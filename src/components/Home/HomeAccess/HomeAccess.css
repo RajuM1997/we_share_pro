@@ -1,0 +1,185 @@
+.access {
+  background: url("../homeImg/phone/acces\ from\ anywhere.jpg");
+  background-size: cover;
+  border-radius: 40px 0px 40px 40px;
+  max-width: 1130px;
+}
+
+.access_text h1 {
+  color: #fff;
+  font-size: 45px;
+  font-weight: 700;
+  padding-top: 20px;
+}
+.access_text span {
+  font-size: 40px;
+  font-weight: 700;
+  padding-top: 30px;
+  padding-bottom: 8px;
+}
+.phone_img {
+  margin-left: -19px;
+}
+.phone_img img {
+  width: 640;
+  height: 450px;
+}
+.access_left {
+  max-height: 500px;
+  height: 400px;
+  margin-left: -54px;
+}
+.access_text p {
+  width: 49%;
+  color: #111;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 0px;
+  padding-bottom: 20px;
+}
+.google {
+  width: 130px;
+  height: 35px;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 7px;
+  object-fit: contain;
+}
+.apple {
+  width: 130px;
+  height: 35px;
+  cursor: pointer;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 1400px) {
+  .phone_img img {
+    height: 450px;
+  }
+  .access_left {
+    margin-left: -83px !important;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .phone_img img {
+    height: 450px;
+  }
+  .access_left {
+    margin-left: -57px !important;
+  }
+  .access_text p {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 1190px) {
+  .phone_img img {
+    height: 450px;
+  }
+  .access_left {
+    margin-left: -9px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .access_text p {
+    font-size: 12px;
+    padding-bottom: 10px;
+    width: 100%;
+  }
+  .access_left {
+    max-height: 500px;
+    height: 399px;
+    margin-left: -87px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .phone_img {
+    text-align: center;
+    margin-left: -161px;
+  }
+
+  .phone_img img {
+    height: 300px;
+  }
+  .access_left {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-left: -333px;
+    padding-bottom: 20px;
+  }
+  .access_text h1 {
+    font-size: 20px;
+    padding-bottom: 0;
+  }
+  .access_text span {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .phone_img {
+    text-align: center;
+    margin-left: -42px;
+  }
+
+  .phone_img img {
+    height: 300px;
+  }
+  .access_left {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 0;
+    padding-bottom: 20px;
+  }
+  .access_text h1 {
+    font-size: 20px;
+    padding-bottom: 0;
+  }
+  .access_text span {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .access {
+    border-radius: none;
+  }
+  .phone_img img {
+    height: 285px;
+    margin-left: 26px !important;
+    margin-bottom: 0px;
+  }
+  .access_left {
+    height: 285px;
+    display: flex;
+    justify-content: center !important;
+    align-items: center;
+    text-align: justify;
+    flex-direction: column;
+    padding-bottom: 10px;
+    padding-top: 0;
+  }
+  .access_text h1 {
+    font-size: 18px;
+    padding-bottom: 0;
+  }
+  .access_text p {
+    font-size: 12px;
+    padding-bottom: 10px;
+    width: 100%;
+  }
+  .apple,
+  .google {
+    width: 120px;
+    display: inline-block;
+    margin-top: 5px !important;
+    /* padding-top: 5px; */
+  }
+}

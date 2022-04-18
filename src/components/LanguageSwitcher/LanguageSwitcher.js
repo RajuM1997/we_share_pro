@@ -1,29 +1,28 @@
 // General
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import { connect } from 'react-redux';
-import { setLocale } from '../../actions/intl';
+import { connect } from "react-redux";
+import { setLocale } from "../../actions/intl";
 
 // Style
-import { FormControl } from 'react-bootstrap';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './LanguageSwitcher.css';
+import { FormControl } from "react-bootstrap";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import s from "./LanguageSwitcher.css";
 
 // Constants
 const localeDict = {
-  'en-US': 'English',
-  'es': 'Español',
-  'it-IT': 'Italiano',
-  'fr-FR': 'Français',
-  'pt-PT': 'Português',
-  'ar-AR': 'الْحُرُوف الْعَرَبِيَّة',
-  'he': 'ישראל'
+  "en-US": "English",
+  es: "Español",
+  "it-IT": "Italiano",
+  "fr-FR": "Français",
+  "pt-PT": "Português",
+  "ar-AR": "الْحُرُوف الْعَرَبِيَّة",
+  he: "ישראל",
 };
-const localeName = locale => localeDict[locale] || locale;
+const localeName = (locale) => localeDict[locale] || locale;
 
 class LanguageSwitcher extends React.Component {
-
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -37,14 +36,20 @@ class LanguageSwitcher extends React.Component {
   render() {
     const { currentLocale, availableLocales } = this.props;
     return (
-      <FormControl value={currentLocale} componentClass="select" className={s.formControlSelect} onChange={this.handleChange}>
-        {availableLocales.map(locale => (
-          <option key={locale} value={locale}>{localeName(locale)}</option>
+      <FormControl
+        value={currentLocale}
+        componentClass="select"
+        className={s.formControlSelect}
+        onChange={this.handleChange}
+      >
+        {availableLocales.map((locale) => (
+          <option key={locale} value={locale}>
+            {localeName(locale)}
+          </option>
         ))}
       </FormControl>
     );
   }
-
 }
 
 LanguageSwitcher.propTypes = {
@@ -53,7 +58,7 @@ LanguageSwitcher.propTypes = {
   setLocale: PropTypes.any.isRequired,
 };
 
-const mapState = state => ({
+const mapState = (state) => ({
   availableLocales: state.runtime.availableLocales,
   currentLocale: state.intl.locale,
 });

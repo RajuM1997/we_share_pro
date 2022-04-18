@@ -1,12 +1,9 @@
-import HomeBannerType from '../../types/HomeBannerType';
-import { HomeBanner } from '../../../data/models';
+import HomeBannerType from "../../types/HomeBannerType";
+import { HomeBanner } from "../../../data/models";
 
-import {
-  GraphQLString as StringType
-} from 'graphql';
+import { GraphQLString as StringType } from "graphql";
 
 const addHomeBanner = {
-
   type: HomeBannerType,
 
   args: {
@@ -14,35 +11,32 @@ const addHomeBanner = {
   },
 
   async resolve({ request }, { name }) {
-
     if (request.user && request.user.admin == true) {
       let isImageUploaded = false;
-      let updateImage = '';
-      const imageCount = await HomeBanner.findAll({})
+      let updateImage = "";
+      const imageCount = await HomeBanner.findAll({});
       // if(imageCount.length < 4) {
       // Site Name
       updateImage = await HomeBanner.create({
         name,
-        enable: 1
-      })
+        enable: 1,
+      });
       // }
 
       if (updateImage) {
         return {
-          status: 'success'
-        }
+          status: "success",
+        };
       } else {
         return {
-          status: 'failed'
-        }
+          status: "failed",
+        };
       }
-
     } else {
       return {
-        status: 'notLoggedIn'
-      }
+        status: "notLoggedIn",
+      };
     }
-
   },
 };
 

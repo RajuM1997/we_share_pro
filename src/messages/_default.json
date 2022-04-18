@@ -12928,5 +12928,32 @@
     "files": [
       "src/locale/messages.js"
     ]
+  },
+  {
+    "id": "app.adminCategory",
+    "description": "Category",
+    "defaultMessage": "Category",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldCategory",
+    "description": "Category",
+    "defaultMessage": "Field",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subCategory",
+    "description": "Category",
+    "defaultMessage": "Sub Category",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
   }
 ]

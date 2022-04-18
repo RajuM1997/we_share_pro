@@ -1,5 +1,6 @@
-@import '../variables.css';
-@import '../helpers.css';
+@import "../variables.css";
+@import "../helpers.css";
+/*
  .root {
 	background: #ffffff;
 	color: #333;
@@ -185,4 +186,102 @@
 	.noPaddingMobile {
 		padding: 0px;
 	}
+} */
+
+.footer_bg {
+  background: rgba(224, 233, 245, 0.829);
+}
+.footer_top_title p,
+.footer_title {
+  font-weight: 600 !important;
+  color: #000;
+  font-size: 18px;
+}
+.container {
+  margin: 0 auto;
+  max-width: 1140px;
+}
+
+.footer_top_title p,
+.footer_title {
+  margin-bottom: 0 !important;
+  padding-bottom: 10px;
+}
+.footer_top_title span {
+  color: #f7a31a;
+}
+.footer_icon .fas {
+  color: #f7a31a;
+}
+
+.footer_top_sub p {
+  cursor: pointer;
+}
+
+.hosting h6,
+.about h6,
+.community h6,
+.support h6 {
+  font-weight: 400;
+  cursor: pointer;
+  margin-bottom: 0 !important;
+  padding-bottom: 5px;
+}
+.hosting h6:hover {
+  text-decoration: underline;
+}
+.about h6:hover {
+  text-decoration: underline;
+}
+.community h6:hover {
+  text-decoration: underline;
+}
+.support h6:hover {
+  text-decoration: underline;
+}
+.footer_icon img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+.padding-top {
+  padding-bottom: 0;
+}
+.play_store_footer {
+  width: 110px;
+  height: 35px;
+  object-fit: contain;
+  border-radius: 5px;
+}
+.footer_apple {
+  width: 110px;
+  height: 32px;
+  cursor: pointer;
+  border-radius: 5px;
+  object-fit: cover;
+}
+.text_secondary {
+  --bs-text-opacity: 1;
+  color: rgba(108, 117, 125, var(--bs-text-opacity)) !important;
+  color: rgba(var(--bs-secondary-rgb), var(--bs-text-opacity)) !important;
+}
+
+@media only screen and (max-width: 668px) {
+  .padding-top {
+    padding-top: 15px;
+  }
+  /* .row-reverse {
+    display: flex;
+    flex-direction: row-reverse;
+  } */
 }

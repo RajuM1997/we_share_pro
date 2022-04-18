@@ -1,11 +1,11 @@
-import Sequelize from 'sequelize';
-import { databaseUrl } from '../config';
+import Sequelize from "sequelize";
+import { databaseUrl } from "../config";
 
 const sequelize = new Sequelize(databaseUrl, {
   define: {
-    freezeTableName: true
+    freezeTableName: true,
   },
-  logging: console.log
+  logging: console.log,
 });
 
 export default sequelize;

@@ -1,35 +1,33 @@
 // General
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 // Redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // Redux Form
-import { reduxForm } from 'redux-form';
+import { reduxForm } from "redux-form";
 // Translation
-import { injectIntl } from 'react-intl';
+import { injectIntl } from "react-intl";
 
 // Styles
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Header.css';
-import cx from 'classnames';
-import {
-  Navbar
-} from 'react-bootstrap';
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import s from "./Header.css";
+import cx from "classnames";
+import { Navbar } from "react-bootstrap";
 
 // Internal Components
-import Link from '../Link';
-import Navigation from '../Navigation';
-import Logo from '../Logo';
+import Link from "../Link";
+import Navigation from "../Navigation";
+import Logo from "../Logo";
 
 // External Components
-import Toaster from '../Toaster';
-import LoadingBar from 'react-redux-loading-bar';
-import HeaderLocationSearch from './HeaderLocationSearch';
+import Toaster from "../Toaster";
+import LoadingBar from "react-redux-loading-bar";
+import HeaderLocationSearch from "./HeaderLocationSearch";
 
 // Redux action
-import { toggleOpen, toggleClose } from '../../actions/Menu/toggleControl';
+import { toggleOpen, toggleClose } from "../../actions/Menu/toggleControl";
 
-import history from '../../core/history';
+import history from "../../core/history";
 
 class HomeHeader extends React.Component {
   static propTypes = {
@@ -43,11 +41,8 @@ class HomeHeader extends React.Component {
   static defaultProps = {
     borderLess: false,
     showMenu: false,
-    searchDisablePages: [
-      '/',
-      '/home'
-    ]
-  }
+    searchDisablePages: ["/", "/home"],
+  };
 
   constructor(props) {
     super(props);
@@ -64,7 +59,7 @@ class HomeHeader extends React.Component {
 
   componentDidMount() {
     this.setState({
-      load: true
+      load: true,
     });
     this.handleDisableSearchPages();
   }
@@ -88,26 +83,31 @@ class HomeHeader extends React.Component {
     let searchHide = false;
     if (location && searchDisablePages.length > 0) {
       searchHide = searchDisablePages.find((o) => location === o);
-      searchHide = (searchHide) ? true : false;
+      searchHide = searchHide ? true : false;
     }
     this.setState({
-      searchHide
-    })
+      searchHide,
+    });
   }
   async openMenu() {
     this.setState({
       isOpen: 1,
-    })
+    });
   }
 
   async openClose() {
-
     this.setState({
       isOpen: 0,
-    })
+    });
   }
   render() {
-    const { siteSettings, borderLess, showMenu, toggleOpen, layoutType } = this.props;
+    const {
+      siteSettings,
+      borderLess,
+      showMenu,
+      toggleOpen,
+      layoutType,
+    } = this.props;
     const { searchHide, load } = this.state;
     let borderClass, headerDesignClass;
     let location;
@@ -115,8 +115,8 @@ class HomeHeader extends React.Component {
       borderClass = s.rentAllHeaderBorderLess;
     }
 
-    if (layoutType && (layoutType != 2)) {
-      headerDesignClass = 'headerNewDesign';
+    if (layoutType && layoutType != 2) {
+      headerDesignClass = "headerNewDesign";
     }
 
     if (history.location) {
@@ -130,15 +130,30 @@ class HomeHeader extends React.Component {
             <Toaster />
             <LoadingBar />
             <div className={s.container}>
-              <Navbar fluid className={cx(s.rentAllHeader, 'rentAllHeader', borderClass, { ['homeHeader']: location === '/' || location === '/home' })}
-                expanded={showMenu} onToggle={this.handleMenu}>
-                <Navbar.Header className={cx('logoPadding', !showMenu ? 'normalPosition' : 'fixedPosition')}>
+              <Navbar
+                fluid
+                className={cx(s.rentAllHeader, "rentAllHeader", borderClass, {
+                  ["homeHeader"]: location === "/" || location === "/home",
+                })}
+                expanded={showMenu}
+                onToggle={this.handleMenu}
+              >
+                <Navbar.Header
+                  className={cx(
+                    "logoPadding",
+                    !showMenu ? "normalPosition" : "fixedPosition"
+                  )}
+                >
                   <Navbar.Brand>
                     <Logo link={"/"} className={cx(s.brand, s.brandImg)} />
                   </Navbar.Brand>
                   <div onClick={() => this.openMenu()}>
-                    <div className={'hidden-lg hamburgerButton'}>
-                      <span className={cx(layoutType == 2 ? 'menuToggleOne' : 'menuToggle')}>
+                    <div className={"hidden-lg hamburgerButton"}>
+                      <span
+                        className={cx(
+                          layoutType == 2 ? "menuToggleOne" : "menuToggle"
+                        )}
+                      >
                         <span></span>
                         <span></span>
                         <span></span>
@@ -146,19 +161,36 @@ class HomeHeader extends React.Component {
                     </div>
                   </div>
                 </Navbar.Header>
-                <div className={cx({ [s.menuOpen]: this.state.isOpen == 1 }, s.mobileMenu)}>
-                  <div className={cx({ [s.menuClose]: this.state.isOpen == 0 }, s.rightMenuClose, 'hidden-lg')}>
+                <div
+                  className={cx(
+                    { [s.menuOpen]: this.state.isOpen == 1 },
+                    s.mobileMenu
+                  )}
+                >
+                  <div
+                    className={cx(
+                      { [s.menuClose]: this.state.isOpen == 0 },
+                      s.rightMenuClose,
+                      "hidden-lg"
+                    )}
+                  >
                     <div className={s.closeButtonPosition}>
-                      <div className={s.closeColor} onClick={() => this.openClose()} >
+                      <div
+                        className={s.closeColor}
+                        onClick={() => this.openClose()}
+                      >
                         ×
                       </div>
                     </div>
                   </div>
-                  {
-                    !searchHide && <Navbar.Form pullLeft className={('hidden-xs', s.breakPoint)}>
+                  {!searchHide && (
+                    <Navbar.Form
+                      pullLeft
+                      className={("hidden-xs", s.breakPoint)}
+                    >
                       <HeaderLocationSearch />
                     </Navbar.Form>
-                  }
+                  )}
                   <div onClick={() => this.openClose()}>
                     <Navigation openClose={this.state.isOpen} />
                   </div>
@@ -176,16 +208,34 @@ class HomeHeader extends React.Component {
           <Toaster />
           <LoadingBar />
           <div className={s.container}>
-            <Navbar fluid className={cx(s.rentAllHeader, 'rentAllHeader', borderClass,
-              { [s.fixedHeader]: location === '/s' }, { ['homeHeader']: location === '/' || location === '/home' })}
-              expanded={showMenu} onToggle={this.handleMenu}>
-              <Navbar.Header className={cx('logoPadding', !showMenu ? 'normalPosition' : 'fixedPosition')}>
+            <Navbar
+              fluid
+              className={cx(
+                s.rentAllHeader,
+                "rentAllHeader",
+                borderClass,
+                { [s.fixedHeader]: location === "/s" },
+                { ["homeHeader"]: location === "/" || location === "/home" }
+              )}
+              expanded={showMenu}
+              onToggle={this.handleMenu}
+            >
+              <Navbar.Header
+                className={cx(
+                  "logoPadding",
+                  !showMenu ? "normalPosition" : "fixedPosition"
+                )}
+              >
                 <Navbar.Brand>
                   <Logo link={"/"} className={cx(s.brand, s.brandImg)} />
                 </Navbar.Brand>
                 <div onClick={() => this.openMenu()}>
-                  <div className={'hidden-lg hamburgerButton'}>
-                    <span className={cx(layoutType == 2 ? 'menuToggleOne' : 'menuToggle')}>
+                  <div className={"hidden-lg hamburgerButton"}>
+                    <span
+                      className={cx(
+                        layoutType == 2 ? "menuToggleOne" : "menuToggle"
+                      )}
+                    >
                       <span></span>
                       <span></span>
                       <span></span>
@@ -193,19 +243,34 @@ class HomeHeader extends React.Component {
                   </div>
                 </div>
               </Navbar.Header>
-              <div className={cx({ [s.menuOpen]: this.state.isOpen == 1 }, s.mobileMenu, 'homeMobileMenu')}>
-                <div className={cx({ [s.menuClose]: this.state.isOpen == 0 }, s.rightMenuClose, 'hidden-lg')}>
+              <div
+                className={cx(
+                  { [s.menuOpen]: this.state.isOpen == 1 },
+                  s.mobileMenu,
+                  "homeMobileMenu"
+                )}
+              >
+                <div
+                  className={cx(
+                    { [s.menuClose]: this.state.isOpen == 0 },
+                    s.rightMenuClose,
+                    "hidden-lg"
+                  )}
+                >
                   <div className={s.closeButtonPosition}>
-                    <div className={s.closeColor} onClick={() => this.openClose()} >
+                    <div
+                      className={s.closeColor}
+                      onClick={() => this.openClose()}
+                    >
                       ×
                     </div>
                   </div>
                 </div>
-                {
-                  !searchHide && <Navbar.Form pullLeft className={('hidden-xs', s.breakPoint)}>
+                {!searchHide && (
+                  <Navbar.Form pullLeft className={("hidden-xs", s.breakPoint)}>
                     <HeaderLocationSearch />
                   </Navbar.Form>
-                }
+                )}
                 <div onClick={() => this.openClose()}>
                   <Navigation openClose={this.state.isOpen} />
                 </div>
@@ -219,18 +284,20 @@ class HomeHeader extends React.Component {
 }
 
 HomeHeader = reduxForm({
-  form: 'HomeHeaderForm', // a unique name for this form
+  form: "HomeHeaderForm", // a unique name for this form
 })(HomeHeader);
 
 const mapState = (state) => ({
   siteSettings: state.siteSettings.data,
   showMenu: state.toggle.showMenu,
-  layoutType: state.siteSettings.data.homePageType
+  layoutType: state.siteSettings.data.homePageType,
 });
 
 const mapDispatch = {
   toggleOpen,
-  toggleClose
+  toggleClose,
 };
 
-export default injectIntl(withStyles(s)(connect(mapState, mapDispatch)(HomeHeader)));
+export default injectIntl(
+  withStyles(s)(connect(mapState, mapDispatch)(HomeHeader))
+);

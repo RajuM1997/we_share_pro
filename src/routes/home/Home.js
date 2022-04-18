@@ -15,6 +15,7 @@ import Loader from "../../components/Loader";
 import SeeAll from "../../components/Home/SeeAll";
 import HomeKindofTrip from "../../components/Home/HomeKindofTrip";
 import PopularLocationGrid from "../../components/Home/PopularLocationGrid";
+// import ShareAndFindItem from "../../components/Home/ShareAndFindItem/ShareAndFindItem";
 import Layout4 from "../../components/Home/Layout4";
 import Layout1 from "../../components/Home/Layout1";
 import Layout3 from "../../components/Home/Layout3";
@@ -26,9 +27,18 @@ import getMostViewedListingQuery from "./getMostViewedListing.graphql";
 import getPopularLocationQuery from "./getPopularLocation.graphql";
 import getStaticBlockInfoQuery from "./getStaticBlockInfo.graphql";
 import getHomeBanner from "./getHomeBanner.graphql";
+import getShareAndFindQu from "./getShareAndFindQu.graphql";
 
 // Locale
 import messages from "../../locale/messages";
+import ShareAndFindItem from "../../components/Home/ShareAndFindItem/ShareAndFindItem";
+import SaveMoreMsg from "../../components/Home/SaveMoreMsg/SaveMoreMsg";
+import NewListingItem from "../../components/Home/NewListing/NewListingItem";
+import HomeOfferItem from "../../components/Home/HomeOffer/HomeOfferItem";
+import HomeHosting from "../../components/Home/HomeHost/HomeHosting";
+import HomeAccess from "../../components/Home/HomeAccess/HomeAccess";
+import OurClientSay from "../../components/Home/OurClientSay/OurClientSay";
+import Banner from "../../components/Home/Layout3/Banner";
 class Homepage extends React.Component {
   static propTypes = {
     getRecommendData: PropTypes.shape({
@@ -44,6 +54,10 @@ class Homepage extends React.Component {
       GetMostViewedListing: PropTypes.array,
     }),
     getPopularLocationData: PropTypes.shape({
+      loading: PropTypes.bool,
+      GetMostViewedListing: PropTypes.array,
+    }),
+    getShareAndFindData: PropTypes.shape({
       loading: PropTypes.bool,
       GetMostViewedListing: PropTypes.array,
     }),
@@ -67,6 +81,9 @@ class Homepage extends React.Component {
     getPopularLocationData: {
       loading: true,
     },
+    getShareAndFindData: {
+      loading: true,
+    },
     homeBannerImages: {
       loading: true,
     },
@@ -82,55 +99,64 @@ class Homepage extends React.Component {
       getMostViewedListingData,
       getBannerData,
     } = this.props;
+    console.log(getBannerData);
     const {
       getPopularLocationData,
       layoutType,
       getStaticBlockInfoData,
       homeBannerImages,
+      getShareAndFindData,
     } = this.props;
     const { getHomeBannerData } = this.props;
     let getHomeBanner = getHomeBannerData && getHomeBannerData.getHomeBanner;
+    console.log(getHomeBannerData);
 
     return (
       <div className={s.root}>
-        {layoutType && layoutType == 1 && (
+        {/* {layoutType && layoutType == 1 && (
           <Layout1
             layoutType={layoutType}
             data={getBannerData}
             homeBannerImages={getHomeBanner}
           />
-        )}
+        )} */}
 
-        {layoutType && layoutType == 3 && (
+        {/* {layoutType && layoutType == 3 && (
           <Layout3
             layoutType={layoutType}
             data={getBannerData}
             homeBannerImages={getHomeBanner}
           />
-        )}
+        )} */}
+        <div>
+          <Banner />
+        </div>
 
-        {layoutType && layoutType == 4 && (
+        {/* {layoutType && layoutType == 4 && (
           <Layout4
             layoutType={layoutType}
             data={getBannerData}
             homeBannerImages={getHomeBanner}
           />
-        )}
+        )} */}
 
         <div className={s.container}>
-          {layoutType && layoutType == 2 && (
+          {/* {layoutType && layoutType == 2 && (
             <div className={s.pageContainer}>
               <BannerCaption data={getBannerData} />
-              <div className={s.pageContainer}>
-                <SearchForm />
-              </div>
+              <div className={s.pageContainer}> <SearchForm /></div>
             </div>
-          )}
+          )} */}
           {/* {
             layoutType && layoutType == 2 && <div className={s.pageContainer}>
               <SearchForm />
             </div>
           } */}
+          {
+            <div>
+              <ShareAndFindItem data={getShareAndFindData} />
+            </div>
+          }
 
           {getRecommendData.loading &&
             getImageBannerData.loading &&
@@ -148,7 +174,7 @@ class Homepage extends React.Component {
             !getMostViewedListingData.loading &&
             !getStaticBlockInfoData.loading && (
               <div className={s.pageContainer}>
-                {getRecommendData &&
+                {/* {getRecommendData &&
                   getRecommendData.getRecommend &&
                   getRecommendData.getRecommend.length > 0 && (
                     <div>
@@ -158,9 +184,9 @@ class Homepage extends React.Component {
                       </h3>
                       <HomeSlider data={getRecommendData.getRecommend} />
                     </div>
-                  )}
+                  )} */}
 
-                {getMostViewedListingData &&
+                {/* {getMostViewedListingData &&
                   getMostViewedListingData.GetMostViewedListing &&
                   getMostViewedListingData.GetMostViewedListing.length > 0 && (
                     <div className={s.pageContainer}>
@@ -172,7 +198,7 @@ class Homepage extends React.Component {
                         data={getMostViewedListingData.GetMostViewedListing}
                       />
                     </div>
-                  )}
+                  )} */}
 
                 {getPopularLocationData.getPopularLocationAdmin &&
                   getPopularLocationData.getPopularLocationAdmin.length > 0 && (
@@ -185,14 +211,44 @@ class Homepage extends React.Component {
                       />
                     </div>
                   )}
+                {
+                  <div>
+                    <SaveMoreMsg />
+                  </div>
+                }
+                {
+                  <div>
+                    <NewListingItem />
+                  </div>
+                }
+                {
+                  <div>
+                    <HomeOfferItem />
+                  </div>
+                }
+                {
+                  <div>
+                    <HomeHosting />
+                  </div>
+                }
+                {
+                  <div>
+                    <OurClientSay />
+                  </div>
+                }
+                {
+                  <div>
+                    <HomeAccess />
+                  </div>
+                }
 
-                {getImageBannerData.getImageBanner != null && (
+                {/* {getImageBannerData.getImageBanner != null && (
                   <div className={s.pageContainer}>
                     <NewsBox data={getImageBannerData.getImageBanner} />
                   </div>
-                )}
+                )} */}
 
-                {getStaticBlockInfoData &&
+                {/* {getStaticBlockInfoData &&
                   !getStaticBlockInfoData.loading &&
                   getStaticBlockInfoData.getStaticInfo &&
                   getStaticBlockInfoData.getStaticInfo.length > 0 &&
@@ -200,7 +256,7 @@ class Homepage extends React.Component {
                     <div className="hidden-xs">
                       <HomeKindofTrip data={getStaticBlockInfoData} />
                     </div>
-                  )}
+                  )} */}
               </div>
             )}
         </div>
@@ -258,6 +314,12 @@ export default compose(
   }),
   graphql(getPopularLocationQuery, {
     name: "getPopularLocationData",
+    options: {
+      ssr: true,
+    },
+  }),
+  graphql(getShareAndFindQu, {
+    name: "getShareAndFindData",
     options: {
       ssr: true,
     },

@@ -1,0 +1,9 @@
+query getShareAndFind {
+  getShareAndFind {
+    id
+    mainTitle
+    subTitle
+    btnText
+    image
+  }
+}
