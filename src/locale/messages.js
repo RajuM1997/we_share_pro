@@ -10,6 +10,11 @@ const messages = defineMessages({
     defaultMessage: "Become a host",
     description: "Menu item",
   },
+  howItWork: {
+    id: "app.howItWork",
+    defaultMessage: "How It Work",
+    description: "Menu item",
+  },
   help: {
     id: "app.help",
     defaultMessage: "Help",

@@ -4,8 +4,16 @@ import right from "../homeImg//Banner/right.png";
 import s from "./Banner.css";
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 import cx from "classnames";
+import AOS from "aos";
 
 class BannerItem extends Component {
+  componentDidMount() {
+    // or simply just AOS.init();
+    AOS.init({
+      // initialise with other settings
+      duration: 2000,
+    });
+  }
   render() {
     const { items, myRef } = this.props;
     const {

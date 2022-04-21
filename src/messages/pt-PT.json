@@ -12955,5 +12955,14 @@
     "files": [
       "src/locale/messages.js"
     ]
+  },
+  {
+    "id": "app.howItWork",
+    "description": "Menu item",
+    "defaultMessage": "How It Work",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
   }
 ]

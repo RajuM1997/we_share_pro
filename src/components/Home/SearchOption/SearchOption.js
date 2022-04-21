@@ -27,6 +27,7 @@ class SearchOption extends Component {
               >
                 What
               </option>
+              {/* <FontAwesome.IoIosArrowDown /> */}
               {/* <option
               style={{ background: "#fff", padding: "20px" }}
               id="red"
@@ -47,7 +48,7 @@ class SearchOption extends Component {
               <option id="red" value="">
                 Where
               </option>
-              <option value="">Where</option>
+              {/* <FontAwesome.IoIosArrowDown /> */}
             </select>
             {/* <FormControl
               componentClass="select"
@@ -80,6 +81,7 @@ class SearchOption extends Component {
               <option id="red" value="">
                 When
               </option>
+              {/* <FontAwesome.IoIosArrowDown /> */}
               {/* <option value="fa fa-angle-down">When&#xf107;</option> */}
 
               {/* <option value="">When</option> */}

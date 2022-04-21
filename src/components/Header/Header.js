@@ -49,13 +49,11 @@ class Header extends React.Component {
       searchHide: true,
       load: false,
       isOpen: 0,
-      change: false,
     };
     this.handleMenu = this.handleMenu.bind(this);
     this.handleDisableSearchPages = this.handleDisableSearchPages.bind(this);
     this.openMenu = this.openMenu.bind(this);
     this.openClose = this.openClose.bind(this);
-    this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount() {

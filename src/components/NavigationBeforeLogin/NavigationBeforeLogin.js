@@ -75,13 +75,17 @@ class NavigationBeforeLogin extends React.Component {
           <NavLink to="/whyhost">
             <FormattedMessage {...messages.becomeAHost} />
           </NavLink>
+          <NavLink to="/">
+            <FormattedMessage {...messages.howItWork} />
+          </NavLink>
           {/* <NavLink to="/help">
+          
             <FormattedMessage {...messages.help} />
           </NavLink> */}
           <NavLink to="#" noLink onClick={openLoginModal}>
             <FormattedMessage {...messages.login} />
           </NavLink>
-          <NavLink to="#" noLink onClick={openSignupModal}>
+          <NavLink to="#" noLink onClick={openSignupModal} className={s.signup}>
             <FormattedMessage {...messages.signup} />
           </NavLink>
         </Nav>

@@ -52,7 +52,7 @@ class PopularLocationGrid extends React.Component {
           <Row className={cx(s.GridCollapse, "GridCollapseAr")}>
             {data &&
               data.length > 0 &&
-              data.map((item, index) => {
+              data.slice(0, 5).map((item, index) => {
                 if (item.isEnable == "true") {
                   let path =
                     index == 2

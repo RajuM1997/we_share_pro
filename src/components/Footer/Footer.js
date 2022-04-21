@@ -336,7 +336,7 @@ import FooterTop from "./FooterTop";
 class Footer extends Component {
   render() {
     return (
-      <div className={cx(s.footer_bg, ss.paddingBottom2, ss.paddingTop3)}>
+      <div className={cx(s.footer_bg, ss.paddingBottom2, ss.paddingTop5)}>
         <Container className={s.container}>
           <Row w-100>
             <FooterTop />

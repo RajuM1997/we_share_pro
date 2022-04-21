@@ -39,6 +39,9 @@ import HomeHosting from "../../components/Home/HomeHost/HomeHosting";
 import HomeAccess from "../../components/Home/HomeAccess/HomeAccess";
 import OurClientSay from "../../components/Home/OurClientSay/OurClientSay";
 import Banner from "../../components/Home/Layout3/Banner";
+import PopularLocationItem from "../../components/Home/PopularLocationGrid/PopularLocationItem";
+import PopularLoctionItems from "../../components/Home/PopularLocationGrid/PopularLoctionItems";
+
 class Homepage extends React.Component {
   static propTypes = {
     getRecommendData: PropTypes.shape({
@@ -211,6 +214,11 @@ class Homepage extends React.Component {
                       />
                     </div>
                   )}
+                {
+                  <div>
+                    <PopularLoctionItems />
+                  </div>
+                }
                 {
                   <div>
                     <SaveMoreMsg />

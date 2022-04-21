@@ -189,7 +189,7 @@
 } */
 
 .footer_bg {
-  background: rgba(224, 233, 245, 0.829);
+  background: rgba(224, 233, 245, 0.829) !important;
 }
 .footer_top_title p,
 .footer_title {

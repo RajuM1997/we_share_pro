@@ -15,6 +15,9 @@ class Banner extends Component {
     this.state = {
       change: false,
     };
+    this.state = {
+      setActiveAnimation: true,
+    };
   }
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
