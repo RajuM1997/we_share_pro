@@ -575,7 +575,7 @@ export default {
       path: "/siteadmin/categorys",
       load: () =>
         import(
-          /* webpackChunkName: 'siteadmin-becomeHostStaticBlock' */ "./siteadmin/categorys/Categorys"
+          /* webpackChunkName: 'siteadmin-popularLocation' */ "./siteadmin/categorys/Categorys"
         ),
     },
     {

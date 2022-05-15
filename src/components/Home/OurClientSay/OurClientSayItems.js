@@ -23,7 +23,7 @@ class OurClientSayItems extends Component {
             {/* display the ratting */}
             <div className={s.testimonial_icon}>
               <div className={s.reviews}>
-                {/* <FontAwesome.AiFillStar /> */}
+                <span>{/* <FontAwesome.AiFillStar /> */}</span>
                 {/* <FontAwesome.AiFillStar />
                 <FontAwesome.AiFillStar />
                 <FontAwesome.AiFillStar />

@@ -303,6 +303,7 @@ textarea {
   font-weight: 500;
   position: absolute;
   border-color: transparent;
+  position: fixed;
 }
 .headerNewDesign .navbar-default .navbar-nav > li > a,
 .headerNewDesign
