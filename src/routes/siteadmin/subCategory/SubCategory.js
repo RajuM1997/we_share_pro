@@ -1,13 +1,12 @@
 import React, { Component } from "react";
+import SubCategoryManagement from "../../../components/siteadmin/SubCategory/SubCategoryManagement";
+// import SubCategoryManagement from "../../../components/siteadmin/subCategory/SubCategoryManagement";
 
-class SubCategory extends Component {
+class Categorys extends Component {
   render() {
-    return (
-      <div>
-        <h1>hello</h1>
-      </div>
-    );
+    console.log("hello");
+    return <SubCategoryManagement />;
   }
 }
 
-export default SubCategory;
+export default Categorys;

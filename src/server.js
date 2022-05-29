@@ -52,6 +52,9 @@ import fileUpload from "./core/fileUpload";
 import documentUpload from "./core/documentUpload";
 import logoUpload from "./core/logoUpload";
 import locationUpload from "./core/locationUpload";
+import categoryUpload from "./core/categoryUpload";
+import subCategoryUpload from "./core/subCategoryUpload";
+import offerUpload from "./core/offerUpload";
 import profilePhotoUpload from "./core/profilePhotoUpload";
 import bannerUpload from "./core/bannerUpload";
 import downloadRoute from "./core/download/downloadRoute";
@@ -180,6 +183,15 @@ logoUpload(app);
 
 // Location Upload
 locationUpload(app);
+
+// Category Upload
+categoryUpload(app);
+
+// Sub Category Upload
+subCategoryUpload(app);
+
+// Offer Upload
+offerUpload(app);
 
 //Profile Photo Upload
 profilePhotoUpload(app);

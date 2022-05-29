@@ -163,6 +163,7 @@ class AddPopularLocationManagement extends React.Component {
                   component={this.renderPlacesSuggest}
                   label={formatMessage(messages.locationAddress)}
                 />
+
                 <FormGroup className={s.formGroup}>
                   <Row>
                     <Col

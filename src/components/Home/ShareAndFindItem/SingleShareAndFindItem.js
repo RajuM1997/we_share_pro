@@ -16,13 +16,15 @@ class SingleShareAndFindItem extends Component {
     // console.log(id, mainTitle);
     return (
       <Col lg={3} md={3} sm={3} xs={12} className="col-md-3">
-        <div className={s.shareFindContainer} style={style}>
-          <div className={s.shareFindContainerChild}>
-            <h5 className={s.shareFind_title}>{title}</h5>
-            <p className={s.shareFindP}>{example}</p>
-            <button className={s.shareFindBtn}>Explore More</button>
+        <a href="/category" target="_blank">
+          <div className={s.shareFindContainer} style={style}>
+            <div className={s.shareFindContainerChild}>
+              <h5 className={s.shareFind_title}>{title}</h5>
+              <p className={s.shareFindP}>{example}</p>
+              <button className={s.shareFindBtn}>Explore More</button>
+            </div>
           </div>
-        </div>
+        </a>
       </Col>
     );
   }

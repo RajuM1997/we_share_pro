@@ -1,33 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './HomeItem.css';
-import {
-  Row,
-  Col
-} from 'react-bootstrap';
-import cx from 'classnames';
-import * as FontAwesome from 'react-icons/lib/fa';
-import { injectIntl } from 'react-intl';
+import React from "react";
+import PropTypes from "prop-types";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import s from "./HomeItem.css";
+import { Row, Col } from "react-bootstrap";
+import cx from "classnames";
+import * as FontAwesome from "react-icons/lib/fa";
+import { injectIntl } from "react-intl";
 
 // Redux
-import { connect } from 'react-redux';
-
+import { connect } from "react-redux";
 
 // Component
-import StarRating from '../../StarRating';
-import CurrencyConverter from '../../CurrencyConverter';
-import ListCoverPhoto from '../../ListCoverPhoto';
-import WishListIcon from '../../WishListIcon';
+import StarRating from "../../StarRating";
+import CurrencyConverter from "../../CurrencyConverter";
+import ListCoverPhoto from "../../ListCoverPhoto";
+import WishListIcon from "../../WishListIcon";
 
 // Locale
-import messages from '../../../locale/messages';
+import messages from "../../../locale/messages";
 
 // Helpers
-import { formatURL } from '../../../helpers/formatURL';
+import { formatURL } from "../../../helpers/formatURL";
 
 class HomeSlider extends React.Component {
-
   static propTypes = {
     formatMessage: PropTypes.func,
     id: PropTypes.number,
@@ -43,7 +38,7 @@ class HomeSlider extends React.Component {
     reviewsCount: PropTypes.number,
     reviewsStarRating: PropTypes.number,
     wishListStatus: PropTypes.bool,
-    isListOwner: PropTypes.bool
+    isListOwner: PropTypes.bool,
   };
 
   constructor(props) {
@@ -60,7 +55,7 @@ class HomeSlider extends React.Component {
       6: s.textMaroon,
       7: s.textDarkBrown,
       8: s.textMediumBrown,
-      9: s.textSkyBlue
+      9: s.textSkyBlue,
     };
 
     let currentIndex = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
@@ -68,14 +63,29 @@ class HomeSlider extends React.Component {
   }
 
   render() {
-    const { id, photo, basePrice, currency, roomType, beds, title, bookingType } = this.props;
-    const { listPhotos, coverPhoto, reviewsCount, reviewsStarRating, userId } = this.props;
+    const {
+      id,
+      photo,
+      basePrice,
+      currency,
+      roomType,
+      beds,
+      title,
+      bookingType,
+    } = this.props;
+    const {
+      listPhotos,
+      coverPhoto,
+      reviewsCount,
+      reviewsStarRating,
+      userId,
+    } = this.props;
     const { wishListStatus, isListOwner, account } = this.props;
     const { formatMessage } = this.props.intl;
 
     let starRatingValue = 0;
     if (reviewsCount > 0 && reviewsStarRating > 0) {
-      starRatingValue = Math.round(reviewsStarRating / reviewsCount)
+      starRatingValue = Math.round(reviewsStarRating / reviewsCount);
     }
 
     let currentUser = account && account.userId;
@@ -88,13 +98,16 @@ class HomeSlider extends React.Component {
     return (
       <div>
         <div className={cx(s.imgContainer)}>
-          {
-            !isWhisListIcon && <WishListIcon listId={id} key={id} isChecked={wishListStatus} />
-          }
+          {!isWhisListIcon && (
+            <WishListIcon listId={id} key={id} isChecked={wishListStatus} />
+          )}
           <div className={cx(s.parent)}>
             <div className={cx(s.children)}>
               <div className={cx(s.content)}>
-                <a href={"/rooms/" + formatURL(title) + '-' + id} target={'_blank'}>
+                <a
+                  href={"/rooms/" + formatURL(title) + "-" + id}
+                  target={"_blank"}
+                >
                   <ListCoverPhoto
                     className={cx(s.imageContent)}
                     coverPhoto={coverPhoto}
@@ -104,23 +117,38 @@ class HomeSlider extends React.Component {
                     lazyLoad
                   />
                 </a>
-
               </div>
             </div>
           </div>
         </div>
         <div className={s.infoContainer}>
-          <a className={s.linkContainer} href={"/rooms/" + formatURL(title) + '-' + id} target={'_blank'}>
-            <Row className='homeSliderRtl'>
+          <a
+            className={s.linkContainer}
+            href={"/rooms/" + formatURL(title) + "-" + id}
+            target={"_blank"}
+          >
+            <Row className="homeSliderRtl">
               <Col
                 xs={12}
                 sm={12}
                 md={12}
-                className={cx(s.space1, s.textEllipsis, s.infoDesc, s.infoText, s.infoSpace)}>
+                className={cx(
+                  s.space1,
+                  s.textEllipsis,
+                  s.infoDesc,
+                  s.infoText,
+                  s.infoSpace
+                )}
+              >
                 <div className={cx(s.listingInfo)}>
-                  <span className='roomTypeRtl'>{roomType}</span>
+                  <span className="roomTypeRtl">{roomType}</span>
                   <span>&nbsp;&#183;&nbsp;</span>
-                  <span>{beds} { beds > 1 ? formatMessage(messages.beds) : formatMessage(messages.bed)}</span>
+                  <span>
+                    {beds}{" "}
+                    {beds > 1
+                      ? formatMessage(messages.beds)
+                      : formatMessage(messages.bed)}
+                  </span>
                 </div>
               </Col>
 
@@ -128,27 +156,46 @@ class HomeSlider extends React.Component {
                 xs={12}
                 sm={12}
                 md={12}
-                className={cx(s.textStrong, s.space1, s.textEllipsis, s.infoTitle, s.infoText, 'listingInfoRTL')}
+                className={cx(
+                  s.textStrong,
+                  s.space1,
+                  s.textEllipsis,
+                  s.infoTitle,
+                  s.infoText,
+                  "listingInfoRTL"
+                )}
               >
                 <span className={cx(s.roomTitleBlock)}>
-                  <CurrencyConverter
-                    amount={basePrice}
-                    from={currency}
-                  />
-                  {
-                    bookingType === "instant" && <span><FontAwesome.FaBolt className={s.instantIcon} /></span>
-                  }
+                  <CurrencyConverter amount={basePrice} from={currency} />
+                  {bookingType === "instant" && (
+                    <span>
+                      <FontAwesome.FaBolt className={s.instantIcon} />
+                    </span>
+                  )}
                 </span>
-                <span className={'textReversing'}>{title}</span>
+                <span className={"textReversing"}>{title}</span>
               </Col>
               <Col
                 xs={12}
                 sm={12}
                 md={12}
-                className={cx(s.textEllipsis, s.infoReview, s.infoText, 'small-star-rating')}>
-                <StarRating className={cx(s.reviewStar, 'floatRight')} value={starRatingValue} name={'review'} />
+                className={cx(
+                  s.textEllipsis,
+                  s.infoReview,
+                  s.infoText,
+                  "small-star-rating"
+                )}
+              >
+                <StarRating
+                  className={cx(s.reviewStar, "floatRight")}
+                  value={starRatingValue}
+                  name={"review"}
+                />
                 <span className={s.reviewText}>
-                  {reviewsCount} {reviewsCount > 1 ? formatMessage(messages.reviews) : formatMessage(messages.review)}
+                  {reviewsCount}{" "}
+                  {reviewsCount > 1
+                    ? formatMessage(messages.reviews)
+                    : formatMessage(messages.review)}
                 </span>
               </Col>
             </Row>
@@ -160,10 +207,11 @@ class HomeSlider extends React.Component {
 }
 
 const mapState = (state) => ({
-  account: state.account.data
+  account: state.account.data,
 });
 
 const mapDispatch = {};
 
-export default injectIntl(withStyles(s)(connect(mapState, mapDispatch)(HomeSlider)));
-
+export default injectIntl(
+  withStyles(s)(connect(mapState, mapDispatch)(HomeSlider))
+);

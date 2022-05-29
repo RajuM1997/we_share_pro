@@ -46,6 +46,11 @@ export default {
         import(/* webpackChunkName: 'manageListing' */ "./manageListing"),
     },
     {
+      path: "/category",
+      load: () =>
+        import(/* webpackChunkName: 'manageListing' */ "./viewCategory/index"),
+    },
+    {
       path: "/s",
       load: () => import(/* webpackChunkName: 'search' */ "./search"),
     },
@@ -575,21 +580,50 @@ export default {
       path: "/siteadmin/categorys",
       load: () =>
         import(
-          /* webpackChunkName: 'siteadmin-popularLocation' */ "./siteadmin/categorys/Categorys"
+          /* webpackChunkName: 'siteadmin-popularLocation' */ "./siteadmin/categorys/index"
+        ),
+    },
+    {
+      path: "/siteadmin/add",
+      load: () =>
+        import(
+          /* webpackChunkName: 'siteadmin-addPopularLocation' */ "./siteadmin/addCategory/index"
         ),
     },
     {
       path: "/siteadmin/subCategory",
       load: () =>
         import(
-          /* webpackChunkName: 'siteadmin-becomeHostStaticBlock' */ "./siteadmin/subCategory/SubCategory"
+          /* webpackChunkName: 'siteadmin-becomeHostStaticBlock' */ "./siteadmin/subCategory/index"
+        ),
+    },
+    {
+      path: "/siteadmin/subCategory/add",
+      load: () =>
+        import(
+          /* webpackChunkName: 'siteadmin-addPopularLocation' */ "./siteadmin/addSubCategory/index"
         ),
     },
     {
       path: "/siteadmin/field",
       load: () =>
         import(
-          /* webpackChunkName: 'siteadmin-becomeHostStaticBlock' */ "./siteadmin/field/Field"
+          /* webpackChunkName: 'siteadmin-becomeHostStaticBlock' */ "./siteadmin/field/index"
+        ),
+    },
+    // home offer import
+    {
+      path: "/siteadmin/home/offer",
+      load: () =>
+        import(
+          /* webpackChunkName: 'siteadmin-popularLocation' */ "./siteadmin/offer/index"
+        ),
+    },
+    {
+      path: "/siteadmin/offer/add",
+      load: () =>
+        import(
+          /* webpackChunkName: 'siteadmin-addPopularLocation' */ "./siteadmin/addOffer/index"
         ),
     },
     {

@@ -49,6 +49,9 @@ import SiteSettings from "./siteadmin/SiteSettings";
 import ListSettings from "./siteadmin/ListSettings";
 import ListSettingsTypes from "./siteadmin/ListSettingsTypes";
 import PopularLocation from "./siteadmin/PopularLocation";
+import Category from "./siteadmin/Category";
+import SubCategory from "./siteadmin/SubCategory";
+import Offer from "./siteadmin/Offer";
 import ShareAndFind from "./siteadmin/ShareAndFind";
 import StaticPage from "./StaticPage";
 import PaymentSettings from "./PaymentSettings";
@@ -629,6 +632,10 @@ export {
   ReportUser,
   BedTypes,
   PopularLocation,
+  //add category
+  Category,
+  SubCategory,
+  Offer,
   ShareAndFind,
   BlogDetails,
   StaticPage,

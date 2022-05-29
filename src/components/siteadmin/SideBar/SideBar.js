@@ -39,6 +39,7 @@ class SideBar extends Component {
       step1: false,
       step3: false,
       home: false,
+      field: false,
       whyHost: false,
       location: "",
     };
@@ -74,7 +75,7 @@ class SideBar extends Component {
 
   render() {
     const { isSuperAdmin, privileges, adminLogout } = this.props;
-    const { step1, step3, home, location } = this.state;
+    const { step1, step3, home, location, field } = this.state;
     const { openHeaderModal, currentLocale, listingApproval } = this.props;
     let reviewManagementArray = [
       "/siteadmin/reviews",
@@ -96,7 +97,9 @@ class SideBar extends Component {
       "/siteadmin/categorys",
       "/siteadmin/subCategory/add",
       "/siteadmin/field/add",
+      "sideadmin/home",
     ];
+    let categoryFieldArray = ["/siteadmin/field/add", "/siteadmin/field"];
     let whyBecomeHostPageArray = [
       "/siteadmin/whyHost/Block1",
       "/siteadmin/whyHost/Block2",
@@ -887,6 +890,29 @@ class SideBar extends Component {
                           </Link>
                         </li>
                       )}
+                      {validatePrivilege(12, privileges) && (
+                        <li
+                          className={cx({
+                            [s.active]:
+                              location === "/siteadmin/home/home-banner",
+                          })}
+                        >
+                          <Link
+                            to={"/siteadmin/home/offer"}
+                            className={cx(s.sideNavitem, s.disPlayTable)}
+                            onClick={() => this.openClose()}
+                          >
+                            <span className={s.disPlayTabelCell}>
+                              <FontAwesome.FaArrowRight
+                                className={cx(s.navigationIcon, "sideArrowRTL")}
+                              />
+                            </span>
+                            <span className={s.disPlayTabelCell}>
+                              <FormattedMessage {...messages.homeOffer} />
+                            </span>
+                          </Link>
+                        </li>
+                      )}
                     </div>
                   </Collapse>
                 </div>
@@ -951,25 +977,77 @@ class SideBar extends Component {
                   </Link>
                 </li>
               )}
-              {validatePrivilege(19, privileges) && (
-                <li
-                  className={cx({
-                    [s.active]: location === "/siteadmin/field",
-                  })}
-                >
-                  <Link
-                    to={"/siteadmin/field"}
-                    className={cx(s.sideNavitem, s.disPlayTable)}
-                    onClick={() => this.openClose()}
+              {(validatePrivilege(8, privileges) ||
+                validatePrivilege(9, privileges)) && (
+                <div>
+                  <div
+                    className={cx({
+                      [s.active]: categoryFieldArray.includes(location),
+                    })}
                   >
-                    <span className={s.disPlayTabelCell}>
-                      <FontAwesome.FaHome className={s.navigationIcon} />
-                    </span>
-                    <span className={s.disPlayTabelCell}>
-                      <FormattedMessage {...messages.fieldCategory} />
-                    </span>
-                  </Link>
-                </li>
+                    <Button
+                      bsStyle="link"
+                      className={cx(
+                        s.button,
+                        s.noPadding,
+                        s.sideNavitem,
+                        s.disPlayTable
+                      )}
+                      onClick={() =>
+                        this.setState({
+                          field: !this.state.field,
+                        })
+                      }
+                    >
+                      <span className={s.disPlayTabelCell}>
+                        <FontAwesome.FaHome className={s.navigationIcon} />
+                      </span>
+                      <span className={s.disPlayTabelCell}>
+                        <FormattedMessage {...messages.fieldCategory} />
+                      </span>
+                      {this.state.field && (
+                        <span className={s.disPlayTabelCell}>
+                          <FontAwesome.FaAngleUp className={s.navigationIcon} />
+                        </span>
+                      )}
+
+                      {!this.state.field && (
+                        <span className={s.disPlayTabelCell}>
+                          <FontAwesome.FaAngleDown
+                            className={s.navigationIcon}
+                          />
+                        </span>
+                      )}
+                    </Button>
+                  </div>
+                  <Collapse in={this.state.field} className={s.subMenu}>
+                    <div>
+                      {validatePrivilege(12, privileges) && (
+                        <li
+                          className={cx({
+                            [s.active]:
+                              location === "/siteadmin/home/home-banner",
+                          })}
+                        >
+                          <Link
+                            to={"/siteadmin/home/offer"}
+                            className={cx(s.sideNavitem, s.disPlayTable)}
+                            onClick={() => this.openClose()}
+                          >
+                            <span className={s.disPlayTabelCell}>
+                              <FontAwesome.FaArrowRight
+                                className={cx(s.navigationIcon, "sideArrowRTL")}
+                              />
+                            </span>
+                            <span className={s.disPlayTabelCell}>
+                              <FormattedMessage {...messages.homeOffer} />
+                            </span>
+                          </Link>
+                        </li>
+                      )}
+                    </div>
+                  </Collapse>
+                </div>
               )}
               {validatePrivilege(16, privileges) && (
                 <div>

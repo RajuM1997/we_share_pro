@@ -572,9 +572,105 @@ const messages = defineMessages({
   },
   popularLocation: {
     id: "app.popularLocation",
-    defaultMessage: "Popular Locations",
+    defaultMessage: "Popular Location",
     description: "Popular Locations Home page Slider title",
   },
+  // category message defiend
+  categoryId: {
+    id: "app.categoryId",
+    defaultMessage: "ID",
+    description: "ID",
+  },
+  categoryName: {
+    id: "app.categoryName",
+    defaultMessage: "Category name",
+    description: "Category name",
+  },
+  categoryStatus: {
+    id: "app.categoryStatus",
+    defaultMessage: "Status",
+    description: "Status",
+  },
+  categoryOperation: {
+    id: "app.categoryOperation",
+    defaultMessage: "Operation",
+    description: "Operation",
+  },
+  category: {
+    id: "app.category",
+    defaultMessage: "Category Type",
+    description: "Category Home page Slider title",
+  },
+  categoryE: {
+    id: "app.category",
+    defaultMessage: "Category",
+    description: "Cocation",
+  },
+  addCategory: {
+    id: "app.addCategory",
+    defaultMessage: "Add Category",
+    description: "Add Category",
+  },
+  categoryTypeInputText: {
+    id: "app.categoryTypeInputText",
+    defaultMessage: "Title",
+    description: "Title",
+  },
+  categorySub: {
+    id: "app.categorySub",
+    defaultMessage: "Sub Title",
+    description: "Sub Title",
+  },
+  categoryType: {
+    id: "app.categoryType",
+    defaultMessage: "Category Type",
+    description: "Category Type",
+  },
+  // sub category message defiend
+  subCategoryId: {
+    id: "app.subCategoryId",
+    defaultMessage: "ID",
+    description: "ID",
+  },
+  subCategoryName: {
+    id: "app.subCategoryName",
+    defaultMessage: "Category name",
+    description: "Category name",
+  },
+  subCategoryStatus: {
+    id: "app.subCategoryStatus",
+    defaultMessage: "Status",
+    description: "Status",
+  },
+  subCategoryOperation: {
+    id: "app.subCategoryOperation",
+    defaultMessage: "Operation",
+    description: "Operation",
+  },
+  primaryCategory: {
+    id: "app.primaryCategory",
+    defaultMessage: "Primary Category",
+    description: "Sub Category Home page Slider title",
+  },
+  subCategory: {
+    id: "app.subCategory",
+    defaultMessage: "Sub Category Type",
+    description: "Sub Category Home page Slider title",
+  },
+  addNew: {
+    id: "app.addNew",
+    defaultMessage: "Add New",
+    description: "add new Home page Slider title",
+  },
+
+  //Home offer
+
+  addOffer: {
+    id: "app.addOffer",
+    defaultMessage: "Add Offer",
+    description: "Add Offer",
+  },
+
   location: {
     id: "app.location",
     defaultMessage: "Location",
@@ -6563,6 +6659,11 @@ const messages = defineMessages({
     defaultMessage: "Home Banner",
     description: "Home Banner",
   },
+  homeOffer: {
+    id: "app.homeOffer",
+    defaultMessage: "Home Offer",
+    description: "Home Banner",
+  },
   staticInfoBlock: {
     id: "app.staticInfoBlock",
     defaultMessage: "Static Info Block",
@@ -7216,11 +7317,6 @@ const messages = defineMessages({
   adminCategory: {
     id: "app.adminCategory",
     defaultMessage: "Category",
-    description: "Category",
-  },
-  subCategory: {
-    id: "app.subCategory",
-    defaultMessage: "Sub Category",
     description: "Category",
   },
   fieldCategory: {

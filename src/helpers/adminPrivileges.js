@@ -150,7 +150,13 @@ const privileges = [
   {
     id: 21,
     privilege: "Field",
-    permittedUrls: ["/siteadmin/field/add"],
+    permittedUrls: [
+      "/siteadmin/field/Car",
+      "/siteadmin/field/Vans",
+      "/siteadmin/field/Yatches",
+      "/siteadmin/field/MountainBikes",
+      "/siteadmin/field/Drones",
+    ],
   },
 ];
 

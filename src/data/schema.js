@@ -146,6 +146,7 @@ import getLogo from "./queries/siteadmin/getLogo";
 // Location
 import uploadLocation from "./mutations/SiteAdmin/PopularLocation/uploadLocation";
 import removeLocation from "./mutations/SiteAdmin/PopularLocation/removeLocation";
+import uploadCategory from "./mutations/SiteAdmin/Category/uploadCategory";
 
 import adminUserLogin from "./queries/siteadmin/adminUserLogin";
 import changeAdminUser from "./mutations/SiteAdmin/changeAdminUser";
@@ -188,6 +189,33 @@ import updatePopularLocation from "./mutations/SiteAdmin/updatePopularLocation";
 import updatePopularLocationStatus from "./mutations/SiteAdmin/updatePopularLocationStatus";
 import addPopularLocation from "./mutations/SiteAdmin/addPopularLocation";
 import deleteHomeBanner from "./mutations/SiteAdmin/deleteHomeBanner";
+
+// category
+import addCategory from "./mutations/SiteAdmin/addCategory";
+import getCategory from "./queries/siteadmin/getCategory";
+// Category admin
+import getCategoryAdmin from "./queries/siteadmin/getCategoryAdmin";
+
+// sub categroy
+import addSubCategory from "./mutations/SiteAdmin/addSubCategory";
+import getSubCategory from "./queries/siteadmin/getSubCategory";
+
+//sub category admin
+import getSubCategoryAdmin from "./queries/siteadmin/getSubCategoryAdmin";
+
+// upolad category
+import uploadSubCategory from "./mutations/SiteAdmin/subCategory/uploadSubCategory";
+import removeSubCategory from "./mutations/SiteAdmin/subCategory/removeSubCategory";
+
+//offer
+import getHomeOffer from "./queries/siteadmin/getHomeOffer";
+import addOffer from "./mutations/SiteAdmin/addOffer";
+
+// upolad offer
+import uploadOffer from "./mutations/SiteAdmin/Offer/uploadOffer";
+import removeOffer from "./mutations/SiteAdmin/Offer/removerOffer";
+// admin offer
+import getOfferAdmin from "./queries/siteadmin/getOfferAdmin";
 
 // Service Fees
 import updateServiceFees from "./mutations/ServiceFees/updateServiceFees";
@@ -451,6 +479,8 @@ const schema = new Schema({
       getUserBanStatus,
       ManageListingTransaction,
       getPopularLocation,
+      getCategory,
+      getHomeOffer,
       getShareAndFind,
       addShareAndFind,
       editPopularLocation,
@@ -591,7 +621,19 @@ const schema = new Schema({
       approveListing,
       createListingHistory,
       updateSiteSettingsLogo,
+      getCategoryAdmin,
       removeFavIconLogo,
+      addCategory,
+      uploadCategory,
+      uploadOffer,
+      removeOffer,
+      addOffer,
+      addSubCategory,
+      getSubCategory,
+      getSubCategoryAdmin,
+      getOfferAdmin,
+      uploadSubCategory,
+      removeSubCategory,
     },
   }),
 });
