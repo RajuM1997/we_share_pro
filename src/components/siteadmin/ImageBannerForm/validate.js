@@ -1,8 +1,7 @@
-import messages from '../../../locale/messages';
+import messages from "../../../locale/messages";
 
-const validate = values => {
-
-  const errors = {}
+const validate = (values) => {
+  const errors = {};
 
   if (!values.title) {
     errors.title = messages.required;
@@ -16,7 +15,7 @@ const validate = values => {
     errors.buttonLabel = messages.required;
   }
 
-  return errors
-}
+  return errors;
+};
 
-export default validate
+export default validate;

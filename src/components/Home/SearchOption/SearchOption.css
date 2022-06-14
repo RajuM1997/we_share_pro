@@ -181,7 +181,7 @@ select {
 }
 @media only screen and (max-width: 768px) {
   .icon_text {
-    width: 400px !important;
+    width: 400px;
     height: 40px;
   }
   .active_icon_text {
@@ -211,14 +211,14 @@ select {
   .search_icon {
     background: #eead41;
     padding: 12px 17px;
-    margin-right: -16px;
+    margin-right: -7px;
     cursor: pointer;
   }
 }
-@media only screen and (max-width: 320px) {
+@media (max-width: 480px) and (min-width: 320px) {
   .active_icon_text {
     height: 30px;
-    width: 244px;
+    width: 270px;
   }
   .active_search_icon {
     background: #eead41;
@@ -230,6 +230,6 @@ select {
     font-size: 12px;
   }
   .active_selector select {
-    font-size: 13px;
+    font-size: 11px;
   }
 }

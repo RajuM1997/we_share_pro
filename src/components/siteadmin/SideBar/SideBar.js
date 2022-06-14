@@ -89,6 +89,7 @@ class SideBar extends Component {
     let homePageArray = [
       "/siteadmin/home/caption",
       "/siteadmin/home/banner",
+      "/siteadmin/banner",
       "/siteadmin/home/footer-block",
       "/siteadmin/popularlocation",
       "/siteadmin/home/static-info-block",
@@ -99,7 +100,13 @@ class SideBar extends Component {
       "/siteadmin/field/add",
       "sideadmin/home",
     ];
-    let categoryFieldArray = ["/siteadmin/field/add", "/siteadmin/field"];
+    let categoryFieldArray = [
+      "/siteadmin/field/Car",
+      "/siteadmin/field/Vans",
+      "/siteadmin/field/Yatches",
+      "/siteadmin/field/MountainBikes",
+      "/siteadmin/field/Drones",
+    ];
     let whyBecomeHostPageArray = [
       "/siteadmin/whyHost/Block1",
       "/siteadmin/whyHost/Block2",
@@ -764,6 +771,30 @@ class SideBar extends Component {
                       {validatePrivilege(12, privileges) && (
                         <li
                           className={cx({
+                            [s.active]: location === "/siteadmin/banner",
+                          })}
+                        >
+                          <Link
+                            to={"/siteadmin/banner"}
+                            className={cx(s.sideNavitem, s.disPlayTable)}
+                            onClick={() => this.openClose()}
+                          >
+                            <span className={s.disPlayTabelCell}>
+                              <FontAwesome.FaArrowRight
+                                className={cx(s.navigationIcon, "sideArrowRTL")}
+                              />
+                            </span>
+                            <span className={s.disPlayTabelCell}>
+                              <FormattedMessage
+                                {...messages.imageBannerLabel}
+                              />
+                            </span>
+                          </Link>
+                        </li>
+                      )}
+                      {/* {validatePrivilege(12, privileges) && (
+                        <li
+                          className={cx({
                             [s.active]: location === "/siteadmin/home/banner",
                           })}
                         >
@@ -784,7 +815,7 @@ class SideBar extends Component {
                             </span>
                           </Link>
                         </li>
-                      )}
+                      )} */}
 
                       {validatePrivilege(12, privileges) && (
                         <li

@@ -26,8 +26,36 @@ import { openHeaderModal } from "../../actions/modalActions";
 
 import { showCurrencySymbol } from "../../helpers/currencyConvertion";
 import { formatLocale } from "../../helpers/formatLocale";
+import SearchOption from "../Home/SearchOption/SearchOption";
 
 class NavigationBeforeLogin extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+    this.state = {
+      change: false,
+    };
+    this.state = {
+      setActiveAnimation: true,
+    };
+  }
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+    console.log("add event");
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+    console.log("remove event");
+  }
+
+  handleScroll = (e) => {
+    if (window.scrollY >= 1) {
+      this.setState({ change: false });
+    } else {
+      this.setState({ change: true });
+    }
+  };
   static propTypes = {
     className: PropTypes.string,
     setUserLogout: PropTypes.any,
@@ -46,13 +74,25 @@ class NavigationBeforeLogin extends React.Component {
     let displayCurrency = toCurrency ? toCurrency : baseCurrency;
 
     return (
-      <div>
+      <div className={!this.state.change ? s.active_navbar_default : ""}>
+        <div className={s.nav_search_main}>
+          <div className={s.search_container}>
+            {!this.state.change && <SearchOption />}
+          </div>
+        </div>
         <LoginModal />
         <SignupModal />
         <ForgotPassword />
         <HeaderModal modalType={"languageModal"} />
         <HeaderModal modalType={"currencyModal"} />
-        <Nav pullRight className={"floatLeftAR"}>
+        <Nav
+          pullRight
+          className={
+            !this.state.change
+              ? cx("floatLeftAR", s.navbarLeft)
+              : cx("floatLeftAR", s.navbarLeftActive)
+          }
+        >
           {/* <Nav pullRight className={s.newMenu}></Nav> */}
           <NavLink to="/" className={cx("hidden-lg", s.newMenuDesign)}>
             <FormattedMessage {...messages.home} />

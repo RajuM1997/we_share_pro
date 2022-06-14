@@ -1,0 +1,11 @@
+query getHomeBanner {
+  getHomeBanner {
+    title
+    description
+    image
+    colorText
+    bottomText
+    category
+    isEnable
+  }
+}

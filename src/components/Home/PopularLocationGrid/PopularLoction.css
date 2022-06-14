@@ -1,6 +1,10 @@
 .main_title {
   position: relative !important;
 }
+.smallItems {
+  width: 100%;
+  min-height: 250px;
+}
 
 .sectionHeader111 {
   display: inline-block;

@@ -53,6 +53,7 @@ import documentUpload from "./core/documentUpload";
 import logoUpload from "./core/logoUpload";
 import locationUpload from "./core/locationUpload";
 import categoryUpload from "./core/categoryUpload";
+import bannerUploads from "./core/bannerUpolads";
 import subCategoryUpload from "./core/subCategoryUpload";
 import offerUpload from "./core/offerUpload";
 import profilePhotoUpload from "./core/profilePhotoUpload";
@@ -186,6 +187,9 @@ locationUpload(app);
 
 // Category Upload
 categoryUpload(app);
+
+// banner upload
+bannerUploads(app);
 
 // Sub Category Upload
 subCategoryUpload(app);

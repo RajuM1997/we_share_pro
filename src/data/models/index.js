@@ -22,6 +22,7 @@ import BlogDetails from "./BlogDetails";
 
 // Listing
 import Listing from "./Listing";
+import SingleCategory from "./SingleCategory";
 import ListingData from "./ListingData";
 import UserAmenities from "./UserAmenities";
 import UserSafetyAmenities from "./UserSafetyAmenities";
@@ -50,6 +51,7 @@ import ListSettings from "./siteadmin/ListSettings";
 import ListSettingsTypes from "./siteadmin/ListSettingsTypes";
 import PopularLocation from "./siteadmin/PopularLocation";
 import Category from "./siteadmin/Category";
+import NewBannerHome from "./siteadmin/NewHomeBanner";
 import SubCategory from "./siteadmin/SubCategory";
 import Offer from "./siteadmin/Offer";
 import ShareAndFind from "./siteadmin/ShareAndFind";
@@ -648,4 +650,6 @@ export {
   FailedTransactionHistory,
   SideMenu,
   ListingPermissionHistory,
+  NewBannerHome,
+  SingleCategory,
 };

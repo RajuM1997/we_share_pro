@@ -52,7 +52,7 @@ class AddCategoryManagement extends React.Component {
       <FormGroup className={s.space2}>
         <Row>
           <Col xs={12} sm={12} md={12} lg={3}>
-            <label className={s.labelTextNew}>{type}</label>
+            <label className={s.labelTextNew}></label>
           </Col>
           <Col xs={12} sm={12} md={12} lg={9}>
             <FormControl
@@ -113,7 +113,7 @@ class AddCategoryManagement extends React.Component {
       <FormGroup className={s.space2}>
         <Row>
           <Col xs={12} sm={12} md={12} lg={3}>
-            <label className={s.labelTextNew}>{label}</label>
+            <label className={s.labelTextNew}></label>
           </Col>
           <Col xs={12} sm={12} md={12} lg={9}>
             <PlaceGeoSuggest
@@ -185,30 +185,30 @@ class AddCategoryManagement extends React.Component {
                     </Col>
                   </Row>
                 </FormGroup>
+                <label className={s.labelTextNew}>Title</label>
                 <Field
                   name="title"
                   type="text"
                   component={this.renderFormControl}
-                  label={formatMessage(messages.categoryTypeInputText)}
                 />
+                <label className={s.labelTextNew}>Description</label>
                 <Field
                   name="subTitle"
                   type="text"
                   component={this.renderFormControl}
-                  label={formatMessage(messages.categorySub)}
                 />
+                <label className={s.labelTextNew}>Category</label>
+                <br />
                 <Field
                   name="category"
                   component="select"
                   type="select"
                   className={bt.commonControlInput}
                 >
-                  <label className={s.labelTextNew}>
-                    {formatMessage(messages.categoryType)}
-                  </label>
                   <option />
                   <option value="Vacation Home">Vacation Home</option>
                   <option value="Events Space">Events Space</option>
+                  <option value="Workspace">Workspace</option>
                   <option value="Vehicles">Vehicles</option>
                   <option value="RVs">RVs</option>
                   <option value="Boats">Boats</option>

@@ -1,0 +1,11 @@
+query getHomeAdmin {
+  getHomeAdmin {
+    title
+    description
+    image
+    colorText
+    bottomText
+    category
+    isEnable
+  }
+}

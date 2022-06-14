@@ -51,6 +51,11 @@ export default {
         import(/* webpackChunkName: 'manageListing' */ "./viewCategory/index"),
     },
     {
+      path: "/category/:id",
+      load: () =>
+        import(/* webpackChunkName: 'manageListing' */ "./viewCategory/index"),
+    },
+    {
       path: "/s",
       load: () => import(/* webpackChunkName: 'search' */ "./search"),
     },
@@ -588,6 +593,20 @@ export default {
       load: () =>
         import(
           /* webpackChunkName: 'siteadmin-addPopularLocation' */ "./siteadmin/addCategory/index"
+        ),
+    },
+    {
+      path: "/siteadmin/banner",
+      load: () =>
+        import(
+          /* webpackChunkName: 'siteadmin-popularLocation' */ "./siteadmin/homePageBanner"
+        ),
+    },
+    {
+      path: "/siteadmin/banner/add",
+      load: () =>
+        import(
+          /* webpackChunkName: 'siteadmin-addPopularLocation' */ "./siteadmin/addBanner"
         ),
     },
     {

@@ -7,7 +7,6 @@ import cx from "classnames";
 class PopularLocationItem extends Component {
   render() {
     const { img, idx, place } = this.props;
-    const small = "smallItem" + `${idx}`;
     const bgStyle = {
       backgroundImage: `url(${img})`,
     };
@@ -19,7 +18,7 @@ class PopularLocationItem extends Component {
             ? cx(s.galleryItemBody, s.bigItem1)
             : idx === 1
             ? cx(s.galleryItemBody, s.bigItem2)
-            : `smallItem${idx}`
+            : cx(s[`smallItem${idx}`], s.galleryItemBody)
         }
         // className={`galleryItemBody ${
         //   idx === 0

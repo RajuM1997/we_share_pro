@@ -94,7 +94,6 @@ class HomeBannerForm extends Component {
                               <img src={DeleteIcon} alt="Delete" />
                             </a>
                           </div>
-                          <div>hello fuckboy</div>
                         </div>
                       );
                     })}

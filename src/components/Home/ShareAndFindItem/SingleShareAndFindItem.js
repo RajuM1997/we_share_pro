@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 import s from "./ShareAndFind.css";
 import { Col } from "react-bootstrap";
+// import PropTypes from "prop-types";
 
 class SingleShareAndFindItem extends Component {
   render() {
-    const { img, title, example } = this.props;
+    const { id, title, subTitle, image, path } = this.props;
     const style = {
-      backgroundImage: `url(${img})`,
+      backgroundImage: `url(${path})`,
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
       backgroundPosition: "center",
@@ -16,11 +17,12 @@ class SingleShareAndFindItem extends Component {
     // console.log(id, mainTitle);
     return (
       <Col lg={3} md={3} sm={3} xs={12} className="col-md-3">
-        <a href="/category" target="_blank">
+        <a href={`/category/${id}`} target="_blank">
           <div className={s.shareFindContainer} style={style}>
+            {/* <img src={image} alt="" /> */}
             <div className={s.shareFindContainerChild}>
               <h5 className={s.shareFind_title}>{title}</h5>
-              <p className={s.shareFindP}>{example}</p>
+              <p className={s.shareFindP}>{subTitle}</p>
               <button className={s.shareFindBtn}>Explore More</button>
             </div>
           </div>

@@ -66,6 +66,7 @@ const privileges = [
     permittedUrls: [
       "/siteadmin/home/caption",
       "/siteadmin/home/banner",
+      "/siteadmin/home/banner/upload",
       "/siteadmin/home/footer-block",
       "/siteadmin/home/static-info-block",
       "/siteadmin/home/home-banner",

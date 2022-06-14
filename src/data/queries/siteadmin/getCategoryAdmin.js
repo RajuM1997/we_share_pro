@@ -16,7 +16,6 @@ const getCategoryAdmin = {
       where: {
         isEnable: true,
       },
-      order: [[sequelize.literal("RAND()")]],
     });
   },
 };

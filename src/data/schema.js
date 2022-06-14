@@ -26,7 +26,6 @@ import DateAvailability from "./queries/DateAvailability";
 import getListingSpecSettings from "./queries/getListingSpecSettings";
 import GetAddressComponents from "./queries/GetAddressComponents";
 import getCountries from "./queries/getCountries";
-import getBanner from "./queries/getBanner";
 import getRecommend from "./queries/getRecommend";
 import ChangePassword from "./queries/ChangePassword";
 import getUserVerifiedInfo from "./queries/getUserVerifiedInfo";
@@ -39,7 +38,7 @@ import GetMostViewedListing from "./queries/GetMostViewedListing";
 import EmailVerification from "./queries/EmailVerification";
 import ResendConfirmEmail from "./queries/ResendConfirmEmail";
 // import getStaticInfoBlock from './queries/getStaticInfoBlock';
-import getHomeBanner from "./queries/getHomeBanner";
+// import getHomeBanner from "./queries/getHomeBanner";
 // Forgot Password
 import sendForgotPassword from "./mutations/ForgotPassword/SendForgotPassword";
 import forgotPasswordVerification from "./queries/ForgotPassword/ForgotPasswordVerification";
@@ -114,6 +113,7 @@ import ShowListPhotos from "./queries/ShowListPhotos";
 
 import UserListing from "./queries/UserListing";
 import getListMeta from "./queries/Listing/getListMeta";
+import getSingleCategory from "./queries/banner/getSingleCategory";
 
 import getProfile from "./queries/UserProfile";
 
@@ -193,9 +193,10 @@ import deleteHomeBanner from "./mutations/SiteAdmin/deleteHomeBanner";
 // category
 import addCategory from "./mutations/SiteAdmin/addCategory";
 import getCategory from "./queries/siteadmin/getCategory";
-// Category admin
-import getCategoryAdmin from "./queries/siteadmin/getCategoryAdmin";
 
+// banner
+import addBanner from "./mutations/SiteAdmin/addBanner";
+import getHomeBanner from "./queries/siteadmin/getHomeBanner";
 // sub categroy
 import addSubCategory from "./mutations/SiteAdmin/addSubCategory";
 import getSubCategory from "./queries/siteadmin/getSubCategory";
@@ -285,6 +286,12 @@ import ManageListingTransaction from "./queries/ManageListing/ManageListingTrans
 
 // Popular Location
 import getPopularLocationAdmin from "./queries/siteadmin/getPopularLocationAdmin";
+
+// Category
+import getCategoryAdmin from "./queries/siteadmin/getCategoryAdmin";
+
+// banner admin
+import getHomeAdmin from "./queries/siteadmin/getHomeAdmin";
 
 // Day Drag Calendar
 import ListingDataUpdate from "./mutations/Listing/ListingDataUpdate";
@@ -424,7 +431,6 @@ const schema = new Schema({
       GetAddressComponents,
       getLogo,
       getCountries,
-      getBanner,
       updateBannerSettings,
       getRecommend,
       getUserDashboard,
@@ -487,6 +493,8 @@ const schema = new Schema({
       getUserStatus,
       checkReservation,
       getPopularLocationAdmin,
+      getCategoryAdmin,
+      getHomeAdmin,
       getListAvailableDates,
       getSpecialPricing,
       getUpcomingBookings,
@@ -520,6 +528,7 @@ const schema = new Schema({
       getSideMenu,
       getAllPermissionListings,
       getSiteSettingsLogo,
+      getSingleCategory,
     },
   }),
   mutation: new ObjectType({
@@ -621,7 +630,6 @@ const schema = new Schema({
       approveListing,
       createListingHistory,
       updateSiteSettingsLogo,
-      getCategoryAdmin,
       removeFavIconLogo,
       addCategory,
       uploadCategory,
@@ -634,6 +642,7 @@ const schema = new Schema({
       getOfferAdmin,
       uploadSubCategory,
       removeSubCategory,
+      addBanner,
     },
   }),
 });

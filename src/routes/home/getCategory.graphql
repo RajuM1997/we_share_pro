@@ -1,0 +1,10 @@
+query getCategoryAdmin {
+  getCategoryAdmin {
+    id
+    title
+    subTitle
+    image
+    isEnable
+    createdAt
+  }
+}

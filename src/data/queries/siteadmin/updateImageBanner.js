@@ -1,65 +1,56 @@
-import ImageBannerType from '../../types/ImageBannerType';
-import { ImageBanner } from '../../../data/models';
+import ImageBannerType from "../../types/ImageBannerType";
+import { ImageBanner } from "../../../data/models";
 
-import {
-  GraphQLString as StringType
-} from 'graphql';
+import { GraphQLString as StringType } from "graphql";
 
 const updateImageBanner = {
-
   type: ImageBannerType,
 
   args: {
     title: { type: StringType },
     description: { type: StringType },
-    buttonLabel: { type: StringType }
+    buttonLabel: { type: StringType },
   },
 
-  async resolve({ request }, {
-    title,
-    description,
-    buttonLabel
-  }) {
-
+  async resolve({ request }, { title, description, buttonLabel }) {
     if (request.user && request.user.admin == true) {
       let isImageBanner = false;
 
       // Site Name
-      const updateBanner = await ImageBanner.update({
-        title,
-        description,
-        buttonLabel
-      },
+      const updateBanner = await ImageBanner.update(
+        {
+          title,
+          description,
+          buttonLabel,
+        },
         {
           where: {
-            id: 1
-          }
-        })
-        .then(function (instance) {
-          // Check if any rows are affected
-          if (instance > 0) {
-            isImageBanner = true;
-          } else {
-            isImageBanner = false;
-          }
-        });
+            id: 1,
+          },
+        }
+      ).then(function(instance) {
+        // Check if any rows are affected
+        if (instance > 0) {
+          isImageBanner = true;
+        } else {
+          isImageBanner = false;
+        }
+      });
 
       if (isImageBanner) {
         return {
-          status: 'success'
-        }
+          status: "success",
+        };
       } else {
         return {
-          status: 'failed'
-        }
+          status: "failed",
+        };
       }
-
     } else {
       return {
-        status: 'notLoggedIn'
-      }
+        status: "notLoggedIn",
+      };
     }
-
   },
 };
 

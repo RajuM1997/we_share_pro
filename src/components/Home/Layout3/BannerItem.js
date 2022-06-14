@@ -15,17 +15,30 @@ class BannerItem extends Component {
     });
   }
   render() {
-    const { items, myRef } = this.props;
     const {
-      imgDesktop,
-      DesktopTitle,
-      DesktopColorText,
-      DesktopSubTitle,
-      DesktopSubTitle3,
-      DesktopSubTitle22,
-      Desktopdta,
-      dataHome,
-    } = items;
+      title,
+      description,
+      image,
+      colorText,
+      bottomText,
+      category,
+      myRef,
+      path,
+    } = this.props;
+    // const style = {
+    //   backgroundImage: `url(${path})`,
+    // };
+
+    // const {
+    //   // imgDesktop,
+    //   // DesktopTitle,
+    //   // colorText,
+    //   // DesktopSubTitle,
+    //   // DesktopSubTitle3,
+    //   // DesktopSubTitle22,
+    //   // Desktopdta,
+    //   // dataHome,
+    // } = item;
     return (
       <div className={s.slider_img}>
         <div className="d-flex align-items-center justify-content-around">
@@ -48,25 +61,33 @@ class BannerItem extends Component {
             // data-aos="fade-right"
             style={{ marginBottom: "15px", marginTop: 0 }}
           >
-            {DesktopTitle}
+            {title}
           </h1>
-          {DesktopSubTitle22 && (
+          {/* {DesktopSubTitle22 && (
             // <p data-aos-duration="1000" data-aos="fade-right">
             <p>{DesktopSubTitle22}</p>
-          )}
-          {!Desktopdta && (
-            <>
-              <p
-                className="py-0"
-                // data-aos-duration="1000"
-                // data-aos="fade-right"
-              >
-                <span>{DesktopColorText}</span>
-                {DesktopSubTitle} <br />
-                {dataHome && <p>{DesktopSubTitle3}</p>}
-              </p>
-            </>
-          )}
+          )} */}
+          <>
+            <p
+              className="py-0"
+              // data-aos-duration="1000"
+              // data-aos="fade-right"
+            >
+              <span>{colorText}</span>
+              <>
+                {colorText == "Don’t Buy! We Share," ? (
+                  <>
+                    <br />
+                    {description}
+                  </>
+                ) : (
+                  <>{description}</>
+                )}
+              </>
+              {/* {description} <br /> */}
+              <>{bottomText === "null" ? "" : <p>{bottomText}</p>}</>
+            </p>
+          </>
           <button
             className={s.slider_btn}
             style={{ marginBottom: "10px" }}
@@ -75,18 +96,18 @@ class BannerItem extends Component {
           >
             Browse Category
           </button>
-          {Desktopdta && (
+          {/* {Desktopdta && (
             <p
               className="pt-2"
               // data-aos-duration="1000"
               // data-aos="fade-right"
             >
-              <span>{DesktopColorText}</span> {DesktopSubTitle} <br />
+              <span>{colorText}</span> {DesktopSubTitle} <br />
               {DesktopSubTitle3}
             </p>
-          )}
+          )} */}
         </div>
-        <img src={imgDesktop} className={s.slider_img_desktop} alt="" />
+        <img src={path} className={s.slider_img_desktop} alt="" />
       </div>
     );
   }

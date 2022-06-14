@@ -42,7 +42,7 @@ class PopularLocationGrid extends React.Component {
   render() {
     const { load } = this.state;
     const { loading, data } = this.props;
-    console.log(data);
+    // console.log(data);
 
     if (loading || !load) {
       return <Loader type={"text"} />;

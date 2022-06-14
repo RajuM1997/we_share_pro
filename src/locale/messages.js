@@ -601,8 +601,13 @@ const messages = defineMessages({
     defaultMessage: "Category Type",
     description: "Category Home page Slider title",
   },
+  banner: {
+    id: "app.banner",
+    defaultMessage: "banner Type",
+    description: "Category Home page Slider title",
+  },
   categoryE: {
-    id: "app.category",
+    id: "app.categoryE",
     defaultMessage: "Category",
     description: "Cocation",
   },
@@ -610,6 +615,11 @@ const messages = defineMessages({
     id: "app.addCategory",
     defaultMessage: "Add Category",
     description: "Add Category",
+  },
+  addBanner: {
+    id: "app.addBanner",
+    defaultMessage: "Add Banner",
+    description: "Add Banner",
   },
   categoryTypeInputText: {
     id: "app.categoryTypeInputText",
@@ -654,6 +664,11 @@ const messages = defineMessages({
   },
   subCategory: {
     id: "app.subCategory",
+    defaultMessage: "Sub Category",
+    description: "Sub Category Home page Slider title",
+  },
+  subCategorys: {
+    id: "app.subCategorys",
     defaultMessage: "Sub Category Type",
     description: "Sub Category Home page Slider title",
   },
@@ -5663,6 +5678,11 @@ const messages = defineMessages({
     defaultMessage: "Location Address",
     description: "Location Address",
   },
+  subTitle: {
+    id: "app.subTitle",
+    defaultMessage: "Sub Title",
+    description: "Sub Title",
+  },
   totalUsers: {
     id: "app.totalUsers",
     defaultMessage: "Total Users",
@@ -5832,6 +5852,11 @@ const messages = defineMessages({
     id: "app.buttonLabel",
     defaultMessage: "Button Label",
     description: "Button Label",
+  },
+  bottomText: {
+    id: "app.bottomText",
+    defaultMessage: "Bottom Text",
+    description: "Bottom Text",
   },
   IconLabel: {
     id: "app.IconLabel",

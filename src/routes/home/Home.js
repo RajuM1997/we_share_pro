@@ -27,7 +27,8 @@ import getMostViewedListingQuery from "./getMostViewedListing.graphql";
 import getPopularLocationQuery from "./getPopularLocation.graphql";
 import getStaticBlockInfoQuery from "./getStaticBlockInfo.graphql";
 import getHomeBanner from "./getHomeBanner.graphql";
-import getShareAndFindQu from "./getShareAndFindQu.graphql";
+import getCategoryQuery from "./getCategory.graphql";
+import getBannerQuery from "./getBannerHome.graphql";
 
 // Locale
 import messages from "../../locale/messages";
@@ -60,7 +61,11 @@ class Homepage extends React.Component {
       loading: PropTypes.bool,
       GetMostViewedListing: PropTypes.array,
     }),
-    getShareAndFindData: PropTypes.shape({
+    getCategoryData: PropTypes.shape({
+      loading: PropTypes.bool,
+      GetMostViewedListing: PropTypes.array,
+    }),
+    getBannerHomeData: PropTypes.shape({
       loading: PropTypes.bool,
       GetMostViewedListing: PropTypes.array,
     }),
@@ -84,7 +89,7 @@ class Homepage extends React.Component {
     getPopularLocationData: {
       loading: true,
     },
-    getShareAndFindData: {
+    getCategoryDate: {
       loading: true,
     },
     homeBannerImages: {
@@ -108,7 +113,8 @@ class Homepage extends React.Component {
       layoutType,
       getStaticBlockInfoData,
       homeBannerImages,
-      getShareAndFindData,
+      getCategoryData,
+      getBannerHomeData,
     } = this.props;
     const { getHomeBannerData } = this.props;
     let getHomeBanner = getHomeBannerData && getHomeBannerData.getHomeBanner;
@@ -131,9 +137,12 @@ class Homepage extends React.Component {
             homeBannerImages={getHomeBanner}
           />
         )} */}
-        <div>
-          <Banner />
-        </div>
+        {getBannerHomeData.getHomeAdmin &&
+          getBannerHomeData.getHomeAdmin.length > 0 && (
+            <div>
+              <Banner data={getBannerHomeData.getHomeAdmin} />
+            </div>
+          )}
 
         {/* {layoutType && layoutType == 4 && (
           <Layout4
@@ -155,11 +164,12 @@ class Homepage extends React.Component {
               <SearchForm />
             </div>
           } */}
-          {
-            <div>
-              <ShareAndFindItem data={getShareAndFindData} />
-            </div>
-          }
+          {getCategoryData.getCategoryAdmin &&
+            getCategoryData.getCategoryAdmin.length > 0 && (
+              <div>
+                <ShareAndFindItem data={getCategoryData.getCategoryAdmin} />
+              </div>
+            )}
 
           {getRecommendData.loading &&
             getImageBannerData.loading &&
@@ -326,8 +336,14 @@ export default compose(
       ssr: true,
     },
   }),
-  graphql(getShareAndFindQu, {
-    name: "getShareAndFindData",
+  graphql(getCategoryQuery, {
+    name: "getCategoryData",
+    options: {
+      ssr: true,
+    },
+  }),
+  graphql(getBannerQuery, {
+    name: "getBannerHomeData",
     options: {
       ssr: true,
     },

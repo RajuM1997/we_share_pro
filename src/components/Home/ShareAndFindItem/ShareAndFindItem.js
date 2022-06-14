@@ -7,13 +7,30 @@ import s from "./ShareAndFind.css";
 import ss from "../ShareAndFindItem/ShareAndFind.css";
 import cx from "classnames";
 import { Row } from "react-bootstrap";
+import PropTypes from "prop-types";
 import Fade from "react-reveal/Fade";
+// Query
+import getCategory from "./getCategory.graphql";
+// import { graphql, gql, compose } from "react-apollo";
 // import SingleShareAndFindItem from "./SingleShareAndFindItem";
 
 class ShareAndFindItem extends Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    data: PropTypes.shape({
+      loading: PropTypes.bool,
+      getCategory: PropTypes.array,
+    }),
+  };
+
+  static defaultProps = {
+    data: {
+      loading: true,
+    },
+  };
+
   render() {
-    // const { load } = this.state;
-    // const { loading, data } = this.props;
+    const { loading, data } = this.props;
     // console.log(data);
     return (
       <div className={s.shareandfind}>
@@ -53,7 +70,25 @@ class ShareAndFindItem extends Component {
                 </span>
               </span>
             </h1> */}
-            <SingleShareAndFindItem
+            {data &&
+              data.length > 0 &&
+              data.map((item, index) => {
+                console.log(item);
+                if (item.isEnable == "true") {
+                  let path = "/images/category/" + item.image;
+                  return (
+                    <SingleShareAndFindItem
+                      id={item.id}
+                      title={item.title}
+                      image={item.image}
+                      subTitle={item.subTitle}
+                      path={path}
+                      key={index}
+                    />
+                  );
+                }
+              })}
+            {/* <SingleShareAndFindItem
               title="Vacation Home"
               example="Short & Long Term Rental"
               img="https://i.ibb.co/61MRHSW/homes-Square.jpg"
@@ -112,7 +147,7 @@ class ShareAndFindItem extends Component {
               title="Parking"
               example="in-door & out-door Garages, Storge, Warehouses"
               img="https://i.ibb.co/smHn9yC/Parking-Square.jpg"
-            />
+            /> */}
           </Row>
         </div>
       </div>

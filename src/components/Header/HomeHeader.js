@@ -28,6 +28,7 @@ import HeaderLocationSearch from "./HeaderLocationSearch";
 import { toggleOpen, toggleClose } from "../../actions/Menu/toggleControl";
 
 import history from "../../core/history";
+import SearchOption from "../Home/SearchOption/SearchOption";
 
 class HomeHeader extends React.Component {
   static propTypes = {
@@ -43,25 +44,45 @@ class HomeHeader extends React.Component {
     showMenu: false,
     searchDisablePages: ["/", "/home"],
   };
-
   constructor(props) {
     super(props);
     this.state = {
       searchHide: true,
       load: false,
       isOpen: 0,
+      change: false,
     };
+
     this.handleMenu = this.handleMenu.bind(this);
     this.handleDisableSearchPages = this.handleDisableSearchPages.bind(this);
     this.openMenu = this.openMenu.bind(this);
     this.openClose = this.openClose.bind(this);
   }
 
+  // componentDidMount() {
+
+  //   console.log("add event");
+  // }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+    console.log("remove event");
+  }
+
+  handleScroll = (e) => {
+    if (window.scrollY >= 1) {
+      this.setState({ change: false });
+    } else {
+      this.setState({ change: true });
+    }
+  };
+
   componentDidMount() {
     this.setState({
       load: true,
     });
     this.handleDisableSearchPages();
+    window.addEventListener("scroll", this.handleScroll);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -146,6 +167,15 @@ class HomeHeader extends React.Component {
                 >
                   <Navbar.Brand>
                     <Logo link={"/"} className={cx(s.brand, s.brandImg)} />
+                    <div
+                      className={
+                        !this.state.change
+                          ? s.category_btn
+                          : s.active_category_btn
+                      }
+                    >
+                      <button>Category</button>
+                    </div>
                   </Navbar.Brand>
                   <div onClick={() => this.openMenu()}>
                     <div className={"hidden-lg hamburgerButton"}>
@@ -203,7 +233,11 @@ class HomeHeader extends React.Component {
     }
 
     return (
-      <div className={cx(headerDesignClass)}>
+      <div
+        className={
+          !this.state.change ? s.active_navbar_default : cx(headerDesignClass)
+        }
+      >
         <div className={s.root}>
           <Toaster />
           <LoadingBar />
@@ -226,23 +260,47 @@ class HomeHeader extends React.Component {
                   !showMenu ? "normalPosition" : "fixedPosition"
                 )}
               >
-                <Navbar.Brand>
+                <Navbar.Brand
+                  className={
+                    !this.state.change ? s.active_logo_main : s.logo_main
+                  }
+                >
                   <Logo link={"/"} className={cx(s.brand, s.brandImg)} />
+                  <div
+                    className={
+                      this.state.change
+                        ? cx(s.category_btn)
+                        : cx(s.active_category_btn)
+                    }
+                  >
+                    <button>Category</button>
+                  </div>
                 </Navbar.Brand>
                 <div onClick={() => this.openMenu()}>
                   <div className={"hidden-lg hamburgerButton"}>
-                    <span
-                      className={cx(
-                        layoutType == 2 ? "menuToggleOne" : "menuToggle"
-                      )}
+                    <div
+                      className={
+                        !this.state.change ? "menuToggle" : "active_menuToggle"
+                      }
                     >
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </span>
+                      <span
+                        className={cx(
+                          layoutType == 2 ? "menuToggleOne" : "menuToggle"
+                        )}
+                      >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </Navbar.Header>
+              {!this.state.change && (
+                <div className={s.mobile_searchOption}>
+                  <SearchOption />
+                </div>
+              )}
               <div
                 className={cx(
                   { [s.menuOpen]: this.state.isOpen == 1 },

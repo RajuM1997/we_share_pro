@@ -52,7 +52,7 @@ class AddSubCategoryManagement extends React.Component {
       <FormGroup className={s.space2}>
         <Row>
           <Col xs={12} sm={12} md={12} lg={3}>
-            <label className={s.labelTextNew}>{type}</label>
+            <label className={s.labelTextNew}></label>
           </Col>
           <Col xs={12} sm={12} md={12} lg={9}>
             <FormControl
@@ -80,7 +80,7 @@ class AddSubCategoryManagement extends React.Component {
       <FormGroup className={s.space2}>
         <Row>
           <Col xs={12} sm={12} md={12} lg={3}>
-            <label className={s.labelTextNew}>{label}</label>
+            <label className={s.labelTextNew}></label>
           </Col>
           <Col xs={12} sm={12} md={12} lg={9}>
             <select value={input.value} aria-label="Default select example">
@@ -152,7 +152,7 @@ class AddSubCategoryManagement extends React.Component {
           )}
         >
           <h1 className={s.headerTitle}>
-            <FormattedMessage {...messages.addCategory} />
+            <FormattedMessage {...messages.subCategorys} />
           </h1>
           <Col xs={12} sm={12} md={8} lg={8} className={s.blockcenter}>
             <div
@@ -185,27 +185,31 @@ class AddSubCategoryManagement extends React.Component {
                     </Col>
                   </Row>
                 </FormGroup>
+                <label className={s.labelTextNew}>Title</label>
                 <Field
                   name="title"
                   type="text"
                   component={this.renderFormControl}
                   label={formatMessage(messages.categoryTypeInputText)}
                 />
+                <label className={s.labelTextNew}>Sub Category</label>
                 <Field
                   name="subCategory"
                   type="text"
                   component={this.renderFormControl}
                   label={formatMessage(messages.categorySub)}
                 />
+                <label className={s.labelTextNew}>Category</label>
+                <br />
                 <Field
                   name="primaryCategory"
                   component="select"
                   type="select"
                   className={bt.commonControlInput}
                 >
-                  <label className={s.labelTextNew}>
+                  {/* <label className={s.labelTextNew}>
                     {formatMessage(messages.categoryType)}
-                  </label>
+                  </label> */}
                   <option />
                   <option value="Car">Car</option>
                   <option value="Vans">Vans</option>

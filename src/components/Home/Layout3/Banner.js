@@ -38,7 +38,7 @@ class Banner extends Component {
   };
 
   render() {
-    console.log(this.state.change);
+    const { loading, data } = this.props;
     const settings = {
       // beforeChange: function() {
       //   // setActiveAnimation(false);
@@ -89,9 +89,26 @@ class Banner extends Component {
         </div>
         <div>
           <Slider {...settings} ref={this.myRef}>
-            {BannerData.map((items, index) => (
-              <BannerItem items={items} index={index} myRef={this.myRef} />
-            ))}
+            {data &&
+              data.length > 0 &&
+              data.map((item, index) => {
+                if (item.isEnable == "true") {
+                  let path = "/images/homeBanner/" + item.image;
+                  return (
+                    <BannerItem
+                      title={item.title}
+                      description={item.description}
+                      image={item.image}
+                      colorText={item.colorText}
+                      bottomText={item.bottomText}
+                      category={item.category}
+                      path={path}
+                      key={item.id}
+                      myRef={this.myRef}
+                    />
+                  );
+                }
+              })}
           </Slider>
         </div>
       </div>
