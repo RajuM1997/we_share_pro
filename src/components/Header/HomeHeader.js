@@ -178,7 +178,13 @@ class HomeHeader extends React.Component {
                     </div>
                   </Navbar.Brand>
                   <div onClick={() => this.openMenu()}>
-                    <div className={"hidden-lg hamburgerButton"}>
+                    <div
+                      className={cx(
+                        !this.state.change
+                          ? "hidden-lg hamburgerButton"
+                          : "active_hamburgerButton"
+                      )}
+                    >
                       <span
                         className={cx(
                           layoutType == 2 ? "menuToggleOne" : "menuToggle"

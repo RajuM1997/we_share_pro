@@ -187,7 +187,7 @@ class Homepage extends React.Component {
             !getMostViewedListingData.loading &&
             !getStaticBlockInfoData.loading && (
               <div className={s.pageContainer}>
-                {getRecommendData &&
+                {/* {getRecommendData &&
                   getRecommendData.getRecommend &&
                   getRecommendData.getRecommend.length > 0 && (
                     <div>
@@ -197,7 +197,7 @@ class Homepage extends React.Component {
                       </h3>
                       <HomeSlider data={getRecommendData.getRecommend} />
                     </div>
-                  )}
+                  )} */}
 
                 {/* {getMostViewedListingData &&
                   getMostViewedListingData.GetMostViewedListing &&
@@ -213,7 +213,7 @@ class Homepage extends React.Component {
                     </div>
                   )} */}
 
-                {getPopularLocationData.getPopularLocationAdmin &&
+                {/* {getPopularLocationData.getPopularLocationAdmin &&
                   getPopularLocationData.getPopularLocationAdmin.length > 0 && (
                     <div className={s.pageContainer}>
                       <h3 className={cx(s.containerTitle, s.marginLeft)}>
@@ -223,12 +223,15 @@ class Homepage extends React.Component {
                         data={getPopularLocationData.getPopularLocationAdmin}
                       />
                     </div>
+                  )} */}
+                {getPopularLocationData.getPopularLocationAdmin &&
+                  getPopularLocationData.getPopularLocationAdmin.length > 0 && (
+                    <div className={s.pageContainer}>
+                      <PopularLoctionItems
+                        data={getPopularLocationData.getPopularLocationAdmin}
+                      />
+                    </div>
                   )}
-                {
-                  <div>
-                    <PopularLoctionItems />
-                  </div>
-                }
                 {
                   <div>
                     <SaveMoreMsg />

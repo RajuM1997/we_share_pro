@@ -6,9 +6,9 @@ import cx from "classnames";
 
 class PopularLocationItem extends Component {
   render() {
-    const { img, idx, place } = this.props;
+    const { path, idx, location } = this.props;
     const bgStyle = {
-      backgroundImage: `url(${img})`,
+      backgroundImage: `url(${path})`,
     };
     return (
       <div
@@ -30,7 +30,7 @@ class PopularLocationItem extends Component {
       >
         <div style={bgStyle} className={s.galleryImg}></div>
         <div className={s.galleryImageOverlay}>
-          <h4>{place}</h4>
+          <h4>{location}</h4>
         </div>
       </div>
     );

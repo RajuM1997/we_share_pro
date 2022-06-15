@@ -13153,5 +13153,23 @@
     "files": [
       "src/locale/messages.js"
     ]
+  },
+  {
+    "id": "app.addBanner",
+    "description": "Add Banner",
+    "defaultMessage": "Add Banner",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.banner",
+    "description": "Category Home page Slider title",
+    "defaultMessage": "banner Type",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
   }
 ]

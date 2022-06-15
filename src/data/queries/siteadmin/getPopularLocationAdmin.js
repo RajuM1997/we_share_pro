@@ -1,28 +1,23 @@
-import {
-    GraphQLList as List
-} from 'graphql';
+import { GraphQLList as List } from "graphql";
 
 // Models
-import { PopularLocation } from '../../models';
+import { PopularLocation } from "../../models";
 
-import sequelize from '../../sequelize';
+import sequelize from "../../sequelize";
 
 // Types
-import PopularLocationType from '../../types/siteadmin/PopularLocationType';
+import PopularLocationType from "../../types/siteadmin/PopularLocationType";
 
 const getPopularLocationAdmin = {
+  type: new List(PopularLocationType),
 
-    type: new List(PopularLocationType),
-
-    async resolve({ request }) {
-        return await PopularLocation.findAll({
-            where: {
-                isEnable: true,
-            },
-            order: [[sequelize.literal('RAND()')]],
-        });
-
-    }
+  async resolve({ request }) {
+    return await PopularLocation.findAll({
+      where: {
+        isEnable: true,
+      },
+    });
+  },
 };
 
 export default getPopularLocationAdmin;
