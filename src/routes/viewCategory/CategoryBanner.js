@@ -30,6 +30,19 @@ class CategoryBanner extends Component {
   //   }
   // }
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.data && nextProps.singleCategory.getSingleCategory.category) {
+      nextProps.data.map((element) => {
+        if (
+          nextProps.singleCategory.getSingleCategory.category ===
+          element.category
+        ) {
+          this.setState({ bannerData: element });
+        }
+      });
+    }
+  }
+
   handleScroll = (e) => {
     if (window.scrollY >= 1) {
       this.setState({ change: true });
@@ -40,25 +53,20 @@ class CategoryBanner extends Component {
   render() {
     const { data, singleCategory } = this.props;
     console.log(data);
-    console.log(singleCategory);
-    // data &&
-    //   data.map((element) => {
-    //     if (singleCategory.getSingleCategory.category === element.category) {
-    //       this.setState({ bannerData: element });
-    //     }
-    //   });
-    // let path = "/images/category/" + this.state.bannerData.image;
+    console.log(this.state.bannerData);
+
+    let path = "/images/homeBanner/" + this.state.bannerData.image;
     const style = {
       background: `url(
-      ../../components/Home/homeImg/Banner/Electronics desktop.jpg
+      ${path}
     )`,
-      backgroundRepeat: "no-repeat",
-      backgroundSize: " cover",
+      backgroundSize: "cover",
       width: "100%",
-      height: " 55vh",
+      height: "60vh",
     };
     return (
-      <div className={s.category_bg} style={style}>
+      <div style={style} className={s.category_bg}>
+        {/* <img className={si} src={this.state.bannerData.image} alt="" /> */}
         <>
           {!this.state.change && (
             <div className={s.category_search_init}>
@@ -68,16 +76,16 @@ class CategoryBanner extends Component {
         </>
         <div className={s.category_banner_text}>
           <div className={s.category_main_title}>
-            <h1>Electronics</h1>
+            <h1>{this.state.bannerData.title}</h1>
           </div>
           <div className={s.category_sub_title}>
-            <h5>Drones, Projectors, Music Inst. DJ equip. etc.</h5>
+            <h5>{this.state.bannerData.description}</h5>
           </div>
           <div className={s.category_color_title}>
-            <h5>Don’t Buy! We Share!</h5>
+            <h5>{this.state.bannerData.colorText}</h5>
           </div>
           <div className={s.category_sub_title}>
-            <h5>Save money, do more, get more!</h5>
+            <h5>{this.state.bannerData.bottomText}</h5>
           </div>
         </div>
       </div>
