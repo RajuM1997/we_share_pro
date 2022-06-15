@@ -135,7 +135,8 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-left: 0;
+    margin-left: 0 !important;
+    padding: 0px 15px;
     padding-bottom: 20px;
   }
   .access_text h1 {

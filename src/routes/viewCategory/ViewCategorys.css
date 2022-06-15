@@ -41,7 +41,7 @@
   width: 36% !important;
   position: absolute;
   z-index: 99;
-  bottom: 28% !important;
+  bottom: 37% !important;
   left: 50%;
   transform: translate(-50%);
   transition: all 1s ease-in-out;
@@ -208,7 +208,7 @@
 }
 @media only screen and (max-width: 1300px) {
   .category_search_init {
-    bottom: 21.5% !important;
+    bottom: 25.5% !important;
   }
 }
 @media only screen and (max-width: 1024px) {
@@ -272,8 +272,11 @@
 }
 @media only screen and (width: 390px) {
   .category_search_init {
-    width: 80% !important;
+    width: 90% !important;
     bottom: 33.1% !important;
+  }
+  .category_search_init select {
+    font-size: 11px !important;
   }
   .category_search_init .SearchOption-search_icon {
     margin-right: 2px !important;

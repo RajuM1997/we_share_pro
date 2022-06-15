@@ -196,7 +196,7 @@ class Header extends React.Component {
                     </Navbar.Form>
                   )}
                   <div onClick={() => this.openClose()}>
-                    {/* <Navigation /> */}
+                    <Navigation />
                   </div>
                 </div>
               </Navbar>
@@ -280,7 +280,7 @@ class Header extends React.Component {
                   </Navbar.Form>
                 )}
                 <div onClick={() => this.openClose()}>
-                  {/* <Navigation /> */}
+                  <Navigation />
                 </div>
               </div>
             </Navbar>
