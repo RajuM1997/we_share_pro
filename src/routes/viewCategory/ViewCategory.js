@@ -62,11 +62,6 @@ class ViewCategory extends Component {
       bannerData: {},
     };
   }
-  // componentDidMount() {
-  //   let { id } = useParams();
-  //   console.log(id);
-  // }
-
   static propTypes = {
     title: PropTypes.string.isRequired,
     data: PropTypes.shape({
@@ -91,9 +86,10 @@ class ViewCategory extends Component {
     const {
       data: { getHomeBanner },
       singleCategory,
+      title,
       // query,
     } = this.props;
-    // console.log(singleCategory.getSingleCategory.category);
+    console.log(title);
 
     return (
       <>

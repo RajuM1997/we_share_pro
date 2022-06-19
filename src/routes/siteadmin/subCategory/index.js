@@ -2,7 +2,7 @@ import React from "react";
 import AdminLayout from "../../../components/Layout/AdminLayout";
 import SubCategory from "./SubCategory";
 
-const title = "Categorys";
+const title = "Sub Category";
 
 export default async function action({ store }) {
   // From Redux Store

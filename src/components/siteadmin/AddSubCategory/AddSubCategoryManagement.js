@@ -159,7 +159,7 @@ class AddSubCategoryManagement extends React.Component {
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={"/siteadmin/popularlocation"}
+                to={"/siteadmin/subCategory"}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,

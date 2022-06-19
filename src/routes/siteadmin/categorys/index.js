@@ -27,7 +27,7 @@ export default async function action({ store }) {
     title,
     component: (
       <AdminLayout>
-        <Categorys />
+        <Categorys title={title} />
       </AdminLayout>
     ),
   };

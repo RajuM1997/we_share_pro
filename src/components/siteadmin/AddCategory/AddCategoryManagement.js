@@ -159,7 +159,7 @@ class AddCategoryManagement extends React.Component {
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={"/siteadmin/popularlocation"}
+                to={"/siteadmin/categorys"}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,

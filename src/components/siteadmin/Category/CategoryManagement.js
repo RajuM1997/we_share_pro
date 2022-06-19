@@ -24,7 +24,7 @@ import messages from "../../../locale/messages";
 
 class CategoryManagement extends React.Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
+    titles: PropTypes.string.isRequired,
     data: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number,

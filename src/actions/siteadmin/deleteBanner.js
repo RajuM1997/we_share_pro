@@ -13,8 +13,8 @@ import history from "../../core/history";
 import { toastr } from "react-redux-toastr";
 
 const query = gql`
-  query getBanner {
-    getBanner {
+  query getHomeBanner {
+    getHomeBanner {
       id
       title
       description
