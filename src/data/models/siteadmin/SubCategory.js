@@ -12,6 +12,14 @@ const SubCategory = Model.define("SubCategory", {
     type: DataType.STRING,
     allowNull: false,
   },
+  description: {
+    type: DataType.STRING,
+    allowNull: false,
+  },
+  address: {
+    type: DataType.STRING,
+    allowNull: false,
+  },
 
   subCategory: {
     type: DataType.STRING,

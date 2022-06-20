@@ -589,6 +589,13 @@ export default {
         ),
     },
     {
+      path: "/siteadmin/edit/category/:id",
+      load: () =>
+        import(
+          /* webpackChunkName: 'siteadmin-editPopularLocation' */ "./siteadmin/editCategory"
+        ),
+    },
+    {
       path: "/siteadmin/add",
       load: () =>
         import(

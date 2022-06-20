@@ -36,7 +36,6 @@ const mutation = gql`
 `;
 
 export function deleteCategory(id) {
-  console.log(id);
   return async (dispatch, getState, { client }) => {
     dispatch({
       type: ADMIN_DELETE_CATEGORY_START,
@@ -54,7 +53,7 @@ export function deleteCategory(id) {
           type: ADMIN_DELETE_CATEGORY_SUCCESS,
         });
         toastr.success("Delete Category", "Deleted successfully!");
-        history.push("/siteadmin/popularlocation");
+        history.push("/siteadmin/categorys");
       } else {
         toastr.error("Delete Category", "Deletion failed!");
       }

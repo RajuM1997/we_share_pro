@@ -6,14 +6,21 @@ const addSubCategory = {
   type: SubCategoryType,
   args: {
     title: { type: StringType },
+    description: { type: StringType },
+    address: { type: StringType },
     subCategory: { type: StringType },
     primaryCategory: { type: StringType },
     image: { type: StringType },
   },
-  async resolve({ request }, { title, subCategory, primaryCategory, image }) {
+  async resolve(
+    { request },
+    { title, description, address, subCategory, primaryCategory, image }
+  ) {
     if (request.user && request.user.admin == true) {
       const Update = await SubCategory.create({
         title: title,
+        description: description,
+        address: address,
         subCategory: subCategory,
         image: image,
         primaryCategory: primaryCategory,

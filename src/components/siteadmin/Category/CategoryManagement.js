@@ -54,8 +54,8 @@ class CategoryManagement extends React.Component {
 
   render() {
     const { data, deleteCategory, updateCategoryStatus } = this.props;
-    console.log(data);
-    console.log(deleteCategory);
+    // console.log(data);
+    // console.log(deleteCategory);
     const { formatMessage } = this.props.intl;
     return (
       <div className={cx(s.pagecontentWrapper, "pagecontentAR")}>
@@ -88,6 +88,7 @@ class CategoryManagement extends React.Component {
                 <Th scope="col">{formatMessage(messages.categoryId)}</Th>
                 <Th scope="col">{formatMessage(messages.categoryName)}</Th>
                 <Th scope="col">{formatMessage(messages.categoryStatus)}</Th>
+                <Th scope="col">{formatMessage(messages.setEnableDisable)}</Th>
                 <Th scope="col">{formatMessage(messages.editLabel)}</Th>
                 <Th scope="col">{formatMessage(messages.delete)}</Th>
               </Thead>
@@ -140,9 +141,7 @@ class CategoryManagement extends React.Component {
                         data-label={formatMessage(messages.editLabel)}
                         column={formatMessage(messages.editLabel)}
                       >
-                        <Link
-                          to={"/siteadmin/edit/popularlocation/" + value.id}
-                        >
+                        <Link to={"/siteadmin/edit/category/" + value.id}>
                           <FormattedMessage {...messages.editLabel} />
                         </Link>
                       </Td>

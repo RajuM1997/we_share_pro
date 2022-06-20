@@ -644,7 +644,7 @@ const messages = defineMessages({
   },
   subCategoryName: {
     id: "app.subCategoryName",
-    defaultMessage: "Category name",
+    defaultMessage: "Sub Category",
     description: "Category name",
   },
   subCategoryStatus: {

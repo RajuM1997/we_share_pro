@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 // Style
 import cx from "classnames";
 import withStyles from "isomorphic-style-loader/lib/withStyles";
-import s from "./EditPopularLocationManagement.css";
+import s from "./EditCategoryManagement.css";
 import bt from "../../../components/commonStyle.css";
 import { Field, reduxForm } from "redux-form";
 import submit from "./submit";
 import validate from "./validate";
 import { injectIntl, FormattedMessage } from "react-intl";
-import Link from "../../Link";
+import Link from "../../Link/Link";
 
 // Style
 import {
@@ -21,8 +21,8 @@ import {
   FormControl,
   Panel,
 } from "react-bootstrap";
-import Uploader from "./Uploader";
-import PlaceGeoSuggest from "./PlaceGeoSuggest";
+import Uploader from "./Uploader/Uploader";
+import PlaceGeoSuggest from "./PlaceGeoSuggest/PlaceGeoSuggest";
 
 // Translation
 import messages from "../../../locale/messages";
@@ -38,7 +38,7 @@ import {
   auth,
 } from "../../../config";
 
-class EditPopularLocationManagement extends React.Component {
+class EditCategoryManagement extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     initialValues: PropTypes.object,
@@ -95,7 +95,7 @@ class EditPopularLocationManagement extends React.Component {
               {...input}
               label={""}
               className={className}
-              formName={"EditPopularLocation"}
+              formName={"EditCategory"}
             />
             {touched && error && (
               <span className={s.errorMessage}>{formatMessage(error)}</span>
@@ -121,7 +121,7 @@ class EditPopularLocationManagement extends React.Component {
       <div
         className={cx(
           s.pagecontentWrapper,
-          "addpopular-autocomplete",
+          "addcategory-autocomplete",
           "pagecontentAR"
         )}
       >
@@ -134,7 +134,7 @@ class EditPopularLocationManagement extends React.Component {
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={"/siteadmin/popularlocation"}
+                to={"/siteadmin/categorys"}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,
@@ -161,17 +161,38 @@ class EditPopularLocationManagement extends React.Component {
                   </Row>
                 </FormGroup>
                 <Field
-                  name="location"
+                  name="title"
                   type="text"
                   component={this.renderFormControl}
                   label={formatMessage(messages.location)}
                 />
                 <Field
-                  name="locationAddress"
+                  name="subTitle"
                   type="text"
-                  component={this.renderPlacesSuggest}
-                  label={formatMessage(messages.locationAddress)}
+                  component={this.renderFormControl}
+                  label={formatMessage(messages.location)}
                 />
+                <label className={s.labelTextNew}>Category</label>
+                <Field
+                  name="category"
+                  component="select"
+                  type="select"
+                  className={bt.commonControlInput}
+                >
+                  <option />
+                  <option value="Vacation Home">Vacation Home</option>
+                  <option value="Events Space">Events Space</option>
+                  <option value="Workspace">Workspace</option>
+                  <option value="Vehicles">Vehicles</option>
+                  <option value="RVs">RVs</option>
+                  <option value="Boats">Boats</option>
+                  <option value="Bikes">Bikes</option>
+                  <option value="Electronics">Electronics</option>
+                  <option value="Power Tools">Power Tools</option>
+                  <option value="Film Equipment">Film Equipment</option>
+                  <option value="Event Equipment">Event Equipment</option>
+                  <option value="Parking">Parking</option>
+                </Field>
                 <FormGroup className={s.formGroup}>
                   <Row>
                     <Col
@@ -200,18 +221,15 @@ class EditPopularLocationManagement extends React.Component {
   }
 }
 
-EditPopularLocationManagement = reduxForm({
-  form: "EditPopularLocation", // a unique name for this form
+EditCategoryManagement = reduxForm({
+  form: "EditCategory", // a unique name for this form
   validate,
-})(EditPopularLocationManagement);
+})(EditCategoryManagement);
 
 const mapState = (state) => ({});
 
 const mapDispatch = {};
 
 export default injectIntl(
-  withStyles(
-    s,
-    bt
-  )(connect(mapState, mapDispatch)(EditPopularLocationManagement))
+  withStyles(s, bt)(connect(mapState, mapDispatch)(EditCategoryManagement))
 );

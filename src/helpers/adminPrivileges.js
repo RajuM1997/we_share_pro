@@ -140,8 +140,12 @@ const privileges = [
   },
   {
     id: 19,
-    privilege: "Category",
-    permittedUrls: ["/siteadmin/category"],
+    privilege: "Manage Category",
+    permittedUrls: [
+      "/siteadmin/category",
+      "/siteadmin/category/add",
+      "/siteadmin/edit/category/",
+    ],
   },
   {
     id: 20,

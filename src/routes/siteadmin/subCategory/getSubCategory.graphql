@@ -1,0 +1,12 @@
+query getSubCategory {
+  getSubCategory {
+    id
+    title
+    primaryCategory
+    subCategory
+    image
+    isEnable
+    createdAt
+    updatedAt
+  }
+}

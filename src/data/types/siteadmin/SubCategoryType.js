@@ -9,6 +9,8 @@ const SubCategoryType = new ObjectType({
   fields: {
     id: { type: IntType },
     title: { type: StringType },
+    description: { type: StringType },
+    address: { type: StringType },
     subCategory: { type: StringType },
     primaryCategory: { type: StringType },
     image: { type: StringType },

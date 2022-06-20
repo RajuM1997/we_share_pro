@@ -139,106 +139,118 @@ class NavigationAfterLogin extends React.Component {
       }
     }
     return (
-      <Nav pullRight className={"floatLeftAR"}>
-        {/* <Nav pullRight className={s.newMenu}></Nav> */}
-        <div className={s.search_container}>
-          {!this.state.change && <SearchOption />}
+      <>
+        <div className={s.nav_search_main}>
+          <div className={s.search_container}>
+            {!this.state.change && <SearchOption />}
+          </div>
         </div>
-        <NavLink
-          to="/"
-          className={cx("visible-xs", s.breakPointScreen, s.newMenuDesign)}
-        >
-          <FormattedMessage {...messages.home} />
-        </NavLink>
-        <NavLink noLink onClick={(e) => openHeaderModal("languageModal")}>
-          {formatLocale(currentLocale)}
-        </NavLink>
-        <NavLink noLink onClick={(e) => openHeaderModal("currencyModal")}>
-          {showCurrencySymbol(displayCurrency, currentLocale) + displayCurrency}
-        </NavLink>
-        <NavLink
-          to="/dashboard"
-          className={cx("visible-xs", s.breakPointScreen)}
-        >
-          <FormattedMessage {...messages.dashboard} />
-        </NavLink>
-        <NavDropdown
-          className={cx("hidden-xs", s.nonBreakPointScreen)}
-          eventKey={3}
-          title={formatMessage(messages.host)}
-          noCaret
-          id="basic-nav-dropdown"
-        >
-          <MenuItemLink to="/rooms">
-            <FormattedMessage {...messages.manageListing} />
-          </MenuItemLink>
-          <MenuItemLink to="/become-a-host?mode=new">
-            <FormattedMessage {...messages.listYourSpace} />
-          </MenuItemLink>
-          <MenuItemLink to="/reservation/current">
-            <FormattedMessage {...messages.yourReservations} />
-          </MenuItemLink>
-          <MenuItemLink to="/user/transaction">
-            <FormattedMessage {...messages.transactionHistory} />
-          </MenuItemLink>
-        </NavDropdown>
-        <NavLink
-          // to={"/users/show/" + isVerified}
-          to={"/user/edit"}
-          className={cx("visible-xs", s.breakPointScreen)}
-        >
-          <FormattedMessage {...messages.profile} />
-        </NavLink>
-        <NavLink
-          to="/user/payout"
-          className={cx("visible-xs", s.breakPointScreen)}
-        >
-          <FormattedMessage {...messages.accountSettings} />
-        </NavLink>
-        <NavLink to="/wishlists">
-          <FormattedMessage {...messages.saved} />
-        </NavLink>
-        <NavLink to="/trips/current">
-          <FormattedMessage {...messages.trips} />
-        </NavLink>
-        <NavLink to="/rooms" className={cx("visible-xs", s.breakPointScreen)}>
-          <FormattedMessage {...messages.host} />
-        </NavLink>
-        <Message />
-        <NavLink to="/help">
-          <FormattedMessage {...messages.help} />
-        </NavLink>
-        <Logout className={cx("visible-xs", s.breakPointScreen)} />
-        <NavDropdown
-          className={cx("hidden-xs", s.nonBreakPointScreen)}
-          eventKey={3}
-          title={
-            <Avatar
-              isUser
-              type={"small"}
-              height={30}
-              width={30}
-              className={s.userAvatar}
-            />
+        <Nav
+          pullRight
+          className={
+            !this.state.change
+              ? cx("floatLeftAR", s.navbarLeft)
+              : cx("floatLeftAR", s.navbarLeftActive)
           }
-          noCaret
-          id="basic-nav-dropdown"
         >
-          <MenuItemLink to="/dashboard">
+          {/* <Nav pullRight className={s.newMenu}></Nav> */}
+          <NavLink
+            to="/"
+            className={cx("visible-xs", s.breakPointScreen, s.newMenuDesign)}
+          >
+            <FormattedMessage {...messages.home} />
+          </NavLink>
+          <NavLink noLink onClick={(e) => openHeaderModal("languageModal")}>
+            {formatLocale(currentLocale)}
+          </NavLink>
+          <NavLink noLink onClick={(e) => openHeaderModal("currencyModal")}>
+            {showCurrencySymbol(displayCurrency, currentLocale) +
+              displayCurrency}
+          </NavLink>
+          <NavLink
+            to="/dashboard"
+            className={cx("visible-xs", s.breakPointScreen)}
+          >
             <FormattedMessage {...messages.dashboard} />
-          </MenuItemLink>
-          <MenuItemLink to="/user/edit">
-            <FormattedMessage {...messages.editProfile} />
-          </MenuItemLink>
-          <MenuItemLink to="/user/payout">
+          </NavLink>
+          <NavDropdown
+            className={cx("hidden-xs", s.nonBreakPointScreen)}
+            eventKey={3}
+            title={formatMessage(messages.host)}
+            noCaret
+            id="basic-nav-dropdown"
+          >
+            <MenuItemLink to="/rooms">
+              <FormattedMessage {...messages.manageListing} />
+            </MenuItemLink>
+            <MenuItemLink to="/become-a-host?mode=new">
+              <FormattedMessage {...messages.listYourSpace} />
+            </MenuItemLink>
+            <MenuItemLink to="/reservation/current">
+              <FormattedMessage {...messages.yourReservations} />
+            </MenuItemLink>
+            <MenuItemLink to="/user/transaction">
+              <FormattedMessage {...messages.transactionHistory} />
+            </MenuItemLink>
+          </NavDropdown>
+          <NavLink
+            // to={"/users/show/" + isVerified}
+            to={"/user/edit"}
+            className={cx("visible-xs", s.breakPointScreen)}
+          >
+            <FormattedMessage {...messages.profile} />
+          </NavLink>
+          <NavLink
+            to="/user/payout"
+            className={cx("visible-xs", s.breakPointScreen)}
+          >
             <FormattedMessage {...messages.accountSettings} />
-          </MenuItemLink>
-          <Logout />
-        </NavDropdown>
-        {wishListModal && <WishListModal />}
-        <HeaderModal modalType={"languageModal"} />
-        <HeaderModal modalType={"currencyModal"} />
-      </Nav>
+          </NavLink>
+          <NavLink to="/wishlists">
+            <FormattedMessage {...messages.saved} />
+          </NavLink>
+          <NavLink to="/trips/current">
+            <FormattedMessage {...messages.trips} />
+          </NavLink>
+          <NavLink to="/rooms" className={cx("visible-xs", s.breakPointScreen)}>
+            <FormattedMessage {...messages.host} />
+          </NavLink>
+          <Message />
+          <NavLink to="/help">
+            <FormattedMessage {...messages.help} />
+          </NavLink>
+          <Logout className={cx("visible-xs", s.breakPointScreen)} />
+          <NavDropdown
+            className={cx("hidden-xs", s.nonBreakPointScreen)}
+            eventKey={3}
+            title={
+              <Avatar
+                isUser
+                type={"small"}
+                height={30}
+                width={30}
+                className={s.userAvatar}
+              />
+            }
+            noCaret
+            id="basic-nav-dropdown"
+          >
+            <MenuItemLink to="/dashboard">
+              <FormattedMessage {...messages.dashboard} />
+            </MenuItemLink>
+            <MenuItemLink to="/user/edit">
+              <FormattedMessage {...messages.editProfile} />
+            </MenuItemLink>
+            <MenuItemLink to="/user/payout">
+              <FormattedMessage {...messages.accountSettings} />
+            </MenuItemLink>
+            <Logout />
+          </NavDropdown>
+          {wishListModal && <WishListModal />}
+          <HeaderModal modalType={"languageModal"} />
+          <HeaderModal modalType={"currencyModal"} />
+        </Nav>
+      </>
     );
   }
 }

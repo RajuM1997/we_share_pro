@@ -1,0 +1,10 @@
+query editCategory($id: Int!) {
+  editCategory(id: $id) {
+    id
+    title
+    subTitle
+    isEnable
+    category
+    image
+  }
+}
