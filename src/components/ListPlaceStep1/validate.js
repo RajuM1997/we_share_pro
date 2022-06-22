@@ -1,9 +1,7 @@
-import messages from '../../locale/messages';
+import messages from "../../locale/messages";
 
-
-const validate = values => {
-
-  const errors = {}
+const validate = (values) => {
+  const errors = {};
 
   if (!values.houseType) {
     errors.houseType = messages.required;
@@ -29,7 +27,7 @@ const validate = values => {
     errors.zipcode = messages.required;
   }
 
-  return errors
-}
+  return errors;
+};
 
-export default validate
+export default validate;

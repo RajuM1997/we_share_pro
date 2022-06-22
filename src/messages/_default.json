@@ -11483,7 +11483,7 @@
   {
     "id": "app.subCategoryName",
     "description": "Category name",
-    "defaultMessage": "Category name",
+    "defaultMessage": "Sub Category",
     "message": "",
     "files": [
       "src/locale/messages.js"
