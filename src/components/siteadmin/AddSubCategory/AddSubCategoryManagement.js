@@ -192,9 +192,51 @@ class AddSubCategoryManagement extends React.Component {
                   component={this.renderFormControl}
                   label={formatMessage(messages.categoryTypeInputText)}
                 />
+                <label className={s.labelTextNew}>Address</label>
+                <Field
+                  name="address"
+                  type="text"
+                  component={this.renderFormControl}
+                  label={formatMessage(messages.categoryTypeInputText)}
+                />
+                <label className={s.labelTextNew}>Description</label>
+                <Field
+                  name="description"
+                  type="text"
+                  component={this.renderFormControl}
+                  label={formatMessage(messages.categoryTypeInputText)}
+                />
                 <label className={s.labelTextNew}>Sub Category</label>
                 <Field
                   name="subCategory"
+                  type="text"
+                  component={this.renderFormControl}
+                  label={formatMessage(messages.categorySub)}
+                />
+                <label className={s.labelTextNew}>Guests</label>
+                <Field
+                  name="guests"
+                  type="text"
+                  component={this.renderFormControl}
+                  label={formatMessage(messages.categorySub)}
+                />
+                <label className={s.labelTextNew}>Bedrooms</label>
+                <Field
+                  name="bedrooms"
+                  type="text"
+                  component={this.renderFormControl}
+                  label={formatMessage(messages.categorySub)}
+                />
+                <label className={s.labelTextNew}>Beds</label>
+                <Field
+                  name="beds"
+                  type="text"
+                  component={this.renderFormControl}
+                  label={formatMessage(messages.categorySub)}
+                />
+                <label className={s.labelTextNew}>Baths</label>
+                <Field
+                  name="baths"
                   type="text"
                   component={this.renderFormControl}
                   label={formatMessage(messages.categorySub)}
@@ -207,19 +249,16 @@ class AddSubCategoryManagement extends React.Component {
                   type="select"
                   className={bt.commonControlInput}
                 >
-                  {/* <label className={s.labelTextNew}>
-                    {formatMessage(messages.categoryType)}
-                  </label> */}
-                  <option />
-                  <option value="Car">Car</option>
-                  <option value="Vans">Vans</option>
-                  <option value="Yatches">Yatches</option>
-                  <option value="RVMountain Bikess">Mountain Bikes</option>
+                  <option value="Vacation Home">Vacation Home</option>
+                  <option value="Events Space">Events Space</option>
+                  <option value="Workspace">Workspace</option>
+                  <option value="Vehicles">Vehicles</option>
+                  <option value="RVs">RVs</option>
                   <option value="Boats">Boats</option>
-                  <option value="Drones">Drones</option>
+                  <option value="Bikes">Bikes</option>
                   <option value="Electronics">Electronics</option>
                   <option value="Power Tools">Power Tools</option>
-                  <option value="0000ff">Film Equipment</option>
+                  <option value="Film Equipment">Film Equipment</option>
                   <option value="Event Equipment">Event Equipment</option>
                   <option value="Parking">Parking</option>
                 </Field>

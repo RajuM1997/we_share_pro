@@ -252,16 +252,16 @@ textarea {
     right: 0;
     width: 100%;
     padding: 0px !important;
-    padding-bottom: 60px !important;
+    padding-bottom: 75px !important;
   }
   .hamburgerButton {
     position: absolute;
-    top: 71px;
+    top: 84px;
     right: 25px;
   }
   .active_menuToggle {
     position: absolute;
-    top: -31px;
+    top: -46px;
     left: -27px;
   }
 }
@@ -3000,6 +3000,17 @@ textarea {
 }
 .menuToggle input:checked ~ ul {
   transform: none;
+}
+@media (max-width: 480px) and (min-width: 320px) {
+  .menuToggleOne {
+    display: block;
+    position: relative;
+    top: -30px;
+    right: 0;
+    z-index: 1;
+    -webkit-user-select: none;
+    user-select: none;
+  }
 }
 /*************************** End of menu toggle ***********************************/
 

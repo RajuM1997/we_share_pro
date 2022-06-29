@@ -1,23 +1,22 @@
 // Redux Form
-import { SubmissionError } from 'redux-form';
+import { SubmissionError } from "redux-form";
 
 // Fetch request
-import fetch from '../../core/fetch';
+import fetch from "../../core/fetch";
 
 // Locale
-import messages from '../../locale/messages';
-import { toastr } from 'react-redux-toastr';
+import messages from "../../locale/messages";
+import { toastr } from "react-redux-toastr";
 
 // For Redirect
-import history from '../../core/history';
+import history from "../../core/history";
 
 // Redux Action
-import { getListingData } from '../../actions/getListing';
-import { manageListingSteps } from '../../actions/manageListingSteps';
-import { setLoaderStart, setLoaderComplete } from '../../actions/loader/loader';
+import { getListingData } from "../../actions/getListing";
+import { manageListingSteps } from "../../actions/manageListingSteps";
+import { setLoaderStart, setLoaderComplete } from "../../actions/loader/loader";
 
 async function submit(values, dispatch) {
-
   let bedTypes = JSON.stringify(values.bedTypes);
 
   let variables = Object.assign({}, values, { bedTypes });
@@ -32,25 +31,34 @@ async function submit(values, dispatch) {
 `;
   let address = `${values.street},${values.city},${values.state},${values.zipcode},${values.country},`;
 
-  const mapResp = await fetch('/graphql', {
-    method: 'post',
+  const mapResp = await fetch("/graphql", {
+    method: "post",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       query: checkMapQuery,
-      variables: { address }
+      variables: { address },
     }),
-    credentials: 'include'
+    credentials: "include",
   });
 
   const checkMapResponse = await mapResp.json();
-  if (checkMapResponse && checkMapResponse.data && checkMapResponse.data.locationItem && checkMapResponse.data.locationItem.status !== 200) {
-    toastr.error("Invalid Address!", "Your address seems to be invalid, please go back to edit your address!");
+  if (
+    checkMapResponse &&
+    checkMapResponse.data &&
+    checkMapResponse.data.locationItem &&
+    checkMapResponse.data.locationItem.status === 200
+    // !==
+  ) {
+    toastr.error(
+      "Invalid Address!",
+      "Your address seems to be invalid, please go back to edit your address!"
+    );
     return;
   } else {
-    dispatch(setLoaderStart('location'));
+    dispatch(setLoaderStart("location"));
 
     const query = `query (
     $roomType:String,
@@ -99,17 +107,17 @@ async function submit(values, dispatch) {
       }
     }`;
 
-    const resp = await fetch('/graphql', {
-      method: 'post',
+    const resp = await fetch("/graphql", {
+      method: "post",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         query: query,
-        variables: variables
+        variables: variables,
       }),
-      credentials: 'include'
+      credentials: "include",
     });
 
     const { data } = await resp.json();
@@ -117,9 +125,9 @@ async function submit(values, dispatch) {
     if (data.createListing.status == "success") {
       await dispatch(getListingData(data.createListing.id));
       await dispatch(manageListingSteps(data.createListing.id, 1));
-      history.push(data.createListing.id + '/map');
-      dispatch(setLoaderComplete('location'));
-      await dispatch(setLoaderComplete('location'));
+      history.push(data.createListing.id + "/map");
+      dispatch(setLoaderComplete("location"));
+      await dispatch(setLoaderComplete("location"));
     } else if (data.createListing.status == "notLoggedIn") {
       throw new SubmissionError({ _error: messages.notLoggedIn });
     } else if (data.createListing.status == "adminLoggedIn") {
@@ -128,7 +136,6 @@ async function submit(values, dispatch) {
       throw new SubmissionError({ _error: messages.somethingWentWrong });
     }
   }
-
 }
 
 export default submit;

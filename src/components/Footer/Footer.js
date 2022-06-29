@@ -332,15 +332,98 @@ import ss from "../../components/Home/NewListing/NewListing.css";
 import cx from "classnames";
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 import FooterTop from "./FooterTop";
+import googleStore from "../../components/Home/homeImg/phone/google_play_store.png";
+import appleStore from "../../components/Home/homeImg/phone/apple_play_store.png";
 
 class Footer extends Component {
   render() {
     return (
-      <div className={cx(s.footer_bg, ss.paddingBottom2, ss.paddingTop5)}>
+      <div className={cx(s.footer_bg, ss.paddingBottom2, s.footerPaddingTop)}>
+        {/* <Container className={s.caontainer}>
+          <FooterTop />
+        </Container> */}
         <Container className={s.container}>
-          <Row w-100>
-            <FooterTop />
-            <Col sm={7} md={3} lg={3} xs={12} className={ss.paddingTop3}>
+          <div className={s.footer_row}>
+            <div className={s.footer_col}>
+              <div className={s.footer_top_title}>
+                <p>
+                  <span>New</span> Categories
+                </p>
+              </div>
+              <div className={cx(s.footer_top_sub, s.text_secondary)}>
+                <p className={cx(s.text_secondary, ss.margin0)}>
+                  Film Equipment
+                </p>
+                <p className={cx(s.text_secondary, ss.margin0)}>Drones</p>
+                <p className={ss.margin0}>Warehouse</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>Parking</p>
+                <p className={ss.margin0}>Boats</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>Yatchs</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>
+                  Sporting Equuipment
+                </p>
+              </div>
+            </div>
+            <div className={s.footer_col}>
+              <div className={s.footer_top_title}>
+                <p>
+                  <span>Popular</span> Stays
+                </p>
+              </div>
+              <div className={s.footer_top_sub}>
+                <p className={cx(s.text_secondary, ss.margin0)}>Apartment</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>Villa</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>Holet</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>Resort</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>Loft</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>LightHouse</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>Cottage</p>
+              </div>
+            </div>
+            <div className={s.footer_col}>
+              <div className={s.footer_top_title}>
+                <p>
+                  <span>Popular</span> Location
+                </p>
+              </div>
+              <div className={s.footer_top_sub}>
+                <p className={cx(s.text_secondary, ss.margin0)}>Dubai</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>New York</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>London</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>Paris</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>Tel Aviv</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>Cairo</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>California</p>
+              </div>
+            </div>
+            <div className={s.footer_col}>
+              <div className={s.footer_top_title}>
+                <p>
+                  <span>Join</span> WeShare
+                </p>
+              </div>
+              <div className={s.footer_top_sub}>
+                <p className={cx(s.text_secondary, ss.margin0, ss.padding0)}>
+                  List an Item
+                </p>
+                <p className={cx(s.text_secondary, ss.margin0)}>How it works</p>
+                <p className={cx(s.text_secondary, ss.margin0)}>Login/SignUp</p>
+                <div className={ss.paddingTop1}>
+                  <img
+                    src={googleStore}
+                    alt=""
+                    className={cx(ss.margin2, s.play_store_footer)}
+                  />
+                  <br />
+                  <img
+                    src={appleStore}
+                    alt=""
+                    className={cx(ss.marginTop1, s.footer_apple)}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className={cx(ss.paddingTop3, s.footer_col)}>
               <p className={s.footer_title}>Support</p>
               <div className={cx(s.footer_top_sub, s.text_secondary)}>
                 <p className={cx(s.text_secondary, ss.margin0)}>FAQs</p>
@@ -351,9 +434,8 @@ class Footer extends Component {
                   Report concern
                 </p>
               </div>
-            </Col>
-            <Col sm={5} md={3} lg={3} xs={12} className={ss.paddingTop3}>
-              {" "}
+            </div>
+            <div className={cx(ss.paddingTop3, s.footer_col)}>
               <p className={s.footer_title}>Community</p>
               <div className={cx(s.footer_top_sub, s.text_secondary)}>
                 <p className={cx(s.text_secondary, ss.margin0)}>
@@ -375,8 +457,8 @@ class Footer extends Component {
                   We Share - Abu Dhabi
                 </p>
               </div>
-            </Col>
-            <Col sm={7} md={3} lg={3} xs={12} className={ss.paddingTop3}>
+            </div>
+            <div className={cx(ss.paddingTop3, s.footer_col)}>
               <p className={s.footer_title}>Hosting</p>
               <div className={cx(s.footer_top_sub, s.text_secondary)}>
                 <p className={cx(s.text_secondary, ss.margin0)}>Try hosting</p>
@@ -390,8 +472,8 @@ class Footer extends Component {
                   How to host responsibly
                 </p>
               </div>
-            </Col>
-            <Col sm={5} md={3} lg={3} xs={12} className={ss.paddingTop3}>
+            </div>
+            <div className={cx(ss.paddingTop3, s.footer_col)}>
               <p className={s.footer_title}>About</p>
               <div className={cx(s.footer_top_sub, s.text_secondary)}>
                 <p className={cx(s.text_secondary, ss.margin0)}>Privacy</p>
@@ -406,8 +488,8 @@ class Footer extends Component {
                 <img src={youtube} alt="" />
                 <img src={tiktok} alt="" />
               </div>
-            </Col>
-          </Row>
+            </div>
+          </div>
         </Container>
       </div>
     );

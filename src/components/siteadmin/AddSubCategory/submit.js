@@ -12,16 +12,27 @@ async function submit(values, dispatch) {
     const mutation = `
   mutation addSubCategory(
     $title: String,
+    $description: String,
+    $address: String,
     $subCategory: String,
-    $primaryCategory: String,
+    $guests: String,
+    $bedrooms: String,
+    $beds: String,
+    $baths: String,
     $image: String,
-   
+    $primaryCategory: String,
   ) {
     addSubCategory(
       title: $title,
+      description: $description,
+      address: $address,
       subCategory: $subCategory,
+      guests: $guests,
+      bedrooms: $bedrooms,
+      beds: $beds,
+      baths: $baths,
+      image: $image,
       primaryCategory: $primaryCategory,
-      image: $image
     ) {
         status
     }
@@ -42,6 +53,7 @@ async function submit(values, dispatch) {
     });
 
     const { data } = await resp.json();
+    console.log(data);
 
     if (data.addSubCategory.status === "success") {
       toastr.success("Added Sub Category", "Successfully Added!");

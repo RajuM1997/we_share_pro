@@ -631,10 +631,17 @@ export default {
         ),
     },
     {
-      path: "/siteadmin/field",
+      path: "/siteadmin/edit/subCategory/:id",
       load: () =>
         import(
-          /* webpackChunkName: 'siteadmin-becomeHostStaticBlock' */ "./siteadmin/field/index"
+          /* webpackChunkName: 'siteadmin-editPopularLocation' */ "./siteadmin/editSubCategory"
+        ),
+    },
+    {
+      path: "/siteadmin/fields",
+      load: () =>
+        import(
+          /* webpackChunkName: 'siteadmin-becomeHostStaticBlock' */ "./siteadmin/fields/index"
         ),
     },
     // home offer import

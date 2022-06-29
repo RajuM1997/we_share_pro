@@ -98,10 +98,9 @@ class SideBar extends Component {
       "/siteadmin/categorys",
       "/siteadmin/subCategory/add",
       "/siteadmin/field/add",
-      "sideadmin/home",
     ];
     let categoryFieldArray = [
-      "/siteadmin/field/Car",
+      "/siteadmin/fields",
       "/siteadmin/field/Vans",
       "/siteadmin/field/Yatches",
       "/siteadmin/field/MountainBikes",
@@ -1053,25 +1052,24 @@ class SideBar extends Component {
                   </div>
                   <Collapse in={this.state.field} className={s.subMenu}>
                     <div>
-                      {validatePrivilege(12, privileges) && (
+                      {validatePrivilege(19, privileges) && (
                         <li
                           className={cx({
-                            [s.active]:
-                              location === "/siteadmin/home/home-banner",
+                            [s.active]: location === "/siteadmin/fields",
                           })}
                         >
                           <Link
-                            to={"/siteadmin/home/offer"}
+                            to={"/siteadmin/fields"}
                             className={cx(s.sideNavitem, s.disPlayTable)}
                             onClick={() => this.openClose()}
                           >
                             <span className={s.disPlayTabelCell}>
-                              <FontAwesome.FaArrowRight
-                                className={cx(s.navigationIcon, "sideArrowRTL")}
+                              <FontAwesome.FaHome
+                                className={s.navigationIcon}
                               />
                             </span>
                             <span className={s.disPlayTabelCell}>
-                              <FormattedMessage {...messages.homeOffer} />
+                              <FormattedMessage {...messages.fieldCar} />
                             </span>
                           </Link>
                         </li>

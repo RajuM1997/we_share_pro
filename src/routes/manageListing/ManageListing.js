@@ -1,53 +1,49 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { graphql, compose } from 'react-apollo';
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql, compose } from "react-apollo";
 
 // Style
-import {
-  Grid,
-  Row,
-  Col,
-} from 'react-bootstrap';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './ManageListing.css';
+import { Grid, Row, Col } from "react-bootstrap";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import s from "./ManageListing.css";
 
 // Component
-import SideMenu from '../../components/ManageListing/SideMenu';
-import PanelWrapper from '../../components/ManageListing/PanelWrapper';
-import Loader from '../../components/Loader';
+import SideMenu from "../../components/ManageListing/SideMenu";
+import PanelWrapper from "../../components/ManageListing/PanelWrapper";
+import Loader from "../../components/Loader";
 // Graphql
-import ManageListingsQuery from './manageListing.graphql';
+import ManageListingsQuery from "./manageListing.graphql";
 
 class ManageListing extends React.Component {
   static propTypes = {
     ManageListingsData: PropTypes.shape({
       loading: PropTypes.bool,
-      ManageListings: PropTypes.array
-    })
+      ManageListings: PropTypes.array,
+    }),
   };
 
   static defaultProps = {
     ManageListingsData: {
       loading: true,
-      ManageListings: []
-    }
-  }
+      ManageListings: [],
+    },
+  };
 
   render() {
-    const { ManageListingsData: { loading, ManageListings } } = this.props;
+    const {
+      ManageListingsData: { loading, ManageListings },
+    } = this.props;
 
     return (
-      <div>
+      <div style={{ marginTop: "30px" }}>
         <Grid fluid className={s.container}>
           <Row className={s.landingContainer}>
             <SideMenu />
             <Col xs={12} sm={9} md={9} lg={9}>
-              {
-                loading && <Loader type={"text"} />
-              }
-              {
-                !loading && ManageListings != null && <PanelWrapper data={ManageListings} />
-              }
+              {loading && <Loader type={"text"} />}
+              {!loading && ManageListings != null && (
+                <PanelWrapper data={ManageListings} />
+              )}
             </Col>
           </Row>
         </Grid>
@@ -56,14 +52,13 @@ class ManageListing extends React.Component {
   }
 }
 
-
 export default compose(
   withStyles(s),
   graphql(ManageListingsQuery, {
-    name: 'ManageListingsData',
+    name: "ManageListingsData",
     options: {
       ssr: false,
-      fetchPolicy: 'network-only'
-    }
-  }),
+      fetchPolicy: "network-only",
+    },
+  })
 )(ManageListing);

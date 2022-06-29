@@ -27,6 +27,7 @@ import { toggleOpen, toggleClose } from "../../actions/Menu/toggleControl";
 
 import history from "../../core/history";
 import { closeLoginModal } from "../../actions/modalActions";
+import SearchOption from "../Home/SearchOption/SearchOption";
 
 class Header extends React.Component {
   static propTypes = {
@@ -49,8 +50,10 @@ class Header extends React.Component {
       searchHide: true,
       load: false,
       isOpen: 0,
+      change: false,
     };
     this.handleMenu = this.handleMenu.bind(this);
+    // this.handleScroll = this.handleScroll.bind(this);
     this.handleDisableSearchPages = this.handleDisableSearchPages.bind(this);
     this.openMenu = this.openMenu.bind(this);
     this.openClose = this.openClose.bind(this);
@@ -61,7 +64,22 @@ class Header extends React.Component {
       load: true,
     });
     this.handleDisableSearchPages();
+    this.setState({
+      load: true,
+    });
+    window.addEventListener("scroll", this.handleScroll);
   }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  handleScroll = (e) => {
+    if (window.scrollY >= 1) {
+      this.setState({ change: false });
+    } else {
+      this.setState({ change: true });
+    }
+  };
 
   componentWillReceiveProps(nextProps) {
     this.handleDisableSearchPages();
@@ -119,6 +137,7 @@ class Header extends React.Component {
     if (history.location) {
       location = history.location.pathname;
     }
+    console.log(this.state.change);
 
     if (!load) {
       return (
@@ -142,7 +161,7 @@ class Header extends React.Component {
                 expanded={showMenu}
                 onToggle={this.handleMenu}
               >
-                {/* <Navbar.Header
+                <Navbar.Header
                   className={cx(
                     "logoPadding",
                     !showMenu ? "normalPosition" : "fixedPosition"
@@ -160,7 +179,7 @@ class Header extends React.Component {
                       </span>
                     </div>
                   </div>
-                </Navbar.Header> */}
+                </Navbar.Header>
                 <div
                   className={cx(
                     { [s.menuOpen]: this.state.isOpen == 1 },
@@ -183,7 +202,7 @@ class Header extends React.Component {
                       </div>
                     </div>
                   </div>
-                  {!searchHide && (
+                  {/* {!searchHide && (
                     <Navbar.Form
                       pullLeft
                       className={cx(
@@ -194,7 +213,7 @@ class Header extends React.Component {
                     >
                       <HeaderLocationSearch />
                     </Navbar.Form>
-                  )}
+                  )} */}
                   <div onClick={() => this.openClose()}>
                     <Navigation />
                   </div>
@@ -224,14 +243,20 @@ class Header extends React.Component {
               expanded={showMenu}
               onToggle={this.handleMenu}
             >
-              {/* <Navbar.Header
+              <Navbar.Header
                 className={cx(
                   "logoPadding",
                   !showMenu ? "normalPosition" : "fixedPosition"
                 )}
               >
-                <Navbar.Brand>
+                {!this.state.change && (
+                  <div className={s.search_all}>
+                    <SearchOption />
+                  </div>
+                )}
+                <Navbar.Brand style={{ marginLeft: "10px" }}>
                   <Logo link={"/"} className={cx(s.brand, s.brandImg)} />
+                  <span></span>
                 </Navbar.Brand>
                 <div onClick={() => this.openMenu()}>
                   <div className={"hidden-lg hamburgerButton"}>
@@ -242,7 +267,7 @@ class Header extends React.Component {
                     </span>
                   </div>
                 </div>
-              </Navbar.Header> */}
+              </Navbar.Header>
               <div
                 className={cx(
                   { [s.menuOpen]: this.state.isOpen == 1 },
@@ -266,7 +291,7 @@ class Header extends React.Component {
                     </div>
                   </div>
                 </div>
-                {!searchHide && (
+                {/* {!searchHide && (
                   <Navbar.Form
                     pullLeft
                     className={cx(
@@ -278,7 +303,7 @@ class Header extends React.Component {
                   >
                     <HeaderLocationSearch />
                   </Navbar.Form>
-                )}
+                )} */}
                 <div onClick={() => this.openClose()}>
                   <Navigation />
                 </div>

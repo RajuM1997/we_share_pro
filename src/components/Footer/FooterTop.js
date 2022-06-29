@@ -12,7 +12,7 @@ class FooterTop extends Component {
   render() {
     return (
       //   <Container className={ss.paddingY}>
-      <>
+      <Row w-100>
         <Col sm={6} md={3} lg={3} xs={12}>
           <div className={s.footer_top_title}>
             <p>
@@ -63,13 +63,7 @@ class FooterTop extends Component {
             <p className={cx(s.text_secondary, ss.margin0)}>California</p>
           </div>
         </Col>
-        <Col
-          sm={6}
-          md={3}
-          lg={3}
-          xs={12}
-          className="col-5 col-md-3 padding-top px-0"
-        >
+        <Col sm={6} md={3} lg={3} xs={12}>
           <div className={s.footer_top_title}>
             <p>
               <span>Join</span> WeShare
@@ -96,7 +90,7 @@ class FooterTop extends Component {
             </div>
           </div>
         </Col>
-      </>
+      </Row>
     );
   }
 }

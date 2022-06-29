@@ -1,8 +1,9 @@
 import React from "react";
 import AdminLayout from "../../../components/Layout/AdminLayout";
-import Field from "./Field";
+// import { restrictUrls } from "../../../helpers/adminPrivileges";
+import AddField from "./AddField";
 
-const title = "Categorys";
+const title = "Add Field";
 
 export default async function action({ store }) {
   // From Redux Store
@@ -12,22 +13,19 @@ export default async function action({ store }) {
     store.getState().adminPrevileges.privileges.privileges;
 
   if (!isAdminAuthenticated) {
-    return {
-      redirect: "/siteadmin/login",
-    };
+    return { redirect: "/siteadmin/login" };
   }
 
   // Admin restriction
-  // if (!restrictUrls("/siteadmin/categorys", adminPrivileges)) {
-  //   return {
-  //     redirect: "/siteadmin",
-  //   };
-  // }
+  //   if (!restrictUrls("/siteadmin/popularlocation/add", adminPrivileges)) {
+  //     return { redirect: "/siteadmin" };
+  //   }
+
   return {
     title,
     component: (
       <AdminLayout>
-        <Field />
+        <AddField title={title} />
       </AdminLayout>
     ),
   };

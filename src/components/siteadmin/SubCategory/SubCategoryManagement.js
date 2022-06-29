@@ -139,9 +139,7 @@ class SubCategoryManagement extends React.Component {
                         data-label={formatMessage(messages.editLabel)}
                         column={formatMessage(messages.editLabel)}
                       >
-                        <Link
-                          to={"/siteadmin/edit/popularlocation/" + value.id}
-                        >
+                        <Link to={"/siteadmin/edit/subCategory/" + value.id}>
                           <FormattedMessage {...messages.editLabel} />
                         </Link>
                       </Td>

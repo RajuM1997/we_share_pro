@@ -13171,5 +13171,50 @@
     "files": [
       "src/locale/messages.js"
     ]
+  },
+  {
+    "id": "app.fieldCar",
+    "description": "Car",
+    "defaultMessage": "Car",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldEnabled",
+    "description": "Enabled",
+    "defaultMessage": "Enabled",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldName",
+    "description": "Name",
+    "defaultMessage": "Name",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldPageId",
+    "description": "Page ID",
+    "defaultMessage": "Page ID",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldType",
+    "description": "Type",
+    "defaultMessage": "Type",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
   }
 ]

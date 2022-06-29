@@ -66,7 +66,7 @@ class ViewCategory extends Component {
     title: PropTypes.string.isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool,
-      getCategory: PropTypes.array,
+      getSubCategory: PropTypes.array,
       getHomeBanner: PropTypes.array,
     }),
   };
@@ -89,7 +89,6 @@ class ViewCategory extends Component {
       title,
       // query,
     } = this.props;
-    console.log(title);
 
     return (
       <>
@@ -108,9 +107,7 @@ class ViewCategory extends Component {
             <Row>
               <Col md={6} sm={12}>
                 <h6 className={s.maptitle}>79 stays in map area</h6>
-                {data.map((items) => (
-                  <SubCategory items={items} key={items.id} />
-                ))}
+                <SubCategory />
               </Col>
               <Col md={6} sm={12}>
                 <div className={s.map}>

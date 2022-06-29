@@ -179,7 +179,6 @@ class EditCategoryManagement extends React.Component {
                   type="select"
                   className={bt.commonControlInput}
                 >
-                  <option />
                   <option value="Vacation Home">Vacation Home</option>
                   <option value="Events Space">Events Space</option>
                   <option value="Workspace">Workspace</option>

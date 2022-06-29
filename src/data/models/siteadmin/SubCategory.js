@@ -33,7 +33,22 @@ const SubCategory = Model.define("SubCategory", {
   image: {
     type: DataType.STRING,
   },
-
+  guests: {
+    type: DataType.STRING,
+    allowNull: false,
+  },
+  bedrooms: {
+    type: DataType.STRING,
+    allowNull: false,
+  },
+  beds: {
+    type: DataType.STRING,
+    allowNull: false,
+  },
+  baths: {
+    type: DataType.STRING,
+    allowNull: false,
+  },
   isEnable: {
     type: DataType.BOOLEAN,
     defaultValue: true,

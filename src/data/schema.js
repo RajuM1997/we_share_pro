@@ -208,6 +208,13 @@ import getHomeBanner from "./queries/siteadmin/getHomeBanner";
 // sub categroy
 import addSubCategory from "./mutations/SiteAdmin/addSubCategory";
 import getSubCategory from "./queries/siteadmin/getSubCategory";
+import deleteSubCategory from "./mutations/SiteAdmin/deleteSubCategory";
+import editSubCategory from "./queries/siteadmin/editSubCategory";
+
+// update sub category
+
+import updateSubCategory from "./mutations/SiteAdmin/updateSubCategory";
+import updateSubCategoryStatus from "./mutations/SiteAdmin/updateSubCategoryStatus";
 
 //sub category admin
 import getSubCategoryAdmin from "./queries/siteadmin/getSubCategoryAdmin";
@@ -541,6 +548,7 @@ const schema = new Schema({
       getSubCategory,
       getSubCategoryAdmin,
       getOfferAdmin,
+      editSubCategory,
     },
   }),
   mutation: new ObjectType({
@@ -656,6 +664,9 @@ const schema = new Schema({
       deleteCategory,
       updateCategory,
       updateCategoryStatus,
+      deleteSubCategory,
+      updateSubCategory,
+      updateSubCategoryStatus,
     },
   }),
 });

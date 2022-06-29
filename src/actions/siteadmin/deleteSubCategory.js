@@ -17,8 +17,14 @@ const query = gql`
     getSubCategory {
       id
       title
+      address
+      description
       subCategory
       primaryCategory
+      guests
+      bedrooms
+      beds
+      baths
       image
       isEnable
       createdAt
@@ -54,7 +60,7 @@ export function deleteSubCategory(id) {
           type: ADMIN_DELETE_SUB_CATEGORY_SUCCESS,
         });
         toastr.success("Delete sub Category", "Deleted successfully!");
-        history.push("/siteadmin/popularlocation");
+        history.push("/siteadmin/subCategory");
       } else {
         toastr.error("Delete Sub Category", "Deletion failed!");
       }

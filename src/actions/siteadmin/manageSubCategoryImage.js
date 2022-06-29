@@ -16,10 +16,15 @@ const query = gql`
     editSubCategory(id: $id) {
       id
       title
+      description
+      address
       subCategory
-      primaryCategory
-      isEnable
+      guests
+      bedrooms
+      beds
+      baths
       image
+      primaryCategory
     }
   }
 `;

@@ -84,7 +84,7 @@ class NavigationAfterLogin extends React.Component {
   }
 
   handleScroll = (e) => {
-    if (window.scrollY >= 1) {
+    if (window.scrollY >= 6) {
       this.setState({ change: false });
     } else {
       this.setState({ change: true });
@@ -139,7 +139,7 @@ class NavigationAfterLogin extends React.Component {
       }
     }
     return (
-      <>
+      <div className={!this.state.change ? s.active_navbar_default : ""}>
         <div className={s.nav_search_main}>
           <div className={s.search_container}>
             {!this.state.change && <SearchOption />}
@@ -250,7 +250,7 @@ class NavigationAfterLogin extends React.Component {
           <HeaderModal modalType={"languageModal"} />
           <HeaderModal modalType={"currencyModal"} />
         </Nav>
-      </>
+      </div>
     );
   }
 }

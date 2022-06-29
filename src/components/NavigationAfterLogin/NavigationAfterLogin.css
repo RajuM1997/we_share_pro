@@ -25,7 +25,7 @@
   width: 600px;
   position: absolute;
   left: 34%;
-  top: 15px;
+  top: 6px;
 }
 .navbarLeft {
   display: none;
@@ -33,9 +33,18 @@
 
 .navbarLeftActive {
   display: block;
-  top: 17px;
+  top: 6px;
   position: absolute;
   right: 26px;
+}
+.active_navbar_default {
+  background: #fff !important;
+  color: #fff;
+  width: 100vw;
+  height: 100px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 10px;
 }
 @media screen and (max-width: 1200px) {
   .breakPointScreen {
