@@ -1,0 +1,598 @@
+-- MySQL dump 10.13  Distrib 8.0.16, for osx10.12 (x86_64)
+--
+-- Host: rental-dev.c0i9bjenstmv.us-east-1.rds.amazonaws.com    Database: we_share
+-- ------------------------------------------------------
+-- Server version	8.0.28
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+ SET NAMES utf8mb4 ;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
+
+--
+-- GTID state at the beginning of the backup 
+--
+
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '';
+
+--
+-- Table structure for table `AdminPrivileges`
+--
+
+DROP TABLE IF EXISTS `AdminPrivileges`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `AdminPrivileges` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `roleId` int NOT NULL,
+  `previlegeId` int NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `roleId` (`roleId`),
+  CONSTRAINT `AdminPrivileges_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `AdminRoles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AdminPrivileges`
+--
+
+LOCK TABLES `AdminPrivileges` WRITE;
+/*!40000 ALTER TABLE `AdminPrivileges` DISABLE KEYS */;
+/*!40000 ALTER TABLE `AdminPrivileges` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `AdminRoles`
+--
+
+DROP TABLE IF EXISTS `AdminRoles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `AdminRoles` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` text,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AdminRoles`
+--
+
+LOCK TABLES `AdminRoles` WRITE;
+/*!40000 ALTER TABLE `AdminRoles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `AdminRoles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `AdminUser`
+--
+
+DROP TABLE IF EXISTS `AdminUser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `AdminUser` (
+  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `emailConfirmed` tinyint(1) DEFAULT '0',
+  `isSuperAdmin` tinyint(1) DEFAULT '0',
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  `roleId` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `admin_user_email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AdminUser`
+--
+
+LOCK TABLES `AdminUser` WRITE;
+/*!40000 ALTER TABLE `AdminUser` DISABLE KEYS */;
+INSERT INTO `AdminUser` VALUES ('8b16c890-c205-11e6-a2c7-4195de507451','admin@radicalstart.com','$2a$08$SR.h58BFMCbcHbl3y9tvYe9UM.q1SMXh43M51po7FDXQrOcMpQxLy',1,1,'2016-12-14 13:59:34','2016-12-14 13:59:34',NULL);
+/*!40000 ALTER TABLE `AdminUser` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Banner`
+--
+
+DROP TABLE IF EXISTS `Banner`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `Banner` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `isEnable` tinyint(1) NOT NULL DEFAULT '1',
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Banner`
+--
+
+LOCK TABLES `Banner` WRITE;
+/*!40000 ALTER TABLE `Banner` DISABLE KEYS */;
+INSERT INTO `Banner` VALUES (1,'Lorum Ipsum.','Lorem Ipsum is simply dummy text of the printing and typesetting industry.',1,'2019-03-27 11:53:46','2018-05-02 04:49:38');
+/*!40000 ALTER TABLE `Banner` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `BedTypes`
+--
+
+DROP TABLE IF EXISTS `BedTypes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `BedTypes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `listId` int NOT NULL,
+  `bedCount` int DEFAULT NULL,
+  `bedType` int DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `listId` (`listId`),
+  KEY `bedType` (`bedType`),
+  CONSTRAINT `BedTypes_ibfk_1` FOREIGN KEY (`listId`) REFERENCES `Listing` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `BedTypes_ibfk_2` FOREIGN KEY (`bedType`) REFERENCES `ListSettings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `BedTypes`
+--
+
+LOCK TABLES `BedTypes` WRITE;
+/*!40000 ALTER TABLE `BedTypes` DISABLE KEYS */;
+INSERT INTO `BedTypes` VALUES (4,1,1,16,'2019-03-27 09:46:01','2019-03-27 09:46:01'),(5,1,2,17,'2019-03-27 09:46:01','2019-03-27 09:46:01'),(6,1,3,17,'2019-03-27 09:46:01','2019-03-27 09:46:01'),(41,7,1,16,'2019-03-27 10:09:36','2019-03-27 10:09:36'),(42,7,4,17,'2019-03-27 10:09:36','2019-03-27 10:09:36'),(43,7,2,16,'2019-03-27 10:09:36','2019-03-27 10:09:36'),(44,7,3,17,'2019-03-27 10:09:36','2019-03-27 10:09:36'),(45,7,5,18,'2019-03-27 10:09:36','2019-03-27 10:09:36'),(46,7,6,19,'2019-03-27 10:09:36','2019-03-27 10:09:36'),(49,6,1,16,'2019-07-04 10:52:39','2019-07-04 10:52:39'),(50,6,2,16,'2019-07-04 10:52:39','2019-07-04 10:52:39'),(51,5,1,16,'2019-07-04 10:57:10','2019-07-04 10:57:10'),(52,5,2,18,'2019-07-04 10:57:10','2019-07-04 10:57:10'),(53,5,3,18,'2019-07-04 10:57:10','2019-07-04 10:57:10'),(58,3,1,20,'2019-07-04 11:00:34','2019-07-04 11:00:34'),(59,3,2,19,'2019-07-04 11:00:34','2019-07-04 11:00:34'),(60,3,3,20,'2019-07-04 11:00:34','2019-07-04 11:00:34'),(61,2,1,17,'2019-07-04 11:02:19','2019-07-04 11:02:19'),(62,2,2,16,'2019-07-04 11:02:19','2019-07-04 11:02:19'),(74,8,1,16,'2020-04-13 13:10:34','2020-04-13 13:10:34'),(75,8,2,20,'2020-04-13 13:10:34','2020-04-13 13:10:34'),(76,8,3,19,'2020-04-13 13:10:34','2020-04-13 13:10:34'),(77,8,4,19,'2020-04-13 13:10:34','2020-04-13 13:10:34'),(78,8,5,20,'2020-04-13 13:10:34','2020-04-13 13:10:34'),(79,4,1,16,'2020-08-10 07:12:12','2020-08-10 07:12:12');
+/*!40000 ALTER TABLE `BedTypes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `BlogDetails`
+--
+
+DROP TABLE IF EXISTS `BlogDetails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `BlogDetails` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `pageTitle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `metaTitle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `metaDescription` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pageUrl` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `isEnable` tinyint(1) NOT NULL DEFAULT '1',
+  `footerCategory` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  `isPrivate` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `BlogDetails`
+--
+
+LOCK TABLES `BlogDetails` WRITE;
+/*!40000 ALTER TABLE `BlogDetails` DISABLE KEYS */;
+/*!40000 ALTER TABLE `BlogDetails` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Cancellation`
+--
+
+DROP TABLE IF EXISTS `Cancellation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `Cancellation` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `policyName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `policyContent` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `priorDays` int NOT NULL,
+  `accommodationPriorCheckIn` float NOT NULL,
+  `accommodationBeforeCheckIn` float NOT NULL,
+  `accommodationDuringCheckIn` float NOT NULL,
+  `guestFeePriorCheckIn` float NOT NULL,
+  `guestFeeBeforeCheckIn` float NOT NULL,
+  `guestFeeDuringCheckIn` float NOT NULL,
+  `hostFeePriorCheckIn` float NOT NULL,
+  `hostFeeBeforeCheckIn` float NOT NULL,
+  `hostFeeDuringCheckIn` float NOT NULL,
+  `isEnable` tinyint(1) NOT NULL DEFAULT '1',
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  `nonRefundableNightsPriorCheckIn` int DEFAULT '0',
+  `nonRefundableNightsBeforeCheckIn` int DEFAULT '1',
+  `nonRefundableNightsDuringCheckIn` int DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Cancellation`
+--
+
+LOCK TABLES `Cancellation` WRITE;
+/*!40000 ALTER TABLE `Cancellation` DISABLE KEYS */;
+INSERT INTO `Cancellation` VALUES (1,'Flexible','Cancel up to 1 day prior to arrival and get a 100% refund',1,100,100,100,100,100,0,100,100,100,1,'2017-06-09 22:43:35','2017-06-09 22:43:35',0,1,0),(2,'Moderate','Cancel up to 5 days prior to arrival and get a 50% refund',5,100,50,50,100,100,0,100,100,100,1,'2017-06-09 22:46:10','2017-06-09 22:46:10',0,1,0),(3,'Strict','Cancel up to 7 days prior to arrival and get a 50% refund',7,50,0,0,100,0,0,100,100,100,1,'2017-06-09 22:47:38','2017-06-09 22:47:38',0,0,0);
+/*!40000 ALTER TABLE `Cancellation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `CancellationDetails`
+--
+
+DROP TABLE IF EXISTS `CancellationDetails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `CancellationDetails` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `reservationId` int NOT NULL,
+  `cancellationPolicy` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `refundToGuest` float NOT NULL,
+  `payoutToHost` float NOT NULL,
+  `guestServiceFee` float NOT NULL,
+  `hostServiceFee` float NOT NULL,
+  `total` float NOT NULL,
+  `currency` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cancelledBy` enum('host','guest') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `reservationId` (`reservationId`),
+  CONSTRAINT `CancellationDetails_ibfk_1` FOREIGN KEY (`reservationId`) REFERENCES `Reservation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `CancellationDetails`
+--
+
+LOCK TABLES `CancellationDetails` WRITE;
+/*!40000 ALTER TABLE `CancellationDetails` DISABLE KEYS */;
+/*!40000 ALTER TABLE `CancellationDetails` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Category`
+--
+
+DROP TABLE IF EXISTS `Category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `Category` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `subTitle` varchar(255) NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `isEnable` tinyint(1) NOT NULL DEFAULT '1',
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Category`
+--
+
+LOCK TABLES `Category` WRITE;
+/*!40000 ALTER TABLE `Category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Country`
+--
+
+DROP TABLE IF EXISTS `Country`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `Country` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `countryCode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `countryName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `isEnable` tinyint(1) NOT NULL DEFAULT '1',
+  `createdAt` datetime DEFAULT '2018-09-29 11:22:19',
+  `updatedAt` datetime DEFAULT '2018-09-29 11:22:19',
+  `dialCode` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Country`
+--
+
+LOCK TABLES `Country` WRITE;
+/*!40000 ALTER TABLE `Country` DISABLE KEYS */;
+INSERT INTO `Country` VALUES (1,'DZ','Algeria',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+213'),(2,'AF','Afghanistan',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+93'),(3,'AL','Albania',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+355'),(4,'AS','AmericanSamoa',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 684'),(5,'AD','Andorra',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+376'),(6,'AO','Angola',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+244'),(7,'AI','Anguilla',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 264'),(8,'AQ','Antarctica',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+672'),(9,'AG','Antigua and Barbuda',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1268'),(10,'AR','Argentina',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+54'),(11,'AM','Armenia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+374'),(12,'AW','Aruba',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+297'),(13,'AU','Australia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+61'),(14,'AT','Austria',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+43'),(15,'AZ','Azerbaijan',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+994'),(16,'BS','Bahamas',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 242'),(17,'BH','Bahrain',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+973'),(18,'BD','Bangladesh',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+880'),(19,'BB','Barbados',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 246'),(20,'BY','Belarus',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+375'),(21,'BE','Belgium',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+32'),(22,'BZ','Belize',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+501'),(23,'BJ','Benin',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+229'),(24,'BM','Bermuda',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 441'),(25,'BT','Bhutan',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+975'),(26,'BO','Bolivia, Plurinational State of',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+591'),(27,'BA','Bosnia and Herzegovina',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+387'),(28,'BW','Botswana',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+267'),(29,'BR','Brazil',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+55'),(30,'IO','British Indian Ocean Territory',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+246'),(31,'BN','Brunei Darussalam',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+673'),(32,'BG','Bulgaria',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+359'),(33,'BF','Burkina Faso',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+226'),(34,'BI','Burundi',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+257'),(35,'KH','Cambodia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+855'),(36,'CM','Cameroon',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+237'),(37,'CA','Canada',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1'),(38,'CV','Cape Verde',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+238'),(39,'KY','Cayman Islands',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+ 345'),(40,'CF','Central African Republic',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+236'),(41,'TD','Chad',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+235'),(42,'CL','Chile',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+56'),(43,'CN','China',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+86'),(44,'CX','Christmas Island',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+61'),(45,'CC','Cocos (Keeling) Islands',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+61'),(46,'CO','Colombia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+57'),(47,'KM','Comoros',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+269'),(48,'CG','Congo',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+242'),(49,'CD','Congo, The Democratic Republic of the',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+243'),(50,'CK','Cook Islands',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+682'),(51,'CR','Costa Rica',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+506'),(52,'CI','Cote d\'Ivoire',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+225'),(53,'HR','Croatia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+385'),(54,'CU','Cuba',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+53'),(55,'CY','Cyprus',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+357'),(56,'CZ','Czech Republic',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+420'),(57,'DK','Denmark',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+45'),(58,'DJ','Djibouti',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+253'),(59,'DM','Dominica',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 767'),(60,'DO','Dominican Republic',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 849'),(61,'EC','Ecuador',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+593'),(62,'EG','Egypt',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+20'),(63,'SV','El Salvador',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+503'),(64,'GQ','Equatorial Guinea',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+240'),(65,'ER','Eritrea',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+291'),(66,'EE','Estonia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+372'),(67,'ET','Ethiopia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+251'),(68,'FK','Falkland Islands (Malvinas)',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+500'),(69,'FO','Faroe Islands',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+298'),(70,'FJ','Fiji',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+679'),(71,'FI','Finland',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+358'),(72,'FR','France',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+33'),(73,'GF','French Guiana',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+594'),(74,'PF','French Polynesia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+689'),(75,'GA','Gabon',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+241'),(76,'GM','Gambia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+220'),(77,'GE','Georgia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+995'),(78,'DE','Germany',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+49'),(79,'GH','Ghana',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+233'),(80,'GI','Gibraltar',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+350'),(81,'GR','Greece',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+30'),(82,'GL','Greenland',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+299'),(83,'GD','Grenada',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 473'),(84,'GP','Guadeloupe',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+590'),(85,'GU','Guam',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 671'),(86,'GT','Guatemala',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+502'),(87,'GG','Guernsey',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+44'),(88,'GN','Guinea',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+224'),(89,'GW','Guinea-Bissau',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+245'),(90,'GY','Guyana',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+595'),(91,'HT','Haiti',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+509'),(92,'VA','Holy See (Vatican City State)',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+379'),(93,'HN','Honduras',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+504'),(94,'HK','Hong Kong',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+852'),(95,'HU','Hungary',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+36'),(96,'IS','Iceland',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+354'),(97,'IN','India',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+91'),(98,'ID','Indonesia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+62'),(99,'IR','Iran, Islamic Republic of',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+98'),(100,'IQ','Iraq',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+964'),(101,'IE','Ireland',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+353'),(102,'IM','Isle of Man',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+44'),(103,'IL','Israel',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+972'),(104,'IT','Italy',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+39'),(105,'JM','Jamaica',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 876'),(106,'JP','Japan',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+81'),(107,'JE','Jersey',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+44'),(108,'JO','Jordan',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+962'),(109,'KZ','Kazakhstan',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+7 7'),(110,'KE','Kenya',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+254'),(111,'KI','Kiribati',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+686'),(112,'KP','Korea, Democratic People\'s Republic of',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+850'),(113,'KR','Korea, Republic of',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+82'),(114,'KW','Kuwait',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+965'),(115,'KG','Kyrgyzstan',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+996'),(116,'LA','Lao People\'s Democratic Republic',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+856'),(117,'LV','Latvia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+371'),(118,'LB','Lebanon',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+961'),(119,'LS','Lesotho',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+266'),(120,'LR','Liberia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+231'),(121,'LY','Libyan Arab Jamahiriya',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+218'),(122,'LI','Liechtenstein',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+423'),(123,'LT','Lithuania',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+370'),(124,'LU','Luxembourg',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+352'),(125,'MO','Macao',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+853'),(126,'MK','Macedonia, The Former Yugoslav Republic of',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+389'),(127,'MG','Madagascar',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+261'),(128,'MW','Malawi',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+265'),(129,'MY','Malaysia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+60'),(130,'MV','Maldives',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+960'),(131,'ML','Mali',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+223'),(132,'MT','Malta',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+356'),(133,'MH','Marshall Islands',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+692'),(134,'MQ','Martinique',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+596'),(135,'MR','Mauritania',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+222'),(136,'MU','Mauritius',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+230'),(137,'YT','Mayotte',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+262'),(138,'MX','Mexico',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+52'),(139,'FM','Micronesia, Federated States of',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+691'),(140,'MD','Moldova, Republic of',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+373'),(141,'MC','Monaco',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+377'),(142,'MN','Mongolia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+976'),(143,'ME','Montenegro',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+382'),(144,'MS','Montserrat',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1664'),(145,'MA','Morocco',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+212'),(146,'MZ','Mozambique',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+258'),(147,'MM','Myanmar',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+95'),(148,'NA','Namibia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+264'),(149,'NR','Nauru',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+674'),(150,'NP','Nepal',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+977'),(151,'NL','Netherlands',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+31'),(152,'AN','Netherlands Antilles',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+599'),(153,'NC','New Caledonia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+687'),(154,'NZ','New Zealand',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+64'),(155,'NI','Nicaragua',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+505'),(156,'NE','Niger',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+227'),(157,'NG','Nigeria',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+234'),(158,'NU','Niue',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+683'),(159,'NF','Norfolk Island',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+672'),(160,'MP','Northern Mariana Islands',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 670'),(161,'NO','Norway',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+47'),(162,'OM','Oman',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+968'),(163,'PK','Pakistan',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+92'),(164,'PW','Palau',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+680'),(165,'PS','Palestinian Territory, Occupied',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+970'),(166,'PA','Panama',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+507'),(167,'PG','Papua New Guinea',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+675'),(168,'PY','Paraguay',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+595'),(169,'PE','Peru',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+51'),(170,'PH','Philippines',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+63'),(171,'PN','Pitcairn',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+872'),(172,'PL','Poland',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+48'),(173,'PT','Portugal',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+351'),(174,'PR','Puerto Rico',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 939'),(175,'QA','Qatar',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+974'),(176,'RO','Romania',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+40'),(177,'RU','Russia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+7'),(178,'RW','Rwanda',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+250'),(179,'RE','Réunion',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+262'),(180,'BL','Saint Barthélemy',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+590'),(181,'SH','Saint Helena, Ascension and Tristan Da Cunha',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+290'),(182,'KN','Saint Kitts and Nevis',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 869'),(183,'LC','Saint Lucia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 758'),(184,'MF','Saint Martin',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+590'),(185,'PM','Saint Pierre and Miquelon',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+508'),(186,'VC','Saint Vincent and the Grenadines',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 784'),(187,'WS','Samoa',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+685'),(188,'SM','San Marino',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+378'),(189,'ST','Sao Tome and Principe',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+239'),(190,'SA','Saudi Arabia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+966'),(191,'SN','Senegal',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+221'),(192,'RS','Serbia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+381'),(193,'SC','Seychelles',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+248'),(194,'SL','Sierra Leone',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+232'),(195,'SG','Singapore',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+65'),(196,'SK','Slovakia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+421'),(197,'SI','Slovenia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+386'),(198,'SB','Solomon Islands',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+677'),(199,'SO','Somalia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+252'),(200,'ZA','South Africa',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+27'),(201,'GS','South Georgia and the South Sandwich Islands',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+500'),(202,'ES','Spain',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+34'),(203,'LK','Sri Lanka',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+94'),(204,'SD','Sudan',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+249'),(205,'SR','Suriname',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+597'),(206,'SJ','Svalbard and Jan Mayen',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+47'),(207,'SZ','Swaziland',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+268'),(208,'SE','Sweden',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+46'),(209,'CH','Switzerland',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+41'),(210,'SY','Syrian Arab Republic',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+963'),(211,'TW','Taiwan, Province of China',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+886'),(212,'TJ','Tajikistan',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+992'),(213,'TZ','Tanzania, United Republic of',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+255'),(214,'TH','Thailand',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+66'),(215,'TL','Timor-Leste',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+670'),(216,'TG','Togo',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+228'),(217,'TK','Tokelau',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+690'),(218,'TO','Tonga',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+676'),(219,'TT','Trinidad and Tobago',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 868'),(220,'TN','Tunisia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+216'),(221,'TR','Turkey',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+90'),(222,'TM','Turkmenistan',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+993'),(223,'TC','Turks and Caicos Islands',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 649'),(224,'TV','Tuvalu',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+688'),(225,'UG','Uganda',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+256'),(226,'UA','Ukraine',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+380'),(227,'AE','United Arab Emirates',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+971'),(228,'GB','United Kingdom',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+44'),(229,'US','United States',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1'),(230,'UY','Uruguay',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+598'),(231,'UZ','Uzbekistan',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+998'),(232,'VU','Vanuatu',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+678'),(233,'VE','Venezuela, Bolivarian Republic of',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+58'),(234,'VN','Viet Nam',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+84'),(235,'VG','Virgin Islands, British',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 284'),(236,'VI','Virgin Islands, U.S.',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+1 340'),(237,'WF','Wallis and Futuna',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+681'),(238,'YE','Yemen',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+967'),(239,'ZM','Zambia',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+260'),(240,'ZW','Zimbabwe',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+263'),(241,'AX','Åland Islands',1,'2019-03-27 11:53:47','2018-09-29 11:22:19','+358');
+/*!40000 ALTER TABLE `Country` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Currencies`
+--
+
+DROP TABLE IF EXISTS `Currencies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `Currencies` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `symbol` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `isEnable` tinyint(1) NOT NULL DEFAULT '1',
+  `isBaseCurrency` tinyint(1) NOT NULL DEFAULT '0',
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  `isPayment` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Currencies`
+--
+
+LOCK TABLES `Currencies` WRITE;
+/*!40000 ALTER TABLE `Currencies` DISABLE KEYS */;
+INSERT INTO `Currencies` VALUES (1,'AUD',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',1),(2,'BGN',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',1),(3,'BRL',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',1),(4,'CAD',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(5,'CHF',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(6,'CNY',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(7,'CZK',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(8,'DKK',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(9,'EUR',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',1),(10,'GBP',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(11,'HKD',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(12,'HRK',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(13,'HUF',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(14,'IDR',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(15,'ILS',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(16,'INR',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(17,'JPY',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(18,'KRW',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(19,'MXN',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(20,'MYR',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(21,'NOK',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(22,'NZD',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(23,'PHP',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',1),(24,'PLN',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(25,'RON',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(26,'RUB',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',1),(27,'SEK',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0),(28,'SGD',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',1),(29,'THB',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',1),(30,'TRY',1,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',1),(31,'USD',1,1,'2019-03-27 11:53:47','2018-05-02 04:52:36',1),(32,'ZAR',0,0,'2019-03-27 11:53:47','2018-05-02 04:52:36',0);
+/*!40000 ALTER TABLE `Currencies` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `CurrencyRates`
+--
+
+DROP TABLE IF EXISTS `CurrencyRates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `CurrencyRates` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `currencyCode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rate` float NOT NULL,
+  `isBase` tinyint(1) DEFAULT '0',
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=357 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `CurrencyRates`
+--
+
+LOCK TABLES `CurrencyRates` WRITE;
+/*!40000 ALTER TABLE `CurrencyRates` DISABLE KEYS */;
+INSERT INTO `CurrencyRates` VALUES (1,'AED',3.67299,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(2,'AFN',89.1743,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(3,'ALL',114.884,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(4,'AMD',481.616,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(5,'ANG',1.80243,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(6,'AOA',434.363,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(7,'ARS',122.511,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(8,'AUD',1.44762,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(9,'AWG',1.8005,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(10,'AZN',1.7,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(11,'BAM',1.87452,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(12,'BBD',2.01826,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(13,'BDT',92.962,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(14,'BGN',1.86503,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(15,'BHD',0.377054,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(16,'BIF',2057.21,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(17,'BMD',1,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(18,'BND',1.39156,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(19,'BOB',6.88036,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(20,'BRL',5.1159,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(21,'BSD',1.00011,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(22,'BTN',78.0479,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(23,'BWP',12.3014,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(24,'BYN',3.36991,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(25,'BYR',33699.1,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(26,'BZD',2.01603,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(27,'CAD',1.29666,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(28,'CDF',2000,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(29,'CHF',0.998887,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(30,'CLF',0.0314949,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(31,'CLP',869.04,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(32,'CNY',6.7201,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(33,'COP',3957.26,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(34,'CRC',683.126,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(35,'CUC',1,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(36,'CVE',105.263,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(37,'CZK',23.646,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(38,'DJF',178.052,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(39,'DKK',7.10814,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(40,'DOP',54.8664,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(41,'DZD',146.361,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(42,'EGP',18.7633,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(43,'ETB',51.78,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(44,'EUR',0.955457,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(45,'FJD',2.19683,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(46,'FKP',0.830639,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(47,'GBP',0.83084,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(48,'GEL',2.93255,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(49,'GHS',7.95068,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(50,'GIP',0.830639,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(51,'GMD',52.6316,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(52,'GNF',8857.23,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(53,'GTQ',7.72606,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(54,'GYD',208.793,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(55,'HKD',7.84998,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(56,'HNL',24.51,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(57,'HRK',7.1886,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(58,'HTG',112.515,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(59,'HUF',380.24,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(60,'IDR',14705.9,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(61,'ILS',3.45107,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(62,'INR',78.0509,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(63,'IQD',1459.5,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(64,'ISK',131.57,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(65,'JMD',152.954,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(66,'JOD',0.708991,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(67,'JPY',134.687,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(68,'KES',117.3,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(69,'KGS',79.5005,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(70,'KHR',4060,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(71,'KMF',471.609,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(72,'KRW',1291.96,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(73,'KWD',0.30734,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(74,'KYD',0.833473,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(75,'KZT',437.492,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(76,'LAK',14705,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(77,'LBP',1517,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(78,'LKR',349.242,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(79,'LRD',151.985,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(80,'LSL',16.09,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(81,'LYD',4.83,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(82,'MAD',10.0385,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(83,'MDL',19.1681,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(84,'MGA',4015,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(85,'MKD',59.0691,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(86,'MMK',1851.17,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(87,'MNT',3124.09,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(88,'MOP',8.08171,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(89,'MUR',44.4784,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(90,'MVR',15.3598,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(91,'MWK',1020.5,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(92,'MXN',20.6087,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(93,'MYR',4.42,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(94,'MZN',63.8923,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(95,'NAD',16.09,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(96,'NGN',419.771,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(97,'NIO',35.76,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(98,'NOK',9.98722,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(99,'NPR',124.876,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(100,'NZD',1.60792,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(101,'OMR',0.384965,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(102,'PAB',1.00014,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(103,'PEN',3.755,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(104,'PGK',3.52,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(105,'PHP',53.419,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(106,'PKR',203.8,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(107,'PLN',4.45812,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(108,'PYG',6875.39,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(109,'QAR',3.64624,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(110,'RON',4.72624,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(111,'RSD',112.125,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(112,'RUB',56.65,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(113,'RWF',1023,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(114,'SAR',3.75192,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(115,'SBD',8.10712,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(116,'SCR',13.554,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(117,'SEK',10.143,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(118,'SHP',0.82132,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(119,'SLL',13175,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(120,'SOS',583.5,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(121,'SRD',21.85,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(122,'SSP',130.26,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(123,'STD',23263,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(124,'SVC',8.74536,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(125,'SZL',16.0806,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(126,'THB',35.1,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(127,'TJS',10.8999,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(128,'TMT',3.51,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(129,'TND',3.086,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(130,'TOP',2.35128,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(131,'TRY',17.2679,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(132,'TTD',6.78855,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(133,'TWD',29.682,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(134,'TZS',2330,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(135,'UAH',29.452,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(136,'UGX',3753.75,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(137,'UYU',40.1123,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(138,'UZS',11000,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(139,'VES',4031330,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(140,'VND',23225,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(141,'VUV',116.539,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(142,'WST',2.66124,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(143,'XAF',626.496,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(144,'XAG',0.0468285,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(145,'XAU',0.000549,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(146,'XBA',7.62132,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(147,'XCD',2.70241,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(148,'XDR',0.730762,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(149,'XOF',625.5,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(150,'XPD',0.00055,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(151,'XPF',114.6,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(152,'XPT',0.0010661,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(153,'XTS',2404.52,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(154,'YER',250.3,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(155,'ZAR',15.9859,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(156,'ZMW',16.9025,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(157,'JEP',0.830639,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(158,'GGP',0.830639,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(159,'IMP',0.830639,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(160,'GBX',52.3866,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(161,'CNH',6.72863,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(162,'ZWD',485.338,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(163,'ZWL',322,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(164,'VEF',403133000000,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(165,'SGD',1.39108,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(166,'USD',1,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(167,'BTC',0.0000482697,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(168,'BCH',0.00848284,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(169,'BSV',0.019619,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(170,'ETH',0.00091586,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(171,'ETH2',0.00091586,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(172,'ETC',0.0743218,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(173,'LTC',0.0231642,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(174,'ZRX',4.17797,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(175,'USDC',1,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(176,'BAT',3.42466,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(177,'LOOM',30.6279,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(178,'MANA',1.29938,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(179,'KNC',0.720851,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(180,'LINK',0.161212,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(181,'DNT',29.6296,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(182,'MKR',0.00137004,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(183,'CVC',8.53242,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(184,'OMG',0.557103,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(185,'GNT',5.76002,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(186,'DAI',0.99995,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(187,'SNT',39.5961,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(188,'ZEC',0.0165303,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(189,'XRP',3.28872,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(190,'REP',0.157729,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(191,'XLM',9.32797,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(192,'EOS',1.12994,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(193,'XTZ',0.738552,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(194,'ALGO',3.48675,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(195,'DASH',0.0249035,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(196,'ATOM',0.15935,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(197,'OXT',10.9469,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(198,'COMP',0.0324992,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(199,'ENJ',2.39521,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(200,'REPV2',0.157729,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(201,'BAND',0.765697,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(202,'NMR',0.128535,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(203,'CGLD',1.18835,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(204,'UMA',0.396511,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(205,'LRC',2.80741,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(206,'YFI',0.000222971,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(207,'UNI',0.281532,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(208,'BAL',0.230415,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(209,'REN',11.3058,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(210,'WBTC',0.0000484022,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(211,'NU',6.57895,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(212,'YFII',0.00280619,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(213,'FIL',0.194212,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(214,'AAVE',0.018111,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(215,'BNT',1.34228,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(216,'GRT',10.6045,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(217,'SNX',0.586167,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(218,'STORJ',2.85714,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(219,'SUSHI',1.08696,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(220,'MATIC',2.63992,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(221,'SKL',17.6367,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(222,'ADA',2.1889,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(223,'ANKR',40.95,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(224,'CRV',1.55763,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(225,'ICP',0.191553,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(226,'NKN',15.3257,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(227,'OGN',5,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(228,'1INCH',1.78253,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(229,'USDT',1.0017,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(230,'FORTH',0.365631,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(231,'CTSI',6.77277,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(232,'TRB',0.091954,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(233,'POLY',6.26959,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(234,'MIR',5.89623,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(235,'RLC',1.5748,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(236,'DOT',0.141533,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(237,'SOL',0.0362385,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(238,'DOGE',19.4156,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(239,'MLN',0.0480307,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(240,'GTC',0.478469,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(241,'AMP',110.988,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(242,'SHIB',128287,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(243,'CHZ',11.1794,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(244,'KEEP',6.56383,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(245,'LPT',0.134953,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(246,'QNT',0.0227894,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(247,'BOND',0.374532,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(248,'RLY',28.4091,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(249,'CLV',10.3573,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(250,'FARM',0.0356506,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(251,'MASK',0.816327,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(252,'FET',10.4767,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(253,'PAX',1.00005,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(254,'ACH',88.3939,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(255,'ASM',52.0562,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(256,'PLA',3.22841,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(257,'RAI',0.33389,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(258,'TRIBE',5.58659,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(259,'ORN',0.831947,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(260,'IOTX',32.4149,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(261,'UST',124.922,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(262,'QUICK',0.0230415,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(263,'AXS',0.0769527,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(264,'REQ',12.2699,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(265,'WLUNA',17721.1,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(266,'TRU',17.331,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(267,'RAD',0.651466,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(268,'COTI',11.5473,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(269,'DDX',1.12994,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(270,'SUKU',12.3077,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(271,'RGT',0.129618,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(272,'XYO',160.643,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(273,'ZEN',0.0743218,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(274,'AUCTION',0.226244,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(275,'BUSD',0.9995,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(276,'JASMY',113.122,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(277,'WCFG',4.36681,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(278,'BTRST',0.556948,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(279,'AGLD',3.80228,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(280,'AVAX',0.065703,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(281,'FX',6.06428,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(282,'TRAC',5.92066,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(283,'LCX',18.797,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(284,'ARPA',36.4299,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(285,'BADGER',0.324149,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(286,'KRL',2.97929,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(287,'PERP',1.72414,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(288,'RARI',0.472813,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(289,'DESO',0.124146,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(290,'API3',0.877963,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(291,'NCT',54.7495,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(292,'SHPING',144.04,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(293,'UPI',46.4576,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(294,'CRO',9.1617,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(295,'AVT',0.682594,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(296,'MDT',40.8163,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(297,'VGX',1.6835,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(298,'ALCX',0.0532623,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(299,'COVAL',81.8331,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(300,'FOX',13.6612,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(301,'MUSD',0.999001,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(302,'GALA',18.1488,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(303,'POWR',5.4407,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(304,'GYEN',135.465,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(305,'ALICE',0.528123,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(306,'INV',0.011441,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(307,'LQTY',1.25786,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(308,'PRO',1.0929,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(309,'SPELL',1277.96,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(310,'ENS',0.129366,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(311,'DIA',2.67033,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(312,'BLZ',10.4548,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(313,'CTX',0.171969,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(314,'ERN',0.796813,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(315,'IDEX',19.1939,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(316,'MCO2',0.204082,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(317,'POLS',2.40964,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(318,'SUPER',7.9139,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(319,'UNFI',0.186567,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(320,'STX',3.21234,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(321,'KSM',0.0201471,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(322,'GODS',2.3546,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(323,'IMX',1.51057,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(324,'RBN',4.87805,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(325,'BICO',2.09205,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(326,'GFI',0.766284,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(327,'ATA',6.25695,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(328,'GLM',5.36913,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(329,'MPL',0.0557569,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(330,'PLU',0.138313,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(331,'SAND',1.23533,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(332,'FIDA',3.07692,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(333,'ORCA',1.69492,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(334,'CRPT',6.87758,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(335,'QSP',48.6736,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(336,'RNDR',2.89855,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(337,'SYN',1.78731,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(338,'AIOZ',19.2493,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(339,'WAMPL',0.224719,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(340,'AERGO',10.5652,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(341,'INDEX',0.290276,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(342,'HIGH',0.863931,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(343,'FLOW',0.679348,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(344,'ROSE',21.2789,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(345,'OP',1.89036,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(346,'APE',0.304414,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(347,'MINA',1.64745,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(348,'FIS',3.1309,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(349,'BIT',2.27816,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(350,'GMT',1.71233,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(351,'GST',4.28266,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(352,'C98',2.21558,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(353,'DAR',3.44732,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(354,'GAL',0.36785,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(355,'POND',100.09,0,'2022-06-15 08:00:00','2022-06-15 08:00:00'),(356,'USD',1,1,'2022-06-15 08:00:00','2022-06-15 08:00:00');
+/*!40000 ALTER TABLE `CurrencyRates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `DocumentVerification`
+--
+
+DROP TABLE IF EXISTS `DocumentVerification`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `DocumentVerification` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` char(36) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `fileName` varchar(255) DEFAULT NULL,
+  `fileType` varchar(255) DEFAULT NULL,
+  `documentStatus` enum('pending','approved') DEFAULT 'pending',
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `DocumentVerification`
+--
+
+LOCK TABLES `DocumentVerification` WRITE;
+/*!40000 ALTER TABLE `DocumentVerification` DISABLE KEYS */;
+/*!40000 ALTER TABLE `DocumentVerification` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `EmailToken`
+--
+
+DROP TABLE IF EXISTS `EmailToken`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `EmailToken` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  CONSTRAINT `EmailToken_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `EmailToken`
+--
+
+LOCK TABLES `EmailToken` WRITE;
+/*!40000 ALTER TABLE `EmailToken` DISABLE KEYS */;
+INSERT INTO `EmailToken` VALUES (1,'d1d6d5a0-5064-11e9-a14e-635e0fd3bfa6','demo@radicalstart.com','1553672955896','2019-03-27 07:49:16','2019-03-27 07:49:16'),(2,'977bc550-5069-11e9-a14e-635e0fd3bfa6','qa@radicalstart.com','1553675005475','2019-03-27 08:23:25','2019-03-27 08:23:25'),(3,'57398690-d53a-11ec-bb1c-054a9beb9c70','ujwal.timilsina1000@gmail.com','1652720708983','2022-05-16 17:05:09','2022-05-16 17:05:09');
+/*!40000 ALTER TABLE `EmailToken` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `FailedTransactionHistory`
+--
+
+DROP TABLE IF EXISTS `FailedTransactionHistory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `FailedTransactionHistory` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `reservationId` int NOT NULL,
+  `userId` char(36) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `amount` float NOT NULL,
+  `currency` varchar(255) NOT NULL,
+  `reason` text NOT NULL,
+  `transactionId` varchar(255) DEFAULT NULL,
+  `paymentMethodId` int DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `reservationId` (`reservationId`),
+  CONSTRAINT `failedtransactionhistory_ibfk_1` FOREIGN KEY (`reservationId`) REFERENCES `Reservation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `FailedTransactionHistory`
+--
+
+LOCK TABLES `FailedTransactionHistory` WRITE;
+/*!40000 ALTER TABLE `FailedTransactionHistory` DISABLE KEYS */;
+/*!40000 ALTER TABLE `FailedTransactionHistory` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `FooterBlock`
+--
+
+DROP TABLE IF EXISTS `FooterBlock`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `FooterBlock` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title1` varchar(255) NOT NULL,
+  `content1` text NOT NULL,
+  `title2` varchar(255) NOT NULL,
+  `content2` text NOT NULL,
+  `title3` varchar(255) NOT NULL,
+  `content3` text NOT NULL,
+  `isEnable` tinyint(1) NOT NULL DEFAULT '1',
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `FooterBlock`
+--
+
+LOCK TABLES `FooterBlock` WRITE;
+/*!40000 ALTER TABLE `FooterBlock` DISABLE KEYS */;
+INSERT INTO `FooterBlock` VALUES (1,'24/7 customer support','If you need help while traveling or hosting, contact us at our toll free number: 000 000 0000 000','6,00,00,000 host guarantee','Hosts are protected against property damages for up to 6,00,00,000.','Verified ID','We aim to build a trusted community by giving you more info when youre deciding who to host or stay with.',1,'2018-05-22 11:12:19','2018-05-23 05:37:44'),(2,'one','hkh','one ','jkjh','one ','nknk',1,'2018-05-22 11:14:18','2018-05-22 11:14:18'),(3,'one','hkhih','one ','nhjlkhk','one ','klnklh',1,'2018-05-22 11:15:07','2018-05-22 11:15:07'),(4,'fdf','fdsfds','fdsfd','fdsfds','fdsff','fdssdfds',1,'2018-05-22 11:34:58','2018-05-22 11:34:58'),(5,'fdf','fdsfds','fdsfd','fdsfds','fdsff','fdss',1,'2018-05-22 11:35:14','2018-05-22 11:35:14'),(6,'fdf','fdsfds','fdsf','fdsfd','fds','fdss',1,'2018-05-22 11:39:06','2018-05-22 11:39:06');
+/*!40000 ALTER TABLE `FooterBlock` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ForgotPassword`
+--
+
+DROP TABLE IF EXISTS `ForgotPassword`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ForgotPassword` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  CONSTRAINT `ForgotPassword_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ForgotPassword`
+--
+
+LOCK TABLES `ForgotPassword` WRITE;
+/*!40000 ALTER TABLE `ForgotPassword` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ForgotPassword` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `HomeBanner`
+--
+
+DROP TABLE IF EXISTS `HomeBanner`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `HomeBanner` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `enable` int NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `HomeBanner`
+--
+
+LOCK TABLES `HomeBanner` WRITE;
+/*!40000 ALTER TABLE `HomeBanner` DISABLE KEYS */;
+INSERT INTO `HomeBanner` VALUES (1,'818214bdca262e754911eb475382f629.jpeg',1,'2019-09-06 06:47:24','2019-09-06 06:47:24'),(2,'a6d84b2d66e7362ce92066073bd80b00.jpeg',1,'2019-09-06 06:47:24','2019-09-06 06:47:24'),(3,'368bae930482d951c44ff6585787944e.jpeg',1,'2019-09-06 06:47:24','2019-09-06 06:47:24'),(4,'610723903989676c52e84d33248546e1.jpeg',1,'2019-09-06 06:47:24','2019-09-06 06:47:24');
+/*!40000 ALTER TABLE `HomeBanner` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ImageBanner`
+--
+
+DROP TABLE IF EXISTS `ImageBanner`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ImageBanner` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `buttonLabel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ImageBanner`
+--
+
+LOCK TABLES `ImageBanner` WRITE;
+/*!40000 ALTER TABLE `ImageBanner` DISABLE KEYS */;
+INSERT INTO `ImageBanner` VALUES (1,'Lorem Ipsum is simply dummy text','Lorem Ipsum is simply dummy text of the printing and typesetting industry.','Lorem Ipsum','e2a09ac3819002edffd36a2d61e8c5c5.jpeg','2019-03-27 11:53:47','2019-07-04 11:11:08');
