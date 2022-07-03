@@ -601,6 +601,26 @@ const messages = defineMessages({
     defaultMessage: "Category Type",
     description: "Category Home page Slider title",
   },
+  fieldName: {
+    id: "app.fieldName",
+    defaultMessage: "Name",
+    description: "Name",
+  },
+  fieldType: {
+    id: "app.fieldType",
+    defaultMessage: "Type",
+    description: "Type",
+  },
+  fieldPageId: {
+    id: "app.fieldPageId",
+    defaultMessage: "Page ID",
+    description: "Page ID",
+  },
+  fieldEnabled: {
+    id: "app.fieldEnabled",
+    defaultMessage: "Enabled",
+    description: "Enabled",
+  },
   banner: {
     id: "app.banner",
     defaultMessage: "banner Type",
@@ -644,7 +664,7 @@ const messages = defineMessages({
   },
   subCategoryName: {
     id: "app.subCategoryName",
-    defaultMessage: "Category name",
+    defaultMessage: "Sub Category",
     description: "Category name",
   },
   subCategoryStatus: {
@@ -690,6 +710,41 @@ const messages = defineMessages({
     id: "app.location",
     defaultMessage: "Location",
     description: "Location",
+  },
+  subTitleAdmin: {
+    id: "app.subTitleAdmin",
+    defaultMessage: "Title",
+    description: "Title",
+  },
+  subAdminDescription: {
+    id: "app.subAdminDescription",
+    defaultMessage: "Description",
+    description: "Description",
+  },
+  subAdminAddress: {
+    id: "app.subAdminAddress",
+    defaultMessage: "Address",
+    description: "Address",
+  },
+  subAdminSubCategory: {
+    id: "app.subAdminSubCategory",
+    defaultMessage: "Sub Category",
+    description: "Sub Category",
+  },
+  subAdminGuests: {
+    id: "app.subAdminGuests",
+    defaultMessage: "Guests",
+    description: "Guests",
+  },
+  subAdminBedrooms: {
+    id: "app.subAdminBedrooms",
+    defaultMessage: "Bedrooms",
+    description: "Bedrooms",
+  },
+  subAdminBaths: {
+    id: "app.subAdminBaths",
+    defaultMessage: "Baths",
+    description: "Baths",
   },
   dates: {
     id: "app.dates",
@@ -6688,6 +6743,11 @@ const messages = defineMessages({
     id: "app.homeOffer",
     defaultMessage: "Home Offer",
     description: "Home Banner",
+  },
+  fieldCar: {
+    id: "app.fieldCar",
+    defaultMessage: "Car",
+    description: "Car",
   },
   staticInfoBlock: {
     id: "app.staticInfoBlock",

@@ -1,5 +1,3 @@
-@import "../variables.css";
-@import "../helpers.css";
 /*
  .root {
 	background: #ffffff;
@@ -200,6 +198,11 @@
 .container {
   margin: 0 auto;
   max-width: 1140px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.footer_col {
+  width: 25%;
 }
 
 .footer_top_title p,
@@ -216,6 +219,14 @@
 
 .footer_top_sub p {
   cursor: pointer;
+}
+.footerPaddingTop {
+  padding-top: 50px;
+}
+.footer_row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
 }
 
 .hosting h6,
@@ -275,7 +286,26 @@ hr {
   color: rgba(108, 117, 125, var(--bs-text-opacity)) !important;
   color: rgba(var(--bs-secondary-rgb), var(--bs-text-opacity)) !important;
 }
-
+@media only screen and (max-width: 1024px) {
+  .footer_col {
+    width: 25%;
+  }
+  .container {
+    justify-content: space-between;
+    margin: 0 auto !important;
+    padding-left: 20px;
+  }
+}
+@media only screen and (max-width: 927px) {
+  .footer_col {
+    width: 50%;
+  }
+  .container {
+    justify-content: space-between;
+    padding-left: 20px;
+    margin: 0 auto;
+  }
+}
 @media only screen and (max-width: 668px) {
   .padding-top {
     padding-top: 15px;
@@ -284,4 +314,11 @@ hr {
     display: flex;
     flex-direction: row-reverse;
   } */
+  .container {
+    justify-content: space-between;
+    padding-left: 10px;
+  }
+  .footer_col {
+    width: 100%;
+  }
 }

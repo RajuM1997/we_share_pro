@@ -109,16 +109,18 @@
   font-weight: 700;
   margin: 0px !important;
 }
-.category_sub_title h5 {
-  font-size: 18px;
+.category_sub_title {
+  font-size: 24px;
   font-weight: 600;
 }
-.category_color_title h5 {
+.category_color_title {
+  font-size: 24px;
   color: #fff;
   background: #fcba21;
   display: inline-block;
-  padding: 0 !important;
+  /* padding: 0 !important; */
   margin: 0 !important;
+  padding-top: 10px 0px 0px 0px;
   font-weight: 700;
 }
 /* filter end */

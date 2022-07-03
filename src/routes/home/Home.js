@@ -187,7 +187,7 @@ class Homepage extends React.Component {
             !getMostViewedListingData.loading &&
             !getStaticBlockInfoData.loading && (
               <div className={s.pageContainer}>
-                {/* {getRecommendData &&
+                {getRecommendData &&
                   getRecommendData.getRecommend &&
                   getRecommendData.getRecommend.length > 0 && (
                     <div>
@@ -197,7 +197,7 @@ class Homepage extends React.Component {
                       </h3>
                       <HomeSlider data={getRecommendData.getRecommend} />
                     </div>
-                  )} */}
+                  )}
 
                 {/* {getMostViewedListingData &&
                   getMostViewedListingData.GetMostViewedListing &&

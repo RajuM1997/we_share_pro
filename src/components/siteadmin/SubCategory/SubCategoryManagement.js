@@ -54,6 +54,7 @@ class SubCategoryManagement extends React.Component {
 
   render() {
     const { data, deleteSubCategory, updateSubCategoryStatus } = this.props;
+    console.log(data);
     const { formatMessage } = this.props.intl;
     return (
       <div className={cx(s.pagecontentWrapper, "pagecontentAR")}>
@@ -87,9 +88,8 @@ class SubCategoryManagement extends React.Component {
                 <Th scope="col">{formatMessage(messages.subCategoryName)}</Th>
                 <Th scope="col">{formatMessage(messages.primaryCategory)}</Th>
                 <Th scope="col">{formatMessage(messages.subCategoryStatus)}</Th>
-                <Th scope="col">
-                  {formatMessage(messages.subCategoryOperation)}
-                </Th>
+                <Th scope="col">{formatMessage(messages.editLabel)}</Th>
+                <Th scope="col">{formatMessage(messages.delete)}</Th>
               </Thead>
               {data &&
                 data.map(function(value, key) {
@@ -102,15 +102,15 @@ class SubCategoryManagement extends React.Component {
                         data={value.id}
                       />
                       <Td
-                        data-label={formatMessage(messages.location)}
-                        column={formatMessage(messages.location)}
-                        data={value.location}
+                        data-label={formatMessage(messages.subCategory)}
+                        column={formatMessage(messages.subCategory)}
+                        data={value.subCategory}
                       />
                       <Td
-                        data-label={formatMessage(messages.locationAddress)}
-                        column={formatMessage(messages.locationAddress)}
+                        data-label={formatMessage(messages.primaryCategory)}
+                        column={formatMessage(messages.primaryCategory)}
                         className={s.imageurl}
-                        data={value.locationAddress}
+                        data={value.primaryCategory}
                       />
                       <Td
                         data-label={formatMessage(messages.status)}
@@ -139,9 +139,7 @@ class SubCategoryManagement extends React.Component {
                         data-label={formatMessage(messages.editLabel)}
                         column={formatMessage(messages.editLabel)}
                       >
-                        <Link
-                          to={"/siteadmin/edit/popularlocation/" + value.id}
-                        >
+                        <Link to={"/siteadmin/edit/subCategory/" + value.id}>
                           <FormattedMessage {...messages.editLabel} />
                         </Link>
                       </Td>

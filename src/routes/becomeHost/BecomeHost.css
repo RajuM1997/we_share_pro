@@ -1,7 +1,8 @@
-@import '../../components/variables.css';
+@import "../../components/variables.css";
 .root {
   padding-left: 0px;
   padding-right: 0px;
+  margin-top: 50px;
 }
 .container {
   margin: 0 auto;

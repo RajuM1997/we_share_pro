@@ -27,9 +27,10 @@ class AddCategory extends React.Component {
   render() {
     const {
       data: { loading },
+      title,
     } = this.props;
 
-    return <AddCategoryManagement />;
+    return <AddCategoryManagement title={title} />;
   }
 }
 

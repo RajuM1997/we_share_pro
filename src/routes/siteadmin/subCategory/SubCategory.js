@@ -1,12 +1,42 @@
 import React, { Component } from "react";
 import SubCategoryManagement from "../../../components/siteadmin/SubCategory/SubCategoryManagement";
-// import SubCategoryManagement from "../../../components/siteadmin/subCategory/SubCategoryManagement";
+import PropTypes from "prop-types";
+import { graphql, gql, compose } from "react-apollo";
+import getSubCategory from "./getSubCategory.graphql";
 
-class Categorys extends Component {
+class SubCategory extends Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    data: PropTypes.shape({
+      loading: PropTypes.bool,
+      getSubCategory: PropTypes.array,
+    }),
+  };
+
+  static defaultProps = {
+    data: {
+      loading: true,
+    },
+  };
+
   render() {
-    console.log("hello");
-    return <SubCategoryManagement />;
+    const {
+      data: { loading },
+    } = this.props;
+
+    const {
+      data: { getSubCategory },
+    } = this.props;
+    console.log(getSubCategory);
+    return <SubCategoryManagement data={getSubCategory} />;
   }
 }
 
-export default Categorys;
+export default compose(
+  graphql(getSubCategory, {
+    options: {
+      fetchPolicy: "network-only",
+      ssr: false,
+    },
+  })
+)(SubCategory);

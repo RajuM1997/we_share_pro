@@ -3,7 +3,7 @@ import AdminLayout from "../../../components/Layout/AdminLayout";
 import AddCategory from "./AddCategory";
 // import { restrictUrls } from "../../../helpers/adminPrivileges";
 
-// const title = "Add Popular Location";
+const title = "Add Category";
 
 export default async function action({ store }) {
   // From Redux Store
@@ -22,9 +22,10 @@ export default async function action({ store }) {
   //   }
 
   return {
+    title,
     component: (
       <AdminLayout>
-        <AddCategory />
+        <AddCategory title={title} />
       </AdminLayout>
     ),
   };

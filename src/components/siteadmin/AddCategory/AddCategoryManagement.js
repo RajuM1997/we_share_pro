@@ -159,7 +159,7 @@ class AddCategoryManagement extends React.Component {
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={"/siteadmin/popularlocation"}
+                to={"/siteadmin/categorys"}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,
@@ -205,7 +205,6 @@ class AddCategoryManagement extends React.Component {
                   type="select"
                   className={bt.commonControlInput}
                 >
-                  <option />
                   <option value="Vacation Home">Vacation Home</option>
                   <option value="Events Space">Events Space</option>
                   <option value="Workspace">Workspace</option>
@@ -215,7 +214,7 @@ class AddCategoryManagement extends React.Component {
                   <option value="Bikes">Bikes</option>
                   <option value="Electronics">Electronics</option>
                   <option value="Power Tools">Power Tools</option>
-                  <option value="0000ff">Film Equipment</option>
+                  <option value="Film Equipment">Film Equipment</option>
                   <option value="Event Equipment">Event Equipment</option>
                   <option value="Parking">Parking</option>
                 </Field>

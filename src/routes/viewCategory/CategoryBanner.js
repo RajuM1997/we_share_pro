@@ -78,15 +78,53 @@ class CategoryBanner extends Component {
           <div className={s.category_main_title}>
             <h1>{this.state.bannerData.title}</h1>
           </div>
-          <div className={s.category_sub_title}>
+          <>
+            <p
+              className="py-0"
+              style={{ marginBottom: "0px", paddingTop: "10px" }}
+              // data-aos-duration="1000"
+              // data-aos="fade-right"
+            >
+              <span className={s.category_color_title}>
+                {this.state.bannerData.colorText}
+              </span>
+              <>
+                {this.state.bannerData.colorText == "Don’t Buy! We Share," ? (
+                  <>
+                    <br />
+                    <span className={s.category_sub_title}>
+                      {this.state.bannerData.description}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className={s.category_sub_title}>
+                      {this.state.bannerData.description}
+                    </span>
+                  </>
+                )}
+              </>
+              {/* {description} <br /> */}
+              <>
+                {this.state.bannerData.bottomText === "null" ? (
+                  ""
+                ) : (
+                  <p className={s.category_sub_title}>
+                    {this.state.bannerData.bottomText}
+                  </p>
+                )}
+              </>
+            </p>
+          </>
+          {/* <div className={s.category_sub_title}>
             <h5>{this.state.bannerData.description}</h5>
           </div>
-          <div className={s.category_color_title}>
+          <div >
             <h5>{this.state.bannerData.colorText}</h5>
           </div>
           <div className={s.category_sub_title}>
             <h5>{this.state.bannerData.bottomText}</h5>
-          </div>
+          </div> */}
         </div>
       </div>
     );

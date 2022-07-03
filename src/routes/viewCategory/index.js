@@ -5,6 +5,8 @@ import ViewCategory from "./ViewCategory";
 import { url, fileuploadDir } from "../../config.js";
 import NotFound from "../notFound/NotFound";
 
+const title = "View Category";
+
 export default async function action({ params }) {
   let listTitle,
     listDescription,
@@ -35,14 +37,17 @@ export default async function action({ params }) {
       variables: { id },
     }),
   });
+
   const { data } = await resp.json();
-  // console.log(data);
-  console.log(params);
+  // console.log(data.getSingleCategory.title);
+  listTitle = data.getSingleCategory.title;
+  // console.log(params);
   return {
+    title: listTitle || title,
     component: (
       <Layout>
         {/* <pre>{JSON.stringify(context)}</pre> */}
-        <ViewCategory singleCategory={data} />
+        <ViewCategory singleCategory={data} title={title} />
       </Layout>
     ),
   };

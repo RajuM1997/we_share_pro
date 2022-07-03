@@ -147,6 +147,7 @@ import getLogo from "./queries/siteadmin/getLogo";
 import uploadLocation from "./mutations/SiteAdmin/PopularLocation/uploadLocation";
 import removeLocation from "./mutations/SiteAdmin/PopularLocation/removeLocation";
 import uploadCategory from "./mutations/SiteAdmin/Category/uploadCategory";
+import removeCategory from "./mutations/SiteAdmin/Category/removeCategory";
 
 import adminUserLogin from "./queries/siteadmin/adminUserLogin";
 import changeAdminUser from "./mutations/SiteAdmin/changeAdminUser";
@@ -185,6 +186,7 @@ import getShareAndFind from "./queries/siteadmin/getShareAndFind";
 import addShareAndFind from "./mutations/SiteAdmin/addShareAndFind";
 import editPopularLocation from "./queries/siteadmin/editPopularLocation";
 import deletePopularLocation from "./mutations/SiteAdmin/deletePopularLocation";
+
 import updatePopularLocation from "./mutations/SiteAdmin/updatePopularLocation";
 import updatePopularLocationStatus from "./mutations/SiteAdmin/updatePopularLocationStatus";
 import addPopularLocation from "./mutations/SiteAdmin/addPopularLocation";
@@ -193,6 +195,12 @@ import deleteHomeBanner from "./mutations/SiteAdmin/deleteHomeBanner";
 // category
 import addCategory from "./mutations/SiteAdmin/addCategory";
 import getCategory from "./queries/siteadmin/getCategory";
+import deleteCategory from "./mutations/SiteAdmin/deleteCategory";
+import editCategory from "./queries/siteadmin/editCategory";
+
+// update category
+import updateCategory from "./mutations/SiteAdmin/updateCategory";
+import updateCategoryStatus from "./mutations/SiteAdmin/updateCategoryStatus";
 
 // banner
 import addBanner from "./mutations/SiteAdmin/addBanner";
@@ -200,6 +208,13 @@ import getHomeBanner from "./queries/siteadmin/getHomeBanner";
 // sub categroy
 import addSubCategory from "./mutations/SiteAdmin/addSubCategory";
 import getSubCategory from "./queries/siteadmin/getSubCategory";
+import deleteSubCategory from "./mutations/SiteAdmin/deleteSubCategory";
+import editSubCategory from "./queries/siteadmin/editSubCategory";
+
+// update sub category
+
+import updateSubCategory from "./mutations/SiteAdmin/updateSubCategory";
+import updateSubCategoryStatus from "./mutations/SiteAdmin/updateSubCategoryStatus";
 
 //sub category admin
 import getSubCategoryAdmin from "./queries/siteadmin/getSubCategoryAdmin";
@@ -529,6 +544,11 @@ const schema = new Schema({
       getAllPermissionListings,
       getSiteSettingsLogo,
       getSingleCategory,
+      editCategory,
+      getSubCategory,
+      getSubCategoryAdmin,
+      getOfferAdmin,
+      editSubCategory,
     },
   }),
   mutation: new ObjectType({
@@ -637,12 +657,16 @@ const schema = new Schema({
       removeOffer,
       addOffer,
       addSubCategory,
-      getSubCategory,
-      getSubCategoryAdmin,
-      getOfferAdmin,
       uploadSubCategory,
       removeSubCategory,
       addBanner,
+      removeCategory,
+      deleteCategory,
+      updateCategory,
+      updateCategoryStatus,
+      deleteSubCategory,
+      updateSubCategory,
+      updateSubCategoryStatus,
     },
   }),
 });

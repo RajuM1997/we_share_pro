@@ -1,0 +1,15 @@
+query editSubCategory($id: Int!) {
+  editSubCategory(id: $id) {
+    id
+    title
+    address
+    description
+    primaryCategory
+    subCategory
+    guests
+    bedrooms
+    beds
+    baths
+    image
+  }
+}

@@ -3,6 +3,8 @@ import AdminLayout from "../../../components/Layout/AdminLayout";
 import AddSubCategory from "./AddSubCategory";
 // import { restrictUrls } from "../../../helpers/adminPrivileges";
 
+const title = "add sub category";
+
 export default async function action({ store }) {
   // From Redux Store
   let isAdminAuthenticated = store.getState().runtime.isAdminAuthenticated;
@@ -20,9 +22,10 @@ export default async function action({ store }) {
   //   }
 
   return {
+    title,
     component: (
       <AdminLayout>
-        <AddSubCategory />
+        <AddSubCategory title={title} />
       </AdminLayout>
     ),
   };
