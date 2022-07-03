@@ -3,10 +3,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 //Redux Form
-import { Field, reduxForm, formValueSelector } from "redux-form";
-
-// Redux
-import { connect } from "react-redux";
+import { Field, reduxForm } from "redux-form";
 
 // Translation
 import { injectIntl, FormattedMessage } from "react-intl";
@@ -14,47 +11,38 @@ import { injectIntl, FormattedMessage } from "react-intl";
 // Locale
 import messages from "../../locale/messages";
 
-// Internal Component
-import IncrementButton from "../IncrementButton";
+// Redux
+import { connect } from "react-redux";
 
 // Style
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 import cx from "classnames";
-import {
-  Grid,
-  Button,
-  Row,
-  FormGroup,
-  Col,
-  FormControl,
-} from "react-bootstrap";
+import { Grid, Button, Row, FormGroup, Col } from "react-bootstrap";
 import s from "./ListPlaceStep1.css";
 import bt from "../../components/commonStyle.css";
+import { url } from "../../config";
 
-// Component
+//Images
+import DefaultIcon from "../../../public/SiteIcons/defaultIcon.png";
+
+// Internal Components
+import CustomCheckbox from "../CustomCheckbox";
 import ListPlaceTips from "../ListPlaceTips";
 
 import update from "./update";
 
-class Page6 extends Component {
+class Page9 extends Component {
   static propTypes = {
     initialValues: PropTypes.object,
     previousPage: PropTypes.any,
     nextPage: PropTypes.any,
-    bathrooms: PropTypes.number,
-    isExistingList: PropTypes.bool,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      bathrooms: {
-        itemName: null,
-        otherItemName: null,
-        startValue: 0,
-        endValue: 0,
-      },
-      bathroomType: [],
+      essentialsAmenities: [],
+      safetyAmenities: [],
     };
   }
 
@@ -62,8 +50,8 @@ class Page6 extends Component {
     const { listingFields } = this.props;
     if (listingFields != undefined) {
       this.setState({
-        bathrooms: listingFields.bathrooms[0],
-        bathroomType: listingFields.bathroomType,
+        essentialsAmenities: listingFields.essentialsAmenities,
+        safetyAmenities: listingFields.safetyAmenities,
       });
     }
   }
@@ -72,46 +60,65 @@ class Page6 extends Component {
     const { listingFields } = nextProps;
     if (listingFields != undefined) {
       this.setState({
-        bathrooms: listingFields.bathrooms[0],
-        bathroomType: listingFields.bathroomType,
+        essentialsAmenities: listingFields.essentialsAmenities,
+        safetyAmenities: listingFields.safetyAmenities,
       });
     }
   }
 
-  renderIncrementButton = (field) => <IncrementButton {...field} />;
-
-  renderSelectField = ({
-    input,
-    label,
-    meta: { touched, error },
-    children,
-  }) => {
-    const { formatMessage } = this.props.intl;
-
-    return (
-      <div>
-        <select {...input}>{children}</select>
-        {touched && error && <span>{formatMessage(error)}</span>}
-      </div>
-    );
-  };
-
-  renderFormControlSelect = ({
-    input,
-    label,
-    meta: { touched, error },
-    children,
-    className,
-  }) => {
-    const { formatMessage } = this.props.intl;
-    return (
-      <div>
-        <FormControl componentClass="select" {...input} className={className}>
-          {children}
-        </FormControl>
-      </div>
-    );
-  };
+  checkboxGroup = ({ label, name, options, input }) => (
+    <ul className={s.listContainer}>
+      {options.map((option, index) => {
+        if (option.isEnable === "1") {
+          return (
+            <li className={cx(s.listContent, s.listContentWidth)} key={index}>
+              <span className={cx(s.checkBoxSection, s.checkBoxWidth)}>
+                <CustomCheckbox
+                  name={`${input.name}[${index}]`}
+                  className={"icheckbox_square-green"}
+                  value={option.id}
+                  checked={input.value.indexOf(option.id) !== -1}
+                  onChange={(event) => {
+                    const newValue = [...input.value];
+                    if (event === true) {
+                      newValue.push(option.id);
+                    } else {
+                      newValue.splice(newValue.indexOf(option.id), 1);
+                    }
+                    return input.onChange(newValue);
+                  }}
+                />
+              </span>
+              <span className={cx(s.checkBoxSection, s.checkBoxLabel)}>
+                <span className={cx(s.checkBoxSection, s.checkBoxImage)}>
+                  {option.image ? (
+                    <img
+                      src={url + "/images/amenities/" + option.image}
+                      className={cx(s.imgSection, "imgSectionRtl")}
+                    />
+                  ) : (
+                    <img
+                      src={DefaultIcon}
+                      className={cx(s.imgSection, "imgSectionRtl")}
+                    />
+                  )}
+                </span>
+                <span
+                  className={cx(
+                    s.checkboxLabel,
+                    s.noPadding,
+                    s.checkBoxSection
+                  )}
+                >
+                  {option.itemName}
+                </span>
+              </span>
+            </li>
+          );
+        }
+      })}
+    </ul>
+  );
 
   render() {
     const {
@@ -121,59 +128,40 @@ class Page6 extends Component {
       previousPage,
       nextPage,
     } = this.props;
-    const { isExistingList } = this.props;
-    const { bathrooms, bathroomType } = this.state;
-    let path = isExistingList ? "map" : "location";
+    const { essentialsAmenities, safetyAmenities } = this.state;
 
     return (
       <Grid fluid>
-        <Row className={cx(s.landingContainer, "arrowPosition")}>
+        <Row className={s.landingContainer}>
           <Col xs={12} sm={7} md={7} lg={7} className={s.landingContent}>
             <div>
               <h3 className={s.landingContentTitle}>
-                <FormattedMessage {...messages.howManyBathrooms} />
+                <FormattedMessage {...messages.whatamenities} />
               </h3>
               <form onSubmit={handleSubmit}>
                 <div className={s.landingMainContent}>
                   <FormGroup className={s.formGroup}>
                     <Field
-                      name="bathrooms"
-                      type="text"
-                      component={this.renderIncrementButton}
-                      labelSingluar={bathrooms.itemName}
-                      labelPlural={bathrooms.otherItemName}
-                      maxValue={bathrooms.endValue}
-                      minValue={bathrooms.startValue}
-                      incrementBy={0.5}
+                      name="amenities"
+                      component={this.checkboxGroup}
+                      options={essentialsAmenities}
                     />
                   </FormGroup>
 
                   <FormGroup className={s.formGroup}>
+                    <label className={cx(s.landingLabel, s.landingSaftyTitle)}>
+                      <FormattedMessage {...messages.safetyamenities} />
+                    </label>
                     <Field
-                      name="bathroomType"
-                      component={this.renderFormControlSelect}
-                      className={cx(
-                        s.formControlSelect,
-                        s.jumboSelect,
-                        s.jumboSelectPadding
-                      )}
-                    >
-                      {bathroomType.map((value, key) => {
-                        return (
-                          value.isEnable == 1 && (
-                            <option value={value.id} key={key}>
-                              {value.itemName}
-                            </option>
-                          )
-                        );
-                      })}
-                    </Field>
+                      name="safetyAmenities"
+                      component={this.checkboxGroup}
+                      options={safetyAmenities}
+                    />
                   </FormGroup>
                 </div>
                 <div className={s.nextPosition}>
                   <div className={s.nextBackButton}>
                     <hr className={s.horizontalLineThrough} />
-
                     <FormGroup className={s.formGroup}>
                       <Col
                         xs={12}
@@ -190,7 +178,7 @@ class Page6 extends Component {
                             s.pullLeft,
                             "floatRight"
                           )}
-                          onClick={() => previousPage("bedrooms")}
+                          onClick={() => previousPage("map")}
                         >
                           <FormattedMessage {...messages.back} />
                         </Button>
@@ -202,7 +190,7 @@ class Page6 extends Component {
                             s.pullRight,
                             "floatLeft"
                           )}
-                          onClick={() => nextPage(path)}
+                          onClick={() => nextPage("spaces")}
                         >
                           <FormattedMessage {...messages.next} />
                         </Button>
@@ -220,20 +208,19 @@ class Page6 extends Component {
   }
 }
 
-Page6 = reduxForm({
+Page9 = reduxForm({
   form: "ListPlaceStep1", // a unique name for this form
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   onSubmit: update,
-})(Page6);
+})(Page9);
 
 const mapState = (state) => ({
-  isExistingList: state.location.isExistingList,
   listingFields: state.listingFields.data,
 });
 
 const mapDispatch = {};
 
 export default injectIntl(
-  withStyles(s, bt)(connect(mapState, mapDispatch)(Page6))
+  withStyles(s, bt)(connect(mapState, mapDispatch)(Page9))
 );

@@ -1,25 +1,22 @@
 // General
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 // Redux Form
-import { Field, reduxForm, formValueSelector, FieldArray, change } from 'redux-form';
+import { Field, reduxForm } from "redux-form";
 
 // Redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 // Translation
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from "react-intl";
 
 // Locale
-import messages from '../../locale/messages';
-
-// Internal Component
-import IncrementButton from '../IncrementButton';
+import messages from "../../locale/messages";
 
 // Style
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import cx from 'classnames';
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import cx from "classnames";
 import {
   Grid,
   Button,
@@ -27,304 +24,226 @@ import {
   FormGroup,
   Col,
   ControlLabel,
-  FormControl
-} from 'react-bootstrap';
-import s from './ListPlaceStep1.css';
-import bt from '../../components/commonStyle.css';
+  FormControl,
+} from "react-bootstrap";
+import s from "./ListPlaceStep1.css";
+import bt from "../../components/commonStyle.css";
+
+import update from "./update";
 
 // Component
-import ListPlaceTips from '../ListPlaceTips';
-
-import update from './update';
-
-// Internal Component
-import IncrementBtn from './IncrementBtn';
+import ListPlaceTips from "../ListPlaceTips";
 
 class Page3 extends Component {
-
   static propTypes = {
     initialValues: PropTypes.object,
-    previousPage: PropTypes.any,
-    beds: PropTypes.number,
     nextPage: PropTypes.any,
-    bedTypes: PropTypes.array,
+    userData: PropTypes.shape({
+      firstName: PropTypes.string.isRequired,
+    }).isRequired,
+  };
+
+  static defaultProps = {
+    userData: {
+      firstName: "",
+    },
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      bedType: [],
-      beds: {
-        itemName: null,
-        otherItemName: null,
-        startValue: 0,
-        endValue: 0
-      },
-      bedrooms: [],
-      personCapacity: {
-        itemName: null,
-        otherItemName: null,
-        startValue: 0,
-        endValue: 0
-      }
-    }
-    this.handleClick = this.handleClick.bind(this);
+      roomType: [],
+      personCapacity: [],
+    };
   }
 
   componentWillMount() {
-    const { listingFields, beds, change, bedTypes } = this.props;
-    const { bedType } = this.state;
-    let obj, bedsArray = []; 
-    
+    const { listingFields } = this.props;
     if (listingFields != undefined) {
       this.setState({
-        bedType: listingFields.bedType,
-        beds: listingFields.beds[0],
-        bedrooms: listingFields.bedrooms,
-        personCapacity: listingFields.personCapacity[0]
+        roomType: listingFields.roomType,
+        personCapacity: listingFields.personCapacity,
       });
     }
-    
-    if((bedTypes && beds != bedTypes.length) || (bedTypes && bedTypes.length == 0)) {
-      Array(beds).fill().map((i, index)=> {
-        obj = {
-          bedCount: index + 1,
-          bedType: bedType.length > 0 ? bedType[0].id : null,
-        };
-        bedsArray.push(obj);
-      })
-      change('bedTypes', bedsArray);
-    } 
   }
 
   componentWillReceiveProps(nextProps) {
     const { listingFields } = nextProps;
     if (listingFields != undefined) {
       this.setState({
-        bedType: listingFields.bedType,
-        beds: listingFields.beds[0],
-        bedrooms: listingFields.bedrooms,
-        personCapacity: listingFields.personCapacity[0]
+        roomType: listingFields.roomType,
+        personCapacity: listingFields.personCapacity,
       });
     }
   }
 
-
-  renderIncrementButton = (field) => (
-    <IncrementButton
-      {...field}
-    />
-  );
-
-  renderIncrementBtn = (input, dispatch) => (
-    <IncrementBtn
-      {...input}
-      onChange={this.handleClick}
-    />
-  );
-
-  renderSelectField = ({ input, label, meta: { touched, error }, children }) => {
+  renderSelectField = ({
+    input,
+    label,
+    meta: { touched, error },
+    children,
+  }) => {
     const { formatMessage } = this.props.intl;
 
     return (
       <div>
-        <select
-          {...input}
-        >
-          {children}
-        </select>
+        <select {...input}>{children}</select>
         {touched && error && <span>{formatMessage(error)}</span>}
       </div>
-    )
-  }
+    );
+  };
 
-  renderFormControlSelect = ({ input, label, meta: { touched, error }, children, className }) => {
+  renderFormControlSelect = ({
+    input,
+    label,
+    meta: { touched, error },
+    children,
+    className,
+  }) => {
     const { formatMessage } = this.props.intl;
     return (
       <div>
-        <FormControl componentClass="select" {...input} className={className} >
+        <FormControl componentClass="select" {...input} className={className}>
           {children}
         </FormControl>
       </div>
-    )
-  }
-
-  renderBedTypes = ({ fields, meta: { error, submitFailed } }) => {
-    const { formatMessage } = this.props.intl;
-    const { bedType } = this.state;
-    return (
-      <div className={s.spaceTop2}>
-        {
-          fields.map((beds, index) => (
-
-            <div key={index}>
-              <Row>
-                <Col xs={12} sm={12} md={12} lg={12}>
-                  <FormGroup className={s.formGroup}>
-                    <Field
-                      name={`${beds}.bedType`}
-                      type="text"
-                      component={this.renderFormControlSelect}
-                      className={cx(s.formControlSelect, s.jumboSelect)}
-                    >
-                      {
-                        bedType.map((value, key) => {
-                          return (
-                            value.isEnable == 1 && <option value={value.id} key={key}>{value.itemName}</option>
-                          )
-                        })
-                      }
-                    </Field>
-                  </FormGroup>
-                </Col>
-              </Row>
-            </div>
-          ))
-        }
-      </div>
-    )
-  }
-
-  async handleClick(e) {
-    const { beds, bedTypes, change } = this.props;
-    const { bedType } = this.state;
-
-    let bedTypesValue = Object.keys(bedTypes).map(function (key) {
-      return bedTypes[key];
-    });
-
-    let updatedBedTypesArray = (bedTypesValue && bedTypesValue.length > 0) ? bedTypesValue.slice(0) : [];
-    let updatedBedCount = beds + 1;
-    let obj = {};
-
-    if (Number(beds) < Number(e)) {
-      obj = {
-        bedCount: updatedBedCount,
-        bedType: bedType.length > 0 ? bedType[0].id : null,
-      };
-      try {
-        updatedBedTypesArray.push(obj);
-      } catch (e) {
-
-      }
-    } else if ((Number(beds) >= Number(e)) || (Number(e) > 2)) {
-      updatedBedTypesArray.splice(bedTypesValue.length - 1, 1);
-    }
-
-    await change('bedTypes', []);
-    await change('bedTypes', updatedBedTypesArray);
-  }
+    );
+  };
 
   render() {
-    const { handleSubmit, submitting, pristine, previousPage, nextPage, bedTypes } = this.props;
-    const { bedrooms, bedType, beds, personCapacity } = this.state;
-
+    const { error, handleSubmit, submitting, dispatch, nextPage } = this.props;
+    const { userData } = this.props;
+    const { roomType, personCapacity } = this.state;
     return (
-      <Grid fluid>
-        <Row className={cx(s.landingContainer, 'arrowPosition')}>
+      <Grid>
+        <Row>
           <Col xs={12} sm={7} md={7} lg={7} className={s.landingContent}>
-            <div>
-              <h3 className={s.landingContentTitle}><FormattedMessage {...messages.howManyGuests} /></h3>
+            <Col
+              xs={12}
+              smOffset={1}
+              sm={8}
+              mdOffset={1}
+              md={8}
+              lgOffset={1}
+              lg={8}
+            >
+              <h2 className={s.landingTitle}>
+                <FormattedMessage {...messages.hi} />, {userData.firstName}!{" "}
+                <FormattedMessage {...messages.letYouGetReady} />.
+              </h2>
+              <strong className={s.landingStep}>
+                <span>
+                  {" "}
+                  <FormattedMessage {...messages.step1HeadingNew} />
+                </span>
+              </strong>
+              <h3 className={s.landingContentTitle}>
+                {" "}
+                <FormattedMessage {...messages.whatKindOfPlace} />{" "}
+              </h3>
+
               <form onSubmit={handleSubmit}>
-                <div className={s.landingMainContent}>
+                <FormGroup className={s.formGroup}>
+                  <Row>
+                    <Col
+                      componentClass={ControlLabel}
+                      xs={12}
+                      sm={12}
+                      md={6}
+                      lg={6}
+                    >
+                      <Field
+                        name="roomType"
+                        component={this.renderFormControlSelect}
+                        className={cx(
+                          s.backgroundPosition,
+                          s.formControlSelect,
+                          s.jumboSelect,
+                          s.noFontWeight
+                        )}
+                      >
+                        {roomType.map((value, key) => {
+                          return (
+                            value.isEnable == 1 && (
+                              <option value={value.id} key={key}>
+                                {value.itemName}
+                              </option>
+                            )
+                          );
+                        })}
+                      </Field>
+                    </Col>
 
-                  <FormGroup className={s.formGroup}>
-                    <Field
-                      name="personCapacity"
-                      type="text"
-                      component={this.renderIncrementButton}
-                      labelSingluar={personCapacity.itemName}
-                      labelPlural={personCapacity.otherItemName}
-                      maxValue={personCapacity.endValue}
-                      minValue={personCapacity.startValue}
-                      incrementBy={1}
-                    />
-                  </FormGroup>
-
-                  <FormGroup className={s.formGroup}>
-                    <ControlLabel className={s.landingLabel}>
-                      <FormattedMessage {...messages.howManyBedrooms} />
-                    </ControlLabel>
-                    <Field name="bedrooms" component={this.renderFormControlSelect} className={cx(s.formControlSelect, s.jumboSelect)} >
-                      {
-                        bedrooms.map((value, key) => {
+                    <Col
+                      componentClass={ControlLabel}
+                      xs={12}
+                      sm={12}
+                      md={6}
+                      lg={6}
+                    >
+                      <Field
+                        name="personCapacity"
+                        component={this.renderFormControlSelect}
+                        className={cx(
+                          s.backgroundPosition,
+                          s.formControlSelect,
+                          s.jumboSelect,
+                          s.noFontWeight
+                        )}
+                      >
+                        {personCapacity.map((value, key) => {
                           let rows = [];
-                          for (let i = value.startValue; i <= value.endValue; i++) {
-                            rows.push(<option value={i}>{i} {i > 1 ? value.otherItemName : value.itemName}</option>);
+                          for (
+                            let i = value.startValue;
+                            i <= value.endValue;
+                            i++
+                          ) {
+                            rows.push(
+                              <option value={i}>
+                                for {i}{" "}
+                                {i > 1 ? value.otherItemName : value.itemName}
+                              </option>
+                            );
                           }
                           return rows;
-                        })
-                      }
-                    </Field>
-                  </FormGroup>
+                        })}
+                      </Field>
+                    </Col>
+                  </Row>
+                </FormGroup>
 
-                  <FormGroup className={s.formGroup}>
-                    <ControlLabel className={s.landingLabel}>
-                      <FormattedMessage {...messages.howManyBeds} />
-                    </ControlLabel>
-                    <Field
-                      name="beds"
-                      type="text"
-                      component={this.renderIncrementBtn}
-                      labelSingluar={beds.itemName}
-                      labelPlural={beds.otherItemName}
-                      minValue={beds.startValue}
-                      incrementBy={1}
-                      maxValue={beds.endValue}
-                    />
-                  </FormGroup>
-
-                  <FieldArray name="bedTypes" component={this.renderBedTypes} className={s.spaceTop2} />
-
-                </div>
-                <div className={s.nextPosition}>
-                  <div className={s.nextBackButton}>
-
-                    <hr className={s.horizontalLineThrough} />
-
-                    <FormGroup className={s.formGroup}>
-                      <Col xs={12} sm={12} md={12} lg={12} className={s.noPadding}>
-                        <Button className={cx(s.button, bt.btnPrimaryBorder, bt.btnLarge, s.pullLeft, 'floatRight')} onClick={() => previousPage("room")}>
-                          <FormattedMessage {...messages.back} />
-                        </Button>
-                        <Button className={cx(s.button, bt.btnPrimary, bt.btnLarge, s.pullRight, 'floatLeft')} onClick={() => nextPage("bathrooms")}>
-                          <FormattedMessage {...messages.next} />
-                        </Button>
-                      </Col>
-                    </FormGroup>
-                  </div></div>
-
+                <FormGroup className={cx(s.formGroup, "floatLeft")}>
+                  <Button
+                    className={cx(s.button, bt.btnPrimary, bt.btnLarge)}
+                    onClick={() => nextPage("room")}
+                  >
+                    <FormattedMessage {...messages.continue} />
+                  </Button>
+                </FormGroup>
               </form>
-            </div>
+            </Col>
           </Col>
           <ListPlaceTips />
         </Row>
       </Grid>
-    )
+    );
   }
 }
 
-
 Page3 = reduxForm({
-  form: 'ListPlaceStep1', // a unique name for this form
+  form: "ListPlaceStep1", // a unique name for this form
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  onSubmit: update
+  onSubmit: update,
 })(Page3);
 
-// Decorate with connect to read form values
-const selector = formValueSelector('ListPlaceStep1'); // <-- same as form name
-
 const mapState = (state) => ({
-  existingList: state.location.isExistingList,
+  userData: state.account.data,
   listingFields: state.listingFields.data,
-  beds: selector(state, 'beds'),
-  bedCount: selector(state, 'beds'),
-  bedTypes: selector(state, 'bedTypes'),
 });
 
-const mapDispatch = {
-  change,
-};
+const mapDispatch = {};
 
-export default injectIntl(withStyles(s, bt)(connect(mapState, mapDispatch)(Page3)));
+export default injectIntl(
+  withStyles(s, bt)(connect(mapState, mapDispatch)(Page3))
+);

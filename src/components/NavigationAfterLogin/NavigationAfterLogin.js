@@ -193,6 +193,26 @@ class NavigationAfterLogin extends React.Component {
               <FormattedMessage {...messages.transactionHistory} />
             </MenuItemLink>
           </NavDropdown>
+          <NavDropdown
+            className={cx("hidden-xs", s.nonBreakPointScreen)}
+            eventKey={3}
+            title={formatMessage(messages.hosts)}
+            noCaret
+            id="basic-nav-dropdown"
+          >
+            <MenuItemLink to="/rooms">
+              <FormattedMessage {...messages.manageListing} />
+            </MenuItemLink>
+            <MenuItemLink to="/become-a-hosts?mode=new">
+              <FormattedMessage {...messages.listYourSpace} />
+            </MenuItemLink>
+            <MenuItemLink to="/reservation/current">
+              <FormattedMessage {...messages.yourReservations} />
+            </MenuItemLink>
+            <MenuItemLink to="/user/transaction">
+              <FormattedMessage {...messages.transactionHistory} />
+            </MenuItemLink>
+          </NavDropdown>
           <NavLink
             // to={"/users/show/" + isVerified}
             to={"/user/edit"}

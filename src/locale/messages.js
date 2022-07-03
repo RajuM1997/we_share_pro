@@ -10,6 +10,11 @@ const messages = defineMessages({
     defaultMessage: "Become a host",
     description: "Menu item",
   },
+  becomeAHost2: {
+    id: "app.becomeAHost2",
+    defaultMessage: "Become a hosts",
+    description: "Menu item",
+  },
   howItWork: {
     id: "app.howItWork",
     defaultMessage: "How It Work",
@@ -33,6 +38,11 @@ const messages = defineMessages({
   host: {
     id: "app.host",
     defaultMessage: "Host",
+    description: "Menu item",
+  },
+  hosts: {
+    id: "app.hosts",
+    defaultMessage: "Hosts",
     description: "Menu item",
   },
   manageListing: {

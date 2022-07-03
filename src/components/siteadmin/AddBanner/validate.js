@@ -5,18 +5,18 @@ const validate = (values) => {
 
   if (!values.title) {
     errors.locationAddress = messages.required;
-  } else if (values.title.trim() == "") {
+  } else if (values.title && values.title.trim() === "") {
     errors.locationAddress = messages.blankSpace;
   }
 
   if (!values.description) {
     errors.locationAddress = messages.required;
-  } else if (values.subTitle.trim() == "") {
+  } else if (values.subTitle && values.subTitle.trim() == "") {
     errors.locationAddress = messages.blankSpace;
   }
   if (!values.category) {
     errors.locationAddress = messages.required;
-  } else if (values.category.trim() == "") {
+  } else if (values.category && values.category.trim() == "") {
     errors.locationAddress = messages.blankSpace;
   }
 
