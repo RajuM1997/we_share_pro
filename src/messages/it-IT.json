@@ -13297,5 +13297,59 @@
     "files": [
       "src/locale/messages.js"
     ]
+  },
+  {
+    "id": "app.categoryAdminCategory",
+    "description": "Category",
+    "defaultMessage": "Category",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.categoryAdminDescription",
+    "description": "Description",
+    "defaultMessage": "Description",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.categoryAdminTitle",
+    "description": "Title",
+    "defaultMessage": "Title",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.editCategory",
+    "description": "Title",
+    "defaultMessage": "Edit Category",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.editSubCategory",
+    "description": "Edit Sub Category",
+    "defaultMessage": "Edit Sub Category",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subAdminBeds",
+    "description": "Beds",
+    "defaultMessage": "Beds",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
   }
 ]

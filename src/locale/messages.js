@@ -666,6 +666,32 @@ const messages = defineMessages({
     defaultMessage: "Category Type",
     description: "Category Type",
   },
+  // category
+  editCategory: {
+    id: "app.editCategory",
+    defaultMessage: "Edit Category",
+    description: "Title",
+  },
+  editSubCategory: {
+    id: "app.editSubCategory",
+    defaultMessage: "Edit Sub Category",
+    description: "Edit Sub Category",
+  },
+  categoryAdminTitle: {
+    id: "app.categoryAdminTitle",
+    defaultMessage: "Title",
+    description: "Title",
+  },
+  categoryAdminDescription: {
+    id: "app.categoryAdminDescription",
+    defaultMessage: "Description",
+    description: "Description",
+  },
+  categoryAdminCategory: {
+    id: "app.categoryAdminCategory",
+    defaultMessage: "Category",
+    description: "Category",
+  },
   // sub category message defiend
   subCategoryId: {
     id: "app.subCategoryId",
@@ -707,20 +733,6 @@ const messages = defineMessages({
     defaultMessage: "Add New",
     description: "add new Home page Slider title",
   },
-
-  //Home offer
-
-  addOffer: {
-    id: "app.addOffer",
-    defaultMessage: "Add Offer",
-    description: "Add Offer",
-  },
-
-  location: {
-    id: "app.location",
-    defaultMessage: "Location",
-    description: "Location",
-  },
   subTitleAdmin: {
     id: "app.subTitleAdmin",
     defaultMessage: "Title",
@@ -756,6 +768,25 @@ const messages = defineMessages({
     defaultMessage: "Baths",
     description: "Baths",
   },
+  subAdminBeds: {
+    id: "app.subAdminBeds",
+    defaultMessage: "Beds",
+    description: "Beds",
+  },
+  //Home offer
+
+  addOffer: {
+    id: "app.addOffer",
+    defaultMessage: "Add Offer",
+    description: "Add Offer",
+  },
+
+  location: {
+    id: "app.location",
+    defaultMessage: "Location",
+    description: "Location",
+  },
+
   dates: {
     id: "app.dates",
     defaultMessage: "Dates",

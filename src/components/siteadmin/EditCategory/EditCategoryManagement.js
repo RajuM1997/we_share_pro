@@ -127,7 +127,7 @@ class EditCategoryManagement extends React.Component {
       >
         <div>
           <h1 className={s.headerTitle}>
-            <FormattedMessage {...messages.editPopularLocation} />
+            <FormattedMessage {...messages.editCategory} />
           </h1>
           <Col xs={12} sm={12} md={8} lg={8} className={s.blockcenter}>
             <div
@@ -164,20 +164,26 @@ class EditCategoryManagement extends React.Component {
                   name="title"
                   type="text"
                   component={this.renderFormControl}
-                  label={formatMessage(messages.location)}
+                  label={formatMessage(messages.categoryAdminTitle)}
                 />
                 <Field
                   name="subTitle"
                   type="text"
                   component={this.renderFormControl}
-                  label={formatMessage(messages.location)}
+                  label={formatMessage(messages.categoryAdminDescription)}
                 />
-                <label className={s.labelTextNew}>Category</label>
+                <label
+                  className={s.labelTextNew}
+                  style={{ marginRight: "20px", marginBottom: "10px" }}
+                >
+                  Category
+                </label>
                 <Field
                   name="category"
                   component="select"
                   type="select"
                   className={bt.commonControlInput}
+                  style={{ marginBottom: "10px" }}
                 >
                   <option value="Vacation Home">Vacation Home</option>
                   <option value="Events Space">Events Space</option>

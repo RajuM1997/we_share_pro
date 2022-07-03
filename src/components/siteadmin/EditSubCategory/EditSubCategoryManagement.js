@@ -127,7 +127,7 @@ class EditSubCategoryManagement extends React.Component {
       >
         <div>
           <h1 className={s.headerTitle}>
-            <FormattedMessage {...messages.editPopularLocation} />
+            <FormattedMessage {...messages.editSubCategory} />
           </h1>
           <Col xs={12} sm={12} md={8} lg={8} className={s.blockcenter}>
             <div
@@ -197,17 +197,29 @@ class EditSubCategoryManagement extends React.Component {
                   label={formatMessage(messages.subAdminBedrooms)}
                 />
                 <Field
+                  name="beds"
+                  type="text"
+                  component={this.renderFormControl}
+                  label={formatMessage(messages.subAdminBeds)}
+                />
+                <Field
                   name="baths"
                   type="text"
                   component={this.renderFormControl}
                   label={formatMessage(messages.subAdminBaths)}
                 />
-                <label className={s.labelTextNew}>Primary Category</label>
+                <label
+                  className={s.labelTextNew}
+                  style={{ marginRight: "20px", marginBottom: "10px" }}
+                >
+                  Primary Category
+                </label>
                 <Field
                   name="primaryCategory"
                   component="select"
                   type="select"
                   className={bt.commonControlInput}
+                  style={{ marginRight: "20px", marginBottom: "10px" }}
                 >
                   <option value="Vacation Home">Vacation Home</option>
                   <option value="Events Space">Events Space</option>

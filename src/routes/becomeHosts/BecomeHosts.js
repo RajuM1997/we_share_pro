@@ -6,7 +6,7 @@ import s from "./BecomeHost.css";
 import cx from "classnames";
 
 // Component
-import ListPlaceStep1 from "../../components/ListPlaceStep1/ListPlaceStep1";
+import ListsPlaceStep1 from "../../components/ListsPlaceStep1/ListsPlaceStep1";
 
 class BecomeHosts extends React.Component {
   static propTypes = {
@@ -29,7 +29,7 @@ class BecomeHosts extends React.Component {
     return (
       <div className={s.root}>
         <div className={cx(s.container, "existingPage")}>
-          <ListPlaceStep1
+          <ListsPlaceStep1
             listId={listId}
             formPage={formPage}
             formBaseURI={formBaseURI}

@@ -28,8 +28,6 @@ import {
 } from "react-bootstrap";
 import s from "./ListPlaceStep1.css";
 import bt from "../../components/commonStyle.css";
-import getCagetoryQuery from "./getCategory.graphql";
-import { graphql, compose } from "react-apollo";
 
 import update from "./update";
 
@@ -43,20 +41,11 @@ class Page1 extends Component {
     userData: PropTypes.shape({
       firstName: PropTypes.string.isRequired,
     }).isRequired,
-    getCategory: PropTypes.shape({
-      loading: PropTypes.bool.isRequired,
-      categoryData: PropTypes.array,
-    }),
   };
 
   static defaultProps = {
     userData: {
       firstName: "",
-    },
-
-    getCategory: {
-      loading: true,
-      categoryData: [],
     },
   };
 
@@ -255,15 +244,6 @@ const mapState = (state) => ({
 
 const mapDispatch = {};
 
-export default compose(
-  injectIntl,
-  withStyles(s, bt),
-  graphql(getCagetoryQuery, {
-    name: "loginUserBanStatus",
-    options: {
-      ssr: false,
-      pollInterval: 5000,
-    },
-  }),
-  connect(mapState, mapDispatch)
-)(Page1);
+export default injectIntl(
+  withStyles(s, bt)(connect(mapState, mapDispatch)(Page1))
+);
