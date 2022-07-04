@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 
 // Redux
 import { connect } from "react-redux";
+import { graphql, compose } from "react-apollo";
+import getCategoryQuery from "./getCategory.graphql";
 
 // Internal Helpers
 import submit from "./submit";
@@ -59,6 +61,18 @@ class ListsPlaceStep1 extends Component {
     listId: PropTypes.number,
     formBaseURI: PropTypes.string,
     mode: PropTypes.string,
+    getCategoryData: PropTypes.shape({
+      loading: PropTypes.bool,
+      getCategoryData: PropTypes.array,
+    }),
+  };
+  static defaultProps = {
+    userData: {
+      firstName: "",
+    },
+    getCategoryData: {
+      loading: true,
+    },
   };
 
   constructor(props) {
@@ -197,6 +211,7 @@ class ListsPlaceStep1 extends Component {
       listId,
       baseCurrency,
     } = this.props;
+    const { getCategoryData } = this.props;
     let currentPage = page;
     if (mode != undefined && mode === "new") {
       currentPage = "index";
@@ -206,7 +221,14 @@ class ListsPlaceStep1 extends Component {
     return (
       <div className={"inputFocusColor"}>
         {this.renderTabBar(currentPage)}
-        {currentPage === "index" && <Page1 nextPage={this.nextPage} />}
+        {currentPage === "index" &&
+          getCategoryData.getCategoryAdmin &&
+          getCategoryData.getCategoryAdmin.length > 0 && (
+            <Page1
+              nextPage={this.nextPage}
+              data={getCategoryData.getCategoryAdmin}
+            />
+          )}
         {currentPage === "home" && (
           <ExistingPage1 nextPage={this.nextPage} photosCount={photosCount} />
         )}
@@ -334,4 +356,13 @@ const mapState = (state) => ({
 
 const mapDispatch = {};
 
-export default injectIntl(connect(mapState, mapDispatch)(ListsPlaceStep1));
+export default compose(
+  injectIntl,
+  graphql(getCategoryQuery, {
+    name: "getCategoryData",
+    options: {
+      ssr: true,
+    },
+  }),
+  connect(mapState, mapDispatch)
+)(ListsPlaceStep1);

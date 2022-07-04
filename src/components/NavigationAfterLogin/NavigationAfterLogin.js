@@ -235,6 +235,9 @@ class NavigationAfterLogin extends React.Component {
           <NavLink to="/rooms" className={cx("visible-xs", s.breakPointScreen)}>
             <FormattedMessage {...messages.host} />
           </NavLink>
+          <NavLink to="/rooms" className={cx("visible-xs", s.breakPointScreen)}>
+            <FormattedMessage {...messages.hosts} />
+          </NavLink>
           <Message />
           <NavLink to="/help">
             <FormattedMessage {...messages.help} />

@@ -359,75 +359,21 @@ const messages = defineMessages({
     defaultMessage: "NonDiscrimination Policy",
     description: "NonDiscrimination Policy",
   },
-  firstName: {
-    id: "app.firstName",
-    defaultMessage: "First Name",
-    description: "Your First name to Register",
-  },
-  firstNameRequired: {
-    id: "app.firstNameRequired",
-    defaultMessage: "First name is required",
-    description: "First name Required",
-  },
-  lastName: {
-    id: "app.lastName",
-    defaultMessage: "Last Name",
-    description: "Your Last name to Register",
-  },
-  lastNameRequired: {
-    id: "app.lastNameRequired",
-    defaultMessage: "Last name is required",
-    description: "Last name Required",
-  },
-  dateOfBirth: {
-    id: "app.dateOfBirth",
-    defaultMessage: "Birthday",
-    description: "Your Birthday to Register",
-  },
-  dateOfBirthRequired: {
-    id: "app.dateOfBirthRequired",
-    defaultMessage: "Birthday is required",
-    description: "Birthday Required",
-  },
-  day: {
-    id: "app.day",
-    defaultMessage: "Day",
-    description: "Day of birthday",
-  },
   dayRequired: {
     id: "app.dayRequired",
     defaultMessage: "Day is required",
     description: "Day is required",
   },
-  month: {
-    id: "app.month",
-    defaultMessage: "Month",
-    description: "Month of birthday",
-  },
+
   monthRequired: {
     id: "app.monthRequired",
     defaultMessage: "Month is required",
     description: "Month is required",
   },
-  year: {
-    id: "app.year",
-    defaultMessage: "Year",
-    description: "Year of birthday",
-  },
   yearRequired: {
     id: "app.yearRequired",
     defaultMessage: "Year is required",
     description: "Year is required",
-  },
-  mustBe18OrOld: {
-    id: "app.mustBe18OrOld",
-    defaultMessage: "You must be at least 18 years old",
-    description: "You must at least 18 years old",
-  },
-  WrongDayChosen: {
-    id: "app.WrongDayChosen",
-    defaultMessage: "Wrong day chosen for the month",
-    description: "Wrong day chosen for the month",
   },
   birthDay: {
     id: "app.birthDay",
@@ -635,11 +581,6 @@ const messages = defineMessages({
     id: "app.banner",
     defaultMessage: "banner Type",
     description: "Category Home page Slider title",
-  },
-  categoryE: {
-    id: "app.categoryE",
-    defaultMessage: "Category",
-    description: "Cocation",
   },
   addCategory: {
     id: "app.addCategory",
@@ -1011,11 +952,6 @@ const messages = defineMessages({
     id: "app.bedroom",
     defaultMessage: "Bedroom",
     description: "Bedroom",
-  },
-  bed: {
-    id: "app.bed",
-    defaultMessage: "Bed",
-    description: "Bed",
   },
   noReviewTitle: {
     id: "app.noReviewTitle",
@@ -1567,21 +1503,6 @@ const messages = defineMessages({
     defaultMessage: "Last name is required",
     description: "Last name Required",
   },
-  email: {
-    id: "app.email",
-    defaultMessage: "Email Address",
-    description: "Your Email Address to Login",
-  },
-  emailRequired: {
-    id: "app.emailRequired",
-    defaultMessage: "Email is required",
-    description: "Email is required",
-  },
-  emailInvalid: {
-    id: "app.emailInValid",
-    defaultMessage: "Invalid Email Address",
-    description: "Invalid Email Address",
-  },
   emailAlreadyExists: {
     id: "app.emailAlreadyExists",
     defaultMessage:
@@ -1682,17 +1603,6 @@ const messages = defineMessages({
     id: "app.infoRequiredone",
     defaultMessage: "Describe yourself is required",
     description: "Describe Yourself is Required",
-  },
-
-  somethingWentWrong: {
-    id: "app.somethingWentWrong",
-    defaultMessage: "Sorry, something went wrong. Please try again",
-    description: "Wrong went wrong",
-  },
-  notLoggedIn: {
-    id: "app.notLoggedIn",
-    defaultMessage: "You are not logged In. Please login to continue!",
-    description: "Wrong went wrong",
   },
   dateOfBirth: {
     id: "app.dateOfBirth",
@@ -2906,11 +2816,7 @@ const messages = defineMessages({
     defaultMessage: "House Type is Required",
     description: "House Type is Required",
   },
-  somethingWentWrong: {
-    id: "app.somethingWentWrong",
-    defaultMessage: "Sorry, something went wrong. Please try again",
-    description: "Wrong went wrong",
-  },
+
   notLoggedIn: {
     id: "app.notLoggedIn",
     defaultMessage: "You are not logged In. Please login to continue!",
@@ -3282,11 +3188,6 @@ const messages = defineMessages({
     id: "app.tripLengthError1",
     defaultMessage: "Minimum nights can't be higher than maximum nights",
     description: "Trip length",
-  },
-  tabPlaceType: {
-    id: "app.tabPlaceType",
-    defaultMessage: "Place type",
-    description: "Tab bar",
   },
   tabPlaceType: {
     id: "app.tabPlaceType",
@@ -4554,11 +4455,6 @@ const messages = defineMessages({
     defaultMessage: "See All",
     description: "seeAll",
   },
-  locationRequired: {
-    id: "app.locationRequired",
-    defaultMessage: "Location is required",
-    description: "Location is required",
-  },
   locationAddressRequired: {
     id: "app.locationAddressRequired",
     defaultMessage: "Location Address is required",
@@ -5040,16 +4936,6 @@ const messages = defineMessages({
     id: "app.exceedLimit",
     defaultMessage: "Limit Exceeded",
     description: "exceedLimit",
-  },
-  enableLabel: {
-    id: "app.enableLabel",
-    defaultMessage: "Enable",
-    description: "Enable",
-  },
-  disableLabel: {
-    id: "app.disableLabel",
-    defaultMessage: "Disable",
-    description: "Disable",
   },
   removeDateError: {
     id: "app.removeDateError",
@@ -6260,25 +6146,10 @@ const messages = defineMessages({
     defaultMessage: "End value must be greater than Start value",
     description: "endValueGreater",
   },
-  somethingWentWrong: {
-    id: "app.somethingWentWrong",
-    defaultMessage: "Sorry, something went wrong. Please try again",
-    description: "Wrong went wrong",
-  },
   descriptionEmpty: {
     id: "app.descriptionEmpty",
     defaultMessage: "Empty spaces are not allowed",
     description: "Wrong went wrong",
-  },
-  blankSpace: {
-    id: "app.blankSpace",
-    defaultMessage: "Input is Blank",
-    description: "blankSpace",
-  },
-  exceedLimit: {
-    id: "app.exceedLimit",
-    defaultMessage: "Limit Exceeded",
-    description: "exceedLimit",
   },
   logoLabel: {
     id: "app.logoLabel",
@@ -6700,11 +6571,6 @@ const messages = defineMessages({
     defaultMessage: "Static Content Management",
     description: "Static Content Management",
   },
-  staticContentManagement: {
-    id: "app.staticContentManagement",
-    defaultMessage: "Static Content Management",
-    description: "Static Content Management",
-  },
   contentManagementLabel: {
     id: "app.contentManagementLabel",
     defaultMessage: "Content Management",
@@ -6856,11 +6722,6 @@ const messages = defineMessages({
     id: "app.invalidPageUrl",
     defaultMessage: "Invalid Page URL",
     description: "Invalid Page URL",
-  },
-  loggedIn: {
-    id: "app.loggedIn",
-    defaultMessage: "You are already logged in!",
-    description: "You are already Logged-in",
   },
   userLoggedIn: {
     id: "app.userLoggedIn",

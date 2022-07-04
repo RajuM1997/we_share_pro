@@ -28,8 +28,6 @@ import {
 } from "react-bootstrap";
 import s from "./ListPlaceStep1.css";
 import bt from "../../components/commonStyle.css";
-import getCagetoryQuery from "./getCategory.graphql";
-import { graphql, compose } from "react-apollo";
 
 import update from "./update";
 
@@ -43,9 +41,9 @@ class Page1 extends Component {
     userData: PropTypes.shape({
       firstName: PropTypes.string.isRequired,
     }).isRequired,
-    getCategory: PropTypes.shape({
-      loading: PropTypes.bool.isRequired,
-      categoryData: PropTypes.array,
+    data: PropTypes.shape({
+      loading: PropTypes.bool,
+      getCategory: PropTypes.any,
     }),
   };
 
@@ -53,10 +51,8 @@ class Page1 extends Component {
     userData: {
       firstName: "",
     },
-
-    getCategory: {
+    data: {
       loading: true,
-      categoryData: [],
     },
   };
 
@@ -123,8 +119,10 @@ class Page1 extends Component {
 
   render() {
     const { error, handleSubmit, submitting, dispatch, nextPage } = this.props;
+    const { loading, data } = this.props;
     const { userData } = this.props;
     const { roomType, personCapacity } = this.state;
+    console.log(data);
     return (
       <Grid>
         <Row>
@@ -173,15 +171,19 @@ class Page1 extends Component {
                           s.noFontWeight
                         )}
                       >
-                        {roomType.map((value, key) => {
-                          return (
-                            value.isEnable == 1 && (
-                              <option value={value.id} key={key}>
-                                {value.itemName}
-                              </option>
-                            )
-                          );
-                        })}
+                        {data &&
+                          data.length > 0 &&
+                          data.map((value, key) => {
+                            console.log(value.isEnable);
+                            console.log(typeof value.isEnable);
+                            return (
+                              value.isEnable && (
+                                <option value={value.id} key={value.id}>
+                                  {value.category}
+                                </option>
+                              )
+                            );
+                          })}
                       </Field>
                     </Col>
 
@@ -210,7 +212,7 @@ class Page1 extends Component {
                             i++
                           ) {
                             rows.push(
-                              <option value={i}>
+                              <option value={i} key={key}>
                                 for {i}{" "}
                                 {i > 1 ? value.otherItemName : value.itemName}
                               </option>
@@ -255,15 +257,6 @@ const mapState = (state) => ({
 
 const mapDispatch = {};
 
-export default compose(
-  injectIntl,
-  withStyles(s, bt),
-  graphql(getCagetoryQuery, {
-    name: "loginUserBanStatus",
-    options: {
-      ssr: false,
-      pollInterval: 5000,
-    },
-  }),
-  connect(mapState, mapDispatch)
-)(Page1);
+export default injectIntl(
+  withStyles(s, bt)(connect(mapState, mapDispatch)(Page1))
+);

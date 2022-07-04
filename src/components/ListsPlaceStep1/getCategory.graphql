@@ -1,5 +1,11 @@
-query getCategory {
-  getCategory {
+query getCategoryAdmin {
+  getCategoryAdmin {
+    id
+    title
+    subTitle
+    image
     category
+    isEnable
+    createdAt
   }
 }

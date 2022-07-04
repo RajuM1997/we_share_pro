@@ -1950,15 +1950,6 @@
     ]
   },
   {
-    "id": "app.categoryE",
-    "description": "Cocation",
-    "defaultMessage": "Category",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
     "id": "app.categoryId",
     "description": "ID",
     "defaultMessage": "ID",
