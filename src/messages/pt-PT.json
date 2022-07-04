@@ -13216,5 +13216,86 @@
     "files": [
       "src/locale/messages.js"
     ]
+  },
+  {
+    "id": "app.subAdminAddress",
+    "description": "Address",
+    "defaultMessage": "Address",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subAdminBaths",
+    "description": "Baths",
+    "defaultMessage": "Baths",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subAdminBedrooms",
+    "description": "Bedrooms",
+    "defaultMessage": "Bedrooms",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subAdminDescription",
+    "description": "Description",
+    "defaultMessage": "Description",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subAdminGuests",
+    "description": "Guests",
+    "defaultMessage": "Guests",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subAdminSubCategory",
+    "description": "Sub Category",
+    "defaultMessage": "Sub Category",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subTitleAdmin",
+    "description": "Title",
+    "defaultMessage": "Title",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.becomeAHost2",
+    "description": "Menu item",
+    "defaultMessage": "Become a hosts",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.hosts",
+    "description": "Menu item",
+    "defaultMessage": "Hosts",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
   }
 ]

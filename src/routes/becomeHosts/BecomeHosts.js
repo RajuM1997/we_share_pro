@@ -8,7 +8,7 @@ import cx from "classnames";
 // Component
 import ListPlaceStep1 from "../../components/ListPlaceStep1/ListPlaceStep1";
 
-class BecomeHost extends React.Component {
+class BecomeHosts extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     mode: PropTypes.string,
@@ -42,4 +42,4 @@ class BecomeHost extends React.Component {
   }
 }
 
-export default withStyles(s)(BecomeHost);
+export default withStyles(s)(BecomeHosts);

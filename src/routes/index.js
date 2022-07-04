@@ -36,6 +36,11 @@ export default {
       path: "/become-a-host/:listId?/:formPage?",
       load: () => import(/* webpackChunkName: 'becomeHost' */ "./becomeHost"),
     },
+    // add new
+    {
+      path: "/become-a-hosts/:listId?/:formPage?",
+      load: () => import(/* webpackChunkName: 'becomeHost' */ "./becomeHosts"),
+    },
     {
       path: "/rooms/:listId/:preview?",
       load: () => import(/* webpackChunkName: 'viewListing' */ "./viewListing"),
@@ -237,6 +242,11 @@ export default {
     {
       path: "/whyhost",
       load: () => import(/* webpackChunkName: 'whyhostnew' */ "./whyhostnew"),
+    },
+    // add new one
+    {
+      path: "/whyhosts",
+      load: () => import(/* webpackChunkName: 'whyhostnew' */ "./whyhostsnew"),
     },
     {
       path: "/cookie-policy",
