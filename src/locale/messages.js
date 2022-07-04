@@ -278,16 +278,6 @@ const messages = defineMessages({
       " It looks like your account is blocked for some reason. If you need further information, please ",
     description: "Not Found",
   },
-  somethingWentWrong: {
-    id: "app.somethingWentWrong",
-    defaultMessage: "Sorry, something went wrong. Please try again",
-    description: "Wrong went wrong",
-  },
-  loggedIn: {
-    id: "app.loggedIn",
-    defaultMessage: "You are already logged in!",
-    description: "You are already Logged-in",
-  },
   cantLogin: {
     id: "app.cantLogin",
     defaultMessage: "Can’t Login?",
@@ -358,16 +348,6 @@ const messages = defineMessages({
     id: "app.yearRequired",
     defaultMessage: "Year is required",
     description: "Year is required",
-  },
-  mustBe18OrOld: {
-    id: "app.mustBe18OrOld",
-    defaultMessage: "You must be at least 18 years old",
-    description: "You must at least 18 years old",
-  },
-  WrongDayChosen: {
-    id: "app.WrongDayChosen",
-    defaultMessage: "Wrong day chosen for the month",
-    description: "Wrong day chosen for the month",
   },
   birthDay: {
     id: "app.birthDay",
@@ -881,11 +861,6 @@ const messages = defineMessages({
     id: "app.bathrooms",
     defaultMessage: "Bathrooms",
     description: "The space bathrooms",
-  },
-  bed: {
-    id: "app.bed",
-    defaultMessage: "Bed",
-    description: "Bed",
   },
   beds: {
     id: "app.beds",
@@ -1602,11 +1577,6 @@ const messages = defineMessages({
     id: "app.liveLocation",
     defaultMessage: "Where You Live",
     description: "location",
-  },
-  locationRequired: {
-    id: "app.locationRequired",
-    defaultMessage: "Location is required",
-    description: "Location is required",
   },
   info: {
     id: "app.info",
@@ -2590,12 +2560,6 @@ const messages = defineMessages({
       "You can contact your guest and do necessary arrangements or you can cancel.",
     description: "Contact Guest",
   },
-  contactGuest: {
-    id: "app.contactGuest",
-    defaultMessage:
-      "You can contact your guest and do necessary arrangements or you can cancel.",
-    description: "Contact Guest",
-  },
   bookingIsExpired: {
     id: "app.bookingIsExpired",
     defaultMessage: "Booking request is expired",
@@ -3211,11 +3175,6 @@ const messages = defineMessages({
     id: "app.tripLengthError1",
     defaultMessage: "Minimum nights can't be higher than maximum nights",
     description: "Trip length",
-  },
-  tabPlaceType: {
-    id: "app.tabPlaceType",
-    defaultMessage: "Place type",
-    description: "Tab bar",
   },
   tabPlaceType: {
     id: "app.tabPlaceType",
@@ -4960,21 +4919,6 @@ const messages = defineMessages({
     defaultMessage: "You",
     description: "Review",
   },
-  exceedLimit: {
-    id: "app.exceedLimit",
-    defaultMessage: "Limit Exceeded",
-    description: "exceedLimit",
-  },
-  enableLabel: {
-    id: "app.enableLabel",
-    defaultMessage: "Enable",
-    description: "Enable",
-  },
-  disableLabel: {
-    id: "app.disableLabel",
-    defaultMessage: "Disable",
-    description: "Disable",
-  },
   removeDateError: {
     id: "app.removeDateError",
     defaultMessage:
@@ -6613,11 +6557,6 @@ const messages = defineMessages({
     id: "app.changePasswordLabel",
     defaultMessage: "Change Password",
     description: "Change Password",
-  },
-  staticContentManagement: {
-    id: "app.staticContentManagement",
-    defaultMessage: "Static Content Management",
-    description: "Static Content Management",
   },
   staticContentManagement: {
     id: "app.staticContentManagement",
