@@ -205,21 +205,6 @@ const messages = defineMessages({
     defaultMessage: "Last Name Invalid",
     description: "Last Name is Invalid",
   },
-  email: {
-    id: "app.email",
-    defaultMessage: "Email Address",
-    description: "Your Email Address to Login",
-  },
-  emailRequired: {
-    id: "app.emailRequired",
-    defaultMessage: "Email is required",
-    description: "Email is required",
-  },
-  emailInvalid: {
-    id: "app.emailInValid",
-    defaultMessage: "Invalid Email Address",
-    description: "Invalid Email Address",
-  },
   emailNotExists: {
     id: "app.emailNotExists",
     defaultMessage:
@@ -359,60 +344,15 @@ const messages = defineMessages({
     defaultMessage: "NonDiscrimination Policy",
     description: "NonDiscrimination Policy",
   },
-  firstName: {
-    id: "app.firstName",
-    defaultMessage: "First Name",
-    description: "Your First name to Register",
-  },
-  firstNameRequired: {
-    id: "app.firstNameRequired",
-    defaultMessage: "First name is required",
-    description: "First name Required",
-  },
-  lastName: {
-    id: "app.lastName",
-    defaultMessage: "Last Name",
-    description: "Your Last name to Register",
-  },
-  lastNameRequired: {
-    id: "app.lastNameRequired",
-    defaultMessage: "Last name is required",
-    description: "Last name Required",
-  },
-  dateOfBirth: {
-    id: "app.dateOfBirth",
-    defaultMessage: "Birthday",
-    description: "Your Birthday to Register",
-  },
-  dateOfBirthRequired: {
-    id: "app.dateOfBirthRequired",
-    defaultMessage: "Birthday is required",
-    description: "Birthday Required",
-  },
-  day: {
-    id: "app.day",
-    defaultMessage: "Day",
-    description: "Day of birthday",
-  },
   dayRequired: {
     id: "app.dayRequired",
     defaultMessage: "Day is required",
     description: "Day is required",
   },
-  month: {
-    id: "app.month",
-    defaultMessage: "Month",
-    description: "Month of birthday",
-  },
   monthRequired: {
     id: "app.monthRequired",
     defaultMessage: "Month is required",
     description: "Month is required",
-  },
-  year: {
-    id: "app.year",
-    defaultMessage: "Year",
-    description: "Year of birthday",
   },
   yearRequired: {
     id: "app.yearRequired",
@@ -666,6 +606,32 @@ const messages = defineMessages({
     defaultMessage: "Category Type",
     description: "Category Type",
   },
+  // category
+  editCategory: {
+    id: "app.editCategory",
+    defaultMessage: "Edit Category",
+    description: "Title",
+  },
+  editSubCategory: {
+    id: "app.editSubCategory",
+    defaultMessage: "Edit Sub Category",
+    description: "Edit Sub Category",
+  },
+  categoryAdminTitle: {
+    id: "app.categoryAdminTitle",
+    defaultMessage: "Title",
+    description: "Title",
+  },
+  categoryAdminDescription: {
+    id: "app.categoryAdminDescription",
+    defaultMessage: "Description",
+    description: "Description",
+  },
+  categoryAdminCategory: {
+    id: "app.categoryAdminCategory",
+    defaultMessage: "Category",
+    description: "Category",
+  },
   // sub category message defiend
   subCategoryId: {
     id: "app.subCategoryId",
@@ -707,20 +673,6 @@ const messages = defineMessages({
     defaultMessage: "Add New",
     description: "add new Home page Slider title",
   },
-
-  //Home offer
-
-  addOffer: {
-    id: "app.addOffer",
-    defaultMessage: "Add Offer",
-    description: "Add Offer",
-  },
-
-  location: {
-    id: "app.location",
-    defaultMessage: "Location",
-    description: "Location",
-  },
   subTitleAdmin: {
     id: "app.subTitleAdmin",
     defaultMessage: "Title",
@@ -756,6 +708,25 @@ const messages = defineMessages({
     defaultMessage: "Baths",
     description: "Baths",
   },
+  subAdminBeds: {
+    id: "app.subAdminBeds",
+    defaultMessage: "Beds",
+    description: "Beds",
+  },
+  //Home offer
+
+  addOffer: {
+    id: "app.addOffer",
+    defaultMessage: "Add Offer",
+    description: "Add Offer",
+  },
+
+  location: {
+    id: "app.location",
+    defaultMessage: "Location",
+    description: "Location",
+  },
+
   dates: {
     id: "app.dates",
     defaultMessage: "Dates",
@@ -1651,12 +1622,6 @@ const messages = defineMessages({
     id: "app.infoRequiredone",
     defaultMessage: "Describe yourself is required",
     description: "Describe Yourself is Required",
-  },
-
-  somethingWentWrong: {
-    id: "app.somethingWentWrong",
-    defaultMessage: "Sorry, something went wrong. Please try again",
-    description: "Wrong went wrong",
   },
   notLoggedIn: {
     id: "app.notLoggedIn",
@@ -2878,11 +2843,6 @@ const messages = defineMessages({
   somethingWentWrong: {
     id: "app.somethingWentWrong",
     defaultMessage: "Sorry, something went wrong. Please try again",
-    description: "Wrong went wrong",
-  },
-  notLoggedIn: {
-    id: "app.notLoggedIn",
-    defaultMessage: "You are not logged In. Please login to continue!",
     description: "Wrong went wrong",
   },
   adminLoggedIn: {
@@ -4116,11 +4076,6 @@ const messages = defineMessages({
     id: "app.searchAsIMove",
     defaultMessage: "Search as I move the map",
     description: "Search as I move the map",
-  },
-  blankSpace: {
-    id: "app.blankSpace",
-    defaultMessage: "Input is Blank",
-    description: "blankSpace",
   },
   ContactMessage: {
     id: "app.ContactMessage",
@@ -6228,11 +6183,6 @@ const messages = defineMessages({
     id: "app.endValueGreater",
     defaultMessage: "End value must be greater than Start value",
     description: "endValueGreater",
-  },
-  somethingWentWrong: {
-    id: "app.somethingWentWrong",
-    defaultMessage: "Sorry, something went wrong. Please try again",
-    description: "Wrong went wrong",
   },
   descriptionEmpty: {
     id: "app.descriptionEmpty",

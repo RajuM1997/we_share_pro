@@ -52,7 +52,7 @@ class AddCategoryManagement extends React.Component {
       <FormGroup className={s.space2}>
         <Row>
           <Col xs={12} sm={12} md={12} lg={3}>
-            <label className={s.labelTextNew}></label>
+            <label className={s.labelTextNew}>{label}</label>
           </Col>
           <Col xs={12} sm={12} md={12} lg={9}>
             <FormControl
@@ -113,7 +113,7 @@ class AddCategoryManagement extends React.Component {
       <FormGroup className={s.space2}>
         <Row>
           <Col xs={12} sm={12} md={12} lg={3}>
-            <label className={s.labelTextNew}></label>
+            <label className={s.labelTextNew}>{label}</label>
           </Col>
           <Col xs={12} sm={12} md={12} lg={9}>
             <PlaceGeoSuggest
@@ -185,25 +185,32 @@ class AddCategoryManagement extends React.Component {
                     </Col>
                   </Row>
                 </FormGroup>
-                <label className={s.labelTextNew}>Title</label>
                 <Field
                   name="title"
                   type="text"
                   component={this.renderFormControl}
+                  label={formatMessage(messages.categoryAdminTitle)}
                 />
-                <label className={s.labelTextNew}>Description</label>
                 <Field
                   name="subTitle"
                   type="text"
                   component={this.renderFormControl}
+                  label={formatMessage(messages.categoryAdminDescription)}
                 />
-                <label className={s.labelTextNew}>Category</label>
-                <br />
+                <label
+                  className={s.labelTextNew}
+                  style={{ marginRight: "20px", marginBottom: "10px" }}
+                >
+                  Category
+                </label>
+
                 <Field
                   name="category"
                   component="select"
                   type="select"
                   className={bt.commonControlInput}
+                  label={formatMessage(messages.categoryAdminCategory)}
+                  style={{ marginBottom: "10px" }}
                 >
                   <option value="Vacation Home">Vacation Home</option>
                   <option value="Events Space">Events Space</option>

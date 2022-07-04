@@ -213,14 +213,20 @@ class AddBannerManagement extends React.Component {
                   component={this.renderFormControl}
                   label={formatMessage(messages.bottomText)}
                 />
-                <label className={s.labelTextNew}>Category</label>
-                <br />
+                <label
+                  className={s.labelTextNew}
+                  style={{ marginRight: "20px", marginBottom: "10px" }}
+                >
+                  Category
+                </label>
+
                 <Field
                   name="category"
                   component="select"
                   type="select"
                   className={bt.commonControlInput}
                   label={formatMessage(messages.bottomText)}
+                  style={{ marginBottom: "10px" }}
                 >
                   <option />
                   <option value="Vacation Home">Vacation Home</option>
