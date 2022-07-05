@@ -205,21 +205,6 @@ const messages = defineMessages({
     defaultMessage: "Last Name Invalid",
     description: "Last Name is Invalid",
   },
-  email: {
-    id: "app.email",
-    defaultMessage: "Email Address",
-    description: "Your Email Address to Login",
-  },
-  emailRequired: {
-    id: "app.emailRequired",
-    defaultMessage: "Email is required",
-    description: "Email is required",
-  },
-  emailInvalid: {
-    id: "app.emailInValid",
-    defaultMessage: "Invalid Email Address",
-    description: "Invalid Email Address",
-  },
   emailNotExists: {
     id: "app.emailNotExists",
     defaultMessage:
@@ -293,16 +278,6 @@ const messages = defineMessages({
       " It looks like your account is blocked for some reason. If you need further information, please ",
     description: "Not Found",
   },
-  somethingWentWrong: {
-    id: "app.somethingWentWrong",
-    defaultMessage: "Sorry, something went wrong. Please try again",
-    description: "Wrong went wrong",
-  },
-  loggedIn: {
-    id: "app.loggedIn",
-    defaultMessage: "You are already logged in!",
-    description: "You are already Logged-in",
-  },
   cantLogin: {
     id: "app.cantLogin",
     defaultMessage: "Can’t Login?",
@@ -364,7 +339,6 @@ const messages = defineMessages({
     defaultMessage: "Day is required",
     description: "Day is required",
   },
-
   monthRequired: {
     id: "app.monthRequired",
     defaultMessage: "Month is required",
@@ -581,6 +555,11 @@ const messages = defineMessages({
     id: "app.banner",
     defaultMessage: "banner Type",
     description: "Category Home page Slider title",
+  },
+  categoryE: {
+    id: "app.categoryE",
+    defaultMessage: "Category",
+    description: "Cocation",
   },
   addCategory: {
     id: "app.addCategory",
@@ -883,11 +862,6 @@ const messages = defineMessages({
     defaultMessage: "Bathrooms",
     description: "The space bathrooms",
   },
-  bed: {
-    id: "app.bed",
-    defaultMessage: "Bed",
-    description: "Bed",
-  },
   beds: {
     id: "app.beds",
     defaultMessage: "Beds",
@@ -952,6 +926,11 @@ const messages = defineMessages({
     id: "app.bedroom",
     defaultMessage: "Bedroom",
     description: "Bedroom",
+  },
+  bed: {
+    id: "app.bed",
+    defaultMessage: "Bed",
+    description: "Bed",
   },
   noReviewTitle: {
     id: "app.noReviewTitle",
@@ -1503,6 +1482,21 @@ const messages = defineMessages({
     defaultMessage: "Last name is required",
     description: "Last name Required",
   },
+  email: {
+    id: "app.email",
+    defaultMessage: "Email Address",
+    description: "Your Email Address to Login",
+  },
+  emailRequired: {
+    id: "app.emailRequired",
+    defaultMessage: "Email is required",
+    description: "Email is required",
+  },
+  emailInvalid: {
+    id: "app.emailInValid",
+    defaultMessage: "Invalid Email Address",
+    description: "Invalid Email Address",
+  },
   emailAlreadyExists: {
     id: "app.emailAlreadyExists",
     defaultMessage:
@@ -1584,11 +1578,6 @@ const messages = defineMessages({
     defaultMessage: "Where You Live",
     description: "location",
   },
-  locationRequired: {
-    id: "app.locationRequired",
-    defaultMessage: "Location is required",
-    description: "Location is required",
-  },
   info: {
     id: "app.info",
     defaultMessage: "Describe Yourself",
@@ -1603,6 +1592,11 @@ const messages = defineMessages({
     id: "app.infoRequiredone",
     defaultMessage: "Describe yourself is required",
     description: "Describe Yourself is Required",
+  },
+  notLoggedIn: {
+    id: "app.notLoggedIn",
+    defaultMessage: "You are not logged In. Please login to continue!",
+    description: "Wrong went wrong",
   },
   dateOfBirth: {
     id: "app.dateOfBirth",
@@ -2566,12 +2560,6 @@ const messages = defineMessages({
       "You can contact your guest and do necessary arrangements or you can cancel.",
     description: "Contact Guest",
   },
-  contactGuest: {
-    id: "app.contactGuest",
-    defaultMessage:
-      "You can contact your guest and do necessary arrangements or you can cancel.",
-    description: "Contact Guest",
-  },
   bookingIsExpired: {
     id: "app.bookingIsExpired",
     defaultMessage: "Booking request is expired",
@@ -2816,10 +2804,9 @@ const messages = defineMessages({
     defaultMessage: "House Type is Required",
     description: "House Type is Required",
   },
-
-  notLoggedIn: {
-    id: "app.notLoggedIn",
-    defaultMessage: "You are not logged In. Please login to continue!",
+  somethingWentWrong: {
+    id: "app.somethingWentWrong",
+    defaultMessage: "Sorry, something went wrong. Please try again",
     description: "Wrong went wrong",
   },
   adminLoggedIn: {
@@ -4049,11 +4036,6 @@ const messages = defineMessages({
     defaultMessage: "Search as I move the map",
     description: "Search as I move the map",
   },
-  blankSpace: {
-    id: "app.blankSpace",
-    defaultMessage: "Input is Blank",
-    description: "blankSpace",
-  },
   ContactMessage: {
     id: "app.ContactMessage",
     defaultMessage: "Message",
@@ -4454,6 +4436,11 @@ const messages = defineMessages({
     id: "app.seeAll",
     defaultMessage: "See All",
     description: "seeAll",
+  },
+  locationRequired: {
+    id: "app.locationRequired",
+    defaultMessage: "Location is required",
+    description: "Location is required",
   },
   locationAddressRequired: {
     id: "app.locationAddressRequired",
@@ -4931,11 +4918,6 @@ const messages = defineMessages({
     id: "app.youLabel",
     defaultMessage: "You",
     description: "Review",
-  },
-  exceedLimit: {
-    id: "app.exceedLimit",
-    defaultMessage: "Limit Exceeded",
-    description: "exceedLimit",
   },
   removeDateError: {
     id: "app.removeDateError",
@@ -6151,6 +6133,16 @@ const messages = defineMessages({
     defaultMessage: "Empty spaces are not allowed",
     description: "Wrong went wrong",
   },
+  blankSpace: {
+    id: "app.blankSpace",
+    defaultMessage: "Input is Blank",
+    description: "blankSpace",
+  },
+  exceedLimit: {
+    id: "app.exceedLimit",
+    defaultMessage: "Limit Exceeded",
+    description: "exceedLimit",
+  },
   logoLabel: {
     id: "app.logoLabel",
     defaultMessage: "Logo",
@@ -6722,6 +6714,11 @@ const messages = defineMessages({
     id: "app.invalidPageUrl",
     defaultMessage: "Invalid Page URL",
     description: "Invalid Page URL",
+  },
+  loggedIn: {
+    id: "app.loggedIn",
+    defaultMessage: "You are already logged in!",
+    description: "You are already Logged-in",
   },
   userLoggedIn: {
     id: "app.userLoggedIn",

@@ -11,12 +11,12 @@ const validate = (values) => {
 
   if (!values.description) {
     errors.locationAddress = messages.required;
-  } else if (values.subTitle && values.subTitle.trim() == "") {
+  } else if (values.subTitle && values.subTitle.trim() === "") {
     errors.locationAddress = messages.blankSpace;
   }
   if (!values.category) {
     errors.locationAddress = messages.required;
-  } else if (values.category && values.category.trim() == "") {
+  } else if (values.category && values.category.trim() === "") {
     errors.locationAddress = messages.blankSpace;
   }
 
