@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-//Redux Form
+// Redux Form
 import { Field, reduxForm, formValueSelector } from "redux-form";
 
 // Redux
@@ -10,29 +10,23 @@ import { connect } from "react-redux";
 
 // Translation
 import { injectIntl, FormattedMessage } from "react-intl";
+import Loader from "../Loader";
 
 // Locale
 import messages from "../../locale/messages";
 
+// Helpers
+import validate from "./validate";
+
 // Internal Component
-import IncrementButton from "../IncrementButton/IncrementButton";
+import PlaceMap from "../PlaceMap";
 
 // Style
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 import cx from "classnames";
-import {
-  Grid,
-  Button,
-  Row,
-  FormGroup,
-  Col,
-  FormControl,
-} from "react-bootstrap";
+import { Grid, Button, Row, FormGroup, Col } from "react-bootstrap";
 import s from "./ListPlaceStep1.css";
 import bt from "../../components/commonStyle.css";
-
-// Component
-import ListPlaceTips from "../ListPlaceTips/ListPlaceTips";
 
 import update from "./update";
 
@@ -41,139 +35,83 @@ class Page6 extends Component {
     initialValues: PropTypes.object,
     previousPage: PropTypes.any,
     nextPage: PropTypes.any,
-    bathrooms: PropTypes.number,
-    isExistingList: PropTypes.bool,
+    locationMap: PropTypes.object,
+    isMapTouched: PropTypes.bool,
+    lat: PropTypes.number,
+    lng: PropTypes.number,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      bathrooms: {
-        itemName: null,
-        otherItemName: null,
-        startValue: 0,
-        endValue: 0,
-      },
-      bathroomType: [],
-    };
-  }
-
-  componentWillMount() {
-    const { listingFields } = this.props;
-    if (listingFields != undefined) {
-      this.setState({
-        bathrooms: listingFields.bathrooms[0],
-        bathroomType: listingFields.bathroomType,
-      });
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { listingFields } = nextProps;
-    if (listingFields != undefined) {
-      this.setState({
-        bathrooms: listingFields.bathrooms[0],
-        bathroomType: listingFields.bathroomType,
-      });
-    }
-  }
-
-  renderIncrementButton = (field) => <IncrementButton {...field} />;
-
-  renderSelectField = ({
+  renderPlaceMap = ({
     input,
     label,
     meta: { touched, error },
-    children,
+    lat,
+    lng,
+    isMapTouched,
+    mapWarning,
+    mapSuccess,
   }) => {
     const { formatMessage } = this.props.intl;
-
     return (
       <div>
-        <select {...input}>{children}</select>
         {touched && error && <span>{formatMessage(error)}</span>}
-      </div>
-    );
-  };
-
-  renderFormControlSelect = ({
-    input,
-    label,
-    meta: { touched, error },
-    children,
-    className,
-  }) => {
-    const { formatMessage } = this.props.intl;
-    return (
-      <div>
-        <FormControl componentClass="select" {...input} className={className}>
-          {children}
-        </FormControl>
+        <PlaceMap
+          {...input}
+          lat={lat}
+          lng={lng}
+          isMapTouched={isMapTouched}
+          mapWarning={mapWarning}
+          mapSuccess={mapSuccess}
+        />
       </div>
     );
   };
 
   render() {
     const {
+      error,
       handleSubmit,
       submitting,
       pristine,
       previousPage,
       nextPage,
     } = this.props;
-    const { isExistingList } = this.props;
-    const { bathrooms, bathroomType } = this.state;
-    let path = isExistingList ? "map" : "location";
-
+    const { locationMap, isMapTouched, lat, lng } = this.props;
+    const { formatMessage } = this.props.intl;
+    let isDisabled = true;
+    if (isMapTouched === true || locationMap != undefined) {
+      isDisabled = false;
+    }
     return (
       <Grid fluid>
-        <Row className={cx(s.landingContainer, "arrowPosition")}>
-          <Col xs={12} sm={7} md={7} lg={7} className={s.landingContent}>
+        <Row className={s.landingContainer}>
+          <Col xs={12} sm={12} md={12} lg={12} className={s.landingContent}>
             <div>
               <h3 className={s.landingContentTitle}>
-                <FormattedMessage {...messages.howManyBathrooms} />
+                <FormattedMessage {...messages.whereLocated} />
               </h3>
               <form onSubmit={handleSubmit}>
+                {error && <strong>{formatMessage(error)}</strong>}
                 <div className={s.landingMainContent}>
                   <FormGroup className={s.formGroup}>
-                    <Field
-                      name="bathrooms"
-                      type="text"
-                      component={this.renderIncrementButton}
-                      labelSingluar={bathrooms.itemName}
-                      labelPlural={bathrooms.otherItemName}
-                      maxValue={bathrooms.endValue}
-                      minValue={bathrooms.startValue}
-                      incrementBy={0.5}
-                    />
-                  </FormGroup>
+                    {!lat && !lng && <Loader type={"text"} />}
 
-                  <FormGroup className={s.formGroup}>
-                    <Field
-                      name="bathroomType"
-                      component={this.renderFormControlSelect}
-                      className={cx(
-                        s.formControlSelect,
-                        s.jumboSelect,
-                        s.jumboSelectPadding
-                      )}
-                    >
-                      {bathroomType.map((value, key) => {
-                        return (
-                          value.isEnable == 1 && (
-                            <option value={value.id} key={key}>
-                              {value.itemName}
-                            </option>
-                          )
-                        );
-                      })}
-                    </Field>
+                    {lat && lng && (
+                      <Field
+                        name="locationMap"
+                        component={this.renderPlaceMap}
+                        lat={lat}
+                        lng={lng}
+                        isMapTouched={isMapTouched}
+                        mapWarning={formatMessage(messages.mapWarning)}
+                        mapSuccess={formatMessage(messages.mapSuccess)}
+                      />
+                    )}
                   </FormGroup>
                 </div>
-                <div className={s.nextPosition}>
-                  <div className={s.nextBackButton}>
+                <div className={cx(s.nextPosition, s.nextPositionMap)}>
+                  <div className={s.nextBackButtonMap}>
                     <hr className={s.horizontalLineThrough} />
-
                     <FormGroup className={s.formGroup}>
                       <Col
                         xs={12}
@@ -190,7 +128,7 @@ class Page6 extends Component {
                             s.pullLeft,
                             "floatRight"
                           )}
-                          onClick={() => previousPage("bedrooms")}
+                          onClick={() => previousPage("location")}
                         >
                           <FormattedMessage {...messages.back} />
                         </Button>
@@ -202,7 +140,8 @@ class Page6 extends Component {
                             s.pullRight,
                             "floatLeft"
                           )}
-                          onClick={() => nextPage(path)}
+                          onClick={() => nextPage("amenities")}
+                          disabled={isDisabled}
                         >
                           <FormattedMessage {...messages.next} />
                         </Button>
@@ -213,7 +152,6 @@ class Page6 extends Component {
               </form>
             </div>
           </Col>
-          <ListPlaceTips />
         </Row>
       </Grid>
     );
@@ -224,16 +162,24 @@ Page6 = reduxForm({
   form: "ListPlaceStep1", // a unique name for this form
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
+  validate,
   onSubmit: update,
 })(Page6);
 
-const mapState = (state) => ({
-  isExistingList: state.location.isExistingList,
-  listingFields: state.listingFields.data,
-});
+// Decorate with connect to read form values
+const selector = formValueSelector("ListPlaceStep1"); // <-- same as form name
+Page6 = connect((state) => {
+  // can select values individually
+  const locationMap = selector(state, "locationMap");
+  const isMapTouched = selector(state, "isMapTouched");
+  const lat = selector(state, "lat");
+  const lng = selector(state, "lng");
+  return {
+    locationMap,
+    isMapTouched,
+    lat,
+    lng,
+  };
+})(Page6);
 
-const mapDispatch = {};
-
-export default injectIntl(
-  withStyles(s, bt)(connect(mapState, mapDispatch)(Page6))
-);
+export default injectIntl(withStyles(s, bt)(Page6));

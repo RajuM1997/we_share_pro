@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { graphql, compose } from "react-apollo";
 import getCategoryQuery from "./getCategory.graphql";
+import getSubCategoryQuery from "./getSubCategory.graphql";
 
 // Internal Helpers
 import submit from "./submit";
@@ -52,6 +53,7 @@ import TabBarStep2 from "./TabBarStep2";
 import TabBarStep3 from "./TabBarStep3";
 
 import history from "../../core/history";
+import Page10 from "./Page10";
 
 class ListsPlaceStep1 extends Component {
   static propTypes = {
@@ -65,12 +67,19 @@ class ListsPlaceStep1 extends Component {
       loading: PropTypes.bool,
       getCategoryData: PropTypes.array,
     }),
+    getSubCategoryData: PropTypes.shape({
+      loading: PropTypes.bool,
+      getSubCategoryData: PropTypes.array,
+    }),
   };
   static defaultProps = {
     userData: {
       firstName: "",
     },
     getCategoryData: {
+      loading: true,
+    },
+    getSubCategoryData: {
       loading: true,
     },
   };
@@ -81,6 +90,7 @@ class ListsPlaceStep1 extends Component {
     this.previousPage = this.previousPage.bind(this);
     this.state = {
       page: "index",
+      selectedCategory: null,
       step1: null,
       step2: null,
       step3: null,
@@ -103,6 +113,7 @@ class ListsPlaceStep1 extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { existingList, listingSteps } = nextProps;
+    console.log(listingSteps, existingList);
     if (existingList && listingSteps != undefined) {
       this.setState({
         step1: listingSteps.step1,
@@ -120,7 +131,7 @@ class ListsPlaceStep1 extends Component {
     }
   }
 
-  nextPage(formPage) {
+  nextPage(formPage, selectedCategory) {
     const { listId, existingList, formBaseURI } = this.props;
     let pathName = formBaseURI + formPage;
     if (existingList === true) {
@@ -128,6 +139,8 @@ class ListsPlaceStep1 extends Component {
     }
     history.push(pathName);
     this.setState({ page: formPage });
+    this.setState({ selectedCategory: selectedCategory });
+    console.log(this.state.selectedCategory);
   }
 
   previousPage(formPage) {
@@ -146,6 +159,7 @@ class ListsPlaceStep1 extends Component {
 
     const step1Pages = [
       "room",
+      "subCategory",
       "bedrooms",
       "bathrooms",
       "location",
@@ -211,7 +225,7 @@ class ListsPlaceStep1 extends Component {
       listId,
       baseCurrency,
     } = this.props;
-    const { getCategoryData } = this.props;
+    const { getCategoryData, getSubCategoryData } = this.props;
     let currentPage = page;
     if (mode != undefined && mode === "new") {
       currentPage = "index";
@@ -232,6 +246,14 @@ class ListsPlaceStep1 extends Component {
         {currentPage === "home" && (
           <ExistingPage1 nextPage={this.nextPage} photosCount={photosCount} />
         )}
+        {currentPage === "subCategory" && (
+          <Page10
+            nextPage={this.nextPage}
+            previousPage={this.previousPage}
+            data={getSubCategoryData.getSubCategoryAdmin}
+            selectedCategory={this.state.selectedCategory}
+          />
+        )}
         {currentPage === "room" && (
           <Page2 nextPage={this.nextPage} previousPage={this.previousPage} />
         )}
@@ -249,7 +271,7 @@ class ListsPlaceStep1 extends Component {
           />
         )}
         {currentPage === "map" && (
-          <Page6 nextPage={this.nextPage} previousPage={this.previousPage} />
+          <Page6 nextPage={this?.nextPage} previousPage={this.previousPage} />
         )}
         {currentPage === "amenities" && (
           <Page7 nextPage={this.nextPage} previousPage={this.previousPage} />
@@ -360,6 +382,12 @@ export default compose(
   injectIntl,
   graphql(getCategoryQuery, {
     name: "getCategoryData",
+    options: {
+      ssr: true,
+    },
+  }),
+  graphql(getSubCategoryQuery, {
+    name: "getSubCategoryData",
     options: {
       ssr: true,
     },

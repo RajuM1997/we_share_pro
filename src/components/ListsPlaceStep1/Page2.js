@@ -33,7 +33,7 @@ import s from "./ListPlaceStep1.css";
 import bt from "../../components/commonStyle.css";
 
 // Component
-import ListPlaceTips from "../ListPlaceTips/ListPlaceTips";
+import ListPlaceTips from "../ListPlaceTips";
 
 import update from "./update";
 

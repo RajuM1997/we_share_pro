@@ -17,6 +17,7 @@ import { manageListingSteps } from "../../actions/manageListingSteps";
 import { setLoaderStart, setLoaderComplete } from "../../actions/loader/loader";
 
 async function submit(values, dispatch) {
+  console.log(values);
   let bedTypes = JSON.stringify(values.bedTypes);
 
   let variables = Object.assign({}, values, { bedTypes });

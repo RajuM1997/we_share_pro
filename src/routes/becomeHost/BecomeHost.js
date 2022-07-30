@@ -7,6 +7,9 @@ import cx from "classnames";
 
 // Component
 import ListPlaceStep1 from "../../components/ListPlaceStep1/ListPlaceStep1";
+import PageRenderer from "../../components/NewListPlaceStep1/PageRenderer";
+import { Field } from "../../components/ListsPlaceStep1/FakeDb";
+// import Field from "../../components/ListsPlaceStep1/FakeDb";
 
 class BecomeHost extends React.Component {
   static propTypes = {
@@ -16,6 +19,22 @@ class BecomeHost extends React.Component {
     formBaseURI: PropTypes.string,
     mode: PropTypes.string,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      currentPageId: 1,
+    };
+  }
+  componentDidMount() {
+    const currentPageData = Field.find(
+      (thisData) => thisData.pageId === this.currentPageId
+    );
+    this.setState({
+      data: currentPageData,
+    });
+  }
 
   render() {
     const {
@@ -36,6 +55,7 @@ class BecomeHost extends React.Component {
             mode={mode}
             baseCurrency={baseCurrency}
           />
+          <PageRenderer currentPageData={this.data} />
         </div>
       </div>
     );

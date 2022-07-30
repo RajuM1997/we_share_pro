@@ -1,0 +1,7 @@
+@import "../../variables.css";
+@import "../../utils.css";
+@import "../../helpers.css";
+@import "../admin-common.css";
+select {
+  width: 100%;
+}

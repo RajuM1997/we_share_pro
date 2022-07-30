@@ -362,7 +362,7 @@ class Page5 extends Component {
                       "arButtonLoader",
                       "floatLeft"
                     )}
-                    handleClick={() => updateListingMap()}
+                    handleClick={() => nextPage("amenities")}
                   />
                 )}
 

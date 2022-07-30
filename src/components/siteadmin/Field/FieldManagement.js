@@ -21,10 +21,13 @@ import history from "../../../core/history";
 // Translation
 import { FormattedMessage, InjectedIntl, injectIntl } from "react-intl";
 import messages from "../../../locale/messages";
+import { openListSettingsModal } from "../../../actions/siteadmin/modalActions";
+import ListSettingsModal from "../ListSettingsModal/ListSettingsModal";
+import NewListSettingModel from "../ListSettingsModel2/NewListSettingModel";
 
 class FieldManagement extends React.Component {
   static propTypes = {
-    titles: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     data: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number,
@@ -54,6 +57,7 @@ class FieldManagement extends React.Component {
 
   render() {
     const { data, deleteCategory, updateCategoryStatus } = this.props;
+    const { openListSettingsModal, page } = this.props;
     // console.log(data);
     // console.log(deleteCategory);
     const { formatMessage } = this.props.intl;
@@ -61,14 +65,15 @@ class FieldManagement extends React.Component {
       <div className={cx(s.pagecontentWrapper, "pagecontentAR")}>
         <div>
           <h1 className={s.headerTitle}>
-            <FormattedMessage {...messages.category} />
+            <FormattedMessage {...messages.field} />
           </h1>
+          <NewListSettingModel />
           <div className={s.space4}>
             <Button
-              onClick={this.handleClick}
               className={cx(bt.btnPrimary, bt.btnLarge)}
+              onClick={() => openListSettingsModal("AddListSettingsForm")}
             >
-              <FormattedMessage {...messages.addNew} />
+              <FormattedMessage {...messages.addNewLabel} />
             </Button>
           </div>
           <div
@@ -182,6 +187,7 @@ const mapState = (state) => ({});
 const mapDispatch = {
   deleteCategory,
   updateCategoryStatus,
+  openListSettingsModal,
 };
 
 export default injectIntl(

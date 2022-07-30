@@ -648,7 +648,7 @@ export default {
         ),
     },
     {
-      path: "/siteadmin/fields",
+      path: "/siteadmin/fields/:id",
       load: () =>
         import(
           /* webpackChunkName: 'siteadmin-becomeHostStaticBlock' */ "./siteadmin/fields/index"

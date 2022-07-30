@@ -2673,6 +2673,11 @@ const messages = defineMessages({
     defaultMessage: "Let’s get you ready to become a host",
     description: "Let You Get Ready",
   },
+  chooseCategory: {
+    id: "app.chooseCategory",
+    defaultMessage: "Choose Category to list",
+    description: "Choose Category to list",
+  },
   whatKindOfPlace: {
     id: "app.whatKindOfPlace",
     defaultMessage: "What kind of place do you have?",
@@ -6073,6 +6078,21 @@ const messages = defineMessages({
     defaultMessage: "Item name",
     description: "Item name",
   },
+  addName: {
+    id: "app.addName",
+    defaultMessage: "Name",
+    description: "Name",
+  },
+  fieldsType: {
+    id: "app.fieldsType",
+    defaultMessage: "Type",
+    description: "Name",
+  },
+  fieldsPageId: {
+    id: "app.fieldsPageId",
+    defaultMessage: "Page ID",
+    description: "Name",
+  },
   addNewDescription: {
     id: "app.addNewDescription",
     defaultMessage: "Item description",
@@ -7307,6 +7327,11 @@ const messages = defineMessages({
     id: "app.fieldCategory",
     defaultMessage: "Field",
     description: "Category",
+  },
+  field: {
+    id: "app.field",
+    defaultMessage: "Field",
+    description: "Field",
   },
   failed: {
     id: "app.failed",

@@ -30,8 +30,20 @@ class SideBar extends Component {
   static defaultProps = {
     isSuperAdmin: false,
     privileges: [],
+    data: [],
   };
-
+  static propTypes = {
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        title: PropTypes.string,
+        subTitle: PropTypes.string,
+        category: PropTypes.string,
+        isEnable: PropTypes.string,
+        image: PropTypes.string,
+      })
+    ),
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -74,7 +86,9 @@ class SideBar extends Component {
   }
 
   render() {
-    const { isSuperAdmin, privileges, adminLogout } = this.props;
+    const { isSuperAdmin, privileges, adminLogout, data } = this.props;
+    // const {  } = this.props;
+    console.log(data);
     const { step1, step3, home, location, field } = this.state;
     const { openHeaderModal, currentLocale, listingApproval } = this.props;
     let reviewManagementArray = [
@@ -1052,28 +1066,35 @@ class SideBar extends Component {
                   </div>
                   <Collapse in={this.state.field} className={s.subMenu}>
                     <div>
-                      {validatePrivilege(19, privileges) && (
-                        <li
-                          className={cx({
-                            [s.active]: location === "/siteadmin/fields",
-                          })}
-                        >
-                          <Link
-                            to={"/siteadmin/fields"}
-                            className={cx(s.sideNavitem, s.disPlayTable)}
-                            onClick={() => this.openClose()}
-                          >
-                            <span className={s.disPlayTabelCell}>
-                              <FontAwesome.FaHome
-                                className={s.navigationIcon}
-                              />
-                            </span>
-                            <span className={s.disPlayTabelCell}>
-                              <FormattedMessage {...messages.fieldCar} />
-                            </span>
-                          </Link>
-                        </li>
-                      )}
+                      {/* {validatePrivilege(19, privileges) && ( */}
+                      {data &&
+                        data.map(function(value, key) {
+                          return (
+                            <li
+                              className={cx({
+                                [s.active]: location === "/siteadmin/fields",
+                              })}
+                              key={value.id}
+                            >
+                              <Link
+                                to={`/siteadmin/fields/${value.id}`}
+                                className={cx(s.sideNavitem, s.disPlayTable)}
+                                onClick={() => this.openClose()}
+                              >
+                                <span className={s.disPlayTabelCell}>
+                                  <FontAwesome.FaHome
+                                    className={s.navigationIcon}
+                                  />
+                                </span>
+                                <span className={s.disPlayTabelCell}>
+                                  {/* <FormattedMessage {...messages.fieldCar} /> */}
+                                  {value.subCategory}
+                                </span>
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      {/* )} */}
                     </div>
                   </Collapse>
                 </div>

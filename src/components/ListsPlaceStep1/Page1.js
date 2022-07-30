@@ -61,17 +61,16 @@ class Page1 extends Component {
     this.state = {
       roomType: [],
       personCapacity: [],
+      selectedCategory: [],
     };
   }
 
   componentWillMount() {
     const { listingFields } = this.props;
-    if (listingFields != undefined) {
-      this.setState({
-        roomType: listingFields.roomType,
-        personCapacity: listingFields.personCapacity,
-      });
-    }
+    this.setState({
+      roomType: listingFields.roomType,
+      personCapacity: listingFields.personCapacity,
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -82,6 +81,9 @@ class Page1 extends Component {
         personCapacity: listingFields.personCapacity,
       });
     }
+  }
+  onSelectChanged(event) {
+    this.setState({ selectedCategory: event.target.value });
   }
 
   renderSelectField = ({
@@ -121,8 +123,8 @@ class Page1 extends Component {
     const { error, handleSubmit, submitting, dispatch, nextPage } = this.props;
     const { loading, data } = this.props;
     const { userData } = this.props;
-    const { roomType, personCapacity } = this.state;
-    console.log(data);
+    const { roomType, personCapacity, selectedCategory } = this.state;
+    console.log(selectedCategory);
     return (
       <Grid>
         <Row>
@@ -136,7 +138,7 @@ class Page1 extends Component {
               lgOffset={1}
               lg={8}
             >
-              <h2 className={s.landingTitle}>
+              {/* <h2 className={s.landingTitle}>
                 <FormattedMessage {...messages.hi} />, {userData.firstName}!{" "}
                 <FormattedMessage {...messages.letYouGetReady} />.
               </h2>
@@ -146,9 +148,10 @@ class Page1 extends Component {
                   <FormattedMessage {...messages.step1HeadingNew} />
                 </span>
               </strong>
+               */}
               <h3 className={s.landingContentTitle}>
                 {" "}
-                <FormattedMessage {...messages.whatKindOfPlace} />{" "}
+                <FormattedMessage {...messages.chooseCategory} />{" "}
               </h3>
 
               <form onSubmit={handleSubmit}>
@@ -162,7 +165,9 @@ class Page1 extends Component {
                       lg={6}
                     >
                       <Field
-                        name="roomType"
+                        name="category"
+                        value={this.state.selectedCategory}
+                        onChange={this.onSelectChanged.bind(this)}
                         component={this.renderFormControlSelect}
                         className={cx(
                           s.backgroundPosition,
@@ -174,11 +179,9 @@ class Page1 extends Component {
                         {data &&
                           data.length > 0 &&
                           data.map((value, key) => {
-                            console.log(value.isEnable);
-                            console.log(typeof value.isEnable);
                             return (
                               value.isEnable && (
-                                <option value={value.id} key={value.id}>
+                                <option value={value.category} key={value.id}>
                                   {value.category}
                                 </option>
                               )
@@ -186,49 +189,12 @@ class Page1 extends Component {
                           })}
                       </Field>
                     </Col>
-
-                    <Col
-                      componentClass={ControlLabel}
-                      xs={12}
-                      sm={12}
-                      md={6}
-                      lg={6}
-                    >
-                      <Field
-                        name="personCapacity"
-                        component={this.renderFormControlSelect}
-                        className={cx(
-                          s.backgroundPosition,
-                          s.formControlSelect,
-                          s.jumboSelect,
-                          s.noFontWeight
-                        )}
-                      >
-                        {personCapacity.map((value, key) => {
-                          let rows = [];
-                          for (
-                            let i = value.startValue;
-                            i <= value.endValue;
-                            i++
-                          ) {
-                            rows.push(
-                              <option value={i} key={key}>
-                                for {i}{" "}
-                                {i > 1 ? value.otherItemName : value.itemName}
-                              </option>
-                            );
-                          }
-                          return rows;
-                        })}
-                      </Field>
-                    </Col>
                   </Row>
                 </FormGroup>
-
                 <FormGroup className={cx(s.formGroup, "floatLeft")}>
                   <Button
                     className={cx(s.button, bt.btnPrimary, bt.btnLarge)}
-                    onClick={() => nextPage("room")}
+                    onClick={() => nextPage("subCategory", selectedCategory)}
                   >
                     <FormattedMessage {...messages.continue} />
                   </Button>

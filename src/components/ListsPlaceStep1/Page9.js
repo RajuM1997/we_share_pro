@@ -26,8 +26,8 @@ import { url } from "../../config";
 import DefaultIcon from "../../../public/SiteIcons/defaultIcon.png";
 
 // Internal Components
-import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
-import ListPlaceTips from "../ListPlaceTips/ListPlaceTips";
+import CustomCheckbox from "../CustomCheckbox";
+import ListPlaceTips from "../ListPlaceTips";
 
 import update from "./update";
 

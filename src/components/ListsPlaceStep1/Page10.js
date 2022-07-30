@@ -2,18 +2,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-// Redux
-import { connect } from "react-redux";
-
-//Redux Form
-import { Field, reduxForm } from "redux-form";
-
-// Style
-import withStyles from "isomorphic-style-loader/lib/withStyles";
-import cx from "classnames";
-import { Grid, Button, Row, FormGroup, Col } from "react-bootstrap";
-import s from "./ListPlaceStep1.css";
-import bt from "../../components/commonStyle.css";
+// Redux Form
+import { Field, reduxForm, formValueSelector } from "redux-form";
 
 // Translation
 import { injectIntl, FormattedMessage } from "react-intl";
@@ -24,172 +14,309 @@ import messages from "../../locale/messages";
 // Helpers
 import validate from "./validate";
 
-// Internal Components
-import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
+// Redux
+import { connect } from "react-redux";
+
+// Style
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import cx from "classnames";
+import {
+  Grid,
+  Button,
+  Row,
+  FormGroup,
+  Col,
+  ControlLabel,
+  FormControl,
+} from "react-bootstrap";
+import s from "./ListPlaceStep1.css";
+import bt from "../../components/commonStyle.css";
+
+// Component
 import ListPlaceTips from "../ListPlaceTips/ListPlaceTips";
 
 import update from "./update";
 
 class Page10 extends Component {
   static propTypes = {
-    initialValues: PropTypes.object,
     previousPage: PropTypes.any,
     nextPage: PropTypes.any,
-    formErrors: PropTypes.object,
+    initialValues: PropTypes.object,
+    nextPage: PropTypes.any,
+    userData: PropTypes.shape({
+      firstName: PropTypes.string.isRequired,
+    }).isRequired,
+    data: PropTypes.shape({
+      loading: PropTypes.bool,
+      getSubCategory: PropTypes.any,
+    }),
+  };
+  static defaultProps = {
+    userData: {
+      firstName: "",
+    },
+    data: {
+      loading: true,
+    },
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      spaces: [],
-      isDisabled: false,
+      isDisabled: true,
+      houseType: [],
+      buildingSize: [],
+      roomType: [],
+      personCapacity: [],
+      filterSubCateory: [],
     };
   }
 
-  componentDidMount() {
-    const { formErrors, listingFields } = this.props;
-    if (formErrors != undefined) {
-      if (formErrors.hasOwnProperty("syncErrors")) {
-        this.setState({ isDisabled: true });
-      } else {
-        this.setState({ isDisabled: false });
-      }
-    }
+  componentWillMount() {
+    const { listingFields } = this.props;
     if (listingFields != undefined) {
       this.setState({
-        spaces: listingFields.spaces,
+        roomType: listingFields.roomType,
+        personCapacity: listingFields.personCapacity,
       });
+    }
+  }
+
+  componentDidMount() {
+    const { valid } = this.props;
+
+    if (valid) {
+      this.setState({ isDisabled: false });
+    } else {
+      this.setState({ isDisabled: true });
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { formErrors, listingFields } = nextProps;
-    if (formErrors != undefined) {
-      if (formErrors.hasOwnProperty("syncErrors")) {
-        this.setState({ isDisabled: true });
-      } else {
-        this.setState({ isDisabled: false });
-      }
+    console.log(nextProps.selectedCategory);
+    console.log(nextProps.data);
+    const { valid, listingFields } = nextProps;
+    if (valid) {
+      this.setState({ isDisabled: false });
+    } else {
+      this.setState({ isDisabled: true });
     }
+
     if (listingFields != undefined) {
       this.setState({
-        spaces: listingFields.spaces,
+        roomType: listingFields.roomType,
+        personCapacity: listingFields.personCapacity,
       });
+    }
+    let fillterData;
+    if (nextProps.data && nextProps.data.length > 0) {
+      fillterData = nextProps.data.filter(
+        (item) => item.primaryCategory == nextProps.selectedCategory
+      );
+      this.setState({ filterSubCateory: fillterData });
+      console.log(fillterData);
     }
   }
 
-  checkboxGroup = ({ label, name, options, input }) => (
-    <ul className={s.listContainer}>
-      {options.map((option, index) => {
-        if (option.isEnable === "1") {
-          return (
-            <li className={s.listContent} key={index}>
-              <span className={s.checkBoxSection}>
-                <CustomCheckbox
-                  name={`${input.name}[${index}]`}
-                  value={option.id}
-                  className={"icheckbox_square-green"}
-                  checked={input.value.indexOf(option.id) !== -1}
-                  onChange={(event) => {
-                    const newValue = [...input.value];
-                    if (event === true) {
-                      newValue.push(option.id);
-                    } else {
-                      newValue.splice(newValue.indexOf(option.id), 1);
-                    }
-                    return input.onChange(newValue);
-                  }}
-                />
-              </span>
-              <span className={cx(s.checkBoxSection, s.checkBoxLabel)}>
-                <label className={cx(s.checkboxLabel, s.noPadding)}>
-                  {option.itemName}
-                </label>
-              </span>
-            </li>
-          );
-        }
-      })}
-    </ul>
-  );
+  renderSelectField = ({
+    input,
+    label,
+    meta: { touched, error },
+    children,
+  }) => {
+    const { formatMessage } = this.props.intl;
+
+    return (
+      <div>
+        <select {...input}>{children}</select>
+        {touched && error && <span>{formatMessage(error)}</span>}
+      </div>
+    );
+  };
+
+  renderFormControlSelect = ({
+    input,
+    label,
+    meta: { touched, error },
+    children,
+    className,
+  }) => {
+    const { formatMessage } = this.props.intl;
+    return (
+      <div>
+        <FormControl componentClass="select" {...input} className={className}>
+          {children}
+        </FormControl>
+      </div>
+    );
+  };
 
   render() {
     const {
       handleSubmit,
       submitting,
       pristine,
+      valid,
       previousPage,
       nextPage,
-      onSubmit,
+      existingList,
+      selectedCategory,
     } = this.props;
-    const { spaces, isDisabled } = this.state;
-    const { formErrors } = this.props;
+    const { loading, data } = this.props;
+    console.log(data);
+    const { userData } = this.props;
+    const {
+      isDisabled,
+      houseType,
+      roomType,
+      buildingSize,
+      personCapacity,
+    } = this.state;
+    let path = "index";
+    if (existingList) {
+      path = "home";
+    }
 
     return (
-      <Grid fluid>
-        <Row className={s.landingContainer}>
-          <Col xs={12} sm={7} md={7} lg={7} className={s.landingContent}>
-            <div>
-              <h3 className={s.landingContentTitle}>
-                <FormattedMessage {...messages.whatSpace} />
-              </h3>
-              <form onSubmit={handleSubmit}>
-                <div className={s.landingMainContent}>
-                  <FormGroup className={s.formGroup}>
-                    <Field
-                      name="spaces"
-                      component={this.checkboxGroup}
-                      options={spaces}
-                    />
-                  </FormGroup>
-                </div>
-                <div className={s.nextPosition}>
-                  <div className={s.nextBackButton}>
-                    <hr className={s.horizontalLineThrough} />
-
+      <div>
+        <Grid fluid>
+          <Row className={cx(s.landingContainer, "arrowPosition")}>
+            <Col xs={12} sm={7} md={7} lg={7} className={s.landingContent}>
+              <div>
+                <h2 className={s.landingTitle}>
+                  <FormattedMessage {...messages.hi} />, {userData.firstName}!{" "}
+                  <FormattedMessage {...messages.letYouGetReady} />.
+                </h2>
+                <strong className={s.landingStep}>
+                  <span>
+                    {" "}
+                    <FormattedMessage {...messages.step1HeadingNew} />
+                  </span>
+                </strong>
+                <h3 className={s.landingContentTitle}>
+                  {" "}
+                  <FormattedMessage {...messages.whatKindOfPlace} />{" "}
+                </h3>
+                <form onSubmit={handleSubmit}>
+                  <div className={s.landingMainContent}>
                     <FormGroup className={s.formGroup}>
-                      <Col
-                        xs={12}
-                        sm={12}
-                        md={12}
-                        lg={12}
-                        className={s.noPadding}
-                      >
-                        <Button
-                          className={cx(
-                            s.button,
-                            bt.btnPrimaryBorder,
-                            bt.btnLarge,
-                            s.pullLeft,
-                            "floatRight"
-                          )}
-                          onClick={() => previousPage("amenities")}
+                      <Row>
+                        <Col
+                          componentClass={ControlLabel}
+                          xs={12}
+                          sm={12}
+                          md={6}
+                          lg={6}
                         >
-                          <FormattedMessage {...messages.back} />
-                        </Button>
-                        <Button
-                          className={cx(
-                            s.button,
-                            bt.btnPrimary,
-                            bt.btnLarge,
-                            s.pullRight,
-                            "floatLeft"
-                          )}
-                          disabled={isDisabled}
-                          type="submit"
+                          <Field
+                            name="roomType"
+                            component={this.renderFormControlSelect}
+                            className={cx(
+                              s.backgroundPosition,
+                              s.formControlSelect,
+                              s.jumboSelect,
+                              s.noFontWeight
+                            )}
+                          >
+                            {this.state.filterSubCateory &&
+                              this.state.filterSubCateory.length > 0 &&
+                              this.state.filterSubCateory.map((value, key) => {
+                                return (
+                                  <option value={value.id} key={key}>
+                                    {value.subCategory}
+                                  </option>
+                                );
+                              })}
+                          </Field>
+                        </Col>
+
+                        <Col
+                          componentClass={ControlLabel}
+                          xs={12}
+                          sm={12}
+                          md={6}
+                          lg={6}
                         >
-                          <FormattedMessage {...messages.next} />
-                        </Button>
-                      </Col>
+                          <Field
+                            name="personCapacity"
+                            component={this.renderFormControlSelect}
+                            className={cx(
+                              s.backgroundPosition,
+                              s.formControlSelect,
+                              s.jumboSelect,
+                              s.noFontWeight
+                            )}
+                          >
+                            {personCapacity.map((value, key) => {
+                              let rows = [];
+                              for (
+                                let i = value.startValue;
+                                i <= value.endValue;
+                                i++
+                              ) {
+                                rows.push(
+                                  <option value={i} key={key}>
+                                    for {i}{" "}
+                                    {i > 1
+                                      ? value.otherItemName
+                                      : value.itemName}
+                                  </option>
+                                );
+                              }
+                              return rows;
+                            })}
+                          </Field>
+                        </Col>
+                      </Row>
                     </FormGroup>
+                    <div className={s.nextPosition}>
+                      <div className={s.nextBackButton}>
+                        <hr className={s.horizontalLineThrough} />
+                        <FormGroup className={s.formGroup}>
+                          <Col
+                            xs={12}
+                            sm={12}
+                            md={12}
+                            lg={12}
+                            className={s.noPadding}
+                          >
+                            <Button
+                              className={cx(
+                                s.button,
+                                bt.btnPrimaryBorder,
+                                bt.btnLarge,
+                                s.pullLeft,
+                                "floatRight"
+                              )}
+                              onClick={() => previousPage(path)}
+                            >
+                              <FormattedMessage {...messages.back} />
+                            </Button>
+                            <Button
+                              className={cx(
+                                s.button,
+                                bt.btnPrimary,
+                                bt.btnLarge,
+                                s.pullRight,
+                                "floatLeft"
+                              )}
+                              disabled={isDisabled}
+                              onClick={() => nextPage("room")}
+                            >
+                              <FormattedMessage {...messages.next} />
+                            </Button>
+                          </Col>
+                        </FormGroup>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </form>
-            </div>
-          </Col>
-          <ListPlaceTips />
-        </Row>
-      </Grid>
+                </form>
+              </div>
+            </Col>
+            <ListPlaceTips />
+          </Row>
+        </Grid>
+      </div>
     );
   }
 }
@@ -202,9 +329,11 @@ Page10 = reduxForm({
   onSubmit: update,
 })(Page10);
 
+// Decorate with connect to read form values
+const selector = formValueSelector("ListPlaceStep1"); // <-- same as form name
+
 const mapState = (state) => ({
   userData: state.account.data,
-  formErrors: state.form.ListPlaceStep1,
   listingFields: state.listingFields.data,
 });
 

@@ -4,7 +4,8 @@ import SubField from "./SubField";
 
 const title = "Car";
 
-export default async function action({ store }) {
+export default async function action({ store, params }) {
+  console.log(params);
   // From Redux Store
   let isAdminAuthenticated = store.getState().runtime.isAdminAuthenticated;
   let adminPrivileges =

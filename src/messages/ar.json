@@ -13342,5 +13342,59 @@
     "files": [
       "src/locale/messages.js"
     ]
+  },
+  {
+    "id": "app.categoryE",
+    "description": "Cocation",
+    "defaultMessage": "Category",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.field",
+    "description": "Field",
+    "defaultMessage": "Field",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.chooseCategory",
+    "description": "Choose Category to list",
+    "defaultMessage": "Choose Category to list",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.addName",
+    "description": "Name",
+    "defaultMessage": "Name",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldsPageId",
+    "description": "Name",
+    "defaultMessage": "Page ID",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldsType",
+    "description": "Name",
+    "defaultMessage": "Type",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
   }
 ]
