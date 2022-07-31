@@ -1,6 +1,51 @@
 export const Field = [
   {
     pageId: 1,
+    title: "Choose Category to list",
+    type: "dropdown",
+    fields: [
+      {
+        id: 1,
+        type: "select",
+        options: [
+          {
+            value: "house",
+            label: "House",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    pageId: 2,
+    title: "What kind of place do you have?",
+    step: "STEP 1",
+    type: "dropdown",
+    fields: [
+      {
+        id: 1,
+        type: "select",
+        options: [
+          {
+            value: "house",
+            label: "Sub-Category",
+          },
+        ],
+      },
+      {
+        id: 2,
+        type: "select",
+        options: [
+          {
+            value: "for 1 guest",
+            label: "for 1 guest",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    pageId: 3,
     title: "What kind of place are you listing?",
     type: "dropdown",
     fields: [
@@ -87,7 +132,7 @@ export const Field = [
     ],
   },
   {
-    pageId: 2,
+    pageId: 4,
     title: "How many guests can your place accommodate?",
     type: "dropdown",
     fields: [
@@ -190,7 +235,7 @@ export const Field = [
     ],
   },
   {
-    pageId: 3,
+    pageId: 5,
     title: "How many bathrooms?",
     type: "dropdown",
     fields: [
@@ -225,7 +270,7 @@ export const Field = [
     ],
   },
   {
-    pageId: 4,
+    pageId: 6,
     title: "Where’s your place located?",
     type: "textInput",
     fields: [
@@ -237,7 +282,7 @@ export const Field = [
     ],
   },
   {
-    pageId: 5,
+    pageId: 7,
     title: "Where’s your place located?",
     type: "dropdown",
     fields: [
@@ -277,7 +322,7 @@ export const Field = [
     ],
   },
   {
-    pageId: 6,
+    pageId: 8,
     title: "Where’s your place located?",
     type: "map",
     fields: [
@@ -288,7 +333,7 @@ export const Field = [
     ],
   },
   {
-    pageId: 7,
+    pageId: 9,
     title: "What amenities do you offer?",
     title2: "essentialsAmenities",
     type: "checkbox",
@@ -358,7 +403,7 @@ export const Field = [
     ],
   },
   {
-    pageId: 8,
+    pageId: 10,
     title: "What spaces can guests use?",
     type: "checkbox",
     spaces: [
@@ -387,5 +432,348 @@ export const Field = [
         type: "checkobx",
       },
     ],
+  },
+  {
+    pageId: 11,
+    step: "Step 2: Set the scene",
+    title: "Photos",
+    type: "image",
+    fields: [
+      {
+        id: 1,
+        type: "image",
+      },
+    ],
+  },
+  {
+    pageId: 12,
+    step: "Step 2: Set the scene",
+    title: "Choose a photo for cover image",
+    type: "image",
+    fields: [
+      {
+        id: 1,
+        type: "image",
+      },
+    ],
+  },
+  {
+    pageId: 13,
+    step: "Step 2: Set the scene",
+    title: "Edit your description",
+    type: "textarea",
+    fields: [
+      {
+        id: 1,
+        label: "Summary",
+        type: "textarea",
+      },
+    ],
+  },
+  {
+    pageId: 14,
+    step: "Step 2: Set the scene",
+    title: "Name your place",
+    type: "textInput",
+    fields: [
+      {
+        id: 1,
+        type: "textInput",
+      },
+    ],
+  },
+  {
+    pageId: 15,
+    step: "Step 3: Get ready for guests",
+    title: "Review guests requirements",
+    type: "checkbox",
+    fields: [
+      {
+        id: 1,
+        value: "Agree to your house rules",
+        type: "checkbox",
+      },
+    ],
+  },
+  {
+    pageId: 16,
+    step: "Step 3: Get ready for guests",
+    title: "Set house rules for your guests",
+    type: "checkbox",
+    fields: [
+      {
+        id: 1,
+        value: "Suitable for children (2-14year)",
+        type: "checkbox",
+      },
+    ],
+  },
+  {
+    pageId: 17,
+    step: "Step 3: Get ready for guests",
+    title: "How guests book: Instantly",
+    type: "checkbox",
+    fields: [
+      {
+        id: 1,
+        value: "Agree to your house rules",
+        type: "checkbox",
+      },
+    ],
+  },
+  {
+    pageId: 18,
+    step: "Step 3: Get ready for guests",
+    title: "How much notice do you need before a guests arrives",
+    type: "dropdown",
+    fields: [
+      {
+        id: 1,
+        type: "select",
+        options: [
+          {
+            value: "2 Days",
+            label: "2 Days",
+          },
+        ],
+      },
+      {
+        id: 2,
+        type: "select",
+        options: [
+          {
+            label: "When can guests check in?",
+            value: "Flexible",
+          },
+        ],
+      },
+      {
+        id: 3,
+        type: "select",
+        options: [
+          {
+            label: "To :",
+            value: "Flexible",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    pageId: 19,
+    step: "Step 3: Get ready for guests",
+    title: "Booking Window",
+    type: "dropdown",
+    fields: [
+      {
+        id: 1,
+        type: "select",
+        options: [
+          {
+            value: "All future dates",
+            label: "All future dates",
+          },
+        ],
+      },
+      {
+        id: 2,
+        type: "select",
+        label: "Cancellation Policy",
+        options: [
+          {
+            value: "Flexible",
+            label: "Flexible",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    pageId: 20,
+    title: "Trip Length",
+    step: "Step 3: Get ready for guests",
+    type: "increment",
+    fields: [
+      {
+        id: 1,
+        type: "increment",
+        options: [
+          {
+            value: "1 Night min",
+            label: "1 Night min",
+          },
+        ],
+      },
+      {
+        id: 2,
+        type: "increment",
+        options: [
+          {
+            value: "1 bedroom",
+            label: "1 Bedroom",
+          },
+          {
+            value: "1 Night max",
+            label: "1 Night max",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    pageId: 21,
+    step: "Step 3: Get ready for guests",
+    title: "Base Price",
+    subTitle: "Your base price is your default nightly rate",
+    type: "numberInput",
+    fields: [
+      {
+        id: 1,
+        type: "numberInput",
+        label: "Base Price",
+        options: [
+          {
+            type: "Number",
+          },
+        ],
+      },
+      {
+        id: 2,
+        type: "numberInput",
+        label: "Cleaning Price",
+        options: [
+          {
+            type: "number",
+          },
+        ],
+      },
+      {
+        id: 3,
+        type: "select",
+        label: "Currency",
+        options: [
+          {
+            value: "USD",
+            label: "USD",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    pageId: 22,
+    step: "Step 3: Get ready for guests",
+    title: "Calendar",
+    type: "Calendar",
+    fields: [
+      {
+        id: 1,
+        type: "calendar",
+        label: "calendar",
+      },
+    ],
+  },
+  {
+    pageId: 22,
+    step: "Step 3: Get ready for guests",
+    title: "Discounts",
+    subTitle: "Discounts for logner stay",
+    type: "numberInput",
+    fields: [
+      {
+        id: 1,
+        type: "numberInput",
+        label: "Weekly discount",
+        options: [
+          {
+            type: "Number",
+          },
+        ],
+      },
+      {
+        id: 2,
+        type: "numberInput",
+        label: "Monthly discount",
+        options: [
+          {
+            type: "Number",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    pageId: 23,
+    step: "Step 3: Get ready for guests",
+    title: "Increase your earning with instant Book",
+    subTitle: "Discounts for logner stay",
+    type: "numberInput",
+    fields: [
+      {
+        id: 1,
+        type: "numberInput",
+        label: "Weekly discount",
+        options: [
+          {
+            type: "Number",
+          },
+        ],
+      },
+      {
+        id: 2,
+        type: "numberInput",
+        label: "Monthly discount",
+        options: [
+          {
+            type: "Number",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    pageId: 24,
+    step: "Step 3: Get ready for guests",
+    title: "Increase your earning with instant Book",
+    subTitle:
+      "Instant book can give you listing an odge. Not only do gusets prefer to book instantly, we're promoting Book listings in search result.",
+    title2: "Who can book instantly",
+    type: "checkbox",
+    fields: [
+      {
+        id: 1,
+        type: "checkbox",
+        label: "CHOOSE WHO CAN AVAILABLE DAYS WITHOUT REQUESTING APPROVAL",
+        options: [
+          {
+            type: "checkbox",
+            label:
+              "Guests who your requirements and agree to your rules Anyone else must send a reservation request ",
+            value:
+              "Guests who your requirements and agree to your rules Anyone else must send a reservation request ",
+          },
+        ],
+      },
+      {
+        id: 2,
+        type: "checkbox",
+        options: [
+          {
+            type: "checkbox",
+            label: "No one. All guests must send reservation requests.",
+            value: "No one. All guests must send reservation requests.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    pageId: 24,
+    step: "Step 3: Get ready for guests",
+    title: "Your local laws and taxes",
+    subTitle:
+      "Take a moment to review your local laws. We want to make sure you've got everything you need to get off a great start.",
+    type: "text",
+    subTitle2: "",
   },
 ];
