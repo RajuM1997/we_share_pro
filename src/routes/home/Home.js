@@ -140,7 +140,10 @@ class Homepage extends React.Component {
         {getBannerHomeData.getHomeAdmin &&
           getBannerHomeData.getHomeAdmin.length > 0 && (
             <div>
-              <Banner data={getBannerHomeData.getHomeAdmin} />
+              <Banner
+                data={getBannerHomeData.getHomeAdmin}
+                shareAndFindData={getCategoryData.getCategoryAdmin}
+              />
             </div>
           )}
 

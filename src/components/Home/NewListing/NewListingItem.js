@@ -65,33 +65,7 @@ class NewListingItem extends Component {
         <Container
           className={cx(s.paddingBottom2, s.paddingBottom1, s.container)}
         >
-          {/* <div className="main_title">
-          <Fade left>
-            <h1 className="sectionHeader111 pb-3 pt-1">
-              <span className="text-yellow">New</span>
-              <span className="text-blue">
-                {" "}
-                Listing{" "}
-                <span className="headerPsudo22">
-                  <img src={headerBg} alt="" />
-                </span>
-              </span>
-            </h1>
-          </Fade>
-        </div> */}
           <Row>
-            {/* <h1 className="sectionHeader3">
-              <span className="text-yellow3">We </span>
-              <span className="text-blue3" style={{ position: "relative" }}>
-                Share
-                <span className="headerPsudo3">
-                  <img src={headerBg} alt="" />
-                </span>
-                <span className="headerPsudoText3">
-                  <span className="p">a sustainable lifestyle</span>
-                </span>
-              </span>
-            </h1> */}
             <div className={cx(s.paddingTop2, s.new_list_main)}>
               <button
                 onClick={() => this.setState({ handleColor: "Newly Listed" })}
@@ -168,16 +142,12 @@ class NewListingItem extends Component {
                   onClick={() => this.myRef.current.slickPrev()}
                 >
                   <FontAwesome.FaChevronLeft />
-                  {/* FaChevronLeft */}
-                  {/* <FontAwesomeIcon icon="fa-solid fa-angle-left" /> */}
-                  <i className="fas fa-arrow-left"></i>
                 </div>
                 <div
                   className={s.right}
                   onClick={() => this.myRef.current.slickNext()}
                 >
                   <FontAwesome.FaChevronRight />
-                  <i className="fas fa-arrow-right"></i>
                 </div>
               </div>
             </div>

@@ -14,12 +14,12 @@ class HomeAccess extends Component {
       <div className={ss.marginTop4}>
         <Container className={cx(s.access)}>
           <Row>
-            <Col md={5} lg={3} sm={4}>
+            <Col md={3} lg={3} sm={3} xs={3}>
               <div className={s.phone_img}>
                 <img src={phoneX} alt="" />
               </div>
             </Col>
-            <Col md={7} lg={7} sm={8}>
+            <Col md={9} lg={7} sm={9} xs={9}>
               <div className={s.access_left}>
                 <div className={s.access_text}>
                   <h1>

@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 // Translation
-import { injectIntl, FormattedNumber } from 'react-intl';
+import { injectIntl, FormattedNumber } from "react-intl";
 
 // Helper
-import { convert } from '../../helpers/currencyConvertion';
-import { isRTL } from '../../helpers/formatLocale';
+import { convert } from "../../helpers/currencyConvertion";
+import { isRTL } from "../../helpers/formatLocale";
 class CurrencyConverter extends Component {
-
   static propTypes = {
     from: PropTypes.string,
     amount: PropTypes.number,
@@ -23,14 +22,14 @@ class CurrencyConverter extends Component {
   static defaultProps = {
     amount: 0,
     superSymbol: false,
-  }
+  };
 
   constructor(props) {
     super(props);
     this.state = {
       base: null,
-      rates: null
-    }
+      rates: null,
+    };
   }
 
   componentWillMount() {
@@ -48,7 +47,15 @@ class CurrencyConverter extends Component {
   }
 
   render() {
-    const { from, amount, superSymbol, className, toCurrency, locale, isCurrency } = this.props;
+    const {
+      from,
+      amount,
+      superSymbol,
+      className,
+      toCurrency,
+      locale,
+      isCurrency,
+    } = this.props;
     const { base, rates } = this.state;
 
     let targetCurrency;
@@ -66,30 +73,27 @@ class CurrencyConverter extends Component {
     }
     return (
       <span className={className}>
-        {
-          isRTL(locale) ?
-            new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: targetCurrency,
-              minimumFractionDigits: convertedAmount % 1 === 0 ? 0 : 2,
-              maximumFractionDigits: convertedAmount % 1 === 0 ? 0 : 2,
-              currencyDisplay: "symbol"
-            }).format(convertedAmount)
-            : <FormattedNumber
-              value={convertedAmount}
-              style="currency"
-              currency={targetCurrency}
-              minimumFractionDigits={convertedAmount % 1 === 0 ? 0 : 2}
-              maximumFractionDigits={convertedAmount % 1 === 0 ? 0 : 2}
-              currencyDisplay={"symbol"}
-            />
-        }
-        {
-          superSymbol && <sup>{targetCurrency}</sup>
-        }
-
+        {isRTL(locale) ? (
+          new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: targetCurrency,
+            minimumFractionDigits: convertedAmount % 1 === 0 ? 0 : 2,
+            maximumFractionDigits: convertedAmount % 1 === 0 ? 0 : 2,
+            currencyDisplay: "symbol",
+          }).format(convertedAmount)
+        ) : (
+          <FormattedNumber
+            value={convertedAmount}
+            style="currency"
+            currency={targetCurrency}
+            minimumFractionDigits={convertedAmount % 1 === 0 ? 0 : 2}
+            maximumFractionDigits={convertedAmount % 1 === 0 ? 0 : 2}
+            currencyDisplay={"symbol"}
+          />
+        )}
+        {superSymbol && <sup>{targetCurrency}</sup>}
       </span>
-    )
+    );
   }
 }
 
@@ -97,11 +101,9 @@ const mapState = (state) => ({
   base: state.currency.base,
   toCurrency: state.currency.to,
   rates: state.currency.rates,
-  locale: state.intl.locale
+  locale: state.intl.locale,
 });
 
 const mapDispatch = {};
 
 export default injectIntl(connect(mapState, mapDispatch)(CurrencyConverter));
-
-

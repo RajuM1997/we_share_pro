@@ -45,6 +45,8 @@ export const categoryuploadDir =
 // banner upload directory
 export const bannersuploadDir =
   process.env.LOGOUPLOAD_DIR || "./images/homeBanner/";
+export const smallBannerUploadDir =
+  process.env.LOGOUPLOAD_DIR || "./images/homeBannerSmall/";
 
 // category upload directory
 export const subCategoryuploadDir =

@@ -213,7 +213,7 @@ class Page5 extends Component {
                     s.pullRight,
                     "floatLeft"
                   )}
-                  onClick={() => nextPage("amenities")}
+                  onClick={() => nextPage("photos")}
                 >
                   <FormattedMessage {...messages.next} />
                 </Button>
@@ -362,7 +362,7 @@ class Page5 extends Component {
                       "arButtonLoader",
                       "floatLeft"
                     )}
-                    handleClick={() => updateListingMap()}
+                    handleClick={() => nextPage("local-laws")}
                   />
                 )}
 

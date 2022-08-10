@@ -1,34 +1,30 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import moment from 'moment';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import moment from "moment";
 
 // Redux
-import { connect } from 'react-redux';
-import { change, formValueSelector } from 'redux-form';
+import { connect } from "react-redux";
+import { change, formValueSelector } from "redux-form";
 
-import CurrencyConverter from '../CurrencyConverter'
+import CurrencyConverter from "../CurrencyConverter";
 
 // External Component
-import DayPicker, { DateUtils } from 'react-day-picker';
-import MomentLocaleUtils from 'react-day-picker/moment';
-import {
-  Row,
-  Col
-} from 'react-bootstrap';
+import DayPicker, { DateUtils } from "react-day-picker";
+import MomentLocaleUtils from "react-day-picker/moment";
+import { Row, Col } from "react-bootstrap";
 
 // Style
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from '!isomorphic-style-loader!css-loader!./DayDragCalendar.css';
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import s from "!isomorphic-style-loader!css-loader!./DayDragCalendar.css";
 
-import SaveCalendar from './SaveCalendar';
+import SaveCalendar from "./SaveCalendar";
 
 // Local
-import { isRTL } from '../../helpers/formatLocale';
+import { isRTL } from "../../helpers/formatLocale";
 
 //Helper
-import { getDateUsingTimeZone } from '../../helpers/dateRange';
+import { getDateUsingTimeZone } from "../../helpers/dateRange";
 class DayDragCalendar extends Component {
-
   static propTypes = {
     change: PropTypes.func,
     formName: PropTypes.string,
@@ -40,7 +36,7 @@ class DayDragCalendar extends Component {
     disabledDates: [],
     blockedDates: [],
     listId: null,
-    sources: []
+    sources: [],
   };
 
   constructor(props) {
@@ -53,7 +49,7 @@ class DayDragCalendar extends Component {
       //availableDates: [],
       chooseRangeDate: [],
       isPrice: [],
-      sources: []
+      sources: [],
     };
     this.isDaySelected = this.isDaySelected.bind(this);
     this.handleDayClick = this.handleDayClick.bind(this);
@@ -71,12 +67,13 @@ class DayDragCalendar extends Component {
     let sourcesValue = [];
     let sourceObject = {};
 
-    availableDatesPrices && availableDatesPrices.map((item, key) => {
-      sourceObject = {};
-      sourceObject["isSpecialPrice"] = item.isSpecialPrice;
-      sourceObject["blockedDates"] = item.date;
-      sourcesValue.push(sourceObject);
-    });
+    availableDatesPrices &&
+      availableDatesPrices.map((item, key) => {
+        sourceObject = {};
+        sourceObject["isSpecialPrice"] = item.isSpecialPrice;
+        sourceObject["blockedDates"] = item.date;
+        sourcesValue.push(sourceObject);
+      });
 
     this.setState({ sources: sourcesValue });
   }
@@ -89,34 +86,33 @@ class DayDragCalendar extends Component {
     let sourcesValue = [];
     let sourceObject = {};
 
-    availableDatesPrices && availableDatesPrices.map((item, key) => {
-      sourceObject = {};
-      sourceObject["isSpecialPrice"] = item.isSpecialPrice;
-      sourceObject["blockedDates"] = item.date;
-      sourcesValue.push(sourceObject);
-    });
+    availableDatesPrices &&
+      availableDatesPrices.map((item, key) => {
+        sourceObject = {};
+        sourceObject["isSpecialPrice"] = item.isSpecialPrice;
+        sourceObject["blockedDates"] = item.date;
+        sourcesValue.push(sourceObject);
+      });
 
     this.setState({ sources: sourcesValue });
-
   }
 
   renderDay(day) {
     const { currency, baseCurrency, isAdminCurrency } = this.props;
     const { dateRange, sources } = this.state;
     const date = day.getDate();
-    let dateRangeValue = moment(day).format('YYYY-MM-DD');
+    let dateRangeValue = moment(day).format("YYYY-MM-DD");
 
     return (
       <div className={s.responsiveDisplay}>
-        <span className={'dateFontWeight'}>{date}</span>
+        <span className={"dateFontWeight"}>{date}</span>
         <div>
-          {
-            sources && sources.map((item, key) => {
-
-              let dateValue = moment(item.blockedDates).format('YYYY-MM-DD');
+          {sources &&
+            sources.map((item, key) => {
+              let dateValue = moment(item.blockedDates).format("YYYY-MM-DD");
               if (dateRangeValue == dateValue) {
                 return (
-                  <div className={'priceAlignment'}>
+                  <div className={"priceAlignment"}>
                     <CurrencyConverter
                       amount={item.isSpecialPrice}
                       from={currency}
@@ -125,20 +121,18 @@ class DayDragCalendar extends Component {
                   </div>
                 );
               }
-            })
-          }
+            })}
         </div>
-      </div >
+      </div>
     );
   }
-
 
   isDaySelected(day) {
     const { selectedDays } = this.state;
 
     if (selectedDays && selectedDays.length > 0) {
-      return selectedDays.some(selectedDay =>
-        DateUtils.isSameDay(selectedDay, day),
+      return selectedDays.some((selectedDay) =>
+        DateUtils.isSameDay(selectedDay, day)
       );
     }
   }
@@ -147,7 +141,9 @@ class DayDragCalendar extends Component {
     const { blockedDates, change, formName } = this.props;
     let selectedDays = blockedDates.slice();
     let startDate, endDate;
-    let dateRange = [], rangeStart, rangeEnd;
+    let dateRange = [],
+      rangeStart,
+      rangeEnd;
 
     if (disabled) {
       return;
@@ -170,7 +166,6 @@ class DayDragCalendar extends Component {
         rangeStart = new Date(+rangeStart);
 
         while (rangeStart < endDate) {
-
           dateRange.push(rangeStart);
           var newDate = rangeStart.setDate(rangeStart.getDate() + 1);
           rangeStart = new Date(newDate);
@@ -178,21 +173,27 @@ class DayDragCalendar extends Component {
       } else {
         startDate = null;
         endDate = null;
-        dateRange, selectedDays = [];
+        dateRange, (selectedDays = []);
       }
     }
     this.setState({ selectedDays, dateRange, from: startDate, to: endDate });
 
-    change('ListPlaceStep3', 'startDate', startDate)
-    change('ListPlaceStep3', 'endDate', endDate)
+    change("ListPlaceStep3", "startDate", startDate);
+    change("ListPlaceStep3", "endDate", endDate);
   }
 
   resetCalendar() {
     const { change } = this.props;
     // this.setState({ dateRange: [], from: null, to: null, startDate: null, endDate: null });
-    this.setState({ dateRange: [], from: null, to: null, startDate: null, endDate: null });
-    change('ListPlaceStep3', 'startDate', null)
-    change('ListPlaceStep3', 'endDate', null)
+    this.setState({
+      dateRange: [],
+      from: null,
+      to: null,
+      startDate: null,
+      endDate: null,
+    });
+    change("ListPlaceStep3", "startDate", null);
+    change("ListPlaceStep3", "endDate", null);
   }
 
   resetDatePickerChange() {
@@ -202,48 +203,69 @@ class DayDragCalendar extends Component {
 
   render() {
     const { selectedDays, from, to, dateRange } = this.state;
-    const { disabledDates, formName, listId, availableDates, todayLabel } = this.props;
+    const {
+      disabledDates,
+      formName,
+      listId,
+      availableDates,
+      todayLabel,
+    } = this.props;
     const { availableDatesPrices } = this.props;
     const { sources } = this.state;
-    const { minNight, maxNight, houseRules, checkInEnd, checkInStart, locale } = this.props;
+    const {
+      minNight,
+      maxNight,
+      houseRules,
+      checkInEnd,
+      checkInStart,
+      locale,
+    } = this.props;
     const { cancellationPolicy, maxDaysNotice, bookingNoticeTime } = this.props;
     const { cleaningPrice, basePrice, currency } = this.props;
     const { isStartDate, isEndDate, country } = this.props;
 
     let listCountryDate = getDateUsingTimeZone(country, false);
-    let today = new Date(listCountryDate.get('year'), listCountryDate.get('month'), listCountryDate.get('date'), listCountryDate.get('hour'), listCountryDate.get('minute'), listCountryDate.get('second'));
+    let today = new Date(
+      listCountryDate.get("year"),
+      listCountryDate.get("month"),
+      listCountryDate.get("date"),
+      listCountryDate.get("hour"),
+      listCountryDate.get("minute"),
+      listCountryDate.get("second")
+    );
 
     const modifiers = {
       start: from,
       end: to,
       selected: selectedDays,
       selecting: dateRange,
-      available: availableDates
+      available: availableDates,
     };
 
     return (
       <Row>
-        <Col lg={8} md={10} sm={10} xs={12} className={'saveCalender'}>
-
+        <Col lg={8} md={10} sm={10} xs={12} className={"saveCalender"}>
           <DayPicker
             selectedDays={[this.isDaySelected, from, { from, to }]}
             onDayClick={this.handleDayClick}
             modifiers={modifiers}
-            disabledDays={[{
-              before: today,
-            }, ...disabledDates]}
+            disabledDays={[
+              {
+                before: today,
+              },
+              ...disabledDates,
+            ]}
             fromMonth={today}
             renderDay={this.renderDay}
-            locale={isRTL(locale) ? locale : 'en-US'}
+            locale={isRTL(locale) ? locale : "en-US"}
             localeUtils={MomentLocaleUtils}
             todayButton={todayLabel}
-            className={'BecomeCalendar'}
+            className={"BecomeCalendar"}
             transitionDuration={0}
-            dir={isRTL(locale) ? 'rtl' : 'ltr'}
+            dir={isRTL(locale) ? "rtl" : "ltr"}
           />
         </Col>
         <Col lg={4} md={4} sm={6} xs={12}>
-
           <SaveCalendar
             selectedDays={dateRange}
             start={from}
@@ -270,23 +292,20 @@ class DayDragCalendar extends Component {
       </Row>
     );
   }
-
 }
 
-
-const selector = formValueSelector('ListPlaceStep3');
-const step1FormSelector = formValueSelector('ListPlaceStep1');
+const selector = formValueSelector("ListPlaceStep3");
+const step1FormSelector = formValueSelector("ListPlaceStep1");
 
 const mapState = (state) => ({
-  isStartDate: selector(state, 'startDate'),
-  isEndDate: selector(state, 'endDate'),
+  isStartDate: selector(state, "startDate"),
+  isEndDate: selector(state, "endDate"),
   locale: state.intl.locale,
-  country: step1FormSelector(state, 'country')
+  country: step1FormSelector(state, "country"),
 });
 
 const mapDispatch = {
-  change
+  change,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(DayDragCalendar));
-

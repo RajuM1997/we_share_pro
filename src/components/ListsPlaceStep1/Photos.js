@@ -22,7 +22,7 @@ import s from "./ListPlaceStep1.css";
 import bt from "../../components/commonStyle.css";
 
 // Internal Component
-import PhotosUpload from "../PhotosUpload/PhotosUpload";
+import PhotosUpload from "../PhotosUpload";
 
 // Validate
 import updateStep2 from "./updateStep2";

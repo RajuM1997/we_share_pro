@@ -70,18 +70,6 @@ class PopularLoctionItems extends Component {
     } else {
       return (
         <div className="container pt-3">
-          {/* <h1 className="sectionHeader2">
-          <span className="text-yellow2">Popular </span>
-          <span className="text-blue2" style={{ position: "relative" }}>
-            Cities
-            <span className="headerPsudo2">
-              <img src={headerBg} alt="" />
-            </span>
-            <span className="headerPsudoText2">
-              <span className="p">a sustainable lifestyle</span>
-            </span>
-          </span>
-        </h1> */}
           <div className={s.main_title}>
             <Fade left>
               <h1 className={cx(ss.sectionHeader111, ss.paddingY)}>

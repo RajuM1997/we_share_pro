@@ -24,6 +24,9 @@ class BannerItem extends Component {
       category,
       myRef,
       path,
+      smallImage,
+      banner,
+      small_images,
     } = this.props;
     // const style = {
     //   backgroundImage: `url(${path})`,
@@ -108,6 +111,7 @@ class BannerItem extends Component {
           )} */}
         </div>
         <img src={path} className={s.slider_img_desktop} alt="" />
+        <img src={small_images} alt="" className={s.slider_img_mobile} />
       </div>
     );
   }

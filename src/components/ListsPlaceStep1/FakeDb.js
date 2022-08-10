@@ -1,13 +1,18 @@
 export const Field = [
   {
     pageId: 1,
-    title: "Choose Category to list",
-    type: "dropdown",
+    step: "STEP 1",
+    label: "Choose Category to list",
     fields: [
       {
         id: 1,
         type: "select",
+        name: "category",
         options: [
+          {
+            value: "house",
+            label: "House",
+          },
           {
             value: "house",
             label: "House",
@@ -18,14 +23,18 @@ export const Field = [
   },
   {
     pageId: 2,
-    title: "What kind of place do you have?",
+    label: "What kind of place do you have?",
     step: "STEP 1",
-    type: "dropdown",
     fields: [
       {
         id: 1,
         type: "select",
+        name: "sub-category",
         options: [
+          {
+            value: "house",
+            label: "Sub-Category",
+          },
           {
             value: "house",
             label: "Sub-Category",
@@ -35,7 +44,13 @@ export const Field = [
       {
         id: 2,
         type: "select",
+
+        name: "personCapacity",
         options: [
+          {
+            value: "for 1 guest",
+            label: "for 1 guest",
+          },
           {
             value: "for 1 guest",
             label: "for 1 guest",
@@ -46,12 +61,13 @@ export const Field = [
   },
   {
     pageId: 3,
-    title: "What kind of place are you listing?",
-    type: "dropdown",
+    step: "STEP 1",
+    label: "What kind of place are you listing?",
     fields: [
       {
         id: 1,
         label: "What type of property is this?",
+        name: "houseType",
         type: "select",
         options: [
           {
@@ -70,8 +86,9 @@ export const Field = [
       },
       {
         id: 2,
-        title: "What will guests have?",
+        label: "What will guests have?",
         type: "select",
+        name: "roomType",
         options: [
           {
             value: "private room",
@@ -90,6 +107,7 @@ export const Field = [
       {
         id: 3,
         label: "How many total rooms does your property have?",
+        name: "buildingSize",
         type: "select",
         options: [
           {
@@ -117,14 +135,15 @@ export const Field = [
       {
         id: 4,
         label: "Is this your personal home?",
-        type: "checkbox",
+        type: "radio",
+        name: "residenceType",
         options: [
           {
-            value: "yes",
+            value: 1,
             label: "Yes",
           },
           {
-            value: "no",
+            value: 0,
             label: "No",
           },
         ],
@@ -133,13 +152,18 @@ export const Field = [
   },
   {
     pageId: 4,
-    title: "How many guests can your place accommodate?",
-    type: "dropdown",
+    step: "STEP 1",
+    label: "How many guests can your place accommodate?",
     fields: [
       {
         id: 1,
-        type: "increment",
+        type: "select",
+        name: "personCapacity",
         options: [
+          {
+            value: "1 guest",
+            label: "1 Guest",
+          },
           {
             value: "1 guest",
             label: "1 Guest",
@@ -150,6 +174,7 @@ export const Field = [
         id: 2,
         label: "How many bedrooms can guests use?",
         type: "select",
+        name: "bedrooms",
         options: [
           {
             value: "1 bedroom",
@@ -196,8 +221,9 @@ export const Field = [
       },
       {
         id: 3,
+        step: "STEP 1",
         label: "How many beds can guests use?",
-        type: "increment",
+        type: "select",
         options: [
           {
             value: "1 bed",
@@ -236,13 +262,14 @@ export const Field = [
   },
   {
     pageId: 5,
-    title: "How many bathrooms?",
-    type: "dropdown",
+    step: "STEP 1",
+    label: "How many bathrooms?",
     fields: [
       {
         id: 1,
-        type: "increment",
-        option: [
+        type: "select",
+        name: "bathrooms",
+        options: [
           {
             value: "1 bathroom",
             label: "1 Bathroom",
@@ -252,7 +279,8 @@ export const Field = [
       {
         id: 2,
         type: "select",
-        option: [
+        name: "bathroomType",
+        options: [
           {
             value: "Private Room",
             label: "private room",
@@ -271,25 +299,32 @@ export const Field = [
   },
   {
     pageId: 6,
-    title: "Where’s your place located?",
-    type: "textInput",
+    step: "STEP 1",
+    label: "Where’s your place located?",
+    name: "location",
     fields: [
       {
         id: 1,
-        placeholder: "Your Full Address",
         type: "textInput",
+        options: [
+          {
+            placeholder: "Your Full Address",
+            type: "text",
+          },
+        ],
       },
     ],
   },
   {
     pageId: 7,
-    title: "Where’s your place located?",
-    type: "dropdown",
+    step: "STEP 1",
+    label: "Where’s your place located?",
     fields: [
       {
         id: 1,
         type: "select",
         label: "Country",
+        name: "country",
         options: [
           {
             value: "",
@@ -300,236 +335,311 @@ export const Field = [
       {
         id: 2,
         type: "textInput",
-        placeholder: "Street Address",
-        label: "Street Address",
+        name: "street",
+        options: [
+          {
+            placeholder: "Street Address",
+            label: "Street Address",
+            type: "text",
+          },
+        ],
       },
       {
         id: 3,
+        step: "STEP 1",
         type: "textInput",
-        placeholder: "Apt, Suite, Bldg. (optional)",
-        label: "Apt, Suite, Bldg. (optional)",
+        name: "buildingName,",
+        options: [
+          {
+            placeholder: "Apt, Suite, Bldg. (optional)",
+            label: "Apt, Suite, Bldg. (optional)",
+            type: "text",
+          },
+        ],
       },
       {
         id: 4,
         type: "textInput",
-        label: "City",
+        name: "city",
+        options: [
+          {
+            label: "City",
+            type: "text",
+          },
+        ],
       },
       {
         id: 5,
         type: "textInput",
-        label: "State / Province",
+
+        name: "state",
+        options: [
+          {
+            label: "State / Province",
+            type: "text",
+          },
+        ],
       },
     ],
   },
   {
     pageId: 8,
-    title: "Where’s your place located?",
-    type: "map",
+    step: "STEP 1",
+    label: "Where’s your place located?",
     fields: [
       {
         id: 1,
         type: "map",
+        name: "map",
       },
     ],
   },
   {
     pageId: 9,
-    title: "What amenities do you offer?",
-    title2: "essentialsAmenities",
-    type: "checkbox",
-    essentialsAmenities: [
-      {
-        id: 2,
-        value: "wifi",
-        label: "Wifi",
-        type: "checkbox",
-      },
-      {
-        id: 3,
-        value: "shampoo",
-        label: "Shampoo",
-        type: "checkbox",
-      },
-      {
-        id: 4,
-        value: "closet/drawers",
-        label: "Closet/drawers",
-        type: "checkbox",
-      },
-      {
-        id: 5,
-        value: "hair dryer",
-        label: "Hair dryer",
-        type: "checkbox",
-      },
-      {
-        id: 6,
-        value: "	parking",
-        label: "	Parking",
-        type: "checkbox",
-      },
-      {
-        id: 7,
-        value: "swimming Pool",
-        label: "Swimming Pool",
-        type: "checkbox",
-      },
-    ],
-    safetyAmenities: [
+    step: "STEP 1",
+    label: "What amenities do you offer?",
+    type: "checkboxImage",
+    fields: [
       {
         id: 1,
-        value: "smoke detector",
-        label: "Smoke detector",
-        type: "checkbox",
+        type: "checkboxImage",
+        label: "essentialsAmenities",
+        name: "amenities",
+        options: [
+          {
+            id: 2,
+            value: "wifi",
+            label: "Wifi",
+            type: "checkbox",
+          },
+          {
+            id: 3,
+            value: "shampoo",
+            label: "Shampoo",
+            type: "checkbox",
+          },
+          {
+            id: 4,
+            value: "closet/drawers",
+            label: "Closet/drawers",
+            type: "checkbox",
+          },
+          {
+            id: 5,
+            value: "hair dryer",
+            label: "Hair dryer",
+            type: "checkbox",
+          },
+          {
+            id: 6,
+            value: "	parking",
+            label: "	Parking",
+            type: "checkbox",
+          },
+          {
+            id: 7,
+            value: "swimming Pool",
+            label: "Swimming Pool",
+            type: "checkbox",
+          },
+        ],
       },
       {
         id: 2,
-        value: "carbon monoxide detector",
-        label: "Carbon monoxide detector",
         type: "checkbox",
-      },
-      {
-        id: 3,
-        value: "first aid kit",
-        label: "First aid kit",
-        type: "checkbox",
-      },
-      {
-        id: 4,
-        value: "safety card",
-        label: "Safety card",
-        type: "checkbox",
+        name: "safetyAmenities",
+        options: [
+          {
+            id: 1,
+            value: "smoke detector",
+            label: "Smoke detector",
+            type: "checkbox",
+          },
+          {
+            id: 2,
+            value: "carbon monoxide detector",
+            label: "Carbon monoxide detector",
+            type: "checkbox",
+          },
+          {
+            id: 3,
+            value: "first aid kit",
+            label: "First aid kit",
+            type: "checkbox",
+          },
+          {
+            id: 4,
+            value: "safety card",
+            label: "Safety card",
+            type: "checkbox",
+          },
+        ],
       },
     ],
   },
   {
     pageId: 10,
-    title: "What spaces can guests use?",
+    step: "STEP 1",
+    label: "What spaces can guests use?",
     type: "checkbox",
-    spaces: [
+    fields: [
       {
         id: 1,
-        value: "kitchen",
-        label: "Kitchen",
-        type: "checkobx",
-      },
-      {
-        id: 2,
-        value: "laundry – washer",
-        label: "Laundry – washer",
-        type: "checkobx",
-      },
-      {
-        id: 3,
-        value: "laundry – dryer",
-        label: "Laundry – dryer",
-        type: "checkobx",
-      },
-      {
-        id: 4,
-        value: "parking",
-        label: "Parking",
-        type: "checkobx",
+        type: "checkbox",
+        name: "spaces",
+        options: [
+          {
+            id: 1,
+            value: "kitchen",
+            label: "Kitchen",
+            type: "checkobx",
+          },
+          {
+            id: 2,
+            value: "laundry – washer",
+            label: "Laundry – washer",
+            type: "checkobx",
+          },
+          {
+            id: 3,
+            value: "laundry – dryer",
+            label: "Laundry – dryer",
+            type: "checkobx",
+          },
+          {
+            id: 4,
+            value: "parking",
+            label: "Parking",
+            type: "checkobx",
+          },
+        ],
       },
     ],
   },
   {
     pageId: 11,
     step: "Step 2: Set the scene",
-    title: "Photos",
+    label: "Photos",
     type: "image",
     fields: [
       {
         id: 1,
         type: "image",
+        name: "photo",
       },
     ],
   },
   {
     pageId: 12,
     step: "Step 2: Set the scene",
-    title: "Choose a photo for cover image",
-    type: "image",
+    label: "Choose a photo for cover image",
+    type: "coverImage",
     fields: [
       {
         id: 1,
-        type: "image",
+        type: "coverImage",
+        name: "coverPhoto",
       },
     ],
   },
   {
     pageId: 13,
     step: "Step 2: Set the scene",
-    title: "Edit your description",
+    label: "Edit your description",
     type: "textarea",
     fields: [
       {
         id: 1,
         label: "Summary",
         type: "textarea",
+        name: "description",
       },
     ],
   },
   {
     pageId: 14,
     step: "Step 2: Set the scene",
-    title: "Name your place",
-    type: "textInput",
+    label: "Name your place",
     fields: [
       {
         id: 1,
         type: "textInput",
+        name: "title",
+        options: [
+          {
+            placeholder: "testing",
+            type: "text",
+          },
+        ],
       },
     ],
   },
   {
     pageId: 15,
     step: "Step 3: Get ready for guests",
-    title: "Review guests requirements",
-    type: "checkbox",
+    label: "Review guests requirements",
     fields: [
       {
         id: 1,
-        value: "Agree to your house rules",
         type: "checkbox",
+        name: "guest-requirements",
+        options: [
+          {
+            id: 1,
+            value: "Agree to your house rules",
+            label: "Agree to your house rules",
+          },
+        ],
       },
     ],
   },
   {
     pageId: 16,
     step: "Step 3: Get ready for guests",
-    title: "Set house rules for your guests",
+    label: "Set house rules for your guests",
     type: "checkbox",
     fields: [
       {
         id: 1,
-        value: "Suitable for children (2-14year)",
         type: "checkbox",
+        name: "houseRules",
+        options: [
+          {
+            id: 1,
+            value: "Suitable for children (2-14year)",
+            label: "Suitable for children (2-14year)",
+          },
+        ],
       },
     ],
   },
   {
     pageId: 17,
     step: "Step 3: Get ready for guests",
-    title: "How guests book: Instantly",
-    type: "checkbox",
+    label: "How guests book: Instantly",
     fields: [
       {
         id: 1,
-        value: "Agree to your house rules",
         type: "checkbox",
+        name: "review-how-guests-book",
+        options: [
+          {
+            value: "Agree to your house rules",
+            label: "Agree to your house rules",
+          },
+        ],
       },
     ],
   },
   {
     pageId: 18,
     step: "Step 3: Get ready for guests",
-    title: "How much notice do you need before a guests arrives",
-    type: "dropdown",
+    label: "How much notice do you need before a guests arrives",
     fields: [
       {
         id: 1,
         type: "select",
+        name: "bookingNoticeTime",
         options: [
           {
             value: "2 Days",
@@ -540,9 +650,11 @@ export const Field = [
       {
         id: 2,
         type: "select",
+        label: "When can guests check in?",
+        name: "checkInStart",
         options: [
           {
-            label: "When can guests check in?",
+            label: "Flexible",
             value: "Flexible",
           },
         ],
@@ -550,9 +662,11 @@ export const Field = [
       {
         id: 3,
         type: "select",
+        label: "To :",
+        name: "checkInEnd ",
         options: [
           {
-            label: "To :",
+            label: "Flexible",
             value: "Flexible",
           },
         ],
@@ -562,12 +676,12 @@ export const Field = [
   {
     pageId: 19,
     step: "Step 3: Get ready for guests",
-    title: "Booking Window",
-    type: "dropdown",
+    label: "Booking Window",
     fields: [
       {
         id: 1,
         type: "select",
+        name: "maxDaysNotice",
         options: [
           {
             value: "All future dates",
@@ -579,6 +693,7 @@ export const Field = [
         id: 2,
         type: "select",
         label: "Cancellation Policy",
+        name: "cancellationPolicy",
         options: [
           {
             value: "Flexible",
@@ -590,13 +705,13 @@ export const Field = [
   },
   {
     pageId: 20,
-    title: "Trip Length",
+    label: "Trip Length",
     step: "Step 3: Get ready for guests",
-    type: "increment",
     fields: [
       {
         id: 1,
-        type: "increment",
+        type: "select",
+        name: "minNight",
         options: [
           {
             value: "1 Night min",
@@ -606,7 +721,8 @@ export const Field = [
       },
       {
         id: 2,
-        type: "increment",
+        type: "select",
+        name: "maxNight",
         options: [
           {
             value: "1 bedroom",
@@ -623,24 +739,25 @@ export const Field = [
   {
     pageId: 21,
     step: "Step 3: Get ready for guests",
-    title: "Base Price",
-    subTitle: "Your base price is your default nightly rate",
-    type: "numberInput",
+    label: "Base Price",
+    subLabel: "Your base price is your default nightly rate",
     fields: [
       {
         id: 1,
-        type: "numberInput",
+        type: "textInput",
         label: "Base Price",
+        name: "basePrice",
         options: [
           {
-            type: "Number",
+            type: "number",
           },
         ],
       },
       {
         id: 2,
-        type: "numberInput",
+        type: "textInput",
         label: "Cleaning Price",
+        name: "cleaningPrice",
         options: [
           {
             type: "number",
@@ -651,6 +768,7 @@ export const Field = [
         id: 3,
         type: "select",
         label: "Currency",
+        name: "currency",
         options: [
           {
             value: "USD",
@@ -663,40 +781,41 @@ export const Field = [
   {
     pageId: 22,
     step: "Step 3: Get ready for guests",
-    title: "Calendar",
-    type: "Calendar",
+    label: "Calendar",
     fields: [
       {
         id: 1,
         type: "calendar",
         label: "calendar",
+        name: "calendar",
       },
     ],
   },
   {
     pageId: 22,
     step: "Step 3: Get ready for guests",
-    title: "Discounts",
-    subTitle: "Discounts for logner stay",
-    type: "numberInput",
+    label: "Discounts",
+    subLabel: "Discounts for logner stay",
     fields: [
       {
         id: 1,
-        type: "numberInput",
+        type: "textInput",
         label: "Weekly discount",
+        name: "weeklyDiscount",
         options: [
           {
-            type: "Number",
+            type: "number",
           },
         ],
       },
       {
         id: 2,
-        type: "numberInput",
+        type: "textInput",
         label: "Monthly discount",
+        name: "monthlyDiscount",
         options: [
           {
-            type: "Number",
+            type: "number",
           },
         ],
       },
@@ -705,44 +824,15 @@ export const Field = [
   {
     pageId: 23,
     step: "Step 3: Get ready for guests",
-    title: "Increase your earning with instant Book",
-    subTitle: "Discounts for logner stay",
-    type: "numberInput",
-    fields: [
-      {
-        id: 1,
-        type: "numberInput",
-        label: "Weekly discount",
-        options: [
-          {
-            type: "Number",
-          },
-        ],
-      },
-      {
-        id: 2,
-        type: "numberInput",
-        label: "Monthly discount",
-        options: [
-          {
-            type: "Number",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    pageId: 24,
-    step: "Step 3: Get ready for guests",
-    title: "Increase your earning with instant Book",
-    subTitle:
+    label: "Increase your earning with instant Book",
+    subLabel:
       "Instant book can give you listing an odge. Not only do gusets prefer to book instantly, we're promoting Book listings in search result.",
-    title2: "Who can book instantly",
-    type: "checkbox",
+    label2: "Who can book instantly",
     fields: [
       {
         id: 1,
         type: "checkbox",
+        name: "bookingType",
         label: "CHOOSE WHO CAN AVAILABLE DAYS WITHOUT REQUESTING APPROVAL",
         options: [
           {
@@ -751,15 +841,6 @@ export const Field = [
               "Guests who your requirements and agree to your rules Anyone else must send a reservation request ",
             value:
               "Guests who your requirements and agree to your rules Anyone else must send a reservation request ",
-          },
-        ],
-      },
-      {
-        id: 2,
-        type: "checkbox",
-        options: [
-          {
-            type: "checkbox",
             label: "No one. All guests must send reservation requests.",
             value: "No one. All guests must send reservation requests.",
           },
@@ -770,10 +851,23 @@ export const Field = [
   {
     pageId: 24,
     step: "Step 3: Get ready for guests",
-    title: "Your local laws and taxes",
-    subTitle:
+    label: "Your local laws and taxes",
+    name: "local-laws",
+    subLabel:
       "Take a moment to review your local laws. We want to make sure you've got everything you need to get off a great start.",
-    type: "text",
-    subTitle2: "",
+    fields: [
+      {
+        id: 1,
+        type: "text",
+        description:
+          "Please educate yourself about the laws in your jurisdiction before listing your space.",
+        description2:
+          "Most cities have rules covering homesharing, and the specific codes and ordinances can appear in many places (such as zoning, building, licensing or tax codes). In most places, you must register, get a permit, or obtain a license before you list your property or accept guests. You may also be responsible for collecting and remitting certain taxes. In some places, short-term rentals could be prohibited altogether.",
+        description3:
+          "Since you are responsible for your own decision to list or book, you should get comfortable with the applicable rules before listing on Your Site. To get you started, we offer some helpful resources under “Your City Laws.” ",
+        description4:
+          "By accepting our Terms of Service and listing your space, you certify that you will follow applicable laws and regulations.",
+      },
+    ],
   },
 ];

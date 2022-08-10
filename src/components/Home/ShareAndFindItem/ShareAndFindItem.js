@@ -7,6 +7,8 @@ import cx from "classnames";
 import { Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 import Fade from "react-reveal/Fade";
+import PopularLoctionItems from "../PopularLocationGrid/PopularLoctionItems";
+import PopularLocationItem from "../PopularLocationGrid/PopularLocationItem";
 
 class ShareAndFindItem extends Component {
   static propTypes = {

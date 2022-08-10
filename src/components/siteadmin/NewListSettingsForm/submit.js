@@ -8,7 +8,9 @@ import { toastr } from "react-redux-toastr";
 import { closeListSettingsModal } from "../../../actions/siteadmin/modalActions";
 import { getAdminListingSettings } from "../../../actions/siteadmin/getAdminListingSettings";
 
-async function submit(values, dispatch) {
+async function submit(values, dispatch, fields) {
+  console.log(fields);
+  console.log(values);
   const query = `
     query (
         $name:String,
@@ -42,16 +44,16 @@ async function submit(values, dispatch) {
 
   const { data } = await resp.json();
 
-  if (data.addNewListSettings.status === "success") {
-    dispatch(closeListSettingsModal());
-    dispatch(getAdminListingSettings(values.typeId));
-    toastr.success(
-      "Add New List Settings",
-      "List Setting is created successfully!"
-    );
-  } else {
-    toastr.error("Add New List Settings", "Creating List Setting is failed");
-  }
+  // if (data.addNewListSettings.status === "success") {
+  //   dispatch(closeListSettingsModal());
+  //   dispatch(getAdminListingSettings(values.typeId));
+  //   toastr.success(
+  //     "Add New List Settings",
+  //     "List Setting is created successfully!"
+  //   );
+  // } else {
+  //   toastr.error("Add New List Settings", "Creating List Setting is failed");
+  // }
 }
 
 export default submit;

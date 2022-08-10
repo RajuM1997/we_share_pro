@@ -119,14 +119,12 @@ class OurClientSay extends Component {
                   onClick={() => this.myRef.current.slickPrev()}
                 >
                   <FontAwesome.FaChevronLeft />
-                  {/* <i className="fas fa-arrow-left"></i> */}
                 </div>
                 <div
                   className={s.testimonial_right}
                   onClick={() => this.myRef.current.slickNext()}
                 >
                   <FontAwesome.FaChevronRight />
-                  <i className="fas fa-arrow-right"></i>
                 </div>
               </div>
             </Row>

@@ -1,43 +1,36 @@
 // General
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 // Redux Form
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from "redux-form";
 
 // Redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 // Translation
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from "react-intl";
 
 // Locale
-import messages from '../../locale/messages';
+import messages from "../../locale/messages";
 
 // Style
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import cx from 'classnames';
-import {
-  Grid,
-  Button,
-  Row,
-  FormGroup,
-  Col
-} from 'react-bootstrap';
-import s from './ListPlaceStep1.css';
-import bt from '../../components/commonStyle.css';
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import cx from "classnames";
+import { Grid, Button, Row, FormGroup, Col } from "react-bootstrap";
+import s from "./ListPlaceStep1.css";
+import bt from "../../components/commonStyle.css";
 
 // Internal Component
-import PhotosUpload from '../PhotosUpload';
+import PhotosUpload from "../PhotosUpload";
 
 // Validate
-import updateStep2 from './updateStep2';
+import updateStep2 from "./updateStep2";
 
 // Helpers
-import validateStep2 from './validateStep2';
+import validateStep2 from "./validateStep2";
 
 class Photos extends Component {
-
   static propTypes = {
     previousPage: PropTypes.any,
     nextPage: PropTypes.any,
@@ -48,7 +41,7 @@ class Photos extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAvailable: false
+      isAvailable: false,
     };
   }
 
@@ -71,7 +64,15 @@ class Photos extends Component {
   }
 
   render() {
-    const { error, handleSubmit, submitting, dispatch, nextPage, previousPage, listId } = this.props;
+    const {
+      error,
+      handleSubmit,
+      submitting,
+      dispatch,
+      nextPage,
+      previousPage,
+      listId,
+    } = this.props;
     const { isAvailable } = this.state;
     const { formatMessage } = this.props.intl;
     return (
@@ -79,32 +80,69 @@ class Photos extends Component {
         <Row className={s.landingContainer}>
           <Col xs={12} sm={12} md={12} lg={12} className={s.landingContent}>
             <div>
-              <h3 className={s.landingContentTitle}><FormattedMessage {...messages.photos} /></h3>
+              <h3 className={s.landingContentTitle}>
+                <FormattedMessage {...messages.photos} />
+              </h3>
               <form>
                 <div className={s.landingMainContent}>
                   <FormGroup className={s.formGroup}>
-                    <PhotosUpload listId={listId} placeholder={formatMessage(messages.photosPlaceholder)} />
+                    <PhotosUpload
+                      listId={listId}
+                      placeholder={formatMessage(messages.photosPlaceholder)}
+                    />
                   </FormGroup>
-
                 </div>
                 <div className={cx(s.nextPosition, s.nextPositionMap)}>
                   <div className={s.nextBackButtonMap}>
                     <hr className={s.horizontalLineThrough} />
                     <FormGroup className={s.formGroup}>
-                      <Col xs={12} sm={12} md={12} lg={12} className={s.noPadding}>
-                        <Button className={cx(s.button, bt.btnPrimaryBorder, bt.btnLarge, s.pullLeft, 'floatRight')} onClick={() => previousPage("home")}>
+                      <Col
+                        xs={12}
+                        sm={12}
+                        md={12}
+                        lg={12}
+                        className={s.noPadding}
+                      >
+                        <Button
+                          className={cx(
+                            s.button,
+                            bt.btnPrimaryBorder,
+                            bt.btnLarge,
+                            s.pullLeft,
+                            "floatRight"
+                          )}
+                          onClick={() => previousPage("home")}
+                        >
                           <FormattedMessage {...messages.back} />
                         </Button>
-                        {
-                          !isAvailable && <Button className={cx(s.button, bt.btnPrimary, bt.btnLarge, s.pullRight, 'floatLeft')} onClick={() => nextPage("description")}>
+                        {!isAvailable && (
+                          <Button
+                            className={cx(
+                              s.button,
+                              bt.btnPrimary,
+                              bt.btnLarge,
+                              s.pullRight,
+                              "floatLeft"
+                            )}
+                            onClick={() => nextPage("description")}
+                          >
                             <FormattedMessage {...messages.skip} />
                           </Button>
-                        }
-                        {
-                          isAvailable && <Button className={cx(s.button, bt.btnPrimary, bt.btnLarge, s.pullRight, 'floatLeft')} onClick={() => nextPage("cover-photo")}>
+                        )}
+                        {isAvailable && (
+                          <Button
+                            className={cx(
+                              s.button,
+                              bt.btnPrimary,
+                              bt.btnLarge,
+                              s.pullRight,
+                              "floatLeft"
+                            )}
+                            onClick={() => nextPage("cover-photo")}
+                          >
                             <FormattedMessage {...messages.next} />
                           </Button>
-                        }
+                        )}
                       </Col>
                     </FormGroup>
                   </div>
@@ -119,7 +157,7 @@ class Photos extends Component {
 }
 
 Photos = reduxForm({
-  form: 'ListPlaceStep2', // a unique name for this form
+  form: "ListPlaceStep2", // a unique name for this form
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   onSubmit: updateStep2,
@@ -127,15 +165,10 @@ Photos = reduxForm({
 })(Photos);
 
 const mapState = (state) => ({
-  photosCount: state.location.photosCount
+  photosCount: state.location.photosCount,
 });
 const mapDispatch = {};
 
-export default injectIntl(withStyles(s, bt)(connect(mapState, mapDispatch)(Photos)));
-
-
-
-
-
-
-
+export default injectIntl(
+  withStyles(s, bt)(connect(mapState, mapDispatch)(Photos))
+);

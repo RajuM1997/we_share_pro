@@ -48,7 +48,7 @@
   border: 1px solid #dce0e0;
   background-color: #fff;
   color: #484848;
-  max-width: 320px;
+  width: 237px;
   /* Drop Down Caret Icon*/
   appearance: none;
   background-image: linear-gradient(45deg, transparent 50%, gray 50%),
@@ -61,6 +61,18 @@
   box-shadow: none;
   /*Drop Down Caret Icon */
 }
+/* Landscape */
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 768px) {
+  .formControlSelect {
+    width: 320px;
+  }
+}
+@media only screen and (max-device-width: 320px) {
+  .formControlSelect {
+    width: 260px;
+  }
+}
 .formControlSelectLarge {
   max-width: 100%;
 }
@@ -71,7 +83,7 @@
 }
 .blockRadioButton {
   margin-top: 0;
-  max-width: 320px;
+  width: 100%;
 }
 .formSection {
   overflow: hidden;
@@ -330,6 +342,37 @@
 /* Common Helpers Style - End */
 
 /** List Photo Cover Style - Start */
+
+.checkInput {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 8px 0;
+}
+.customBorder[type="checkbox"] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  outline: none;
+  content: none;
+  margin-top: 0;
+}
+
+.customBorder[type="checkbox"]:before {
+  font-family: "FontAwesome";
+  content: "\f00c";
+  font-size: 15px;
+  color: transparent !important;
+  background: transparent;
+  display: block;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #ccc;
+  margin-right: 7px;
+}
+.customBorder[type="checkbox"]:checked:before {
+  color: rgb(81, 81, 236) !important;
+}
 
 .listPhotoCover {
   display: block;

@@ -6083,6 +6083,21 @@ const messages = defineMessages({
     defaultMessage: "Name",
     description: "Name",
   },
+  pageTitle: {
+    id: "app.pageTitle",
+    defaultMessage: "Page Title",
+    description: "Page Title",
+  },
+  pageSubTitle: {
+    id: "app.pageSubTitle",
+    defaultMessage: "Page Sub Title (Optional)",
+    description: "Page Sub Title",
+  },
+  hostingStep: {
+    id: "app.hostingStep",
+    defaultMessage: "How many Step",
+    description: "Step",
+  },
   fieldsType: {
     id: "app.fieldsType",
     defaultMessage: "Type",
@@ -6091,7 +6106,17 @@ const messages = defineMessages({
   fieldsPageId: {
     id: "app.fieldsPageId",
     defaultMessage: "Page ID",
-    description: "Name",
+    description: "Page ID",
+  },
+  fieldsOption: {
+    id: "app.fieldsOption",
+    defaultMessage: "Options",
+    description: "Options",
+  },
+  labelOption: {
+    id: "app.labelOption",
+    defaultMessage: "Label",
+    description: "Label",
   },
   addNewDescription: {
     id: "app.addNewDescription",
@@ -6102,6 +6127,11 @@ const messages = defineMessages({
     id: "app.addOtherItem",
     defaultMessage: "Other Item name",
     description: "Other Item name",
+  },
+  addOptions: {
+    id: "app.addOptions",
+    defaultMessage: "Add Options",
+    description: "add Options",
   },
   startValue: {
     id: "app.startValue",

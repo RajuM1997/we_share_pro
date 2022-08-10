@@ -13381,7 +13381,7 @@
   },
   {
     "id": "app.fieldsPageId",
-    "description": "Name",
+    "description": "Page ID",
     "defaultMessage": "Page ID",
     "message": "",
     "files": [
@@ -13392,6 +13392,60 @@
     "id": "app.fieldsType",
     "description": "Name",
     "defaultMessage": "Type",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.hostingStep",
+    "description": "Step",
+    "defaultMessage": "How many Step",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.pageSubTitle",
+    "description": "Page Sub Title",
+    "defaultMessage": "Page Sub Title (Optional)",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.pageTitle",
+    "description": "Page Title",
+    "defaultMessage": "Page Title",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.addOptions",
+    "description": "add Options",
+    "defaultMessage": "Add Options",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldsOption",
+    "description": "Options",
+    "defaultMessage": "Options",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.labelOption",
+    "description": "Label",
+    "defaultMessage": "Label",
     "message": "",
     "files": [
       "src/locale/messages.js"

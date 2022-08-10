@@ -41,7 +41,7 @@
   width: 36% !important;
   position: absolute;
   z-index: 99;
-  bottom: 32% !important;
+  bottom: 21% !important;
   left: 50%;
   transform: translate(-50%);
   transition: all 1s ease-in-out;
@@ -210,9 +210,10 @@
 }
 @media only screen and (max-width: 1300px) {
   .category_search_init {
-    bottom: 30% !important;
+    bottom: 23% !important;
   }
 }
+
 @media only screen and (max-width: 1024px) {
   .padding_s {
     padding-left: 1rem !important;

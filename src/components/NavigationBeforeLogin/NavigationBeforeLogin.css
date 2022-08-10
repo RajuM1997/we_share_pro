@@ -90,6 +90,10 @@
     position: absolute;
     left: 26px;
   }
+  .navbarLeft {
+    display: block;
+    left: 0;
+  }
 }
 @media (max-width: 767px) {
   .newMenuDesign {

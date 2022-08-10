@@ -286,7 +286,6 @@ class Page6 extends Component {
               label={formatMessage(messages.buildingName)}
             />
           </FormGroup>
-
           <Row>
             <Col xs={12} sm={6} md={6} lg={6}>
               <FormGroup className={s.formGroup}>

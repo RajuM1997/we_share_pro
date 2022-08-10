@@ -89,7 +89,6 @@ class ListPlaceStep1 extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { existingList, listingSteps } = nextProps;
-    console.log(existingList, listingSteps);
     if (existingList && listingSteps != undefined) {
       this.setState({
         step1: listingSteps.step1,
@@ -132,7 +131,6 @@ class ListPlaceStep1 extends Component {
     const { photosCount, formPage } = this.props;
 
     const step1Pages = [
-      "subCategory",
       "room",
       "bedrooms",
       "bathrooms",

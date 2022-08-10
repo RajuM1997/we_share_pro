@@ -1,28 +1,30 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import DropzoneComponent from 'react-dropzone-component';
-import cx from 'classnames';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { toastr } from 'react-redux-toastr';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import DropzoneComponent from "react-dropzone-component";
+import cx from "classnames";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import { toastr } from "react-redux-toastr";
 
 // Translation
-import { FormattedMessage } from 'react-intl';
-import messages from '../../locale/messages';
+import { FormattedMessage } from "react-intl";
+import messages from "../../locale/messages";
 
 // Redux Action
-import { createListPhotos, removeListPhotos } from '../../actions/manageListPhotos';
+import {
+  createListPhotos,
+  removeListPhotos,
+} from "../../actions/manageListPhotos";
 
 // Style
-import s from '!isomorphic-style-loader!css-loader!./filepicker.css';
+import s from "!isomorphic-style-loader!css-loader!./filepicker.css";
 
 // Component
-import PhotosList from '../PhotosList';
+import PhotosList from "../PhotosList";
 
-import { maxUploadSize } from '../../config';
+import { maxUploadSize } from "../../config";
 
 class PhotosUpload extends Component {
-
   static propTypes = {
     createListPhotos: PropTypes.any.isRequired,
     removeListPhotos: PropTypes.any.isRequired,
@@ -36,20 +38,20 @@ class PhotosUpload extends Component {
     this.dropzone = null;
     this.addedfile = this.addedfile.bind(this);
     this.state = {
-      djsConfig: {}
-    }
+      djsConfig: {},
+    };
   }
 
   componentDidMount() {
     const { placeholder } = this.props;
-    const isBrowser = typeof window !== 'undefined';
+    const isBrowser = typeof window !== "undefined";
     const isDocument = typeof document !== undefined;
     if (isBrowser && isDocument) {
-      document.querySelector(".dz-hidden-input").style.visibility = 'visible';
-      document.querySelector(".dz-hidden-input").style.opacity = '0';
-      document.querySelector(".dz-hidden-input").style.height = '100%';
-      document.querySelector(".dz-hidden-input").style.width = '100%';
-      document.querySelector(".dz-hidden-input").style.cursor = 'pointer';
+      document.querySelector(".dz-hidden-input").style.visibility = "visible";
+      document.querySelector(".dz-hidden-input").style.opacity = "0";
+      document.querySelector(".dz-hidden-input").style.height = "60%";
+      document.querySelector(".dz-hidden-input").style.width = "100%";
+      document.querySelector(".dz-hidden-input").style.cursor = "pointer";
     }
 
     if (placeholder) {
@@ -59,10 +61,10 @@ class PhotosUpload extends Component {
           addRemoveLinks: false,
           maxFilesize: 10,
           maxFiles: 20,
-          acceptedFiles: 'image/jpeg,image/png',
-          hiddenInputContainer: '.dzInputContainer',
+          acceptedFiles: "image/jpeg,image/png",
+          hiddenInputContainer: ".dzInputContainer",
           // dictFileTooBig: '',
-        }
+        },
       });
     }
   }
@@ -77,14 +79,13 @@ class PhotosUpload extends Component {
           addRemoveLinks: false,
           maxFilesize: 10,
           maxFiles: 20,
-          acceptedFiles: 'image/jpeg,image/png',
-          hiddenInputContainer: '.dzInputContainer',
+          acceptedFiles: "image/jpeg,image/png",
+          hiddenInputContainer: ".dzInputContainer",
           // dictFileTooBig: '',
-        }
+        },
       });
     }
   }
-
 
   success(file, fromServer) {
     /*const { listId, createListPhotos } = this.props;
@@ -101,8 +102,11 @@ class PhotosUpload extends Component {
     const { djsConfig } = this.state;
 
     // not more than the size in the server config
-    if (file.size > (1024 * 1024 * maxUploadSize)) {
-      toastr.error('Maximum upload size Exceeded! ', 'Try with smallest size image');
+    if (file.size > 1024 * 1024 * maxUploadSize) {
+      toastr.error(
+        "Maximum upload size Exceeded! ",
+        "Try with smallest size image"
+      );
       this.dropzone.removeFile(file);
     }
   }
@@ -125,20 +129,20 @@ class PhotosUpload extends Component {
     const { djsConfig } = this.state;
 
     const componentConfig = {
-      iconFiletypes: ['.jpg', '.png'],
+      iconFiletypes: [".jpg", ".png"],
       //showFiletypeIcon: true,
-      postUrl: '/photos'
+      postUrl: "/photos",
     };
     const eventHandlers = {
-      init: dz => this.dropzone = dz,
+      init: (dz) => (this.dropzone = dz),
       success: this.success,
       complete: this.complete,
-      addedfile: this.addedfile
+      addedfile: this.addedfile,
     };
 
     return (
-      <div className={cx('listPhotoContainer')}>
-        <div className={cx('dzInputContainer')}>
+      <div className={cx("listPhotoContainer")}>
+        <div className={cx("dzInputContainer")}>
           <DropzoneComponent
             config={componentConfig}
             eventHandlers={eventHandlers}
@@ -146,13 +150,13 @@ class PhotosUpload extends Component {
           />
         </div>
         <div>
-          <FormattedMessage {...messages.uploadSizedLabel} />{maxUploadSize}MB
+          <FormattedMessage {...messages.uploadSizedLabel} />
+          {maxUploadSize}MB
         </div>
         <PhotosList listId={listId} />
       </div>
     );
   }
-
 }
 
 const mapState = (state) => ({});

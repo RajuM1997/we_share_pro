@@ -213,7 +213,7 @@ class Page5 extends Component {
                     s.pullRight,
                     "floatLeft"
                   )}
-                  onClick={updateLocationStatus}
+                  onClick={nextPage("photos")}
                 >
                   <FormattedMessage {...messages.next} />
                 </Button>

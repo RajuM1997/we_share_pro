@@ -22,6 +22,7 @@ import {
   Panel,
 } from "react-bootstrap";
 import Uploader from "./Uploader/Uploader";
+import Uploaders from "./Uploader2/Uploaders";
 import PlaceGeoSuggest from "./PlaceGeoSuggest/PlaceGeoSuggest";
 
 // Translation
@@ -181,6 +182,8 @@ class AddBannerManagement extends React.Component {
                     </Col>
                     <Col xs={12} sm={12} md={12} lg={9}>
                       <Uploader />
+                      <label className={s.labelTextNew}>Small Photo</label>
+                      <Uploaders />
                     </Col>
                   </Row>
                 </FormGroup>

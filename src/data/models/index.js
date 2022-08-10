@@ -21,6 +21,7 @@ import TransactionHistory from "./TransactionHistory";
 import BlogDetails from "./BlogDetails";
 
 // Listing
+import Fields from "./Fields";
 import Listing from "./Listing";
 import SingleCategory from "./SingleCategory";
 import ListingData from "./ListingData";
@@ -652,4 +653,5 @@ export {
   ListingPermissionHistory,
   NewBannerHome,
   SingleCategory,
+  Fields,
 };

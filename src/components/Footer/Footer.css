@@ -305,10 +305,16 @@ hr {
     padding-left: 20px;
     margin: 0 auto;
   }
+  .footer_top_title {
+    padding-top: 20px;
+  }
 }
 @media only screen and (max-width: 668px) {
   .padding-top {
     padding-top: 15px;
+  }
+  .footer_top_title {
+    padding-top: 20px;
   }
   /* .row-reverse {
     display: flex;
@@ -319,6 +325,6 @@ hr {
     padding-left: 10px;
   }
   .footer_col {
-    width: 100%;
+    width: 50%;
   }
 }

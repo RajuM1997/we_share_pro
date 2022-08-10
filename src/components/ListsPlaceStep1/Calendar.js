@@ -22,7 +22,7 @@ import s from "./ListPlaceStep1.css";
 import bt from "../../components/commonStyle.css";
 
 // Internal Component
-import DayDragCalendar from "../DayDragCalendar/DayDragCalendar";
+import DayDragCalendar from "../../components/DayDragCalendar";
 import defaultPic from "../../../public/SiteImages/large_no_image.jpeg";
 
 import updateStep3 from "./updateStep3";

@@ -2,9 +2,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+// Fetch Request
+import fetch from "../../../core/fetch";
+
 // Redux Form
 import { Field, reduxForm, formValueSelector, change } from "redux-form";
-import submit from "../ListSettingsForm/submit";
+import submit from "./submit";
 // import validate from "./validate";
 
 // Translation
@@ -20,12 +23,6 @@ import cx from "classnames";
 import s from "./NewListSettingForm.css";
 import bt from "../../../components/commonStyle.css";
 import { Button, FormGroup, FormControl, Col, Row } from "react-bootstrap";
-// import DropZone from "./DropZone";
-// import { url } from "../../../config";
-
-// Asset
-// import defaultPic from "../../../../public/adminIcons/defaultAdmin.svg";
-// import DeleteIcon from "../../../../public/adminIcons/dlt.png";
 
 class AddListSettingsForm extends Component {
   static propTypes = {
@@ -36,6 +33,18 @@ class AddListSettingsForm extends Component {
     super(props);
     this.state = {
       fieldType: null,
+      selectedField: null,
+      addOption: false,
+      option: [],
+      label: "",
+      value: "",
+
+      title: "",
+      name: "",
+      subTitle: "",
+      step: "",
+      pageId: "",
+      type: "",
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -53,7 +62,64 @@ class AddListSettingsForm extends Component {
       this.setState({ fieldType: fieldType });
     }
   }
+  onSelectChanged(event) {
+    this.setState({ selectedField: event.target.value });
+  }
+  shawOption() {
+    this.setState({
+      addOption: !this.state.addOption,
+    });
+  }
 
+  handleOption = (event) => {
+    this.setState({
+      label: event.target.value,
+      value: event.target.value,
+    });
+  };
+
+  addOption = () => {
+    this.setState({
+      option: [
+        ...this.state.option,
+        { label: this.state.label, value: this.state.value },
+      ],
+    });
+  };
+
+  handleChanges = (e) => {
+    this.setState({
+      [e.target.name]: [e.target.value],
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {};
+    data.name = e.target.name.value;
+    data.title = e.target.title.value;
+    data.subTitle = e.target.subTitle.value;
+    data.step = e.target.step.value;
+    data.pageId = e.target.pageId.value;
+    data.type = e.target.type.value;
+    data.option = this.state.option;
+    console.log(data);
+
+    //   const resp = await fetch("/graphql", {
+    //   method: "post",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     query: query,
+    //     variables: data,
+    //   }),
+    //   credentials: "include",
+    // });
+
+    e.target.reset();
+  };
   renderFormControl = ({
     input,
     label,
@@ -108,13 +174,16 @@ class AddListSettingsForm extends Component {
       typeId,
       initialValues,
       image,
+      openListSettingsModal,
     } = this.props;
     const { formatMessage } = this.props.intl;
     const { fieldType } = this.state;
-
+    console.log(this.state.option);
+    const { name, title, subTitle, type, pageId, step } = this.state;
     return (
       <div className={cx(s.formMaxWidth, "maxwidthcenter", "empty")}>
-        <form onSubmit={handleSubmit(submit)}>
+        <pre></pre>
+        <form onSubmit={this.handleSubmit}>
           {error && <strong>{formatMessage(error)}</strong>}
           <FormGroup className={s.space3}>
             <Field
@@ -123,6 +192,35 @@ class AddListSettingsForm extends Component {
               component={this.renderFormControl}
               label={formatMessage(messages.addName)}
               className={cx(bt.commonControlInput)}
+              value={name}
+              onChange={this.handleChanges}
+            />
+            <Field
+              name="title"
+              type="text"
+              component={this.renderFormControl}
+              label={formatMessage(messages.pageTitle)}
+              className={cx(bt.commonControlInput)}
+              value={title}
+              onChange={this.handleChanges}
+            />
+            <Field
+              name="subTitle"
+              type="text"
+              component={this.renderFormControl}
+              label={formatMessage(messages.pageSubTitle)}
+              className={cx(bt.commonControlInput)}
+              value={subTitle}
+              onChange={this.handleChanges}
+            />
+            <Field
+              name="step"
+              type="text"
+              component={this.renderFormControl}
+              label={formatMessage(messages.hostingStep)}
+              className={cx(bt.commonControlInput)}
+              value={step}
+              onChange={this.handleChanges}
             />
             <label
               className={s.labelTextNew}
@@ -138,118 +236,69 @@ class AddListSettingsForm extends Component {
               className={bt.commonControlInput}
               label={formatMessage(messages.categoryAdminCategory)}
               style={{ marginBottom: "10px" }}
+              onChange={this.handleChanges}
+              value={type}
             >
-              <option value="dropdown">Dropdown</option>
-              <option value="number">Number</option>
-              <option value="number">Map</option>
-              <option value="Text">Text</option>
+              <option value="checkbox">Check Box</option>
+              <option value="calendar">Calendar</option>
+              <option value="select">Dropdown</option>
+              <option value="textInput">Input</option>
               <option value="image">Image</option>
+              <option value="radio">Radio Button</option>
+              <option value="checkboxImage">Check Box And Image</option>
+              <option value="map">Map</option>
             </Field>
+
+            {this.state.type == "select" && (
+              <>
+                <Button
+                  className={cx(bt.btnPrimaryBorder, bt.btnLarge)}
+                  onClick={() => this.shawOption()}
+                >
+                  {formatMessage(messages.addOptions)}
+                </Button>
+              </>
+            )}
+            {this.state.addOption && (
+              <>
+                <Field
+                  name="label"
+                  type="text"
+                  component={this.renderFormControl}
+                  label={formatMessage(messages.fieldsOption)}
+                  className={cx(bt.commonControlInput)}
+                  value={this.state.label}
+                  onChange={this.handleOption}
+                />
+                <Field
+                  name="value"
+                  type="text"
+                  component={this.renderFormControl}
+                  label={formatMessage(messages.labelOption)}
+                  className={cx(bt.commonControlInput)}
+                  value={this.state.value}
+                  onChange={this.handleOption}
+                />
+                <Button
+                  className={cx(bt.btnPrimaryBorder, bt.btnLarge)}
+                  onClick={this.addOption}
+                  style={{ marginTop: "10px" }}
+                >
+                  {formatMessage(messages.add)}
+                </Button>
+              </>
+            )}
+
             <Field
               name="pageId"
               type="number"
               component={this.renderFormControl}
               label={formatMessage(messages.fieldsPageId)}
               className={cx(bt.commonControlInput)}
+              value={pageId}
+              onChange={this.handleChanges}
             />
           </FormGroup>
-          {/* {(typeId === 11 || typeId === 10) && (
-            <Col xs={12} sm={12} md={12} lg={12} className={s.noPadding}>
-              <p className={s.labelTextNew}>
-                <FormattedMessage {...messages.IconLabel} />
-              </p>
-              <div className={bt.picContainerMain}>
-                <div className={bt.picContainer}>
-                  <p className={cx("hidden-md hidden-lg hidden-sm")}>&nbsp;</p>
-                  {image && (
-                    <div
-                      style={{
-                        backgroundImage: `url(/images/amenities/${image})`,
-                      }}
-                      className={s.bannerImageBg}
-                    />
-                  )}
-                  {image == null && (
-                    <div
-                      style={{ backgroundImage: `url(${defaultPic})` }}
-                      className={bt.profileImageBg}
-                    />
-                  )}
-                  {image && (
-                    <a
-                      href="javascript:void(0);"
-                      onClick={() => this.handleChange()}
-                      className={bt.trashIconNew}
-                    >
-                      <img src={DeleteIcon} />
-                    </a>
-                  )}
-                </div>
-              </div>
-              <Col
-                xs={12}
-                sm={12}
-                md={12}
-                lg={12}
-                className={cx(s.space2, s.spaceTop2, s.noPadding)}
-              >
-                <div
-                  className={cx(
-                    s.fullWidth,
-                    bt.btnPrimary,
-                    s.noPadding,
-                    "photoUploadBtn"
-                  )}
-                >
-                  <DropZone
-                    formName={"AddListSettingsForm"}
-                    defaultMessage={formatMessage(messages.UploadImage)}
-                  />
-                </div>
-              </Col>
-            </Col>
-          )}
-          {typeId === 1 && (
-            <FormGroup className={s.space3}>
-              <Field
-                name="itemDescription"
-                component={this.renderFormControlTextArea}
-                label={formatMessage(messages.addNewDescription)}
-                className={cx(bt.commonControlInput, s.space3)}
-              />
-            </FormGroup>
-          )}
-          {fieldType == "numberType" && (
-            <div>
-              <FormGroup className={s.space3}>
-                <Field
-                  name="otherItemName"
-                  type="text"
-                  component={this.renderFormControl}
-                  label={formatMessage(messages.addOtherItem)}
-                  className={bt.commonControlInput}
-                />
-              </FormGroup>
-              <FormGroup className={s.space3}>
-                <Field
-                  name="startValue"
-                  type="text"
-                  component={this.renderFormControl}
-                  label={formatMessage(messages.startValue)}
-                  className={bt.commonControlInput}
-                />
-              </FormGroup>
-              <FormGroup className={s.space3}>
-                <Field
-                  name="endValue"
-                  type="text"
-                  component={this.renderFormControl}
-                  label={formatMessage(messages.endValue)}
-                  className={bt.commonControlInput}
-                />
-              </FormGroup>
-            </div>
-          )} */}
           <FormGroup className={s.space1}>
             <Row>
               <Col

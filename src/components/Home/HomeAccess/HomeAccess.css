@@ -97,8 +97,7 @@
 
 @media only screen and (max-width: 768px) {
   .phone_img {
-    text-align: center;
-    margin-left: -161px;
+    margin-left: -4px;
   }
 
   .phone_img img {
@@ -108,7 +107,7 @@
     height: 100%;
     display: flex;
     align-items: center;
-    flex-direction: column;
+
     margin-left: -333px;
     padding-bottom: 20px;
   }
@@ -123,8 +122,7 @@
 
 @media only screen and (max-width: 767px) {
   .phone_img {
-    text-align: center;
-    margin-left: -42px;
+    margin-left: -5px;
   }
 
   .phone_img img {
@@ -134,10 +132,7 @@
     height: 100%;
     display: flex;
     align-items: center;
-    flex-direction: column;
     margin-left: 0 !important;
-    padding: 0px 15px;
-    padding-bottom: 20px;
   }
   .access_text h1 {
     font-size: 20px;
@@ -152,9 +147,12 @@
   .access {
     border-radius: none;
   }
+  .phone_img {
+    margin-left: -5px;
+  }
   .phone_img img {
     height: 285px;
-    margin-left: 26px !important;
+
     margin-bottom: 0px;
   }
   .access_left {
@@ -164,8 +162,7 @@
     align-items: center;
     text-align: justify;
     flex-direction: column;
-    padding-bottom: 10px;
-    padding-top: 0;
+    padding-left: 45px;
   }
   .access_text h1 {
     font-size: 18px;

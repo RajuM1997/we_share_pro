@@ -30,7 +30,7 @@ class Banner extends Component {
   }
 
   handleScroll = (e) => {
-    if (window.scrollY >= 1) {
+    if (window.scrollY >= 10) {
       this.setState({ change: true });
     } else {
       this.setState({ change: false });
@@ -38,7 +38,18 @@ class Banner extends Component {
   };
 
   render() {
-    const { loading, data } = this.props;
+    const { loading, data, shareAndFindData } = this.props;
+    let bannerData;
+
+    // {
+    //   shareAndFindData &&
+    //     shareAndFindData.length > 0 &&
+    //     shareAndFindData.find((image) => {
+    //       return (bannerData = image);
+    //     });
+    // }
+    // let small_images = "/images/category/" + bannerData?.image;
+    console.log(bannerData);
     const settings = {
       // beforeChange: function() {
       //   // setActiveAnimation(false);
@@ -94,6 +105,7 @@ class Banner extends Component {
               data.map((item, index) => {
                 if (item.isEnable == "true") {
                   let path = "/images/homeBanner/" + item.image;
+                  let smallImage = "/images/homeBanner/medium_" + item.image;
                   return (
                     <BannerItem
                       title={item.title}
@@ -103,6 +115,7 @@ class Banner extends Component {
                       bottomText={item.bottomText}
                       category={item.category}
                       path={path}
+                      small_images={smallImage}
                       key={item.id}
                       myRef={this.myRef}
                     />

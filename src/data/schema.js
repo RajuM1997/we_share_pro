@@ -198,6 +198,9 @@ import getCategory from "./queries/siteadmin/getCategory";
 import deleteCategory from "./mutations/SiteAdmin/deleteCategory";
 import editCategory from "./queries/siteadmin/editCategory";
 
+//add fields
+import addFields from "./mutations/SiteAdmin/addFields";
+
 // update category
 import updateCategory from "./mutations/SiteAdmin/updateCategory";
 import updateCategoryStatus from "./mutations/SiteAdmin/updateCategoryStatus";
@@ -667,6 +670,7 @@ const schema = new Schema({
       deleteSubCategory,
       updateSubCategory,
       updateSubCategoryStatus,
+      addFields,
     },
   }),
 });
