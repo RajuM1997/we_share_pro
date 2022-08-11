@@ -13450,5 +13450,50 @@
     "files": [
       "src/locale/messages.js"
     ]
+  },
+  {
+    "id": "app.fieldPage",
+    "description": "Page",
+    "defaultMessage": "Page",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.pageSetting",
+    "description": "Page Setting",
+    "defaultMessage": "Fields Setting",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.pageFieldPageId",
+    "description": "Page Id",
+    "defaultMessage": "Page Id",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.pageFieldStep",
+    "description": "Step",
+    "defaultMessage": "Step",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.pageFieldTitle",
+    "description": "Title",
+    "defaultMessage": "Title",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
   }
 ]

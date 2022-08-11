@@ -200,6 +200,12 @@ import editCategory from "./queries/siteadmin/editCategory";
 
 //add fields
 import addFields from "./mutations/SiteAdmin/addFields";
+//get fields
+import getFields from "./queries/siteadmin/getFields";
+import getFieldsAdmin from "./queries/siteadmin/getFieldsAdmin";
+
+import addPageField from "./mutations/SiteAdmin/addPageField";
+import getPageField from "./queries/siteadmin/getPageField";
 
 // update category
 import updateCategory from "./mutations/SiteAdmin/updateCategory";
@@ -552,6 +558,9 @@ const schema = new Schema({
       getSubCategoryAdmin,
       getOfferAdmin,
       editSubCategory,
+      getFieldsAdmin,
+      getFields,
+      getPageField,
     },
   }),
   mutation: new ObjectType({
@@ -671,6 +680,7 @@ const schema = new Schema({
       updateSubCategory,
       updateSubCategoryStatus,
       addFields,
+      addPageField,
     },
   }),
 });

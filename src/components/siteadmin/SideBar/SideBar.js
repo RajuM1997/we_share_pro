@@ -53,6 +53,7 @@ class SideBar extends Component {
       home: false,
       field: false,
       whyHost: false,
+      fieldSetting: false,
       location: "",
     };
     this.openMenu = this.openMenu.bind(this);
@@ -151,6 +152,16 @@ class SideBar extends Component {
       "/siteadmin/listsettings/17",
       "/siteadmin/listsettings/18",
       "/siteadmin/listsettings/19",
+    ];
+
+    let fieldSetting = [
+      "/siteadmin/fieldSetting/1",
+      "/siteadmin/listsettings/2",
+      "/siteadmin/listsettings/3",
+      "/siteadmin/listsettings/4",
+      "/siteadmin/listsettings/5",
+      "/siteadmin/listsettings/6",
+      "/siteadmin/listsettings/7",
     ];
 
     return (
@@ -1095,6 +1106,74 @@ class SideBar extends Component {
                           );
                         })}
                       {/* )} */}
+                    </div>
+                  </Collapse>
+                </div>
+              )}
+              {validatePrivilege(21, privileges) && (
+                <div>
+                  <div
+                    className={cx({
+                      [s.active]: fieldSetting.includes(location),
+                    })}
+                  >
+                    <Button
+                      bsStyle="link"
+                      className={cx(
+                        s.button,
+                        s.noPadding,
+                        s.sideNavitem,
+                        s.disPlayTable
+                      )}
+                      onClick={() =>
+                        this.setState({
+                          fieldSetting: !this.state.fieldSetting,
+                        })
+                      }
+                    >
+                      <span className={s.disPlayTabelCell}>
+                        <FontAwesome.FaHome className={s.navigationIcon} />
+                      </span>
+                      <span className={s.disPlayTabelCell}>
+                        <FormattedMessage {...messages.pageSetting} />
+                      </span>
+                      {this.state.fieldSetting && (
+                        <span className={s.disPlayTabelCell}>
+                          <FontAwesome.FaAngleUp className={s.navigationIcon} />
+                        </span>
+                      )}
+
+                      {!this.state.fieldSetting && (
+                        <span className={s.disPlayTabelCell}>
+                          <FontAwesome.FaAngleDown
+                            className={s.navigationIcon}
+                          />
+                        </span>
+                      )}
+                    </Button>
+                  </div>
+                  <Collapse in={this.state.fieldSetting} className={s.subMenu}>
+                    <div>
+                      <li
+                        className={cx({
+                          [s.active]: location === "/siteadmin/fieldSetting/1",
+                        })}
+                      >
+                        <Link
+                          to={"/siteadmin/fieldSetting/1"}
+                          className={cx(s.sideNavitem, s.disPlayTable)}
+                          onClick={() => this.openClose()}
+                        >
+                          <span className={s.disPlayTabelCell}>
+                            <FontAwesome.FaArrowRight
+                              className={cx(s.navigationIcon, "sideArrowRTL")}
+                            />
+                          </span>
+                          <span className={s.disPlayTabelCell}>
+                            <FormattedMessage {...messages.fieldPage} /> 1
+                          </span>
+                        </Link>
+                      </li>
                     </div>
                   </Collapse>
                 </div>
