@@ -541,6 +541,11 @@ const messages = defineMessages({
     defaultMessage: "Type",
     description: "Type",
   },
+  fieldTitle: {
+    id: "app.fieldTitle",
+    defaultMessage: "Title",
+    description: "Title",
+  },
   fieldPageId: {
     id: "app.fieldPageId",
     defaultMessage: "Page ID",
@@ -6117,6 +6122,11 @@ const messages = defineMessages({
     id: "app.labelOption",
     defaultMessage: "Label",
     description: "Label",
+  },
+  valueOption: {
+    id: "app.valueOption",
+    defaultMessage: "Value",
+    description: "Value",
   },
   addNewDescription: {
     id: "app.addNewDescription",

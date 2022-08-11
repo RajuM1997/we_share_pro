@@ -22,7 +22,8 @@ import withStyles from "isomorphic-style-loader/lib/withStyles";
 import cx from "classnames";
 import s from "./NewListSettingForm.css";
 import bt from "../../../components/commonStyle.css";
-import { Button, FormGroup, FormControl, Col, Row } from "react-bootstrap";
+import { Button, FormGroup, FormControl, Col, Row, Alert } from "react-bootstrap";
+import {toastr} from "react-redux-toastr";
 
 class AddListSettingsForm extends Component {
   static propTypes = {
@@ -32,19 +33,13 @@ class AddListSettingsForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fieldType: null,
-      selectedField: null,
-      addOption: false,
-      option: [],
-      label: "",
-      value: "",
-
+      fields: [],
       title: "",
       name: "",
-      subTitle: "",
-      step: "",
-      pageId: "",
       type: "",
+      label: "",
+      value: "",
+      pageId: "",
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -71,39 +66,44 @@ class AddListSettingsForm extends Component {
     });
   }
 
-  handleOption = (event) => {
-    this.setState({
-      label: event.target.value,
-      value: event.target.value,
-    });
-  };
-
-  addOption = () => {
-    this.setState({
-      option: [
-        ...this.state.option,
-        { label: this.state.label, value: this.state.value },
-      ],
+  addOption = (event) => {
+    this.setState(thisState => {
+      return {
+        ...thisState,
+        fields: [
+            ...thisState.fields,
+          {
+            label: thisState.label,
+            value: thisState.value,
+          }
+        ],
+        label: null,
+        value: null,
+      }
     });
   };
 
   handleChanges = (e) => {
     this.setState({
-      [e.target.name]: [e.target.value],
+      [e.target.name]: e.target.value,
     });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const data = {};
-    data.name = e.target.name.value;
-    data.title = e.target.title.value;
-    data.subTitle = e.target.subTitle.value;
-    data.step = e.target.step.value;
-    data.pageId = e.target.pageId.value;
-    data.type = e.target.type.value;
-    data.option = this.state.option;
-    console.log(data);
+    const {title, name, type, pageId} = this.state;
+    if (title && name && type && pageId) {
+      const data = {
+        fields: JSON.stringify(this.state.fields),
+        title,
+        name,
+        type,
+        pageId: Number(pageId),
+      };
+      console.log("data", data);
+    } else {
+      toastr.error("Error", "Field can't be empty");
+    }
 
     //   const resp = await fetch("/graphql", {
     //   method: "post",
@@ -177,127 +177,128 @@ class AddListSettingsForm extends Component {
       openListSettingsModal,
     } = this.props;
     const { formatMessage } = this.props.intl;
-    const { fieldType } = this.state;
     console.log(this.state.option);
-    const { name, title, subTitle, type, pageId, step } = this.state;
+    const { name, title, type, pageId } = this.state;
     return (
       <div className={cx(s.formMaxWidth, "maxwidthcenter", "empty")}>
-        <pre></pre>
         <form onSubmit={this.handleSubmit}>
           {error && <strong>{formatMessage(error)}</strong>}
           <FormGroup className={s.space3}>
             <Field
-              name="name"
-              type="text"
-              component={this.renderFormControl}
-              label={formatMessage(messages.addName)}
-              className={cx(bt.commonControlInput)}
-              value={name}
-              onChange={this.handleChanges}
+                name="title"
+                type="text"
+                component={this.renderFormControl}
+                label={formatMessage(messages.fieldTitle)}
+                className={cx(bt.commonControlInput)}
+                value={title}
+                onChange={this.handleChanges}
             />
             <Field
-              name="title"
-              type="text"
-              component={this.renderFormControl}
-              label={formatMessage(messages.pageTitle)}
-              className={cx(bt.commonControlInput)}
-              value={title}
-              onChange={this.handleChanges}
-            />
-            <Field
-              name="subTitle"
-              type="text"
-              component={this.renderFormControl}
-              label={formatMessage(messages.pageSubTitle)}
-              className={cx(bt.commonControlInput)}
-              value={subTitle}
-              onChange={this.handleChanges}
-            />
-            <Field
-              name="step"
-              type="text"
-              component={this.renderFormControl}
-              label={formatMessage(messages.hostingStep)}
-              className={cx(bt.commonControlInput)}
-              value={step}
-              onChange={this.handleChanges}
+                name="name"
+                type="text"
+                component={this.renderFormControl}
+                label={formatMessage(messages.addName)}
+                className={cx(bt.commonControlInput)}
+                value={name}
+                onChange={this.handleChanges}
             />
             <label
-              className={s.labelTextNew}
-              style={{ marginRight: "20px", marginBottom: "10px" }}
+                className={s.labelTextNew}
+                style={{ marginRight: "20px", marginBottom: "10px" }}
             >
               Type
             </label>
             <br />
             <Field
-              name="type"
-              component="select"
-              type="select"
-              className={bt.commonControlInput}
-              label={formatMessage(messages.categoryAdminCategory)}
-              style={{ marginBottom: "10px" }}
-              onChange={this.handleChanges}
-              value={type}
+                name="type"
+                component="select"
+                type="select"
+                className={bt.commonControlInput}
+                label={formatMessage(messages.categoryAdminCategory)}
+                style={{ marginBottom: "10px" }}
+                onChange={this.handleChanges}
+                value={type}
             >
+              <option value="" selected disabled>Please Select</option>
               <option value="checkbox">Check Box</option>
               <option value="calendar">Calendar</option>
               <option value="select">Dropdown</option>
-              <option value="textInput">Input</option>
+              <option value="text">Text Input</option>
+              <option value="number">Number Input</option>
               <option value="image">Image</option>
-              <option value="radio">Radio Button</option>
-              <option value="checkboxImage">Check Box And Image</option>
+              {/*<option value="checkboxImage">Check Box And Image</option>*/}
               <option value="map">Map</option>
             </Field>
 
-            {this.state.type == "select" && (
-              <>
-                <Button
-                  className={cx(bt.btnPrimaryBorder, bt.btnLarge)}
-                  onClick={() => this.shawOption()}
-                >
-                  {formatMessage(messages.addOptions)}
-                </Button>
-              </>
+            {(this.state.type === "select" || this.state.type === "checkbox") && (
+                <Row>
+                  <Col xs={12}>
+                    {
+                      this.state.fields.map((field, index) => (
+                          <div style={{
+                            display: 'flex',
+                            justifyContent: "space-between",
+                            alignItems: 'center',
+                            padding: 8,
+                            background: "#f5f5f5",
+                            border: "1px solid #ccc",
+                            borderRadius: 4,
+                            marginBottom: 8,
+                          }}>
+                              <span>{field.label} ({field.value})</span>
+                              <button onClick={()=> {
+                                const fields = [...this.state.fields];
+                                fields.splice(index, 1);
+                                this.setState({
+                                  fields,
+                                })
+                              }}>Delete</button>
+                          </div>
+                      ))
+                    }
+                  </Col>
+                  <Col xs={6}>
+                      <label className={s.labelTextNew}>{formatMessage(messages.labelOption)}</label>
+                      <FormControl name="label" type="text" className={cx(bt.commonControlInput)} value={this.state.label} onChange={this.handleChanges}/>
+                  </Col>
+                  <Col xs={6}>
+                    <label className={s.labelTextNew}>{formatMessage(messages.valueOption)}</label>
+                    <FormControl name="value" type="text" className={cx(bt.commonControlInput)} value={this.state.value} onChange={this.handleChanges}/>
+                  </Col>
+                  <Col xs={12}>
+                    <Button
+                        className={cx(bt.btnPrimaryBorder, bt.btnLarge)}
+                        onClick={this.addOption}
+                        style={{ marginTop: "10px" }}
+                        type="reset"
+                    >
+                      {formatMessage(messages.add)}
+                    </Button>
+                  </Col>
+                </Row>
             )}
-            {this.state.addOption && (
-              <>
-                <Field
-                  name="label"
-                  type="text"
-                  component={this.renderFormControl}
-                  label={formatMessage(messages.fieldsOption)}
-                  className={cx(bt.commonControlInput)}
-                  value={this.state.label}
-                  onChange={this.handleOption}
-                />
-                <Field
-                  name="value"
-                  type="text"
-                  component={this.renderFormControl}
-                  label={formatMessage(messages.labelOption)}
-                  className={cx(bt.commonControlInput)}
-                  value={this.state.value}
-                  onChange={this.handleOption}
-                />
-                <Button
-                  className={cx(bt.btnPrimaryBorder, bt.btnLarge)}
-                  onClick={this.addOption}
-                  style={{ marginTop: "10px" }}
-                >
-                  {formatMessage(messages.add)}
-                </Button>
-              </>
-            )}
-
+            <label
+                className={s.labelTextNew}
+                style={{ marginRight: "20px", marginBottom: "10px" }}
+            >
+              {formatMessage(messages.fieldsPageId)}
+            </label>
+            <br />
             <Field
-              name="pageId"
-              type="number"
-              component={this.renderFormControl}
-              label={formatMessage(messages.fieldsPageId)}
-              className={cx(bt.commonControlInput)}
-              value={pageId}
-              onChange={this.handleChanges}
-            />
+                name="pageId"
+                component="select"
+                type="select"
+                className={bt.commonControlInput}
+                label={formatMessage(messages.fieldsPageId)}
+                style={{ marginBottom: "10px" }}
+                onChange={this.handleChanges}
+                value={pageId}
+            >
+              <option value="" selected disabled>Please Select</option>
+              {Array.from(Array(100).keys()).map(page => (
+                  <option value={page}>{page}</option>
+              ))}
+            </Field>
           </FormGroup>
           <FormGroup className={s.space1}>
             <Row>
