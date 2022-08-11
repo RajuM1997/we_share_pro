@@ -607,6 +607,21 @@ const messages = defineMessages({
     defaultMessage: "Title",
     description: "Title",
   },
+  pageFieldTitle: {
+    id: "app.pageFieldTitle",
+    defaultMessage: "Title",
+    description: "Title",
+  },
+  pageFieldStep: {
+    id: "app.pageFieldStep",
+    defaultMessage: "Step",
+    description: "Step",
+  },
+  pageFieldPageId: {
+    id: "app.pageFieldPageId",
+    defaultMessage: "Page Id",
+    description: "Page Id",
+  },
   categoryAdminDescription: {
     id: "app.categoryAdminDescription",
     defaultMessage: "Description",
@@ -5300,6 +5315,11 @@ const messages = defineMessages({
     defaultMessage: "Block",
     description: "Listing Step3",
   },
+  fieldPage: {
+    id: "app.fieldPage",
+    defaultMessage: "Page",
+    description: "Page",
+  },
   coverLabel: {
     id: "app.coverLabel",
     defaultMessage: "Cover",
@@ -6693,6 +6713,13 @@ const messages = defineMessages({
     defaultMessage: "Why Become Host Page",
     description: "Why Become Host Page",
   },
+
+  pageSetting: {
+    id: "app.pageSetting",
+    defaultMessage: "Fields Setting",
+    description: "Page Setting",
+  },
+
   homeBannerLabel: {
     id: "app.homeBannerLabel",
     defaultMessage: "Home Banner",

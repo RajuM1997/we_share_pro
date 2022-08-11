@@ -670,6 +670,20 @@ export default {
         ),
     },
     {
+      path: "/siteadmin/fieldSetting/1",
+      load: () =>
+        import(
+          /* webpackChunkName: 'siteadmin-whyHostBlock7' */ "./siteadmin/fieldPage/Page1/index"
+        ),
+    },
+    {
+      path: "/siteadmin/pageField/add",
+      load: () =>
+        import(
+          /* webpackChunkName: 'siteadmin-addPopularLocation' */ "./siteadmin/addPageField"
+        ),
+    },
+    {
       path: "/siteadmin/listing-request",
       load: () =>
         import(
