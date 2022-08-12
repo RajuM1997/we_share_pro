@@ -159,7 +159,7 @@ class AddFieldManagement extends React.Component {
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={"/siteadmin/categorys"}
+                to={"/siteadmin/fieldSetting"}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,

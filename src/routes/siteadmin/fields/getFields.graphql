@@ -1,0 +1,10 @@
+query getFields {
+  getFields {
+    id
+    name
+    type
+    pageId
+    fields
+    isEnable
+  }
+}

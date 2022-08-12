@@ -13495,5 +13495,41 @@
     "files": [
       "src/locale/messages.js"
     ]
+  },
+  {
+    "id": "app.adminPageFieldPageId",
+    "description": "Page Id",
+    "defaultMessage": "Page Id",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.editPageField",
+    "description": "Edit Page Field",
+    "defaultMessage": "Edit Page Field",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldTitle",
+    "description": "Title",
+    "defaultMessage": "Title",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.valueOption",
+    "description": "Value",
+    "defaultMessage": "Value",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
   }
 ]

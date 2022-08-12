@@ -651,7 +651,7 @@ export default {
       path: "/siteadmin/fields/:id",
       load: () =>
         import(
-          /* webpackChunkName: 'siteadmin-becomeHostStaticBlock' */ "./siteadmin/fields/index"
+          /* webpackChunkName: 'siteadmin-becomeHostStaticBlock' */ "./siteadmin/fields"
         ),
     },
     // home offer import
@@ -670,10 +670,10 @@ export default {
         ),
     },
     {
-      path: "/siteadmin/fieldSetting/1",
+      path: "/siteadmin/fieldSetting",
       load: () =>
         import(
-          /* webpackChunkName: 'siteadmin-whyHostBlock7' */ "./siteadmin/fieldPage/Page1/index"
+          /* webpackChunkName: 'siteadmin-whyHostBlock7' */ "./siteadmin/fieldPage"
         ),
     },
     {
@@ -681,6 +681,13 @@ export default {
       load: () =>
         import(
           /* webpackChunkName: 'siteadmin-addPopularLocation' */ "./siteadmin/addPageField"
+        ),
+    },
+    {
+      path: "/siteadmin/edit/pageField/:id",
+      load: () =>
+        import(
+          /* webpackChunkName: 'siteadmin-editPopularLocation' */ "./siteadmin/editPageField"
         ),
     },
     {

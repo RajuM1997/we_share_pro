@@ -5,12 +5,12 @@ import {
 } from "graphql";
 
 const PageFieldType = new ObjectType({
-  name: "PageField",
+  name: "FieldPage",
   fields: {
     id: { type: IntType },
     title: { type: StringType },
     step: { type: StringType },
-    PageId: { type: IntType },
+    pageId: { type: IntType },
     isEnable: { type: StringType },
     createdAt: { type: StringType },
     updatedAt: { type: StringType },

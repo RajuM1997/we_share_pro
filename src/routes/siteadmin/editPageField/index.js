@@ -1,12 +1,13 @@
 import React from "react";
-import AdminLayout from "../../../../components/Layout/AdminLayout";
-// import WhyHostBlock7 from "./WhyHostBlock7";
-import { restrictUrls } from "../../../../helpers/adminPrivileges";
-import FieldPage1 from "./FieldPage1";
+import AdminLayout from "../../../components/Layout/AdminLayout";
 
-const title = "Field Page 1";
+import { restrictUrls } from "../../../helpers/adminPrivileges";
+import EditPageField from "./EditPageField";
 
-export default async function action({ store }) {
+const title = "Edit Field";
+
+export default async function action({ store, params }) {
+  // From Redux Store
   let isAdminAuthenticated = store.getState().runtime.isAdminAuthenticated;
   let adminPrivileges =
     store.getState().adminPrevileges.privileges &&
@@ -16,15 +17,18 @@ export default async function action({ store }) {
     return { redirect: "/siteadmin/login" };
   }
 
-  if (!restrictUrls("/siteadmin/whyHost/Block7", adminPrivileges)) {
+  // Admin restriction
+  if (!restrictUrls("/siteadmin/edit/category/", adminPrivileges)) {
     return { redirect: "/siteadmin" };
   }
+
+  const id = Number(params.id);
 
   return {
     title,
     component: (
       <AdminLayout>
-        <FieldPage1 title={title} />
+        <EditPageField title={title} id={id} />
       </AdminLayout>
     ),
   };

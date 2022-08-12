@@ -17,24 +17,16 @@ const Fields = Model.define("Fields", {
     type: DataType.STRING,
     allowNull: false,
   },
-  subTitle: {
-    type: DataType.STRING,
-    allowNull: false,
-  },
-  step: {
-    type: DataType.STRING,
-    allowNull: false,
-  },
-  option: {
-    type: DataType.STRING,
-    allowNull: false,
-  },
-  types: {
+  type: {
     type: DataType.STRING,
     allowNull: false,
   },
   pageId: {
     type: DataType.INTEGER,
+    allowNull: false,
+  },
+  fields: {
+    type: DataType.STRING,
     allowNull: false,
   },
   isEnable: {

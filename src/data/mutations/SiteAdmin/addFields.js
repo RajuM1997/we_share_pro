@@ -7,24 +7,17 @@ const addFields = {
   args: {
     name: { type: StringType },
     title: { type: StringType },
-    subTitle: { type: StringType },
-    step: { type: StringType },
-    types: { type: StringType },
-    option: { type: StringType },
+    type: { type: StringType },
+    fields: { type: StringType },
     pageId: { type: IntType },
   },
-  async resolve(
-    { request },
-    { name, title, subTitle, step, types, option, pageId }
-  ) {
+  async resolve({ request }, { name, title, type, fields, pageId }) {
     if (request.user && request.user.admin == true) {
       const Update = await Fields.create({
         name: name,
         title: title,
-        subTitle: subTitle,
-        step: step,
-        option: option,
-        types: types,
+        fields: fields,
+        type: type,
         pageId: pageId,
       });
       return {

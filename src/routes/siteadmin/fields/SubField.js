@@ -1,19 +1,17 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import s from "./Field.css";
-import withStyles from "isomorphic-style-loader/lib/withStyles";
-import CategoryManagement from "../../../components/siteadmin/Category/CategoryManagement";
-// Query
-import getCategory from "../categorys/getCategory.graphql";
 import { graphql, gql, compose } from "react-apollo";
+import PropTypes from "prop-types";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import s from "./FieldManagement.css";
+// Query
+import getFields from "./getFields.graphql";
 import FieldManagement from "../../../components/siteadmin/Field/FieldManagement";
-
 class SubField extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool,
-      getCategory: PropTypes.array,
+      getFields: PropTypes.array,
     }),
   };
 
@@ -29,15 +27,15 @@ class SubField extends Component {
     } = this.props;
 
     const {
-      data: { getCategory },
+      data: { getFields },
     } = this.props;
-    return <FieldManagement />;
+    return <FieldManagement data={getFields} />;
   }
 }
 
 export default compose(
   withStyles(s),
-  graphql(getCategory, {
+  graphql(getFields, {
     options: {
       fetchPolicy: "network-only",
       ssr: false,

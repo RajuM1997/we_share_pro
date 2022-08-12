@@ -115,14 +115,14 @@ class AddPageFieldManagement extends React.Component {
           )}
         >
           <h1 className={s.headerTitle}>
-            <FormattedMessage {...messages.addCategory} />
+            <FormattedMessage {...messages.fieldCategory} />
           </h1>
           <Col xs={12} sm={12} md={8} lg={8} className={s.blockcenter}>
             <div
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={"/siteadmin/categorys"}
+                to={"/siteadmin/fieldSetting"}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,
@@ -136,31 +136,61 @@ class AddPageFieldManagement extends React.Component {
             <Panel className={s.panelHeader}>
               <form onSubmit={handleSubmit(submit)}>
                 {error && <strong>{formatMessage(error)}</strong>}
-                <Field
-                  name="title"
-                  type="text"
-                  component={this.renderFormControl}
-                  label={formatMessage(messages.pageFieldTitle)}
-                />
-                <Field
-                  name="pageId"
-                  type="number"
-                  component={this.renderFormControl}
-                  label={formatMessage(messages.pageFieldPageId)}
-                />
-                <label className={s.labelTextNew}>Step</label>
-                <br />
-                <Field
-                  name="step"
-                  component="select"
-                  type="select"
-                  className={bt.commonControlInput}
-                >
-                  <option />
-                  <option value="Step1">Step1</option>
-                  <option value="Step2">Step1</option>
-                  <option value="Step3">Step1</option>
-                </Field>
+                <div className={s.selectField}>
+                  <label
+                    className={s.labelTextNew}
+                    style={{ marginRight: "20px", marginBottom: "10px" }}
+                  >
+                    Title
+                  </label>
+                  <Field name="title" type="text" component="input" />
+                </div>
+                <div className={s.selectField}>
+                  <label
+                    className={s.labelTextNew}
+                    style={{ marginRight: "20px", marginBottom: "10px" }}
+                  >
+                    Page ID
+                  </label>
+                  <Field
+                    name="pageId"
+                    component="select"
+                    type="select"
+                    className={bt.commonControlInput}
+                    label={formatMessage(messages.fieldsPageId)}
+                    style={{ marginBottom: "10px" }}
+                  >
+                    <option value="" selected disabled>
+                      Please Select
+                    </option>
+                    {Array.from(Array(100).keys()).map((page) => (
+                      <option value={page}>{page}</option>
+                    ))}
+                  </Field>
+                </div>
+                <div className={s.selectField}>
+                  <label
+                    className={s.labelTextNew}
+                    style={{ marginRight: "20px", marginBottom: "10px" }}
+                  >
+                    Step
+                  </label>
+                  <Field
+                    name="step"
+                    component="select"
+                    type="select"
+                    className={bt.commonControlInput}
+                    label={formatMessage(messages.fieldsPageId)}
+                    style={{ marginBottom: "10px" }}
+                  >
+                    <option value="" selected disabled>
+                      Please Select
+                    </option>
+                    <option value="step1">Step1</option>
+                    <option value="step3">Step2</option>
+                    <option value="step2">Step3</option>
+                  </Field>
+                </div>
                 <FormGroup className={s.formGroup}>
                   <Row>
                     <Col

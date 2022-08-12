@@ -591,6 +591,7 @@ const messages = defineMessages({
     defaultMessage: "Category Type",
     description: "Category Type",
   },
+
   // category
   editCategory: {
     id: "app.editCategory",
@@ -622,6 +623,12 @@ const messages = defineMessages({
     defaultMessage: "Page Id",
     description: "Page Id",
   },
+  adminPageFieldPageId: {
+    id: "app.adminPageFieldPageId",
+    defaultMessage: "Page Id",
+    description: "Page Id",
+  },
+
   categoryAdminDescription: {
     id: "app.categoryAdminDescription",
     defaultMessage: "Description",
@@ -631,6 +638,11 @@ const messages = defineMessages({
     id: "app.categoryAdminCategory",
     defaultMessage: "Category",
     description: "Category",
+  },
+  editPageField: {
+    id: "app.editPageField",
+    defaultMessage: "Edit Page Field",
+    description: "Edit Page Field",
   },
   // sub category message defiend
   subCategoryId: {

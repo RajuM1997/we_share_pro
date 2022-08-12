@@ -6,7 +6,7 @@ import {
 } from "graphql";
 
 const FieldsType = new ObjectType({
-  name: "fields",
+  name: "Field",
   fields: {
     id: {
       type: IntType,
@@ -17,16 +17,10 @@ const FieldsType = new ObjectType({
     title: {
       type: StringType,
     },
-    subTitle: {
+    fields: {
       type: StringType,
     },
-    step: {
-      type: StringType,
-    },
-    option: {
-      type: StringType,
-    },
-    types: {
+    type: {
       type: StringType,
     },
     pageId: {

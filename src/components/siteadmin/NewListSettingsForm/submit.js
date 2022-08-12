@@ -9,51 +9,53 @@ import { closeListSettingsModal } from "../../../actions/siteadmin/modalActions"
 import { getAdminListingSettings } from "../../../actions/siteadmin/getAdminListingSettings";
 
 async function submit(values, dispatch, fields) {
-  console.log(fields);
   console.log(values);
-  const query = `
-    query (
-        $name:String,
-        $type:String,
-         $pageID:Int,
-         $isEnable: String,
-      ) {
-          addNewListSettings (
-            name:$name,
-            type:$type,
-            pageID:$pageID,
-            isEnable: $isEnable,
-          ) {
-            status
-          }
-        }
+  if (values == null) {
+    toastr.error("Error Occured", "Please Add page Field");
+  } else {
+    const mutation = `
+  mutation addFields(
+    $name: String,
+    $title: String,
+    $type: String,
+    $fields: String,
+    $pageId: Int,
+  ) {
+    addFields(
+      name: $name,
+      title: $title,
+      type: $type,
+      fields: $fields,
+      pageId: $pageId,
+    ) {
+        status
+    }
+  }
   `;
 
-  const resp = await fetch("/graphql", {
-    method: "post",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: query,
-      variables: values,
-    }),
-    credentials: "include",
-  });
+    const resp = await fetch("/graphql", {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: mutation,
+        variables: values,
+      }),
+      credentials: "include",
+    });
 
-  const { data } = await resp.json();
+    const { data } = await resp.json();
+    console.log(data);
 
-  // if (data.addNewListSettings.status === "success") {
-  //   dispatch(closeListSettingsModal());
-  //   dispatch(getAdminListingSettings(values.typeId));
-  //   toastr.success(
-  //     "Add New List Settings",
-  //     "List Setting is created successfully!"
-  //   );
-  // } else {
-  //   toastr.error("Add New List Settings", "Creating List Setting is failed");
-  // }
+    if (data.addFields.status === "success") {
+      toastr.success("Page Field", "Successfully Added!");
+      // history.push("/siteadmin/category");
+    } else {
+      toastr.error("Page Field", "Failed to create");
+    }
+  }
 }
 
 export default submit;

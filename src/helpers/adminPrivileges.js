@@ -165,15 +165,7 @@ const privileges = [
   {
     id: 22,
     privilege: "Manage Field Page",
-    permittedUrls: [
-      "/siteadmin/fieldSetting/1",
-      "/siteadmin/listsettings/2",
-      "/siteadmin/listsettings/3",
-      "/siteadmin/listsettings/4",
-      "/siteadmin/listsettings/5",
-      "/siteadmin/listsettings/6",
-      "/siteadmin/listsettings/7",
-    ],
+    permittedUrls: ["/siteadmin/fieldSetting"],
   },
 ];
 

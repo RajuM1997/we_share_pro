@@ -4,6 +4,10 @@ import PropTypes from "prop-types";
 
 // Redux Form
 import { formValueSelector } from "redux-form";
+// graphql;
+import { graphql, compose } from "react-apollo";
+// query
+import getPageField from "./getPageField.graphql";
 
 // Translation
 import { injectIntl } from "react-intl";
@@ -16,12 +20,28 @@ import AddNewListSettingsForm from "./AddNewListSettingsForm";
 class NewListSettingsForm extends Component {
   static propTypes = {
     id: PropTypes.number,
+    data: PropTypes.shape({
+      loading: PropTypes.bool,
+      getPageField: PropTypes.array,
+    }),
+  };
+  static defaultProps = {
+    data: {
+      loading: true,
+    },
   };
 
   render() {
+    const {
+      data: { loading },
+    } = this.props;
+
+    const {
+      data: { getPageField },
+    } = this.props;
     return (
       <div className="empty">
-        <AddNewListSettingsForm />
+        <AddNewListSettingsForm data={getPageField} />
       </div>
     );
   }
@@ -36,4 +56,12 @@ const mapState = (state) => ({
 
 const mapDispatch = {};
 
-export default injectIntl(connect(mapState, mapDispatch)(NewListSettingsForm));
+export default compose(
+  injectIntl,
+  graphql(getPageField, {
+    options: {
+      ssr: true,
+    },
+  }),
+  connect(mapState, mapDispatch)
+)(NewListSettingsForm);

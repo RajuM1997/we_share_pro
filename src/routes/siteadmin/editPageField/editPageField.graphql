@@ -1,0 +1,9 @@
+query editPageField($id: Int!) {
+  editPageField(id: $id) {
+    id
+    title
+    pageId
+    isEnable
+    step
+  }
+}

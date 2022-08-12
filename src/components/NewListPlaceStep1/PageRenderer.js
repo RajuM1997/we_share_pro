@@ -57,7 +57,7 @@ class PageRenderer extends Component {
       updateField,
       listId,
     } = this.props;
-    console.log(formData);
+    console.log(currentPageData);
     return (
       <Grid className={s.container}>
         <Row className={cx(s.landingContainer, "arrowPosition")}>
@@ -66,17 +66,17 @@ class PageRenderer extends Component {
               <h3 className={s.landingContentTitle}>
                 {currentPageData?.label}
               </h3>
-              {currentPageData.subLabel && (
+              {currentPageData?.subLabel && (
                 <div className={cx(s.space4, s.spaceTop4)}>
                   <span className={s.bookingLandingStep}>
-                    {currentPageData.subLabel}
+                    {currentPageData?.subLabel}
                   </span>
                 </div>
               )}
-              {currentPageData.label2 && (
+              {currentPageData?.label2 && (
                 <div className={s.spaceTop3}>
                   <h3 className={s.landingContentTitle}>
-                    {currentPageData.label2}
+                    {currentPageData?.label2}
                   </h3>
                 </div>
               )}
@@ -84,7 +84,7 @@ class PageRenderer extends Component {
                 <div className={s.landingMainContent}>
                   <FormGroup className={s.formGroup}>
                     <Row>
-                      {currentPageData.fields?.map((item) => {
+                      {currentPageData?.fields?.map((item) => {
                         if (item.type === "select") {
                           return (
                             <Col
@@ -95,7 +95,7 @@ class PageRenderer extends Component {
                               lg={12}
                             >
                               <ControlLabel className={s.landingLabel}>
-                                {item.label}
+                                {item?.label}
                               </ControlLabel>
                               <span className={s.subText}>
                                 {item?.sublabel}
@@ -118,7 +118,7 @@ class PageRenderer extends Component {
                                     console.log(optionData);
                                     return (
                                       <option value={optionData.label}>
-                                        {optionData.label}
+                                        {optionData?.label}
                                       </option>
                                     );
                                   })}
@@ -414,8 +414,8 @@ class PageRenderer extends Component {
                       })}
                     </Row>
                   </FormGroup>
-                  {currentPageData.pageId === 1 ||
-                  currentPageData.pageId === 2 ? (
+                  {currentPageData?.pageId === 1 ||
+                  currentPageData?.pageId === 2 ? (
                     <FormGroup className={cx(s.formGroup, "floatLeft")}>
                       <Button
                         className={cx(s.button, bt.btnPrimary, bt.btnLarge)}
@@ -465,7 +465,7 @@ class PageRenderer extends Component {
               </form>
             </div>
           </Col>
-          {currentPageData.type === "calendar" && "image" ? (
+          {currentPageData?.type === "calendar" && "image" ? (
             ""
           ) : (
             <ListPlaceTips />

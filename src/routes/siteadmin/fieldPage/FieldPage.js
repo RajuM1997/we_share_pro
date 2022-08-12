@@ -3,16 +3,16 @@ import PropTypes from "prop-types";
 import s from "./FieldPage.css";
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 // Query
-// import getCategory from "./getCategory.graphql";
+import getPageField from "./getPageField.graphql";
 import { graphql, gql, compose } from "react-apollo";
-import PageFieldManagement from "../../../../components/siteadmin/PageField/PageFieldManagement";
+import PageFieldManagement from "../../../components/siteadmin/PageField/PageFieldManagement";
 
 class FieldPage extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool,
-      getCategory: PropTypes.array,
+      getPageField: PropTypes.array,
     }),
   };
 
@@ -28,18 +28,18 @@ class FieldPage extends Component {
     } = this.props;
 
     const {
-      data: { getCategory },
+      data: { getPageField },
     } = this.props;
-    return <PageFieldManagement />;
+    return <PageFieldManagement data={getPageField} />;
   }
 }
 
 export default compose(
-  withStyles(s)
-  // graphql(getCategory, {
-  //   options: {
-  //     fetchPolicy: "network-only",
-  //     ssr: false,
-  //   },
-  // })
+  withStyles(s),
+  graphql(getPageField, {
+    options: {
+      fetchPolicy: "network-only",
+      ssr: false,
+    },
+  })
 )(FieldPage);

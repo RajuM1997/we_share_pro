@@ -13,9 +13,9 @@ import withStyles from "isomorphic-style-loader/lib/withStyles";
 import s from "./PageFieldManagement.css";
 import bt from "../../../components/commonStyle.css";
 import {
-  deleteCategory,
-  updateCategoryStatus,
-} from "../../../actions/siteadmin/deleteCategory";
+  deletePageField,
+  updatePageFieldStatus,
+} from "../../../actions/siteadmin/deletePageField";
 import history from "../../../core/history";
 
 // Translation
@@ -34,8 +34,8 @@ class PageFieldManagement extends React.Component {
         isEnable: PropTypes.string,
       })
     ),
-    deleteCategory: PropTypes.any,
-    updateCategoryStatus: PropTypes.any,
+    deletePageField: PropTypes.any,
+    updatePageFieldStatus: PropTypes.any,
   };
 
   static defaultProps = {
@@ -52,9 +52,9 @@ class PageFieldManagement extends React.Component {
   }
 
   render() {
-    const { data, deleteCategory, updateCategoryStatus } = this.props;
-    // console.log(data);
-    // console.log(deleteCategory);
+    const { data, deletePageField, updatePageFieldStatus } = this.props;
+    console.log(data);
+    // console.log(deletePageField);
     const { formatMessage } = this.props.intl;
     return (
       <div className={cx(s.pagecontentWrapper, "pagecontentAR")}>
@@ -84,9 +84,9 @@ class PageFieldManagement extends React.Component {
               noDataText={formatMessage(messages.noRecordFound)}
             >
               <Thead>
-                {/* <Th scope="col">{formatMessage(messages.pageId)}</Th> */}
-                {/* <Th scope="col">{formatMessage(messages.step)}</Th>
-                <Th scope="col">{formatMessage(messages.title)}</Th> */}
+                <Th scope="col">{formatMessage(messages.fieldPageId)}</Th>
+                <Th scope="col">{formatMessage(messages.pageFieldStep)}</Th>
+                <Th scope="col">{formatMessage(messages.pageFieldTitle)}</Th>
                 <Th scope="col">{formatMessage(messages.setEnableDisable)}</Th>
                 <Th scope="col">{formatMessage(messages.editLabel)}</Th>
                 <Th scope="col">{formatMessage(messages.delete)}</Th>
@@ -98,18 +98,18 @@ class PageFieldManagement extends React.Component {
                   return (
                     <Tr key={key}>
                       <Td
-                        data-label={formatMessage(messages.idLabel)}
-                        column={formatMessage(messages.idLabel)}
-                        data={value.id}
+                        data-label={formatMessage(messages.fieldPageId)}
+                        column={formatMessage(messages.fieldPageId)}
+                        data={value.pageId}
                       />
                       <Td
-                        data-label={formatMessage(messages.categoryName)}
-                        column={formatMessage(messages.categoryName)}
+                        data-label={formatMessage(messages.pageFieldTitle)}
+                        column={formatMessage(messages.pageFieldTitle)}
                         data={value.title}
                       />
                       <Td
-                        data-label={formatMessage(messages.locationAddress)}
-                        column={formatMessage(messages.locationAddress)}
+                        data-label={formatMessage(messages.pageFieldStep)}
+                        column={formatMessage(messages.pageFieldStep)}
                         className={s.imageurl}
                         data={value.step}
                       />
@@ -128,7 +128,7 @@ class PageFieldManagement extends React.Component {
                         <a
                           href="javascript:void(0)"
                           onClick={() =>
-                            updateCategoryStatus(value.id, value.isEnable)
+                            updatePageFieldStatus(value.id, value.isEnable)
                           }
                         >
                           {value.isEnable == "true"
@@ -140,7 +140,7 @@ class PageFieldManagement extends React.Component {
                         data-label={formatMessage(messages.editLabel)}
                         column={formatMessage(messages.editLabel)}
                       >
-                        <Link to={"/siteadmin/edit/category/" + value.id}>
+                        <Link to={"/siteadmin/edit/pageField/" + value.id}>
                           <FormattedMessage {...messages.editLabel} />
                         </Link>
                       </Td>
@@ -150,7 +150,7 @@ class PageFieldManagement extends React.Component {
                       >
                         <div>
                           <Confirm
-                            onConfirm={() => deleteCategory(value.id)}
+                            onConfirm={() => deletePageField(value.id)}
                             body={formatMessage(
                               messages.areYouSureDeleteWishList
                             )}
@@ -180,8 +180,8 @@ class PageFieldManagement extends React.Component {
 const mapState = (state) => ({});
 
 const mapDispatch = {
-  deleteCategory,
-  updateCategoryStatus,
+  deletePageField,
+  updatePageFieldStatus,
 };
 
 export default injectIntl(

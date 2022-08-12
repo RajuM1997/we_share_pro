@@ -8,7 +8,7 @@ import sequelize from "../../sequelize";
 // Types
 import FieldsType from "../../types/FieldsType";
 
-const getCategoryAdmin = {
+const getFieldsAdmin = {
   type: new List(FieldsType),
 
   async resolve({ request }) {
@@ -20,7 +20,7 @@ const getCategoryAdmin = {
   },
 };
 
-export default getCategoryAdmin;
+export default getFieldsAdmin;
 
 /**
 

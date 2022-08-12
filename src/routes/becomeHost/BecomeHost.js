@@ -4,6 +4,10 @@ import PropTypes from "prop-types";
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 import s from "./BecomeHost.css";
 import cx from "classnames";
+// graphql;
+import { graphql, compose } from "react-apollo";
+import getFields from "./getFields.graphql";
+import getCategory from "./getCategory.graphql";
 
 // Component
 import ListPlaceStep1 from "../../components/ListPlaceStep1/ListPlaceStep1";
@@ -16,6 +20,22 @@ class BecomeHost extends React.Component {
     mode: PropTypes.string,
     listId: PropTypes.number,
     formBaseURI: PropTypes.string,
+    data: PropTypes.shape({
+      loading: PropTypes.bool,
+      getFields: PropTypes.array,
+    }),
+    // categoryData: PropTypes.shape({
+    //   loading: PropTypes.bool,
+    //   getCategory: PropTypes.array,
+    // }),
+  };
+  static defaultProps = {
+    data: {
+      loading: true,
+    },
+    categoryData: {
+      loading: true,
+    },
   };
 
   constructor(props) {
@@ -56,6 +76,25 @@ class BecomeHost extends React.Component {
 
   render() {
     const {
+      data: { loading },
+    } = this.props;
+
+    const {
+      data: { getFields },
+    } = this.props;
+
+    console.log(getFields);
+
+    const genarateField = () => {
+      try {
+        return JSON.parse(getFields.fields);
+      } catch (error) {
+        return [];
+      }
+    };
+
+    // console.log(getCategory);
+    const {
       title,
       formPage,
       formBaseURI,
@@ -64,13 +103,13 @@ class BecomeHost extends React.Component {
       baseCurrency,
     } = this.props;
     console.log(listId);
-    const currentPageData = Field.find(
-      (thisData) => thisData.pageId === this.state.currentPageId
+    const currentPageData = genarateField().find(
+      (thisData) => thisData.pageId == this.state.currentPageId
     );
+    console.log(currentPageData);
     return (
       <div className={s.root}>
         <div className={cx(s.container, "existingPage")}>
-          <pre>{JSON.stringify(this.state, null, 4)}</pre>
           {/* <ListPlaceStep1
             listId={listId}
             formPage={formPage}
@@ -96,4 +135,19 @@ class BecomeHost extends React.Component {
   }
 }
 
-export default withStyles(s)(BecomeHost);
+BecomeHost;
+export default compose(
+  withStyles(s),
+  graphql(getFields, {
+    options: {
+      fetchPolicy: "network-only",
+      ssr: false,
+    },
+  })
+  // graphql(getCategory, {
+  //   options: {
+  //     fetchPolicy: "network-only",
+  //     ssr: false,
+  //   },
+  // })
+)(BecomeHost);

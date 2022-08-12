@@ -13,16 +13,15 @@ import withStyles from "isomorphic-style-loader/lib/withStyles";
 import s from "./FieldManagement.css";
 import bt from "../../../components/commonStyle.css";
 import {
-  deleteCategory,
-  updateCategoryStatus,
-} from "../../../actions/siteadmin/deleteCategory";
+  deletePageField,
+  updatePageFieldStatus,
+} from "../../../actions/siteadmin/deletePageField";
 import history from "../../../core/history";
 
 // Translation
 import { FormattedMessage, InjectedIntl, injectIntl } from "react-intl";
 import messages from "../../../locale/messages";
 import { openListSettingsModal } from "../../../actions/siteadmin/modalActions";
-import ListSettingsModal from "../ListSettingsModal/ListSettingsModal";
 import NewListSettingModel from "../ListSettingsModel2/NewListSettingModel";
 
 class FieldManagement extends React.Component {
@@ -38,8 +37,8 @@ class FieldManagement extends React.Component {
         image: PropTypes.string,
       })
     ),
-    deleteCategory: PropTypes.any,
-    updateCategoryStatus: PropTypes.any,
+    deletePageField: PropTypes.any,
+    updatePageFieldStatus: PropTypes.any,
   };
 
   static defaultProps = {
@@ -54,12 +53,11 @@ class FieldManagement extends React.Component {
   handleClick() {
     history.push("/siteadmin/add");
   }
-
   render() {
-    const { data, deleteCategory, updateCategoryStatus } = this.props;
+    const { data, deletePageField, updatePageFieldStatus } = this.props;
     const { openListSettingsModal, page } = this.props;
-    // console.log(data);
-    // console.log(deleteCategory);
+    console.log(data);
+    // console.log(deletePageField);
     const { formatMessage } = this.props.intl;
     return (
       <div className={cx(s.pagecontentWrapper, "pagecontentAR")}>
@@ -94,7 +92,7 @@ class FieldManagement extends React.Component {
                 <Th scope="col">{formatMessage(messages.fieldName)}</Th>
                 <Th scope="col">{formatMessage(messages.fieldType)}</Th>
                 <Th scope="col">{formatMessage(messages.fieldPageId)}</Th>
-                <Th scope="col">{formatMessage(messages.fieldEnabled)}</Th>
+                <Th scope="col">{formatMessage(messages.setEnableDisable)}</Th>
               </Thead>
               {data &&
                 data.map(function(value, key) {
@@ -103,20 +101,21 @@ class FieldManagement extends React.Component {
                   return (
                     <Tr key={key}>
                       <Td
-                        data-label={formatMessage(messages.idLabel)}
-                        column={formatMessage(messages.idLabel)}
-                        data={value.id}
+                        data-label={formatMessage(messages.fieldName)}
+                        column={formatMessage(messages.fieldName)}
+                        data={value.name}
                       />
                       <Td
-                        data-label={formatMessage(messages.categoryName)}
-                        column={formatMessage(messages.categoryName)}
-                        data={value.title}
-                      />
-                      <Td
-                        data-label={formatMessage(messages.locationAddress)}
-                        column={formatMessage(messages.locationAddress)}
+                        data-label={formatMessage(messages.fieldPageId)}
+                        column={formatMessage(messages.fieldPageId)}
                         className={s.imageurl}
-                        data={value.subTitle}
+                        data={value.pageId}
+                      />
+                      <Td
+                        data-label={formatMessage(messages.fieldType)}
+                        column={formatMessage(messages.fieldType)}
+                        className={s.imageurl}
+                        data={value.type}
                       />
                       <Td
                         data-label={formatMessage(messages.status)}
@@ -133,7 +132,7 @@ class FieldManagement extends React.Component {
                         <a
                           href="javascript:void(0)"
                           onClick={() =>
-                            updateCategoryStatus(value.id, value.isEnable)
+                            updatePageFieldStatus(value.id, value.isEnable)
                           }
                         >
                           {value.isEnable == "true"
@@ -155,7 +154,7 @@ class FieldManagement extends React.Component {
                       >
                         <div>
                           <Confirm
-                            onConfirm={() => deleteCategory(value.id)}
+                            onConfirm={() => deletePageField(value.id)}
                             body={formatMessage(
                               messages.areYouSureDeleteWishList
                             )}
@@ -185,8 +184,8 @@ class FieldManagement extends React.Component {
 const mapState = (state) => ({});
 
 const mapDispatch = {
-  deleteCategory,
-  updateCategoryStatus,
+  deletePageField,
+  updatePageFieldStatus,
   openListSettingsModal,
 };
 

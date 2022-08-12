@@ -1,34 +1,30 @@
 import React from "react";
 import AdminLayout from "../../../components/Layout/AdminLayout";
-import SubField from "./SubField";
+// import WhyHostBlock7 from "./WhyHostBlock7";
+import { restrictUrls } from "../../../helpers/adminPrivileges";
+import FieldPage from "./FieldPage";
 
-const title = "fields";
+const title = "Field Page 1";
 
-export default async function action({ store, params }) {
-  console.log(params);
-  // From Redux Store
+export default async function action({ store }) {
   let isAdminAuthenticated = store.getState().runtime.isAdminAuthenticated;
   let adminPrivileges =
     store.getState().adminPrevileges.privileges &&
     store.getState().adminPrevileges.privileges.privileges;
 
   if (!isAdminAuthenticated) {
-    return {
-      redirect: "/siteadmin/login",
-    };
+    return { redirect: "/siteadmin/login" };
   }
 
-  // Admin restriction
-  // if (!restrictUrls("/siteadmin/categorys", adminPrivileges)) {
-  //   return {
-  //     redirect: "/siteadmin",
-  //   };
-  // }
+  if (!restrictUrls("/siteadmin/whyHost/Block7", adminPrivileges)) {
+    return { redirect: "/siteadmin" };
+  }
+
   return {
     title,
     component: (
       <AdminLayout>
-        <SubField title={title} />
+        <FieldPage title={title} />
       </AdminLayout>
     ),
   };
