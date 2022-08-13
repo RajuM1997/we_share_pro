@@ -37,6 +37,9 @@ import PhotosUpload from "../PhotosUpload/PhotosUpload";
 //Images
 import DefaultIcon from "../../../public/SiteIcons/defaultIcon.png";
 import Calendar from "../ListsPlaceStep1/Calendar";
+import HostCategoryPage from "./HostCategoryPage";
+import HostSubCategoryPage from "./HostSubCategoryPage";
+import { ItemAssignmentContext } from "twilio/lib/rest/numbers/v2/regulatoryCompliance/bundle/itemAssignment";
 
 class PageRenderer extends Component {
   static propTypes = {
@@ -45,8 +48,29 @@ class PageRenderer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { currentPage: 1, selectedCategoryValue: "" };
+    this.continuePage = this.continuePage.bind(this);
+    this.prePage = this.prePage.bind(this);
   }
+
+  continuePage(selectedCategory) {
+    this.setState((thisState) => ({
+      ...thisState,
+      currentPage: thisState.currentPage + 1,
+    }));
+
+    this.setState({
+      selectedCategoryValue: selectedCategory,
+    });
+    // console.log(selectedCategory);
+  }
+  prePage() {
+    this.setState((thisState) => ({
+      ...thisState,
+      currentPage: thisState.currentPage - 1,
+    }));
+  }
+
   render() {
     // console.log(this.state.selectedCategory);
     const {
@@ -58,10 +82,30 @@ class PageRenderer extends Component {
       formData,
       updateField,
       listId,
+      category,
+      subCategory,
     } = this.props;
-    console.log(currentPageData);
+    const { currentPage, selectedCategoryValue } = this.state;
+    // console.log(currentPageData);
+    // console.log(selectedCategoryValue);
+    //  console.log(subCategory);
+    const filterSubCateory = subCategory.filter((item) => {
+      item.primaryCategory == selectedCategoryValue;
+    });
+    console.log(filterSubCateory);
     return (
       <Grid className={s.container}>
+        {currentPage === 1 ? (
+          <HostCategoryPage
+            category={category}
+            continuePage={this.continuePage}
+          />
+        ) : (
+          <HostSubCategoryPage
+            continuePage={this.continuePage}
+            prePage={this.prePage}
+          />
+        )}
         <pre>{JSON.stringify(this.props, null, 4)}</pre>
         <Row className={cx(s.landingContainer, "arrowPosition")}>
           <Col xs={12} sm={7} md={7} lg={7}>
@@ -414,7 +458,7 @@ class PageRenderer extends Component {
                           s.pullRight,
                           "floatLeft"
                         )}
-                        disabled={totalPage -1 === pageIndex}
+                        disabled={totalPage - 1 === pageIndex}
                         onClick={nextPage}
                       >
                         <FormattedMessage {...messages.next} />
