@@ -27,7 +27,7 @@ class FieldPage extends Component {
       data: { loading },
       subCategoryId,
     } = this.props;
-    console.log("page", subCategoryId);
+    // console.log("page", subCategoryId);
     const {
       data: { getPageField },
     } = this.props;

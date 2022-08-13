@@ -6,8 +6,14 @@ import s from "./BecomeHost.css";
 import cx from "classnames";
 // graphql;
 import { graphql, compose } from "react-apollo";
-import getFields from "./getFields.graphql";
-import getCategory from "./getCategory.graphql";
+
+// query
+import getFieldsQuery from "./getFields.graphql";
+import getCategoryQuery from "./getCategory.graphql";
+import getSubCategoryQuery from "./getSubCategory.graphql";
+import getPageFieldQuery from "./getPageField.graphql";
+// Redux
+import { connect } from "react-redux";
 
 // Component
 import ListPlaceStep1 from "../../components/ListPlaceStep1/ListPlaceStep1";
@@ -27,14 +33,22 @@ class BecomeHost extends React.Component {
     mode: PropTypes.string,
     listId: PropTypes.number,
     formBaseURI: PropTypes.string,
-    data: PropTypes.shape({
+    getCategoryData: PropTypes.shape({
       loading: PropTypes.bool,
-      getFields: PropTypes.array,
+      getCategoryData: PropTypes.array,
     }),
-    // categoryData: PropTypes.shape({
-    //   loading: PropTypes.bool,
-    //   getCategory: PropTypes.array,
-    // }),
+    getSubCategoryData: PropTypes.shape({
+      loading: PropTypes.bool,
+      getSubCategoryData: PropTypes.array,
+    }),
+    getFieldsData: PropTypes.shape({
+      loading: PropTypes.bool,
+      getFieldsData: PropTypes.array,
+    }),
+    getPageFieldData: PropTypes.shape({
+      loading: PropTypes.bool,
+      getPageFieldData: PropTypes.array,
+    }),
   };
   static defaultProps = {
     data: {
@@ -87,14 +101,14 @@ class BecomeHost extends React.Component {
           ...page,
           pageIndex: index,
           fields,
-        }
+        };
       });
-      const groupedPages = groupBy(pages, 'pageId');
+      const groupedPages = groupBy(pages, "pageId");
       return Object.values(groupedPages);
     } catch (error) {
       return [];
     }
-  };
+  }
   updateFileByPageId = (currentPageId) => (key, value) => {
     this.setState((thisState) => ({
       ...thisState,
@@ -109,28 +123,27 @@ class BecomeHost extends React.Component {
   };
 
   render() {
-    const {
-      data: { loading },
-    } = this.props;
-
-    const {
-      data: { getFields },
-    } = this.props;
-
     // console.log(getCategory);
     const {
       title,
+      getCategoryData,
+      getSubCategoryData,
+      getFieldsData,
+      getPageFieldData,
       formPage,
       formBaseURI,
       mode,
       listId,
       baseCurrency,
     } = this.props;
-    console.log(listId);
+    // console.log(listId);
     const pageData = this.generatePageData();
     const currentPageFields = pageData[this.state.currentPageIndex] || [];
     const currentPageId = currentPageFields[0]?.pageId;
-    console.log(currentPageFields);
+    // console.log(currentPageFields);
+    console.log(getCategoryData.getCategoryAdmin);
+    console.log(getSubCategoryData.getSubCategoryAdmin);
+
     return (
       <div className={s.root}>
         <div className={cx(s.container, "existingPage")}>
@@ -144,7 +157,7 @@ class BecomeHost extends React.Component {
           <PageRenderer
             totalPage={pageData?.length}
             currentPageData={{
-              fields: currentPageFields
+              fields: currentPageFields,
             }}
             pageIndex={this.state.currentPageIndex}
             nextPage={this.nextPage}
@@ -156,26 +169,44 @@ class BecomeHost extends React.Component {
             baseCurrency={baseCurrency}
             formData={this.state.formData[currentPageId] || {}}
             updateField={this.updateFileByPageId(currentPageId)}
+            category={getCategoryData.getCategoryAdmin}
+            subCategory={getSubCategoryData.getSubCategoryAdmin}
+            fields={getFieldsData.getFieldsAdmin}
+            pageField={getPageFieldData.getPageFieldAdmin}
           />
         </div>
       </div>
     );
   }
 }
+const mapState = (state) => ({});
 
-BecomeHost;
+const mapDispatch = {};
 export default compose(
   withStyles(s),
-  graphql(getFields, {
+  graphql(getCategoryQuery, {
+    name: "getCategoryData",
     options: {
-      fetchPolicy: "network-only",
-      ssr: false,
+      ssr: true,
     },
-  })
-  // graphql(getCategory, {
-  //   options: {
-  //     fetchPolicy: "network-only",
-  //     ssr: false,
-  //   },
-  // })
+  }),
+  graphql(getSubCategoryQuery, {
+    name: "getSubCategoryData",
+    options: {
+      ssr: true,
+    },
+  }),
+  graphql(getFieldsQuery, {
+    name: "getFieldsData",
+    options: {
+      ssr: true,
+    },
+  }),
+  graphql(getPageFieldQuery, {
+    name: "getPageFieldData",
+    options: {
+      ssr: true,
+    },
+  }),
+  connect(mapState, mapDispatch)
 )(BecomeHost);

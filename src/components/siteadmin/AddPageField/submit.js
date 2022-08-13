@@ -4,6 +4,7 @@ import fetch from "../../../core/fetch";
 // Toaster
 import { toastr } from "react-redux-toastr";
 import history from "../../../core/history";
+
 const submit = (subCategoryId) => async (values, dispatch) => {
   console.log(values);
   if (values == null) {
@@ -45,7 +46,7 @@ const submit = (subCategoryId) => async (values, dispatch) => {
 
     if (data.addPageField.status === "success") {
       toastr.success("Page Field", "Successfully Added!");
-      // history.push("/siteadmin/category");
+      history.push(`/siteadmin/pageField/${subCategoryId}`);
     } else {
       toastr.error("Page Field", "Failed to create");
     }

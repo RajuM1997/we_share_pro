@@ -5,7 +5,7 @@ import {
 } from "graphql";
 
 const PageFieldType = new ObjectType({
-  name: "FieldPage",
+  name: "PageFields",
   fields: {
     id: { type: IntType },
     title: { type: StringType },

@@ -8,7 +8,7 @@ const updateFields = {
     name: { type: StringType },
     title: { type: StringType },
     type: { type: StringType },
-    subCategoryId: { type: StringType },
+    subCategoryId: { type: IntType },
     pageId: { type: IntType },
   },
 

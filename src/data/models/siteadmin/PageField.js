@@ -1,7 +1,7 @@
 import DataType from "sequelize";
 import Model from "../../sequelize";
 
-const PageField = Model.define("PageField", {
+const PageField = Model.define("PageFields", {
   id: {
     type: DataType.INTEGER,
     primaryKey: true,

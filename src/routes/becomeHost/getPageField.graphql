@@ -1,0 +1,11 @@
+query getPageFieldAdmin {
+  getPageFieldAdmin {
+    id
+    title
+    step
+    pageId
+    isEnable
+    createdAt
+    updatedAt
+  }
+}

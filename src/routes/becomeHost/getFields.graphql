@@ -1,5 +1,5 @@
-query getFields {
-  getFields {
+query getFieldsAdmin {
+  getFieldsAdmin {
     id
     name
     title
