@@ -8,14 +8,16 @@ const updatePageField = {
     title: { type: StringType },
     step: { type: StringType },
     pageId: { type: StringType },
+    subCategoryId: { type: IntType },
   },
-  async resolve({ request }, { id, title, step, pageId }) {
+  async resolve({ request }, { id, title, step, pageId, subCategoryId }) {
     if (request.user && request.user.admin == true) {
       const Update = await PageField.update(
         {
           title: title,
           step: step,
           pageId: pageId,
+          subCategoryId: subCategoryId,
         },
         {
           where: {

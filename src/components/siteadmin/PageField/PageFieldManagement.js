@@ -21,6 +21,7 @@ import history from "../../../core/history";
 // Translation
 import { FormattedMessage, InjectedIntl, injectIntl } from "react-intl";
 import messages from "../../../locale/messages";
+import { ItemAssignmentContext } from "twilio/lib/rest/numbers/v2/regulatoryCompliance/bundle/itemAssignment";
 
 class PageFieldManagement extends React.Component {
   static propTypes = {
@@ -32,6 +33,7 @@ class PageFieldManagement extends React.Component {
         step: PropTypes.string,
         pageId: PropTypes.number,
         isEnable: PropTypes.string,
+        singleField: [],
       })
     ),
     deletePageField: PropTypes.any,
@@ -47,14 +49,21 @@ class PageFieldManagement extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    history.push("/siteadmin/pageField/add");
+  handleClick(id) {
+    history.push(`/siteadmin/pageField/add/${id}`);
   }
 
   render() {
-    const { data, deletePageField, updatePageFieldStatus } = this.props;
-    console.log(data);
-    // console.log(deletePageField);
+    const {
+      data,
+      deletePageField,
+      updatePageFieldStatus,
+      subCategoryId,
+    } = this.props;
+    const singleFields = data.filter(
+      (item) => item.subCategoryId == subCategoryId
+    );
+    console.log("hello", subCategoryId);
     const { formatMessage } = this.props.intl;
     return (
       <div className={cx(s.pagecontentWrapper, "pagecontentAR")}>
@@ -64,7 +73,7 @@ class PageFieldManagement extends React.Component {
           </h1>
           <div className={s.space4}>
             <Button
-              onClick={this.handleClick}
+              onClick={() => this.handleClick(subCategoryId)}
               className={cx(bt.btnPrimary, bt.btnLarge)}
             >
               <FormattedMessage {...messages.addNew} />
@@ -91,33 +100,33 @@ class PageFieldManagement extends React.Component {
                 <Th scope="col">{formatMessage(messages.editLabel)}</Th>
                 <Th scope="col">{formatMessage(messages.delete)}</Th>
               </Thead>
-              {data &&
-                data.map(function(value, key) {
-                  console.log(value);
+              {singleFields &&
+                singleFields?.map((value, key) => {
+                  // console.log(value);
                   let isStatus;
                   return (
                     <Tr key={key}>
                       <Td
                         data-label={formatMessage(messages.fieldPageId)}
                         column={formatMessage(messages.fieldPageId)}
-                        data={value.pageId}
+                        data={value?.pageId}
                       />
                       <Td
                         data-label={formatMessage(messages.pageFieldTitle)}
                         column={formatMessage(messages.pageFieldTitle)}
-                        data={value.title}
+                        data={value?.title}
                       />
                       <Td
                         data-label={formatMessage(messages.pageFieldStep)}
                         column={formatMessage(messages.pageFieldStep)}
                         className={s.imageurl}
-                        data={value.step}
+                        data={value?.step}
                       />
                       <Td
                         data-label={formatMessage(messages.status)}
                         column={formatMessage(messages.status)}
                       >
-                        {value.isEnable == "true"
+                        {value?.isEnable == "true"
                           ? formatMessage(messages.enabledLabel)
                           : formatMessage(messages.disabledLabel)}
                       </Td>

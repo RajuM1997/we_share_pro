@@ -18,6 +18,7 @@ const query = gql`
       id
       title
       step
+      subCategoryId
       PageId
       isEnable
       createdAt

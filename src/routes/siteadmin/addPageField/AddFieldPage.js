@@ -25,9 +25,12 @@ class AddField extends React.Component {
     const {
       data: { loading },
       title,
+      subCategoryId,
     } = this.props;
 
-    return <AddPageFieldManagement title={title} />;
+    return (
+      <AddPageFieldManagement title={title} subCategoryId={subCategoryId} />
+    );
   }
 }
 

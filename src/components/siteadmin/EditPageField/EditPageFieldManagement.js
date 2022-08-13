@@ -71,6 +71,7 @@ class EditPageFieldManagement extends React.Component {
       submitting,
       dispatch,
       initialValues,
+      id,
     } = this.props;
     const { data } = this.props;
     const { formatMessage } = this.props.intl;
@@ -92,7 +93,7 @@ class EditPageFieldManagement extends React.Component {
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={"/siteadmin/fieldSetting"}
+                to={`/siteadmin/fieldSetting/${id}`}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,
@@ -125,7 +126,7 @@ class EditPageFieldManagement extends React.Component {
                     component="select"
                     type="select"
                     className={bt.commonControlInput}
-                    style={{ marginBottom: "10px" }}
+                    style={{ marginBottom: "10px", width: "100%" }}
                   >
                     <option value="" selected disabled>
                       Please Select

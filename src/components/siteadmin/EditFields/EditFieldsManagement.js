@@ -71,6 +71,7 @@ class EditFieldsManagement extends React.Component {
       submitting,
       dispatch,
       initialValues,
+      id,
     } = this.props;
     const { data } = this.props;
     const { formatMessage } = this.props.intl;
@@ -92,7 +93,7 @@ class EditFieldsManagement extends React.Component {
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={`siteadmin/`}
+                to={`/siteadmin/fields/${id}`}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,
@@ -142,7 +143,7 @@ class EditFieldsManagement extends React.Component {
                     type="select"
                     className={bt.commonControlInput}
                     label={formatMessage(messages.categoryAdminCategory)}
-                    style={{ marginBottom: "10px" }}
+                    style={{ marginBottom: "10px", width: "100%" }}
                   >
                     <option value="" selected disabled>
                       Please Select

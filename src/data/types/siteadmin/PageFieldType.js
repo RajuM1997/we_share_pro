@@ -10,6 +10,7 @@ const PageFieldType = new ObjectType({
     id: { type: IntType },
     title: { type: StringType },
     step: { type: StringType },
+    subCategoryId: { type: IntType },
     pageId: { type: IntType },
     isEnable: { type: StringType },
     createdAt: { type: StringType },

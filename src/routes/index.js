@@ -670,14 +670,14 @@ export default {
         ),
     },
     {
-      path: "/siteadmin/fieldSetting",
+      path: "/siteadmin/fieldSetting/:id",
       load: () =>
         import(
           /* webpackChunkName: 'siteadmin-whyHostBlock7' */ "./siteadmin/fieldPage"
         ),
     },
     {
-      path: "/siteadmin/pageField/add",
+      path: "/siteadmin/pageField/add/:id",
       load: () =>
         import(
           /* webpackChunkName: 'siteadmin-addPopularLocation' */ "./siteadmin/addPageField"
