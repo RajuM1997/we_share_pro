@@ -14,6 +14,13 @@ import ListPlaceStep1 from "../../components/ListPlaceStep1/ListPlaceStep1";
 import PageRenderer from "../../components/NewListPlaceStep1/PageRenderer";
 import { Field } from "../../components/ListsPlaceStep1/FakeDb";
 
+const groupBy = function(xs, key) {
+  return xs.reduce(function(rv, x) {
+    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return rv;
+  }, {});
+};
+
 class BecomeHost extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
@@ -41,33 +48,60 @@ class BecomeHost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPageId: 1,
+      currentPageIndex: 0,
       formData: {},
     };
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.updateFileByPageId = this.updateFileByPageId.bind(this);
   }
+
+  // UNSAFE_componentWillReceiveProps(nextProps) {
+  //     if (this.props?.data?.getFields && this.props?.data?.getFields?.length !== nextProps?.data?.getFields?.length) {
+  //       const fields = this.generatePageData();
+  //       console.log("fields", fields);
+  //       this.setState({
+  //         currentPageId: fields[0]?.pageId || 1
+  //       })
+  //     }
+  // }
+
   nextPage() {
     this.setState((thisState) => ({
       ...thisState,
-      currentPageId: thisState.currentPageId + 1,
+      currentPageIndex: thisState.currentPageIndex + 1,
     }));
   }
   previousPage() {
     this.setState((thisState) => ({
       ...thisState,
-      currentPageId: thisState.currentPageId - 1,
+      currentPageIndex: thisState.currentPageIndex - 1,
     }));
   }
-
-  updateFileByPageId = (key, value) => {
+  generatePageData() {
+    try {
+      console.log("this?.props?.data?.getFields", this?.props?.data?.getFields);
+      const pages = this?.props?.data?.getFields?.map((page, index) => {
+        const fields = JSON.parse(page.fields);
+        return {
+          ...page,
+          pageIndex: index,
+          fields,
+        }
+      });
+      const groupedPages = groupBy(pages, 'pageId');
+      return Object.values(groupedPages);
+    } catch (error) {
+      return [];
+    }
+  };
+  updateFileByPageId = (currentPageId) => (key, value) => {
     this.setState((thisState) => ({
       ...thisState,
       formData: {
         ...thisState.formData,
-        [this.state.currentPageId]: {
-          ...(thisState[this.state.currentPageId] || {}),
+        [currentPageId]: {
+          ...(thisState[currentPageId] || {}),
           [key]: value,
         },
       },
@@ -83,16 +117,6 @@ class BecomeHost extends React.Component {
       data: { getFields },
     } = this.props;
 
-    console.log(getFields);
-
-    const genarateField = () => {
-      try {
-        return JSON.parse(getFields.fields);
-      } catch (error) {
-        return [];
-      }
-    };
-
     // console.log(getCategory);
     const {
       title,
@@ -103,10 +127,10 @@ class BecomeHost extends React.Component {
       baseCurrency,
     } = this.props;
     console.log(listId);
-    const currentPageData = genarateField().find(
-      (thisData) => thisData.pageId == this.state.currentPageId
-    );
-    console.log(currentPageData);
+    const pageData = this.generatePageData();
+    const currentPageFields = pageData[this.state.currentPageIndex] || [];
+    const currentPageId = currentPageFields[0]?.pageId;
+    console.log(currentPageFields);
     return (
       <div className={s.root}>
         <div className={cx(s.container, "existingPage")}>
@@ -118,7 +142,11 @@ class BecomeHost extends React.Component {
             baseCurrency={baseCurrency}
           /> */}
           <PageRenderer
-            currentPageData={currentPageData}
+            totalPage={pageData?.length}
+            currentPageData={{
+              fields: currentPageFields
+            }}
+            pageIndex={this.state.currentPageIndex}
             nextPage={this.nextPage}
             previousPage={this.previousPage}
             listId={listId}
@@ -126,8 +154,8 @@ class BecomeHost extends React.Component {
             formBaseURI={formBaseURI}
             mode={mode}
             baseCurrency={baseCurrency}
-            formData={this.state.formData[this.state.currentPageId] || {}}
-            updateField={this.updateFileByPageId}
+            formData={this.state.formData[currentPageId] || {}}
+            updateField={this.updateFileByPageId(currentPageId)}
           />
         </div>
       </div>

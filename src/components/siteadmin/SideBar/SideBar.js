@@ -1071,7 +1071,7 @@ class SideBar extends Component {
                     <div>
                       {/* {validatePrivilege(19, privileges) && ( */}
                       {data &&
-                        data.map(function(value, key) {
+                        data.map((value, key)=> {
                           return (
                             <li
                               className={cx({

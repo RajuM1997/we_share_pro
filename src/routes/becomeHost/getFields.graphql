@@ -2,6 +2,7 @@ query getFields {
   getFields {
     id
     name
+    title
     type
     pageId
     fields

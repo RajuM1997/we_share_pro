@@ -50,6 +50,8 @@ class PageRenderer extends Component {
   render() {
     // console.log(this.state.selectedCategory);
     const {
+      totalPage,
+      pageIndex,
       currentPageData,
       nextPage,
       previousPage,
@@ -60,24 +62,18 @@ class PageRenderer extends Component {
     console.log(currentPageData);
     return (
       <Grid className={s.container}>
+        <pre>{JSON.stringify(this.props, null, 4)}</pre>
         <Row className={cx(s.landingContainer, "arrowPosition")}>
           <Col xs={12} sm={7} md={7} lg={7}>
             <div>
               <h3 className={s.landingContentTitle}>
-                {currentPageData?.label}
+                {currentPageData?.title}
               </h3>
-              {currentPageData?.subLabel && (
+              {currentPageData?.subtitle && (
                 <div className={cx(s.space4, s.spaceTop4)}>
                   <span className={s.bookingLandingStep}>
-                    {currentPageData?.subLabel}
+                    {currentPageData?.subtitle}
                   </span>
-                </div>
-              )}
-              {currentPageData?.label2 && (
-                <div className={s.spaceTop3}>
-                  <h3 className={s.landingContentTitle}>
-                    {currentPageData?.label2}
-                  </h3>
                 </div>
               )}
               <form onSubmit="">
@@ -232,7 +228,7 @@ class PageRenderer extends Component {
                               lg={12}
                             >
                               <ControlLabel className={s.landingLabel}>
-                                {item.label}
+                                {item.title}
                               </ControlLabel>
 
                               {item?.options &&
@@ -301,7 +297,7 @@ class PageRenderer extends Component {
                               ></textarea>
                             </Col>
                           );
-                        } else if (item.type === "textInput") {
+                        } else if (item.type === "text") {
                           return (
                             <Col
                               componentClass={ControlLabel}
@@ -370,7 +366,7 @@ class PageRenderer extends Component {
                               />
                             </Col>
                           );
-                        } else if (item.type === "coverImage") {
+                        } else if (item.type === "image") {
                           return (
                             <Col
                               componentClass={ControlLabel}
@@ -385,82 +381,46 @@ class PageRenderer extends Component {
                               />
                             </Col>
                           );
-                        } else if (item.type === "text") {
-                          console.log(item);
-                          return (
-                            <div className={s.landingMainContent}>
-                              <p className={cx(s.textHigh, s.space3)}>
-                                <span>{item.label}</span>
-                              </p>
-                              <div className={cx(s.textLow, s.space5)}>
-                                <p>
-                                  <span>{item.subLabel}</span>
-                                </p>
-                                <p>
-                                  <span>{item.description}</span>
-                                </p>
-                                <p>
-                                  <span>
-                                    {item.description2} {item.description3}
-                                  </span>
-                                </p>
-                                <p>
-                                  <span>{item.description4}</span>
-                                </p>
-                              </div>
-                            </div>
-                          );
                         }
                       })}
                     </Row>
                   </FormGroup>
-                  {currentPageData?.pageId === 1 ||
-                  currentPageData?.pageId === 2 ? (
-                    <FormGroup className={cx(s.formGroup, "floatLeft")}>
+                  <FormGroup className={s.formGroup}>
+                    <Col
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={12}
+                      className={s.noPadding}
+                    >
                       <Button
-                        className={cx(s.button, bt.btnPrimary, bt.btnLarge)}
-                        onClick={() => nextPage()}
+                        className={cx(
+                          s.button,
+                          bt.btnPrimaryBorder,
+                          bt.btnLarge,
+                          s.pullLeft,
+                          "floatRight"
+                        )}
+                        disabled={pageIndex === 0}
+                        onClick={previousPage}
                       >
-                        <FormattedMessage {...messages.continue} />
+                        <FormattedMessage {...messages.back} />
                       </Button>
-                    </FormGroup>
-                  ) : (
-                    <FormGroup className={s.formGroup}>
-                      <Col
-                        xs={12}
-                        sm={12}
-                        md={12}
-                        lg={12}
-                        className={s.noPadding}
+                      <Button
+                        className={cx(
+                          s.button,
+                          bt.btnPrimary,
+                          bt.btnLarge,
+                          s.pullRight,
+                          "floatLeft"
+                        )}
+                        disabled={totalPage -1 === pageIndex}
+                        onClick={nextPage}
                       >
-                        <Button
-                          className={cx(
-                            s.button,
-                            bt.btnPrimaryBorder,
-                            bt.btnLarge,
-                            s.pullLeft,
-                            "floatRight"
-                          )}
-                          onClick={() => previousPage()}
-                        >
-                          <FormattedMessage {...messages.back} />
-                        </Button>
-                        <Button
-                          className={cx(
-                            s.button,
-                            bt.btnPrimary,
-                            bt.btnLarge,
-                            s.pullRight,
-                            "floatLeft"
-                          )}
-                          // disabled={isDisabled}
-                          onClick={() => nextPage()}
-                        >
-                          <FormattedMessage {...messages.next} />
-                        </Button>
-                      </Col>
-                    </FormGroup>
-                  )}
+                        <FormattedMessage {...messages.next} />
+                      </Button>
+                    </Col>
+                  </FormGroup>
                 </div>
               </form>
             </div>
