@@ -4,7 +4,7 @@ import fetch from "../../../core/fetch";
 // Toaster
 import { toastr } from "react-redux-toastr";
 import history from "../../../core/history";
-async function submit(values, dispatch) {
+const submit = (subCategoryId) => async (values, dispatch) => {
   console.log(values);
   if (values == null) {
     toastr.error("Error Occured", "Please Add page Field");
@@ -14,12 +14,13 @@ async function submit(values, dispatch) {
     $title: String,
     $step: String,
     $pageId: String,
+    $subCategoryId: Int,
   ) {
     addPageField(
       title: $title,
       step: $step,
       pageId: $pageId,
-    
+      subCategoryId: $subCategoryId,
     ) {
         status
     }
@@ -34,7 +35,7 @@ async function submit(values, dispatch) {
       },
       body: JSON.stringify({
         query: mutation,
-        variables: values,
+        variables: { ...values, subCategoryId: Number(subCategoryId) },
       }),
       credentials: "include",
     });
@@ -49,6 +50,6 @@ async function submit(values, dispatch) {
       toastr.error("Page Field", "Failed to create");
     }
   }
-}
+};
 
 export default submit;

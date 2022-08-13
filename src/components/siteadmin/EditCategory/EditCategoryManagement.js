@@ -172,32 +172,40 @@ class EditCategoryManagement extends React.Component {
                   component={this.renderFormControl}
                   label={formatMessage(messages.categoryAdminDescription)}
                 />
-                <label
-                  className={s.labelTextNew}
-                  style={{ marginRight: "20px", marginBottom: "10px" }}
+                <Col
+                  xs={12}
+                  sm={12}
+                  md={12}
+                  lg={3}
+                  style={{ paddingLeft: "0px" }}
                 >
-                  Category
-                </label>
-                <Field
-                  name="category"
-                  component="select"
-                  type="select"
-                  className={bt.commonControlInput}
-                  style={{ marginBottom: "10px" }}
-                >
-                  <option value="Vacation Home">Vacation Home</option>
-                  <option value="Events Space">Events Space</option>
-                  <option value="Workspace">Workspace</option>
-                  <option value="Vehicles">Vehicles</option>
-                  <option value="RVs">RVs</option>
-                  <option value="Boats">Boats</option>
-                  <option value="Bikes">Bikes</option>
-                  <option value="Electronics">Electronics</option>
-                  <option value="Power Tools">Power Tools</option>
-                  <option value="Film Equipment">Film Equipment</option>
-                  <option value="Event Equipment">Event Equipment</option>
-                  <option value="Parking">Parking</option>
-                </Field>
+                  <label className={s.labelTextNew}>Category</label>
+                </Col>
+                <Col xs={12} sm={12} md={12} lg={9} className={s.categoryCol}>
+                  <Field
+                    name="category"
+                    component="select"
+                    type="select"
+                    className={bt.commonControlInput}
+                    style={{ marginBottom: "10px", width: "100%" }}
+                  >
+                    <option value="" selected disabled>
+                      Please Select
+                    </option>
+                    <option value="Vacation Home">Vacation Home</option>
+                    <option value="Events Space">Events Space</option>
+                    <option value="Workspace">Workspace</option>
+                    <option value="Vehicles">Vehicles</option>
+                    <option value="RVs">RVs</option>
+                    <option value="Boats">Boats</option>
+                    <option value="Bikes">Bikes</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Power Tools">Power Tools</option>
+                    <option value="Film Equipment">Film Equipment</option>
+                    <option value="Event Equipment">Event Equipment</option>
+                    <option value="Parking">Parking</option>
+                  </Field>
+                </Col>
                 <FormGroup className={s.formGroup}>
                   <Row>
                     <Col

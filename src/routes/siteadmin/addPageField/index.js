@@ -5,7 +5,7 @@ import AddFieldPage from "./AddFieldPage";
 
 const title = "Add Field";
 
-export default async function action({ store }) {
+export default async function action({ store, params }) {
   // From Redux Store
   let isAdminAuthenticated = store.getState().runtime.isAdminAuthenticated;
   let adminPrivileges =
@@ -20,12 +20,13 @@ export default async function action({ store }) {
   //   if (!restrictUrls("/siteadmin/popularlocation/add", adminPrivileges)) {
   //     return { redirect: "/siteadmin" };
   //   }
+  // console.log("i", params);
 
   return {
     title,
     component: (
       <AdminLayout>
-        <AddFieldPage title={title} />
+        <AddFieldPage title={title} subCategoryId={params?.id} />
       </AdminLayout>
     ),
   };

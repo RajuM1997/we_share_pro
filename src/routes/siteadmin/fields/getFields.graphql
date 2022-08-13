@@ -1,10 +1,11 @@
-query getFields {
-  getFields {
+query getFieldsAdmin {
+  getFieldsAdmin {
     id
     name
     type
     pageId
     fields
+    subCategoryId
     isEnable
   }
 }

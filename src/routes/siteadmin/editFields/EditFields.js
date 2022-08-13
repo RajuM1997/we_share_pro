@@ -30,8 +30,11 @@ class EditPageField extends React.Component {
     const {
       data: { loading, editFields },
       title,
+      id,
     } = this.props;
-    return <EditFieldsManagement title={title} initialValues={editFields} />;
+    return (
+      <EditFieldsManagement title={title} initialValues={editFields} id={id} />
+    );
   }
 }
 

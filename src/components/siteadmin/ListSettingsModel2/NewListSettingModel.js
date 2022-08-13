@@ -70,7 +70,10 @@ class NewListSettingsModal extends Component {
           </Modal.Header>
           <Modal.Body bsClass={s.logInModalBody}>
             <div className={cx(s.modalRoot, s.modalBorderBottom)}>
-              <NewListSettingForm subCategoryId={subCategoryId} />
+              <NewListSettingForm
+                subCategoryId={subCategoryId}
+                listSettingsModalStatus={closeListSettingsModal}
+              />
             </div>
           </Modal.Body>
         </Modal>

@@ -1,70 +1,65 @@
 import React, { Component } from "react";
+// Redux
+import { connect } from "react-redux";
 import { graphql, gql, compose } from "react-apollo";
 import PropTypes from "prop-types";
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 import s from "./FieldManagement.css";
 // Query
-import getFields from "./getFields.graphql";
-import getSubCategory from "./getSubCategory.graphql";
+import getFieldsQuery from "./getFields.graphql";
+import getSubCategoryQuery from "./getSubCategory.graphql";
 // component
 import FieldManagement from "../../../components/siteadmin/Field/FieldManagement";
 class SubField extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    data: PropTypes.shape({
+    getFieldsData: PropTypes.shape({
       loading: PropTypes.bool,
-      getFields: PropTypes.array,
+      getFieldsData: PropTypes.array,
     }),
-    subCategoryData: PropTypes.shape({
+    getSubCategoryData: PropTypes.shape({
       loading: PropTypes.bool,
-      getSubCategory: PropTypes.array,
+      getSubCategoryData: PropTypes.array,
     }),
   };
 
   static defaultProps = {
-    data: {
+    getFieldsData: {
       loading: true,
     },
-    subCategoryData: {
+    getSubCategoryData: {
       loading: true,
     },
   };
 
   render() {
-    const {
-      data: { loading },
-      subCategoryId,
-    } = this.props;
-
-    const {
-      data: { getFields },
-      // subCategoryData: { getSubCategory },
-    } = this.props;
-    // console.log(getSubCategory);
+    const { subCategoryId, getFieldsData, getSubCategoryData } = this.props;
+    // console.log(data);
     return (
-      <>
-        <FieldManagement
-          data={getFields}
-          subCategoryId={subCategoryId}
-          // subCategoryData={getSubCategory}
-        />
-      </>
+      <FieldManagement
+        data={getFieldsData.getFieldsAdmin}
+        subCategoryId={subCategoryId}
+        // subCategoryData={getSubCategory}
+      />
     );
   }
 }
+const mapState = (state) => ({});
 
+const mapDispatch = {};
 export default compose(
   withStyles(s),
-  graphql(getFields, {
+  graphql(getFieldsQuery, {
+    name: "getFieldsData",
     options: {
-      fetchPolicy: "network-only",
-      ssr: false,
+      ssr: true,
     },
-  })
-  // graphql(getSubCategory, {
-  //   options: {
-  //     fetchPolicy: "network-only",
-  //     ssr: false,
-  //   },
-  // })
+  }),
+  graphql(getSubCategoryQuery, {
+    name: "getSubCategoryData",
+    options: {
+      ssr: true,
+    },
+  }),
+  connect(mapState, mapDispatch)
 )(SubField);

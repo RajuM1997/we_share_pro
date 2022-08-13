@@ -64,7 +64,12 @@ class FieldManagement extends React.Component {
       subCategoryId,
     } = this.props;
 
-    console.log("data", subCategoryId);
+    const singleFields = data.filter(
+      (item) => item.subCategoryId == subCategoryId
+    );
+    console.log(singleFields);
+
+    // console.log("data", subCategoryId);
     // console.log(deleteFields);
     const { formatMessage } = this.props.intl;
     return (
@@ -104,9 +109,9 @@ class FieldManagement extends React.Component {
                 <Th scope="col">{formatMessage(messages.editLabel)}</Th>
                 <Th scope="col">{formatMessage(messages.delete)}</Th>
               </Thead>
-              {data &&
-                data.map(function(value, key) {
-                  console.log(value);
+              {singleFields &&
+                singleFields.map((value, key) => {
+                  // console.log(value);
                   let isStatus;
                   return (
                     <Tr key={key}>

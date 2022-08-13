@@ -16,7 +16,14 @@ const editPageField = {
   async resolve({ request }, { id }) {
     // Get All User Profile Data
     const PageFieldData = await PageField.find({
-      attributes: ["id", "title", "step", "pageId", "isEnable"],
+      attributes: [
+        "id",
+        "title",
+        "step",
+        "pageId",
+        "subCategoryId",
+        "isEnable",
+      ],
       where: {
         id: id,
       },

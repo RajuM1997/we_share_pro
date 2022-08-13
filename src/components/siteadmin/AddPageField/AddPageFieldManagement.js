@@ -103,7 +103,9 @@ class AddPageFieldManagement extends React.Component {
       submitting,
       dispatch,
       initialValues,
+      subCategoryId,
     } = this.props;
+    console.log(subCategoryId);
     const { data } = this.props;
     return (
       <div>
@@ -122,7 +124,7 @@ class AddPageFieldManagement extends React.Component {
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={"/siteadmin/fieldSetting"}
+                to={`/siteadmin/fieldSetting/${subCategoryId}`}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,
@@ -134,8 +136,9 @@ class AddPageFieldManagement extends React.Component {
               </Link>
             </div>
             <Panel className={s.panelHeader}>
-              <form onSubmit={handleSubmit(submit)}>
+              <form onSubmit={handleSubmit(submit(subCategoryId))}>
                 {error && <strong>{formatMessage(error)}</strong>}
+
                 <div className={s.selectField}>
                   <label
                     className={s.labelTextNew}

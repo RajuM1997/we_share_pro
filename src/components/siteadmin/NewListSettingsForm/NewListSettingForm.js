@@ -35,6 +35,7 @@ class NewListSettingsForm extends Component {
     const {
       data: { loading },
       subCategoryId,
+      listSettingsModalStatus,
     } = this.props;
 
     const {
@@ -45,6 +46,7 @@ class NewListSettingsForm extends Component {
         <AddNewListSettingsForm
           data={getPageField}
           subCategoryId={subCategoryId}
+          listSettingsModalStatus={listSettingsModalStatus}
         />
       </div>
     );

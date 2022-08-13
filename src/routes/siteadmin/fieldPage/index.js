@@ -6,7 +6,7 @@ import FieldPage from "./FieldPage";
 
 const title = "Field Page 1";
 
-export default async function action({ store }) {
+export default async function action({ store, params }) {
   let isAdminAuthenticated = store.getState().runtime.isAdminAuthenticated;
   let adminPrivileges =
     store.getState().adminPrevileges.privileges &&
@@ -19,12 +19,12 @@ export default async function action({ store }) {
   if (!restrictUrls("/siteadmin/whyHost/Block7", adminPrivileges)) {
     return { redirect: "/siteadmin" };
   }
-
+  // console.log("index", params);
   return {
     title,
     component: (
       <AdminLayout>
-        <FieldPage title={title} />
+        <FieldPage title={title} subCategoryId={params?.id} />
       </AdminLayout>
     ),
   };

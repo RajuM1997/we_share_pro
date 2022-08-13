@@ -1102,7 +1102,86 @@ class SideBar extends Component {
                   </Collapse>
                 </div>
               )}
-              {validatePrivilege(21, privileges) && (
+              {(validatePrivilege(8, privileges) ||
+                validatePrivilege(9, privileges)) && (
+                <div>
+                  <div
+                    className={cx({
+                      [s.active]: categoryFieldArray.includes(location),
+                    })}
+                  >
+                    <Button
+                      bsStyle="link"
+                      className={cx(
+                        s.button,
+                        s.noPadding,
+                        s.sideNavitem,
+                        s.disPlayTable
+                      )}
+                      onClick={() =>
+                        this.setState({
+                          fieldSetting: !this.state.fieldSetting,
+                        })
+                      }
+                    >
+                      <span className={s.disPlayTabelCell}>
+                        <FontAwesome.FaHome className={s.navigationIcon} />
+                      </span>
+                      <span className={s.disPlayTabelCell}>
+                        <FormattedMessage {...messages.pageSetting} />
+                      </span>
+                      {this.state.fieldSetting && (
+                        <span className={s.disPlayTabelCell}>
+                          <FontAwesome.FaAngleUp className={s.navigationIcon} />
+                        </span>
+                      )}
+
+                      {!this.state.fieldSetting && (
+                        <span className={s.disPlayTabelCell}>
+                          <FontAwesome.FaAngleDown
+                            className={s.navigationIcon}
+                          />
+                        </span>
+                      )}
+                    </Button>
+                  </div>
+                  <Collapse in={this.state.fieldSetting} className={s.subMenu}>
+                    <div>
+                      {/* {validatePrivilege(19, privileges) && ( */}
+                      {data &&
+                        data.map((value, key) => {
+                          return (
+                            <li
+                              className={cx({
+                                [s.active]:
+                                  location === "/siteadmin/fieldSetting",
+                              })}
+                              key={value.id}
+                            >
+                              <Link
+                                to={`/siteadmin/fieldSetting/${value.id}`}
+                                className={cx(s.sideNavitem, s.disPlayTable)}
+                                onClick={() => this.openClose()}
+                              >
+                                <span className={s.disPlayTabelCell}>
+                                  <FontAwesome.FaHome
+                                    className={s.navigationIcon}
+                                  />
+                                </span>
+                                <span className={s.disPlayTabelCell}>
+                                  {/* <FormattedMessage {...messages.fieldCar} /> */}
+                                  {value.subCategory}
+                                </span>
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      {/* )} */}
+                    </div>
+                  </Collapse>
+                </div>
+              )}
+              {/* {validatePrivilege(21, privileges) && (
                 <li
                   className={cx({
                     [s.active]: location === "/siteadmin/fieldSetting",
@@ -1121,7 +1200,7 @@ class SideBar extends Component {
                     </span>
                   </Link>
                 </li>
-              )}
+              )} */}
               {validatePrivilege(16, privileges) && (
                 <div>
                   <div

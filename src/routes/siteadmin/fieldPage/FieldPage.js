@@ -25,12 +25,15 @@ class FieldPage extends Component {
   render() {
     const {
       data: { loading },
+      subCategoryId,
     } = this.props;
-
+    console.log("page", subCategoryId);
     const {
       data: { getPageField },
     } = this.props;
-    return <PageFieldManagement data={getPageField} />;
+    return (
+      <PageFieldManagement data={getPageField} subCategoryId={subCategoryId} />
+    );
   }
 }
 

@@ -170,7 +170,8 @@ class AddListSettingsForm extends Component {
       typeId,
       initialValues,
       image,
-      openListSettingsModal,
+      listSettingsModalStatus,
+      closeListSettingsModal,
     } = this.props;
     const { formatMessage } = this.props.intl;
     const { name, title, type, pageId } = this.state;
@@ -342,6 +343,7 @@ class AddListSettingsForm extends Component {
                   className={cx(bt.btnPrimaryBorder, bt.btnLarge)}
                   type="submit"
                   disabled={submitting}
+                  // onClick={() => listSettingsModalStatus(false)}
                 >
                   {formatMessage(messages.add)}
                 </Button>
