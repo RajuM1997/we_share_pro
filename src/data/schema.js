@@ -213,6 +213,12 @@ import updatePageField from "./mutations/SiteAdmin/updatePageField";
 import updatePageFieldStatus from "./mutations/SiteAdmin/updatePageFieldStatus";
 import deletePageField from "./mutations/SiteAdmin/deletePageField";
 
+// edit fields
+import editFields from "./queries/siteadmin/editFields";
+import updateFields from "./mutations/SiteAdmin/updateFields";
+import updateFieldsStatus from "./mutations/SiteAdmin/updateFieldsStatus";
+import deleteFields from "./mutations/SiteAdmin/deleteFields";
+
 // update category
 import updateCategory from "./mutations/SiteAdmin/updateCategory";
 import updateCategoryStatus from "./mutations/SiteAdmin/updateCategoryStatus";
@@ -568,6 +574,7 @@ const schema = new Schema({
       getFields,
       getPageField,
       editPageField,
+      editFields,
     },
   }),
   mutation: new ObjectType({
@@ -691,6 +698,9 @@ const schema = new Schema({
       updatePageField,
       updatePageFieldStatus,
       deletePageField,
+      updateFields,
+      updateFieldsStatus,
+      deleteFields,
     },
   }),
 });

@@ -5,6 +5,8 @@ import withStyles from "isomorphic-style-loader/lib/withStyles";
 import s from "./FieldManagement.css";
 // Query
 import getFields from "./getFields.graphql";
+import getSubCategory from "./getSubCategory.graphql";
+// component
 import FieldManagement from "../../../components/siteadmin/Field/FieldManagement";
 class SubField extends Component {
   static propTypes = {
@@ -13,10 +15,17 @@ class SubField extends Component {
       loading: PropTypes.bool,
       getFields: PropTypes.array,
     }),
+    subCategoryData: PropTypes.shape({
+      loading: PropTypes.bool,
+      getSubCategory: PropTypes.array,
+    }),
   };
 
   static defaultProps = {
     data: {
+      loading: true,
+    },
+    subCategoryData: {
       loading: true,
     },
   };
@@ -24,12 +33,23 @@ class SubField extends Component {
   render() {
     const {
       data: { loading },
+      subCategoryId,
     } = this.props;
 
     const {
       data: { getFields },
+      // subCategoryData: { getSubCategory },
     } = this.props;
-    return <FieldManagement data={getFields} />;
+    // console.log(getSubCategory);
+    return (
+      <>
+        <FieldManagement
+          data={getFields}
+          subCategoryId={subCategoryId}
+          // subCategoryData={getSubCategory}
+        />
+      </>
+    );
   }
 }
 
@@ -41,4 +61,10 @@ export default compose(
       ssr: false,
     },
   })
+  // graphql(getSubCategory, {
+  //   options: {
+  //     fetchPolicy: "network-only",
+  //     ssr: false,
+  //   },
+  // })
 )(SubField);

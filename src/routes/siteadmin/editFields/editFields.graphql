@@ -1,0 +1,10 @@
+query editFields($id: Int!) {
+  editFields(id: $id) {
+    id
+    name
+    type
+    title
+    pageId
+    isEnable
+  }
+}

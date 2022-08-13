@@ -19,6 +19,7 @@ async function submit(values, dispatch, fields) {
     $title: String,
     $type: String,
     $fields: String,
+    $subCategoryId: Int,
     $pageId: Int,
   ) {
     addFields(
@@ -26,6 +27,7 @@ async function submit(values, dispatch, fields) {
       title: $title,
       type: $type,
       fields: $fields,
+      subCategoryId: $subCategoryId,
       pageId: $pageId,
     ) {
         status

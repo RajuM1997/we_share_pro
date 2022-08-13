@@ -13,14 +13,15 @@ import withStyles from "isomorphic-style-loader/lib/withStyles";
 import s from "./FieldManagement.css";
 import bt from "../../../components/commonStyle.css";
 import {
-  deletePageField,
-  updatePageFieldStatus,
-} from "../../../actions/siteadmin/deletePageField";
+  deleteFields,
+  updateFieldsStatus,
+} from "../../../actions/siteadmin/deleteFields";
 import history from "../../../core/history";
 
 // Translation
 import { FormattedMessage, InjectedIntl, injectIntl } from "react-intl";
 import messages from "../../../locale/messages";
+
 import { openListSettingsModal } from "../../../actions/siteadmin/modalActions";
 import NewListSettingModel from "../ListSettingsModel2/NewListSettingModel";
 
@@ -37,8 +38,8 @@ class FieldManagement extends React.Component {
         image: PropTypes.string,
       })
     ),
-    deletePageField: PropTypes.any,
-    updatePageFieldStatus: PropTypes.any,
+    deleteFields: PropTypes.any,
+    updateFieldsStatus: PropTypes.any,
   };
 
   static defaultProps = {
@@ -54,10 +55,17 @@ class FieldManagement extends React.Component {
     history.push("/siteadmin/add");
   }
   render() {
-    const { data, deletePageField, updatePageFieldStatus } = this.props;
-    const { openListSettingsModal, page } = this.props;
-    console.log(data);
-    // console.log(deletePageField);
+    const {
+      data,
+      deleteFields,
+      updateFieldsStatus,
+      openListSettingsModal,
+      page,
+      subCategoryId,
+    } = this.props;
+
+    console.log("data", subCategoryId);
+    // console.log(deleteFields);
     const { formatMessage } = this.props.intl;
     return (
       <div className={cx(s.pagecontentWrapper, "pagecontentAR")}>
@@ -65,7 +73,7 @@ class FieldManagement extends React.Component {
           <h1 className={s.headerTitle}>
             <FormattedMessage {...messages.field} />
           </h1>
-          <NewListSettingModel />
+          <NewListSettingModel subCategoryId={subCategoryId} />
           <div className={s.space4}>
             <Button
               className={cx(bt.btnPrimary, bt.btnLarge)}
@@ -93,6 +101,8 @@ class FieldManagement extends React.Component {
                 <Th scope="col">{formatMessage(messages.fieldType)}</Th>
                 <Th scope="col">{formatMessage(messages.fieldPageId)}</Th>
                 <Th scope="col">{formatMessage(messages.setEnableDisable)}</Th>
+                <Th scope="col">{formatMessage(messages.editLabel)}</Th>
+                <Th scope="col">{formatMessage(messages.delete)}</Th>
               </Thead>
               {data &&
                 data.map(function(value, key) {
@@ -132,7 +142,7 @@ class FieldManagement extends React.Component {
                         <a
                           href="javascript:void(0)"
                           onClick={() =>
-                            updatePageFieldStatus(value.id, value.isEnable)
+                            updateFieldsStatus(value.id, value.isEnable)
                           }
                         >
                           {value.isEnable == "true"
@@ -144,7 +154,7 @@ class FieldManagement extends React.Component {
                         data-label={formatMessage(messages.editLabel)}
                         column={formatMessage(messages.editLabel)}
                       >
-                        <Link to={"/siteadmin/edit/category/" + value.id}>
+                        <Link to={"/siteadmin/edit/fields/" + value.id}>
                           <FormattedMessage {...messages.editLabel} />
                         </Link>
                       </Td>
@@ -154,7 +164,7 @@ class FieldManagement extends React.Component {
                       >
                         <div>
                           <Confirm
-                            onConfirm={() => deletePageField(value.id)}
+                            onConfirm={() => deleteFields(value.id)}
                             body={formatMessage(
                               messages.areYouSureDeleteWishList
                             )}
@@ -184,8 +194,8 @@ class FieldManagement extends React.Component {
 const mapState = (state) => ({});
 
 const mapDispatch = {
-  deletePageField,
-  updatePageFieldStatus,
+  deleteFields,
+  updateFieldsStatus,
   openListSettingsModal,
 };
 

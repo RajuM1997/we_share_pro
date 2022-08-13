@@ -1,13 +1,11 @@
 // GrpahQL
 import { GraphQLInt as IntType, GraphQLNonNull as NonNull } from "graphql";
 
-import PageFieldType from "../../types/siteadmin/PageFieldType";
+import FieldsType from "../../types/FieldsType";
+import { Fields } from "../../models";
 
-// Sequelize models
-import { PageField } from "../../models";
-
-const deletePageField = {
-  type: PageFieldType,
+const deleteFields = {
+  type: FieldsType,
 
   args: {
     id: { type: new NonNull(IntType) },
@@ -15,20 +13,20 @@ const deletePageField = {
 
   async resolve({ request, response }, { id }) {
     if (request.user.admin) {
-      const PageFieldDetails = await PageField.findById(id);
-      if (!PageFieldDetails) {
+      const FieldsDetails = await Fields.findById(id);
+      if (!FieldsDetails) {
         return {
           status: "404",
         };
       }
 
-      const deletePageField = await PageField.destroy({
+      const deleteFields = await Fields.destroy({
         where: {
           id: id,
         },
       });
 
-      if (deletePageField) {
+      if (deleteFields) {
         return {
           status: "200",
         };
@@ -45,4 +43,4 @@ const deletePageField = {
   },
 };
 
-export default deletePageField;
+export default deleteFields;

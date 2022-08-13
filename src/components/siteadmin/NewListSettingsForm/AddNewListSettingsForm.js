@@ -103,6 +103,7 @@ class AddListSettingsForm extends Component {
     if (title && name && type && pageId) {
       const data = {
         fields: JSON.stringify(this.state.fields),
+        subCategoryId: Number(this.props.subCategoryId),
         title,
         name,
         type,
@@ -113,20 +114,6 @@ class AddListSettingsForm extends Component {
     } else {
       toastr.error("Error", "Field can't be empty");
     }
-
-    //   const resp = await fetch("/graphql", {
-    //   method: "post",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     query: query,
-    //     variables: data,
-    //   }),
-    //   credentials: "include",
-    // });
-
     e.target.reset();
   };
   renderFormControl = ({
@@ -186,10 +173,9 @@ class AddListSettingsForm extends Component {
       openListSettingsModal,
     } = this.props;
     const { formatMessage } = this.props.intl;
-    console.log(this.state.option);
     const { name, title, type, pageId } = this.state;
-    const { data } = this.props;
-    console.log(data);
+    const { data, subCategoryId } = this.props;
+    // console.log(data);
     return (
       <div className={cx(s.formMaxWidth, "maxwidthcenter", "empty")}>
         <form onSubmit={this.handleSubmit}>

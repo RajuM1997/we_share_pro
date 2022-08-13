@@ -60,7 +60,7 @@ class PageFieldManagement extends React.Component {
       <div className={cx(s.pagecontentWrapper, "pagecontentAR")}>
         <div>
           <h1 className={s.headerTitle}>
-            <FormattedMessage {...messages.category} />
+            <FormattedMessage {...messages.field} />
           </h1>
           <div className={s.space4}>
             <Button

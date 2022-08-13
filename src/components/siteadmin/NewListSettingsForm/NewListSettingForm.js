@@ -34,6 +34,7 @@ class NewListSettingsForm extends Component {
   render() {
     const {
       data: { loading },
+      subCategoryId,
     } = this.props;
 
     const {
@@ -41,7 +42,10 @@ class NewListSettingsForm extends Component {
     } = this.props;
     return (
       <div className="empty">
-        <AddNewListSettingsForm data={getPageField} />
+        <AddNewListSettingsForm
+          data={getPageField}
+          subCategoryId={subCategoryId}
+        />
       </div>
     );
   }

@@ -546,6 +546,13 @@ const messages = defineMessages({
     defaultMessage: "Title",
     description: "Title",
   },
+
+  editField: {
+    d: "app.editField",
+    defaultMessage: "Edit Fields",
+    description: "Edit",
+  },
+
   fieldPageId: {
     id: "app.fieldPageId",
     defaultMessage: "Page ID",

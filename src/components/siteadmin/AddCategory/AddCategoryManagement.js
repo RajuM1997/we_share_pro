@@ -207,16 +207,7 @@ class AddCategoryManagement extends React.Component {
                 >
                   <label className={s.labelTextNew}>Category</label>
                 </Col>
-                <Col
-                  xs={12}
-                  sm={12}
-                  md={12}
-                  lg={9}
-                  style={{
-                    paddingLeft: "0px",
-                    paddingRight: "0px",
-                  }}
-                >
+                <Col xs={12} sm={12} md={12} lg={9} className={s.categoryCol}>
                   {" "}
                   <Field
                     name="category"
@@ -224,7 +215,7 @@ class AddCategoryManagement extends React.Component {
                     type="select"
                     className={bt.commonControlInput}
                     label={formatMessage(messages.categoryAdminCategory)}
-                    style={{ width: "100%", paddingBottom: "20px" }}
+                    style={{ width: "100%" }}
                   >
                     <option value="Vacation Home">Vacation Home</option>
                     <option value="Events Space">Events Space</option>
@@ -260,6 +251,7 @@ class AddCategoryManagement extends React.Component {
                         className={cx(bt.button, bt.btnPrimary, bt.btnlarge)}
                         type="submit"
                         disabled={submitting}
+                        style={{ marginTop: "10px" }}
                       >
                         <FormattedMessage {...messages.save} />
                       </Button>

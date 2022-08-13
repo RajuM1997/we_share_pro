@@ -1,11 +1,12 @@
 import React from "react";
 import AdminLayout from "../../../components/Layout/AdminLayout";
-import SubField from "./SubField";
 
-const title = "fields";
+import { restrictUrls } from "../../../helpers/adminPrivileges";
+import EditFields from "./EditFields";
+
+const title = "Edit Field";
 
 export default async function action({ store, params }) {
-  console.log(params);
   // From Redux Store
   let isAdminAuthenticated = store.getState().runtime.isAdminAuthenticated;
   let adminPrivileges =
@@ -13,22 +14,21 @@ export default async function action({ store, params }) {
     store.getState().adminPrevileges.privileges.privileges;
 
   if (!isAdminAuthenticated) {
-    return {
-      redirect: "/siteadmin/login",
-    };
+    return { redirect: "/siteadmin/login" };
   }
 
   // Admin restriction
-  // if (!restrictUrls("/siteadmin/categorys", adminPrivileges)) {
-  //   return {
-  //     redirect: "/siteadmin",
-  //   };
+  // if (!restrictUrls("/siteadmin", adminPrivileges)) {
+  //   return { redirect: "/siteadmin" };
   // }
+
+  const id = Number(params.id);
+
   return {
     title,
     component: (
       <AdminLayout>
-        <SubField title={title} subCategoryId={params?.id} />
+        <EditFields title={title} id={id} />
       </AdminLayout>
     ),
   };

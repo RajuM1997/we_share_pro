@@ -53,7 +53,7 @@ class NewListSettingsModal extends Component {
   }
 
   render() {
-    const { closeListSettingsModal } = this.props;
+    const { closeListSettingsModal, subCategoryId } = this.props;
     const { listSettingsModalStatus } = this.state;
 
     return (
@@ -70,7 +70,7 @@ class NewListSettingsModal extends Component {
           </Modal.Header>
           <Modal.Body bsClass={s.logInModalBody}>
             <div className={cx(s.modalRoot, s.modalBorderBottom)}>
-              <NewListSettingForm />
+              <NewListSettingForm subCategoryId={subCategoryId} />
             </div>
           </Modal.Body>
         </Modal>

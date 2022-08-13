@@ -1,5 +1,5 @@
 // Fetch Request
-import fetch from "../../../core/fetch";
+import fetch from "../../../core/fetch/fetch.server";
 
 // Toaster
 import { toastr } from "react-redux-toastr";
@@ -7,16 +7,16 @@ import history from "../../../core/history";
 async function submit(values, dispatch) {
   console.log(values);
   const mutation = `
-  mutation updatePageField(
-    $id: Int,
+  mutation updateFields(
+    $name: String,
     $title: String,
-    $step: String,
-    $pageId: String,
+    $type: String,
+    $pageId: Int,
   ) {
-    updatePageField(
-      id: $id,
+    updateFields(
+      name: $name,
       title: $title,
-      step: $step,
+      type: $type,
       pageId: $pageId,
     ) {
         status
@@ -39,11 +39,11 @@ async function submit(values, dispatch) {
 
   const { data } = await resp.json();
 
-  if (data.updatePageField.status === "success") {
-    toastr.success("Update Page Field", "Changes are updated!");
-    history.push("/siteadmin/fieldSetting");
+  if (data.updateFields.status === "success") {
+    toastr.success("Update Fields", "Changes are updated!");
+    history.push("/siteadmin/");
   } else {
-    toastr.error("Update Page Field", "Updating category failed");
+    toastr.error("Update Fields", "Updating Fields failed");
   }
 }
 

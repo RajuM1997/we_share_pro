@@ -3,15 +3,6 @@
 @import "../admin-form.css";
 @import "../../common.css";
 @import "../../helpers.css";
-.selectField {
-  display: flex;
-  -webkit-box-flex: 3;
-  -ms-flex-positive: 3;
-  flex-grow: 3;
-  align-content: center;
-  justify-content: space-around;
-  flex-direction: column;
-}
 .categoryCol {
   padding-left: 6px;
   padding-right: 0;

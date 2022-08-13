@@ -21,6 +21,10 @@ const Fields = Model.define("Fields", {
     type: DataType.STRING,
     allowNull: false,
   },
+  subCategoryId: {
+    type: DataType.INTEGER,
+    allowNull: false,
+  },
   pageId: {
     type: DataType.INTEGER,
     allowNull: false,

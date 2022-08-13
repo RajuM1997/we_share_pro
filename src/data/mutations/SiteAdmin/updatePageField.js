@@ -7,9 +7,9 @@ const updatePageField = {
     id: { type: IntType },
     title: { type: StringType },
     step: { type: StringType },
-    pageId: { type: IntType },
+    pageId: { type: StringType },
   },
-  async resolve({ request }, { id, title, step }) {
+  async resolve({ request }, { id, title, step, pageId }) {
     if (request.user && request.user.admin == true) {
       const Update = await PageField.update(
         {

@@ -684,6 +684,13 @@ export default {
         ),
     },
     {
+      path: "/siteadmin/edit/fields/:id",
+      load: () =>
+        import(
+          /* webpackChunkName: 'siteadmin-editPopularLocation' */ "./siteadmin/editFields"
+        ),
+    },
+    {
       path: "/siteadmin/edit/pageField/:id",
       load: () =>
         import(

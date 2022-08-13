@@ -2,29 +2,32 @@ import FieldsType from "../../types/FieldsType";
 import { Fields } from "../../models";
 import { GraphQLString as StringType, GraphQLInt as IntType } from "graphql";
 
-const addFields = {
+const updateFields = {
   type: FieldsType,
   args: {
     name: { type: StringType },
     title: { type: StringType },
     type: { type: StringType },
-    fields: { type: StringType },
-    subCategoryId: { type: IntType },
+    subCategoryId: { type: StringType },
     pageId: { type: IntType },
   },
-  async resolve(
-    { request },
-    { name, title, type, fields, pageId, subCategoryId }
-  ) {
+
+  async resolve({ request }, { id, title, name, type, subCategoryId, pageId }) {
     if (request.user && request.user.admin == true) {
-      const Update = await Fields.create({
-        name: name,
-        title: title,
-        fields: fields,
-        type: type,
-        subCategoryId: subCategoryId,
-        pageId: pageId,
-      });
+      const Update = await Fields.update(
+        {
+          name: name,
+          title: title,
+          type: type,
+          subCategoryId: subCategoryId,
+          pageId: pageId,
+        },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
       return {
         status: "success",
       };
@@ -35,4 +38,4 @@ const addFields = {
     }
   },
 };
-export default addFields;
+export default updateFields;
