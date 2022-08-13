@@ -15,7 +15,7 @@ const submit = (subCategoryId) => async (values, dispatch) => {
     $title: String,
     $step: String,
     $pageId: String,
-    $subCategoryId: Int,
+    $subCategoryId: String,
   ) {
     addPageField(
       title: $title,

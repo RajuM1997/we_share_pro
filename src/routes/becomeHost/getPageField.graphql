@@ -4,6 +4,7 @@ query getPageFieldAdmin {
     title
     step
     pageId
+    subCategoryId
     isEnable
     createdAt
     updatedAt

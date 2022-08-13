@@ -141,8 +141,9 @@ class BecomeHost extends React.Component {
     const currentPageFields = pageData[this.state.currentPageIndex] || [];
     const currentPageId = currentPageFields[0]?.pageId;
     // console.log(currentPageFields);
-    console.log(getCategoryData.getCategoryAdmin);
-    console.log(getSubCategoryData.getSubCategoryAdmin);
+    // console.log(getCategoryData.getCategoryAdmin);
+    // console.log(getSubCategoryData.getSubCategoryAdmin);
+    console.log(getPageFieldData.getPageFieldAdmin);
 
     return (
       <div className={s.root}>
