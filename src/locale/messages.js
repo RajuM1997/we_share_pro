@@ -548,7 +548,7 @@ const messages = defineMessages({
   },
 
   editField: {
-    d: "app.editField",
+    id: "app.editField",
     defaultMessage: "Edit Fields",
     description: "Edit",
   },

@@ -89,10 +89,6 @@ class PageRenderer extends Component {
     // console.log(currentPageData);
     // console.log(selectedCategoryValue);
     //  console.log(subCategory);
-    const filterSubCateory = subCategory.filter((item) => {
-      item.primaryCategory == selectedCategoryValue;
-    });
-    console.log(filterSubCateory);
     return (
       <Grid className={s.container}>
         {currentPage === 1 ? (
