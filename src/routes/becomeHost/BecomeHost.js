@@ -95,7 +95,7 @@ class BecomeHost extends React.Component {
   generatePageData() {
     try {
       console.log("this?.props?.data?.getFields", this?.props?.data?.getFields);
-      const pages = this?.props?.data?.getFields?.map((page, index) => {
+      const pages = this.props.getFieldsData?.getFieldsAdmin?.map((page, index) => {
         const fields = JSON.parse(page.fields);
         return {
           ...page,
@@ -169,10 +169,10 @@ class BecomeHost extends React.Component {
             baseCurrency={baseCurrency}
             formData={this.state.formData[currentPageId] || {}}
             updateField={this.updateFileByPageId(currentPageId)}
-            category={getCategoryData.getCategoryAdmin}
-            subCategory={getSubCategoryData.getSubCategoryAdmin}
-            fields={getFieldsData.getFieldsAdmin}
-            pageField={getPageFieldData.getPageFieldAdmin}
+            // category={getCategoryData.getCategoryAdmin}
+            // subCategory={getSubCategoryData.getSubCategoryAdmin}
+            // fields={getFieldsData.getFieldsAdmin}
+            // pageField={getPageFieldData.getPageFieldAdmin}
           />
         </div>
       </div>

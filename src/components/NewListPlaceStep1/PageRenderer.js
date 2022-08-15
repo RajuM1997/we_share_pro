@@ -131,7 +131,7 @@ class PageRenderer extends Component {
                               lg={6}
                             >
                               <ControlLabel className={s.landingLabel}>
-                                {item.label}
+                                {item.title}
                               </ControlLabel>
 
                               {item?.options &&
@@ -175,7 +175,7 @@ class PageRenderer extends Component {
                               lg={12}
                             >
                               <ControlLabel className={s.landingLabel}>
-                                {item.label}
+                                {item.title}
                               </ControlLabel>
 
                               {item?.options &&
@@ -231,14 +231,14 @@ class PageRenderer extends Component {
                                 {item.title}
                               </ControlLabel>
 
-                              {item?.options &&
-                                item.options?.map((optionData) => {
+                              {item?.fields &&
+                                item.fields?.map((optionData) => {
                                   console.log(optionData);
                                   return (
                                     <div className={s.checkInput}>
                                       <input
                                         type="checkbox"
-                                        name={item.name}
+                                        name={item.label}
                                         value={optionData.value}
                                         className={cx(
                                           s.pullRight,
@@ -247,7 +247,7 @@ class PageRenderer extends Component {
                                         onChange={(e) => {
                                           console.log(e);
                                           updateField(
-                                            item.name,
+                                            item.label,
                                             e.target.value
                                           );
                                         }}
@@ -284,7 +284,7 @@ class PageRenderer extends Component {
                               lg={6}
                             >
                               <ControlLabel className={s.landingLabel}>
-                                {item.label}
+                                {item.title}
                               </ControlLabel>
 
                               <textarea
@@ -307,7 +307,7 @@ class PageRenderer extends Component {
                               lg={6}
                             >
                               <ControlLabel className={s.landingLabel}>
-                                {item.label}
+                                {item.title}
                               </ControlLabel>
 
                               {item.options &&
@@ -341,7 +341,7 @@ class PageRenderer extends Component {
                               lg={12}
                             >
                               <ControlLabel className={s.landingLabel}>
-                                {item.label}
+                                {item.title}
                               </ControlLabel>
 
                               {/* <Calendar /> */}
@@ -358,7 +358,7 @@ class PageRenderer extends Component {
                             >
                               <PhotosUpload
                                 listId={listId}
-                                placeholder={item.label}
+                                placeholder={item.title}
                                 onChange={(e) => {
                                   console.log(e.target.value);
                                   updateField(item.name, e.target.value);
@@ -377,7 +377,7 @@ class PageRenderer extends Component {
                             >
                               <PhotosUpload
                                 listId={listId}
-                                placeholder={item.label}
+                                placeholder={item.title}
                               />
                             </Col>
                           );
