@@ -91,18 +91,7 @@ class PageRenderer extends Component {
     //  console.log(subCategory);
     return (
       <Grid className={s.container}>
-        {currentPage === 1 ? (
-          <HostCategoryPage
-            category={category}
-            continuePage={this.continuePage}
-          />
-        ) : (
-          <HostSubCategoryPage
-            continuePage={this.continuePage}
-            prePage={this.prePage}
-          />
-        )}
-        <pre>{JSON.stringify(this.props, null, 4)}</pre>
+        {/* <pre>{JSON.stringify(this.props, null, 4)}</pre> */}
         <Row className={cx(s.landingContainer, "arrowPosition")}>
           <Col xs={12} sm={7} md={7} lg={7}>
             <div>
@@ -129,6 +118,7 @@ class PageRenderer extends Component {
                               sm={12}
                               md={12}
                               lg={12}
+                              key={item.id}
                             >
                               <ControlLabel className={s.landingLabel}>
                                 {item?.label}
@@ -153,7 +143,10 @@ class PageRenderer extends Component {
                                   item.options?.map((optionData) => {
                                     console.log(optionData);
                                     return (
-                                      <option value={optionData.label}>
+                                      <option
+                                        value={optionData.label}
+                                        key={optionData.value}
+                                      >
                                         {optionData?.label}
                                       </option>
                                     );

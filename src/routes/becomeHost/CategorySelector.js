@@ -26,15 +26,13 @@ import {
   ControlLabel,
   FormControl,
 } from "react-bootstrap";
-import s from "./ListPlaceStep1.css";
+import s from "../../components/NewListPlaceStep1/ListPlaceStep1.css";
 import bt from "../../components/commonStyle.css";
-
-import update from "./update";
+import ListPlaceTips from "../../components/ListPlaceTips/ListPlaceTips";
 
 // Component
-import ListPlaceTips from "../ListPlaceTips/ListPlaceTips";
 
-class HostCategoryPage extends Component {
+class CategorySelector extends Component {
   static propTypes = {
     initialValues: PropTypes.object,
     continuePage: PropTypes.any,
@@ -58,12 +56,7 @@ class HostCategoryPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      selectedCategory: "",
-    };
-  }
-  onSelectChanged(event) {
-    this.setState({ selectedCategory: event.target.value });
+    this.state = {};
   }
 
   renderSelectField = ({
@@ -107,8 +100,10 @@ class HostCategoryPage extends Component {
       dispatch,
       continuePage,
       category,
+      selectedCategory,
+      onSelectChanged,
     } = this.props;
-    const { selectedCategory, loading, userData } = this.state;
+    const { loading, userData } = this.props;
     console.log("category", category);
     return (
       <Grid>
@@ -151,8 +146,11 @@ class HostCategoryPage extends Component {
                     >
                       <Field
                         name="category"
-                        value={this.state.selectedCategory}
-                        onChange={this.onSelectChanged.bind(this)}
+                        value={selectedCategory}
+                        onChange={(event) => {
+                          console.log("event", event);
+                          onSelectChanged(event);
+                        }}
                         component={this.renderFormControlSelect}
                         className={cx(
                           s.backgroundPosition,
@@ -161,12 +159,15 @@ class HostCategoryPage extends Component {
                           s.noFontWeight
                         )}
                       >
+                        <option value="" selected disabled>
+                          Please Select
+                        </option>
                         {category &&
                           category.length > 0 &&
                           category.map((value, key) => {
                             return (
                               value.isEnable && (
-                                <option value={value.category} key={value.id}>
+                                <option value={value.category} key={key}>
                                   {value.category}
                                 </option>
                               )
@@ -194,12 +195,11 @@ class HostCategoryPage extends Component {
   }
 }
 
-HostCategoryPage = reduxForm({
+CategorySelector = reduxForm({
   form: "ListPlaceStep1", // a unique name for this form
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  onSubmit: update,
-})(HostCategoryPage);
+})(CategorySelector);
 
 const mapState = (state) => ({
   userData: state.account.data,
@@ -209,5 +209,5 @@ const mapState = (state) => ({
 const mapDispatch = {};
 
 export default injectIntl(
-  withStyles(s, bt)(connect(mapState, mapDispatch)(HostCategoryPage))
+  withStyles(s, bt)(connect(mapState, mapDispatch)(CategorySelector))
 );

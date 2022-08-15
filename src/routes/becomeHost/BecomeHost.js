@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 import ListPlaceStep1 from "../../components/ListPlaceStep1/ListPlaceStep1";
 import PageRenderer from "../../components/NewListPlaceStep1/PageRenderer";
 import { Field } from "../../components/ListsPlaceStep1/FakeDb";
+import CategoryAndSubCtegorySelector from "./CategoryAndSubCtegorySelector";
 
 const groupBy = function(xs, key) {
   return xs.reduce(function(rv, x) {
@@ -64,10 +65,20 @@ class BecomeHost extends React.Component {
     this.state = {
       currentPageIndex: 0,
       formData: {},
+      currentPage: 1,
+      selectedCategoryValue: "",
+      selectedCategory: "",
+      selectedSubCategory: "",
     };
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.updateFileByPageId = this.updateFileByPageId.bind(this);
+    this.continuePage = this.continuePage.bind(this);
+    this.prePage = this.prePage.bind(this);
+    this.onSelectChanged = this.onSelectChanged(this);
+    this.onSelectSubCategoryChanged = this.onSelectSubCategoryChanged.bind(
+      this
+    );
   }
 
   // UNSAFE_componentWillReceiveProps(nextProps) {
@@ -79,7 +90,30 @@ class BecomeHost extends React.Component {
   //       })
   //     }
   // }
-
+  continuePage(selectedCategory) {
+    this.setState((thisState) => ({
+      ...thisState,
+      currentPage: thisState.currentPage + 1,
+    }));
+    this.setState({
+      selectedCategoryValue: selectedCategory,
+    });
+    // console.log(selectedCategory);
+  }
+  prePage() {
+    this.setState((thisState) => ({
+      ...thisState,
+      currentPage: thisState.currentPage - 1,
+    }));
+  }
+  onSelectChanged(event) {
+    console.log("event22", event);
+    this.setState({ selectedCategory: event?.target?.value });
+  }
+  onSelectSubCategoryChanged(event) {
+    console.log("event22", event);
+    this.setState({ selectedSubCategory: event?.target?.value });
+  }
   nextPage() {
     this.setState((thisState) => ({
       ...thisState,
@@ -95,14 +129,16 @@ class BecomeHost extends React.Component {
   generatePageData() {
     try {
       console.log("this?.props?.data?.getFields", this?.props?.data?.getFields);
-      const pages = this.props.getFieldsData?.getFieldsAdmin?.map((page, index) => {
-        const fields = JSON.parse(page.fields);
-        return {
-          ...page,
-          pageIndex: index,
-          fields,
-        };
-      });
+      const pages = this.props.getFieldsData?.getFieldsAdmin?.map(
+        (page, index) => {
+          const fields = JSON.parse(page.fields);
+          return {
+            ...page,
+            pageIndex: index,
+            fields,
+          };
+        }
+      );
       const groupedPages = groupBy(pages, "pageId");
       return Object.values(groupedPages);
     } catch (error) {
@@ -155,26 +191,45 @@ class BecomeHost extends React.Component {
             mode={mode}
             baseCurrency={baseCurrency}
           /> */}
-          <PageRenderer
-            totalPage={pageData?.length}
-            currentPageData={{
-              fields: currentPageFields,
-            }}
-            pageIndex={this.state.currentPageIndex}
-            nextPage={this.nextPage}
-            previousPage={this.previousPage}
-            listId={listId}
-            formPage={formPage}
-            formBaseURI={formBaseURI}
-            mode={mode}
-            baseCurrency={baseCurrency}
-            formData={this.state.formData[currentPageId] || {}}
-            updateField={this.updateFileByPageId(currentPageId)}
-            // category={getCategoryData.getCategoryAdmin}
-            // subCategory={getSubCategoryData.getSubCategoryAdmin}
-            // fields={getFieldsData.getFieldsAdmin}
-            // pageField={getPageFieldData.getPageFieldAdmin}
-          />
+
+          {this.state.selectedCategory && this.state.selectedSubCategory ? (
+            <PageRenderer
+              totalPage={pageData?.length}
+              currentPageData={{
+                fields: currentPageFields,
+              }}
+              pageIndex={this.state.currentPageIndex}
+              nextPage={this.nextPage}
+              previousPage={this.previousPage}
+              listId={listId}
+              formPage={formPage}
+              formBaseURI={formBaseURI}
+              mode={mode}
+              baseCurrency={baseCurrency}
+              formData={this.state.formData[currentPageId] || {}}
+              updateField={this.updateFileByPageId(currentPageId)}
+              category={getCategoryData.getCategoryAdmin}
+              subCategory={getSubCategoryData.getSubCategoryAdmin}
+              // fields={getFieldsData.getFieldsAdmin}
+              // pageField={getPageFieldData.getPageFieldAdmin}
+            />
+          ) : (
+            <CategoryAndSubCtegorySelector
+              category={getCategoryData.getCategoryAdmin}
+              subCategory={getSubCategoryData.getSubCategoryAdmin}
+              continuePage={this.continuePage}
+              onSelectChanged={(event) => {
+                console.log("event22", event);
+                this.setState({ selectedCategory: event?.target?.value });
+              }}
+              selectedCategory={this.state.selectedCategory}
+              onSelectSubCategoryChanged={this.onSelectSubCategoryChanged}
+              selectedSubCategory={this.state.selectedSubCategory}
+              prePage={this.prePage}
+              currentPage={this.state.currentPage}
+              nextPage={this.nextPage}
+            />
+          )}
         </div>
       </div>
     );
