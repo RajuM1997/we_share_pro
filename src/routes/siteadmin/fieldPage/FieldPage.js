@@ -3,43 +3,41 @@ import PropTypes from "prop-types";
 import s from "./FieldPage.css";
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 // Query
-import getPageField from "./getPageField.graphql";
+import getPageFieldQuery from "./getPageField.graphql";
 import { graphql, gql, compose } from "react-apollo";
 import PageFieldManagement from "../../../components/siteadmin/PageField/PageFieldManagement";
 
 class FieldPage extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    data: PropTypes.shape({
+    getPageFieldData: PropTypes.shape({
       loading: PropTypes.bool,
-      getPageField: PropTypes.array,
+      getFieldsData: PropTypes.array,
     }),
   };
 
   static defaultProps = {
-    data: {
+    getPageFieldData: {
       loading: true,
     },
   };
 
   render() {
-    const {
-      data: { loading },
-      subCategoryId,
-    } = this.props;
+    const { getPageFieldData, subCategoryId } = this.props;
     // console.log("page", subCategoryId);
-    const {
-      data: { getPageField },
-    } = this.props;
     return (
-      <PageFieldManagement data={getPageField} subCategoryId={subCategoryId} />
+      <PageFieldManagement
+        data={getPageFieldData.getPageFieldAdmin}
+        subCategoryId={subCategoryId}
+      />
     );
   }
 }
 
 export default compose(
   withStyles(s),
-  graphql(getPageField, {
+  graphql(getPageFieldQuery, {
+    name: "getPageFieldData",
     options: {
       fetchPolicy: "network-only",
       ssr: false,

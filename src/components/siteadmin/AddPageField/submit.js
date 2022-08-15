@@ -15,7 +15,7 @@ const submit = (subCategoryId) => async (values, dispatch) => {
     $title: String,
     $step: String,
     $pageId: String,
-    $subCategoryId: Int,
+    $subCategoryId: String,
   ) {
     addPageField(
       title: $title,
@@ -46,7 +46,7 @@ const submit = (subCategoryId) => async (values, dispatch) => {
 
     if (data.addPageField.status === "success") {
       toastr.success("Page Field", "Successfully Added!");
-      history.push(`/siteadmin/pageField/${subCategoryId}`);
+      history.push(`/siteadmin/fieldSetting/${subCategoryId}`);
     } else {
       toastr.error("Page Field", "Failed to create");
     }

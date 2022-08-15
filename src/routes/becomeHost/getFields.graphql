@@ -5,6 +5,7 @@ query getFieldsAdmin {
     title
     type
     pageId
+    subCategoryId
     fields
     isEnable
   }

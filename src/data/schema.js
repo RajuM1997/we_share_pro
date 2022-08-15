@@ -206,6 +206,7 @@ import getFieldsAdmin from "./queries/siteadmin/getFieldsAdmin";
 
 import addPageField from "./mutations/SiteAdmin/addPageField";
 import getPageField from "./queries/siteadmin/getPageField";
+import getPageFieldAdmin from "./queries/siteadmin/getPageFieldAdmin";
 
 //edit and update
 import editPageField from "./queries/siteadmin/editPageField";
@@ -573,6 +574,7 @@ const schema = new Schema({
       getFieldsAdmin,
       getFields,
       getPageField,
+      getPageFieldAdmin,
       editPageField,
       editFields,
     },

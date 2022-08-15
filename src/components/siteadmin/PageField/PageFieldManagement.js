@@ -60,10 +60,13 @@ class PageFieldManagement extends React.Component {
       updatePageFieldStatus,
       subCategoryId,
     } = this.props;
+
     const singleFields = data.filter(
       (item) => item.subCategoryId == subCategoryId
     );
-    console.log("hello", subCategoryId);
+    console.log(singleFields);
+    // console.log("hello", subCategoryId);
+    console.log("hello2", data);
     const { formatMessage } = this.props.intl;
     return (
       <div className={cx(s.pagecontentWrapper, "pagecontentAR")}>
@@ -101,7 +104,7 @@ class PageFieldManagement extends React.Component {
                 <Th scope="col">{formatMessage(messages.delete)}</Th>
               </Thead>
               {singleFields &&
-                singleFields?.map((value, key) => {
+                singleFields.map((value, key) => {
                   // console.log(value);
                   let isStatus;
                   return (
@@ -109,24 +112,24 @@ class PageFieldManagement extends React.Component {
                       <Td
                         data-label={formatMessage(messages.fieldPageId)}
                         column={formatMessage(messages.fieldPageId)}
-                        data={value?.pageId}
+                        data={value.pageId}
                       />
                       <Td
                         data-label={formatMessage(messages.pageFieldTitle)}
                         column={formatMessage(messages.pageFieldTitle)}
-                        data={value?.title}
+                        data={value.title}
                       />
                       <Td
                         data-label={formatMessage(messages.pageFieldStep)}
                         column={formatMessage(messages.pageFieldStep)}
                         className={s.imageurl}
-                        data={value?.step}
+                        data={value.step}
                       />
                       <Td
                         data-label={formatMessage(messages.status)}
                         column={formatMessage(messages.status)}
                       >
-                        {value?.isEnable == "true"
+                        {value.isEnable == "true"
                           ? formatMessage(messages.enabledLabel)
                           : formatMessage(messages.disabledLabel)}
                       </Td>

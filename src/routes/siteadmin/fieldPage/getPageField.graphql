@@ -1,9 +1,10 @@
-query getPageField {
-  getPageField {
+query getPageFieldAdmin {
+  getPageFieldAdmin {
     id
     title
     step
     pageId
+    subCategoryId
     isEnable
     createdAt
     updatedAt
