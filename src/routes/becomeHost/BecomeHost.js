@@ -64,56 +64,16 @@ class BecomeHost extends React.Component {
     super(props);
     this.state = {
       currentPageIndex: 0,
+      personCapacity: 0,
       formData: {},
-      currentPage: 1,
-      selectedCategoryValue: "",
       selectedCategory: "",
       selectedSubCategory: "",
     };
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.updateFileByPageId = this.updateFileByPageId.bind(this);
-    this.continuePage = this.continuePage.bind(this);
-    this.prePage = this.prePage.bind(this);
-    this.onSelectChanged = this.onSelectChanged(this);
-    this.onSelectSubCategoryChanged = this.onSelectSubCategoryChanged.bind(
-      this
-    );
   }
 
-  // UNSAFE_componentWillReceiveProps(nextProps) {
-  //     if (this.props?.data?.getFields && this.props?.data?.getFields?.length !== nextProps?.data?.getFields?.length) {
-  //       const fields = this.generatePageData();
-  //       console.log("fields", fields);
-  //       this.setState({
-  //         currentPageId: fields[0]?.pageId || 1
-  //       })
-  //     }
-  // }
-  continuePage(selectedCategory) {
-    this.setState((thisState) => ({
-      ...thisState,
-      currentPage: thisState.currentPage + 1,
-    }));
-    this.setState({
-      selectedCategoryValue: selectedCategory,
-    });
-    // console.log(selectedCategory);
-  }
-  prePage() {
-    this.setState((thisState) => ({
-      ...thisState,
-      currentPage: thisState.currentPage - 1,
-    }));
-  }
-  onSelectChanged(event) {
-    console.log("event22", event);
-    this.setState({ selectedCategory: event?.target?.value });
-  }
-  onSelectSubCategoryChanged(event) {
-    console.log("event22", event);
-    this.setState({ selectedSubCategory: event?.target?.value });
-  }
   nextPage() {
     this.setState((thisState) => ({
       ...thisState,
@@ -128,7 +88,6 @@ class BecomeHost extends React.Component {
   }
   generatePageData() {
     try {
-      console.log("this?.props?.data?.getFields", this?.props?.data?.getFields);
       const pages = this.props.getFieldsData?.getFieldsAdmin?.map(
         (page, index) => {
           const fields = JSON.parse(page.fields);
@@ -159,7 +118,6 @@ class BecomeHost extends React.Component {
   };
 
   render() {
-    // console.log(getCategory);
     const {
       title,
       getCategoryData,
@@ -176,9 +134,6 @@ class BecomeHost extends React.Component {
     const pageData = this.generatePageData();
     const currentPageFields = pageData[this.state.currentPageIndex] || [];
     const currentPageId = currentPageFields[0]?.pageId;
-    // console.log(currentPageFields);
-    // console.log(getCategoryData.getCategoryAdmin);
-    // console.log(getSubCategoryData.getSubCategoryAdmin);
     console.log(getPageFieldData.getPageFieldAdmin);
 
     return (
@@ -191,7 +146,6 @@ class BecomeHost extends React.Component {
             mode={mode}
             baseCurrency={baseCurrency}
           /> */}
-
           {this.state.selectedCategory && this.state.selectedSubCategory ? (
             <PageRenderer
               totalPage={pageData?.length}
@@ -210,24 +164,20 @@ class BecomeHost extends React.Component {
               updateField={this.updateFileByPageId(currentPageId)}
               category={getCategoryData.getCategoryAdmin}
               subCategory={getSubCategoryData.getSubCategoryAdmin}
-              // fields={getFieldsData.getFieldsAdmin}
-              // pageField={getPageFieldData.getPageFieldAdmin}
             />
           ) : (
             <CategoryAndSubCtegorySelector
               category={getCategoryData.getCategoryAdmin}
               subCategory={getSubCategoryData.getSubCategoryAdmin}
               continuePage={this.continuePage}
-              onSelectChanged={(event) => {
-                console.log("event22", event);
-                this.setState({ selectedCategory: event?.target?.value });
+              onSelectChanged={(selectedCategory) => {
+                this.setState({selectedCategory});
+              }}
+              onSelectSubCategoryChanged={(selectedSubCategory, personCapacity, selectedCategory) => {
+                this.setState({selectedSubCategory, personCapacity, selectedCategory});
               }}
               selectedCategory={this.state.selectedCategory}
-              onSelectSubCategoryChanged={this.onSelectSubCategoryChanged}
               selectedSubCategory={this.state.selectedSubCategory}
-              prePage={this.prePage}
-              currentPage={this.state.currentPage}
-              nextPage={this.nextPage}
             />
           )}
         </div>
