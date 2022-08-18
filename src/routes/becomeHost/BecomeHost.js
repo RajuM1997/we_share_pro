@@ -8,18 +8,15 @@ import cx from "classnames";
 import { graphql, compose } from "react-apollo";
 
 // query
-import getFieldsQuery from "./getFields.graphql";
 import getCategoryQuery from "./getCategory.graphql";
 import getSubCategoryQuery from "./getSubCategory.graphql";
-import getPageFieldQuery from "./getPageField.graphql";
 // Redux
 import { connect } from "react-redux";
 
 // Component
-import ListPlaceStep1 from "../../components/ListPlaceStep1/ListPlaceStep1";
 import PageRenderer from "../../components/NewListPlaceStep1/PageRenderer";
-import { Field } from "../../components/ListsPlaceStep1/FakeDb";
 import CategoryAndSubCtegorySelector from "./CategoryAndSubCtegorySelector";
+import {getFieldsBySubCategory, getPageFieldBySubCategory} from "../../helpers/graphQLHelper";
 
 const groupBy = function(xs, key) {
   return xs.reduce(function(rv, x) {
@@ -58,12 +55,16 @@ class BecomeHost extends React.Component {
     categoryData: {
       loading: true,
     },
+    pageData: {},
   };
 
   constructor(props) {
     super(props);
     this.state = {
+      steps: {},
+      pageData: {},
       currentPageIndex: 0,
+      currentStep: 1,
       personCapacity: 0,
       formData: {},
       selectedCategory: "",
@@ -72,6 +73,9 @@ class BecomeHost extends React.Component {
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.updateFileByPageId = this.updateFileByPageId.bind(this);
+    this.handleSubCategoryChange = this.handleSubCategoryChange.bind(this);
+    this.handleCategoryChange = this.handleCategoryChange.bind(this);
+    this.handleCompleteStep = this.handleCompleteStep.bind(this);
   }
 
   nextPage() {
@@ -86,24 +90,56 @@ class BecomeHost extends React.Component {
       currentPageIndex: thisState.currentPageIndex - 1,
     }));
   }
-  generatePageData() {
-    try {
-      const pages = this.props.getFieldsData?.getFieldsAdmin?.map(
-        (page, index) => {
-          const fields = JSON.parse(page.fields);
-          return {
-            ...page,
-            pageIndex: index,
-            fields,
-          };
+
+  async handleSubCategoryChange(selectedSubCategory, personCapacity, selectedCategory) {
+    this.setState({selectedSubCategory, personCapacity, selectedCategory});
+    if(selectedSubCategory) {
+      try {
+        const pages = await getPageFieldBySubCategory(selectedSubCategory);
+        const fields = await getFieldsBySubCategory(selectedSubCategory);
+        const data = fields?.map(
+            (page, index) => {
+              const fields = JSON.parse(page.fields);
+              const pageInfo = pages.find(item => item?.pageId === page?.pageId);
+              return {
+                ...page,
+                pageIndex: index,
+                step: pageInfo?.step || -1,
+                fields,
+              };
+            }
+        );
+        const stepPages = groupBy(data, "step");
+        for (const property in stepPages) {
+          stepPages[property] = Object.values(groupBy(stepPages[property], "pageId"));
+          this.setState(thisSate => ({
+            steps: {
+              ...thisSate.steps,
+              [property]: 'pending',
+            }
+          }));
         }
-      );
-      const groupedPages = groupBy(pages, "pageId");
-      return Object.values(groupedPages);
-    } catch (error) {
-      return [];
+        console.log("stepPages", stepPages);
+        this.setState({pageData: stepPages});
+      } catch (e) {
+
+      }
     }
   }
+
+  handleCategoryChange(selectedCategory) {
+    this.setState({selectedCategory});
+  }
+
+  handleCompleteStep() {
+    this.setState(thisSate => ({
+      steps: {
+        ...thisSate.steps,
+        [thisSate.currentStep]: 'visible',
+      }
+    }));
+  }
+
   updateFileByPageId = (currentPageId) => (key, value) => {
     this.setState((thisState) => ({
       ...thisState,
@@ -122,64 +158,75 @@ class BecomeHost extends React.Component {
       title,
       getCategoryData,
       getSubCategoryData,
-      getFieldsData,
-      getPageFieldData,
       formPage,
       formBaseURI,
       mode,
       listId,
       baseCurrency,
     } = this.props;
-    // console.log(listId);
-    const pageData = this.generatePageData();
+    const pageData = this.state?.pageData[this.state.currentStep] || [];
     const currentPageFields = pageData[this.state.currentPageIndex] || [];
-    const currentPageId = currentPageFields[0]?.pageId;
-    console.log(getPageFieldData.getPageFieldAdmin);
+    const { pageId: currentPageId } = currentPageFields[0] || {};
 
     return (
       <div className={s.root}>
         <div className={cx(s.container, "existingPage")}>
-          {/* <ListPlaceStep1
-            listId={listId}
-            formPage={formPage}
-            formBaseURI={formBaseURI}
-            mode={mode}
-            baseCurrency={baseCurrency}
-          /> */}
-          {this.state.selectedCategory && this.state.selectedSubCategory ? (
-            <PageRenderer
-              totalPage={pageData?.length}
-              currentPageData={{
-                fields: currentPageFields,
-              }}
-              pageIndex={this.state.currentPageIndex}
-              nextPage={this.nextPage}
-              previousPage={this.previousPage}
-              listId={listId}
-              formPage={formPage}
-              formBaseURI={formBaseURI}
-              mode={mode}
-              baseCurrency={baseCurrency}
-              formData={this.state.formData[currentPageId] || {}}
-              updateField={this.updateFileByPageId(currentPageId)}
-              category={getCategoryData.getCategoryAdmin}
-              subCategory={getSubCategoryData.getSubCategoryAdmin}
-            />
-          ) : (
-            <CategoryAndSubCtegorySelector
-              category={getCategoryData.getCategoryAdmin}
-              subCategory={getSubCategoryData.getSubCategoryAdmin}
-              continuePage={this.continuePage}
-              onSelectChanged={(selectedCategory) => {
-                this.setState({selectedCategory});
-              }}
-              onSelectSubCategoryChanged={(selectedSubCategory, personCapacity, selectedCategory) => {
-                this.setState({selectedSubCategory, personCapacity, selectedCategory});
-              }}
-              selectedCategory={this.state.selectedCategory}
-              selectedSubCategory={this.state.selectedSubCategory}
-            />
-          )}
+          {
+            this.state.steps && this.state.steps[this?.state?.currentStep] === 'visible' ? (
+                <>
+                  <h1>Step</h1>
+                  <button onClick={()=>{
+                    const maxStep = Math.max(...Object.keys(this.state?.steps || {}));
+                    console.log("maxStep", maxStep)
+                    console.log("currentStep", this.state.currentStep)
+                    if (maxStep === this.state.currentStep) {
+                      alert("Do Form Submit")
+                    } else {
+                      this.setState(thisSate => ({
+                        steps: {
+                          ...thisSate.steps,
+                          [thisSate.currentStep]: 'completed',
+                        },
+                        currentStep: thisSate.currentStep < maxStep ?  thisSate.currentStep + 1 : maxStep,
+                        currentPageIndex: 0,
+                      }));
+                    }
+                  }}>Next</button>
+                </>
+            ) : (
+                <>
+                  {this.state.selectedCategory && this.state.selectedSubCategory ? (
+                      <PageRenderer
+                          totalPage={pageData?.length}
+                          currentPageData={{
+                            fields: currentPageFields,
+                          }}
+                          pageIndex={this.state.currentPageIndex}
+                          nextPage={this.nextPage}
+                          previousPage={this.previousPage}
+                          listId={listId}
+                          formPage={formPage}
+                          formBaseURI={formBaseURI}
+                          mode={mode}
+                          baseCurrency={baseCurrency}
+                          formData={this.state.formData[currentPageId] || {}}
+                          updateField={this.updateFileByPageId(currentPageId)}
+                          handleCompleteStep={this.handleCompleteStep}
+                      />
+                  ) : (
+                      <CategoryAndSubCtegorySelector
+                          category={getCategoryData.getCategoryAdmin}
+                          subCategory={getSubCategoryData.getSubCategoryAdmin}
+                          continuePage={this.continuePage}
+                          onSelectChanged={this.handleCategoryChange}
+                          onSelectSubCategoryChanged={this.handleSubCategoryChange}
+                          selectedCategory={this.state.selectedCategory}
+                          selectedSubCategory={this.state.selectedSubCategory}
+                      />
+                  )}
+                </>
+            )
+          }
         </div>
       </div>
     );
@@ -198,18 +245,6 @@ export default compose(
   }),
   graphql(getSubCategoryQuery, {
     name: "getSubCategoryData",
-    options: {
-      ssr: true,
-    },
-  }),
-  graphql(getFieldsQuery, {
-    name: "getFieldsData",
-    options: {
-      ssr: true,
-    },
-  }),
-  graphql(getPageFieldQuery, {
-    name: "getPageFieldData",
     options: {
       ssr: true,
     },

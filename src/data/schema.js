@@ -206,7 +206,10 @@ import getFieldsAdmin from "./queries/siteadmin/getFieldsAdmin";
 
 import addPageField from "./mutations/SiteAdmin/addPageField";
 import getPageField from "./queries/siteadmin/getPageField";
+import getPageFieldBySubCategory from "./queries/siteadmin/getPageFieldBySubCategory";
+import getFieldsBySubCategory from "./queries/siteadmin/getFieldsBySubCategory";
 import getPageFieldAdmin from "./queries/siteadmin/getPageFieldAdmin";
+import getFieldsGroupByPages from "./queries/siteadmin/getFieldsGroupByPages";
 
 //edit and update
 import editPageField from "./queries/siteadmin/editPageField";
@@ -573,6 +576,9 @@ const schema = new Schema({
       getFieldsAdmin,
       getFields,
       getPageField,
+      getPageFieldBySubCategory,
+      getFieldsBySubCategory,
+      getFieldsGroupByPages,
       getPageFieldAdmin,
       editPageField,
       editFields,

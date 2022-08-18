@@ -24,6 +24,7 @@ import messages from "../../../locale/messages";
 
 import { openListSettingsModal } from "../../../actions/siteadmin/modalActions";
 import NewListSettingModel from "../ListSettingsModel2/NewListSettingModel";
+import {getFieldsBySubCategory} from "../../../helpers/graphQLHelper";
 
 class FieldManagement extends React.Component {
   static propTypes = {
@@ -43,12 +44,33 @@ class FieldManagement extends React.Component {
   };
 
   static defaultProps = {
-    data: [],
+    fieldsData: [],
   };
 
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      fieldsData: []
+    }
+  }
+
+  fetchPageData(subCategoryId) {
+    getFieldsBySubCategory(subCategoryId).then(data => {
+      this.setState({ pageData: data })
+    }).catch(e => {
+    })
+  }
+
+  componentDidMount() {
+    console.log("this.props.subCategoryId", this.props.subCategoryId);
+    this.fetchPageData(this.props.subCategoryId)
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (nextProps?.subCategoryId) {
+      this.fetchPageData(nextProps?.subCategoryId)
+    }
   }
 
   handleClick() {
@@ -56,18 +78,11 @@ class FieldManagement extends React.Component {
   }
   render() {
     const {
-      data,
       deleteFields,
       updateFieldsStatus,
       openListSettingsModal,
-      page,
       subCategoryId,
     } = this.props;
-
-    const singleFields = data.filter(
-      (item) => item.subCategoryId == subCategoryId
-    );
-    console.log(singleFields);
 
     // console.log("data", subCategoryId);
     // console.log(deleteFields);
@@ -109,10 +124,7 @@ class FieldManagement extends React.Component {
                 <Th scope="col">{formatMessage(messages.editLabel)}</Th>
                 <Th scope="col">{formatMessage(messages.delete)}</Th>
               </Thead>
-              {singleFields &&
-                singleFields.map((value, key) => {
-                  // console.log(value);
-                  let isStatus;
+              {this.state?.pageData?.map((value, key) => {
                   return (
                     <Tr key={key}>
                       <Td

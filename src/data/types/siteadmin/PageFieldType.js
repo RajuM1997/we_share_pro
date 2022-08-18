@@ -2,6 +2,7 @@ import {
   GraphQLObjectType as ObjectType,
   GraphQLString as StringType,
   GraphQLInt as IntType,
+  GraphQLBoolean as BooleanType,
 } from "graphql";
 
 const PageFieldType = new ObjectType({
@@ -9,10 +10,10 @@ const PageFieldType = new ObjectType({
   fields: {
     id: { type: IntType },
     title: { type: StringType },
-    step: { type: StringType },
+    step: { type: IntType },
     subCategoryId: { type: IntType },
     pageId: { type: IntType },
-    isEnable: { type: StringType },
+    isEnable: { type: BooleanType },
     createdAt: { type: StringType },
     updatedAt: { type: StringType },
     status: { type: StringType },

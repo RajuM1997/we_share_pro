@@ -82,16 +82,10 @@ class PageRenderer extends Component {
       formData,
       updateField,
       listId,
-      category,
-      subCategory,
+      handleCompleteStep,
     } = this.props;
-    const { currentPage, selectedCategoryValue } = this.state;
-    // console.log(currentPageData);
-    // console.log(selectedCategoryValue);
-    //  console.log(subCategory);
     return (
       <Grid className={s.container}>
-        {/* <pre>{JSON.stringify(this.props, null, 4)}</pre> */}
         <Row className={cx(s.landingContainer, "arrowPosition")}>
           <Col xs={12} sm={7} md={7} lg={7}>
             <div>
@@ -447,8 +441,13 @@ class PageRenderer extends Component {
                           s.pullRight,
                           "floatLeft"
                         )}
-                        disabled={totalPage - 1 === pageIndex}
-                        onClick={nextPage}
+                        onClick={() => {
+                          if (totalPage - 1 === pageIndex) {
+                            handleCompleteStep();
+                          } else {
+                            nextPage();
+                          }
+                        }}
                       >
                         <FormattedMessage {...messages.next} />
                       </Button>

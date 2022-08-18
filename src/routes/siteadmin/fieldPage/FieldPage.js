@@ -35,12 +35,5 @@ class FieldPage extends Component {
 }
 
 export default compose(
-  withStyles(s),
-  graphql(getPageFieldQuery, {
-    name: "getPageFieldData",
-    options: {
-      fetchPolicy: "network-only",
-      ssr: false,
-    },
-  })
+  withStyles(s)
 )(FieldPage);

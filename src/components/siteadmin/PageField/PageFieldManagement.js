@@ -21,7 +21,7 @@ import history from "../../../core/history";
 // Translation
 import { FormattedMessage, InjectedIntl, injectIntl } from "react-intl";
 import messages from "../../../locale/messages";
-import { ItemAssignmentContext } from "twilio/lib/rest/numbers/v2/regulatoryCompliance/bundle/itemAssignment";
+import {getPageFieldBySubCategory} from "../../../helpers/graphQLHelper";
 
 class PageFieldManagement extends React.Component {
   static propTypes = {
@@ -41,32 +41,45 @@ class PageFieldManagement extends React.Component {
   };
 
   static defaultProps = {
-    data: [],
+    pageData: [],
   };
 
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      pageData: []
+    }
   }
 
   handleClick(id) {
     history.push(`/siteadmin/pageField/add/${id}`);
   }
 
+  fetchPageData(subCategoryId) {
+    getPageFieldBySubCategory(subCategoryId).then(data => {
+      this.setState({ pageData: data })
+    }).catch(e => {
+    })
+  }
+  componentDidMount() {
+    console.log("this.props.subCategoryId", this.props.subCategoryId);
+    this.fetchPageData(this.props.subCategoryId)
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (nextProps?.subCategoryId) {
+      this.fetchPageData(nextProps?.subCategoryId)
+    }
+  }
+
   render() {
     const {
-      data,
       deletePageField,
       updatePageFieldStatus,
       subCategoryId,
     } = this.props;
 
-    const singleFields = data.filter(
-      (item) => item.subCategoryId == subCategoryId
-    );
-    console.log(singleFields);
-    // console.log("hello", subCategoryId);
-    console.log("hello2", data);
     const { formatMessage } = this.props.intl;
     return (
       <div className={cx(s.pagecontentWrapper, "pagecontentAR")}>
@@ -103,8 +116,7 @@ class PageFieldManagement extends React.Component {
                 <Th scope="col">{formatMessage(messages.editLabel)}</Th>
                 <Th scope="col">{formatMessage(messages.delete)}</Th>
               </Thead>
-              {singleFields &&
-                singleFields.map((value, key) => {
+              {this?.state?.pageData?.map((value, key) => {
                   // console.log(value);
                   let isStatus;
                   return (

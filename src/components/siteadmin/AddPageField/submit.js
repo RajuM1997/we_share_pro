@@ -6,16 +6,16 @@ import { toastr } from "react-redux-toastr";
 import history from "../../../core/history";
 
 const submit = (subCategoryId) => async (values, dispatch) => {
-  console.log(values);
+  console.log("values", values);
   if (values == null) {
     toastr.error("Error Occured", "Please Add page Field");
   } else {
     const mutation = `
   mutation addPageField(
     $title: String,
-    $step: String,
-    $pageId: String,
-    $subCategoryId: String,
+    $step: Int,
+    $pageId: Int,
+    $subCategoryId: Int,
   ) {
     addPageField(
       title: $title,
@@ -36,7 +36,7 @@ const submit = (subCategoryId) => async (values, dispatch) => {
       },
       body: JSON.stringify({
         query: mutation,
-        variables: { ...values, subCategoryId: Number(subCategoryId) },
+        variables: { subCategoryId: Number(subCategoryId), pageId: Number(values?.pageId), step: Number(values?.step), title: values?.title },
       }),
       credentials: "include",
     });
@@ -44,11 +44,11 @@ const submit = (subCategoryId) => async (values, dispatch) => {
     const { data } = await resp.json();
     console.log(data);
 
-    if (data.addPageField.status === "success") {
+    if (data?.addPageField?.status === "success") {
       toastr.success("Page Field", "Successfully Added!");
       history.push(`/siteadmin/fieldSetting/${subCategoryId}`);
     } else {
-      toastr.error("Page Field", "Failed to create");
+      toastr.error("Page Field", data?.addPageField?.status || "Failed to create");
     }
   }
 };

@@ -33,13 +33,10 @@ class SubField extends Component {
   };
 
   render() {
-    const { subCategoryId, getFieldsData, getSubCategoryData } = this.props;
-    // console.log(data);
+    const { subCategoryId } = this.props;
     return (
       <FieldManagement
-        data={getFieldsData.getFieldsAdmin}
         subCategoryId={subCategoryId}
-        // subCategoryData={getSubCategory}
       />
     );
   }
@@ -49,17 +46,5 @@ const mapState = (state) => ({});
 const mapDispatch = {};
 export default compose(
   withStyles(s),
-  graphql(getFieldsQuery, {
-    name: "getFieldsData",
-    options: {
-      ssr: true,
-    },
-  }),
-  graphql(getSubCategoryQuery, {
-    name: "getSubCategoryData",
-    options: {
-      ssr: true,
-    },
-  }),
   connect(mapState, mapDispatch)
 )(SubField);

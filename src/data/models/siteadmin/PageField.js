@@ -14,7 +14,7 @@ const PageField = Model.define("PageFields", {
   },
 
   step: {
-    type: DataType.STRING,
+    type: DataType.INTEGER,
     allowNull: false,
   },
   subCategoryId: {
