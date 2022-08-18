@@ -5,39 +5,32 @@ import SubCategorySelector from "./SubCategorySelector";
 class CategoryAndSubCtegorySelector extends Component {
   render() {
     const {
-      continuePage,
-      prePage,
       category,
       subCategory,
       onSelectChanged,
       selectedCategory,
       onSelectSubCategoryChanged,
       selectedSubCategory,
-      currentPage,
-      nextPage,
     } = this.props;
     const subCategories =
       subCategory?.filter((cat) => {
-        console.log("SubCategory", cat);
         return cat?.primaryCategory === selectedCategory;
       }) || [];
     return (
       <div>
-        {currentPage === 1 && (
+        {!selectedCategory && (
           <CategorySelector
-            continuePage={continuePage}
             category={category}
             onSelectChanged={onSelectChanged}
             selectedCategory={selectedCategory}
           />
         )}
-        {currentPage === 2 && (
+        {selectedCategory && (
           <SubCategorySelector
-            prePage={prePage}
             subCategory={subCategories}
             onSelectSubCategoryChanged={onSelectSubCategoryChanged}
             selectedSubCategory={selectedSubCategory}
-            nextPage={nextPage}
+            selectedCategory={selectedCategory}
           />
         )}
       </div>

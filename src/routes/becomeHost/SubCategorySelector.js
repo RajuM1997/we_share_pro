@@ -35,7 +35,6 @@ import ListPlaceTips from "../../components/ListPlaceTips/ListPlaceTips";
 class CategoryAndSubCtegorySelector extends Component {
   static propTypes = {
     previousPage: PropTypes.any,
-    nextPage: PropTypes.any,
     initialValues: PropTypes.object,
     nextPage: PropTypes.any,
     userData: PropTypes.shape({
@@ -59,11 +58,9 @@ class CategoryAndSubCtegorySelector extends Component {
     super(props);
     this.state = {
       isDisabled: true,
-      houseType: [],
-      buildingSize: [],
-      roomType: [],
       personCapacity: [],
-      filterSubCateory: [],
+      selectedPersonCapacity: 0,
+      selectedSubCategory: null,
     };
   }
 
@@ -71,7 +68,6 @@ class CategoryAndSubCtegorySelector extends Component {
     const { listingFields } = this.props;
     if (listingFields != undefined) {
       this.setState({
-        roomType: listingFields.roomType,
         personCapacity: listingFields.personCapacity,
       });
     }
@@ -88,8 +84,6 @@ class CategoryAndSubCtegorySelector extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.selectedCategory);
-    console.log(nextProps.data);
     const { valid, listingFields } = nextProps;
     if (valid) {
       this.setState({ isDisabled: false });
@@ -99,17 +93,8 @@ class CategoryAndSubCtegorySelector extends Component {
 
     if (listingFields != undefined) {
       this.setState({
-        roomType: listingFields.roomType,
         personCapacity: listingFields.personCapacity,
       });
-    }
-    let fillterData;
-    if (nextProps.data && nextProps.data.length > 0) {
-      fillterData = nextProps.data.filter(
-        (item) => item.primaryCategory == nextProps.selectedCategory
-      );
-      this.setState({ filterSubCateory: fillterData });
-      console.log(fillterData);
     }
   }
 
@@ -149,29 +134,16 @@ class CategoryAndSubCtegorySelector extends Component {
   render() {
     const {
       handleSubmit,
-      submitting,
-      nextPage,
-      existingList,
       onSelectSubCategoryChanged,
       selectedSubCategory,
       subCategory,
-      prePage,
       userData,
-      loading,
-      data,
+      selectedCategory,
     } = this.props;
-    console.log(data);
     const {
       isDisabled,
-      houseType,
-      roomType,
-      buildingSize,
       personCapacity,
     } = this.state;
-    let path = "index";
-    if (existingList) {
-      path = "home";
-    }
 
     return (
       <div>
@@ -205,10 +177,10 @@ class CategoryAndSubCtegorySelector extends Component {
                           lg={6}
                         >
                           <Field
-                            name="roomType"
-                            onChange={(event) =>
-                              onSelectSubCategoryChanged(event)
-                            }
+                            name="subCategory"
+                            onChange={(event) =>{
+                                this.setState({selectedSubCategory: event?.target?.value})
+                            }}
                             value={selectedSubCategory}
                             component={this.renderFormControlSelect}
                             className={cx(
@@ -249,6 +221,9 @@ class CategoryAndSubCtegorySelector extends Component {
                               s.jumboSelect,
                               s.noFontWeight
                             )}
+                            onChange={(event) =>{
+                              this.setState({selectedPersonCapacity: event?.target?.value})
+                            }}
                           >
                             {personCapacity.map((value, key) => {
                               let rows = [];
@@ -291,7 +266,9 @@ class CategoryAndSubCtegorySelector extends Component {
                                 s.pullLeft,
                                 "floatRight"
                               )}
-                              onClick={() => prePage()}
+                              onClick={() => {
+                                onSelectSubCategoryChanged(null, 0, null)
+                              }}
                             >
                               <FormattedMessage {...messages.back} />
                             </Button>
@@ -304,7 +281,9 @@ class CategoryAndSubCtegorySelector extends Component {
                                 "floatLeft"
                               )}
                               disabled={isDisabled}
-                              onClick={() => nextPage()}
+                              onClick={() => {
+                                onSelectSubCategoryChanged(this.state.selectedSubCategory, this.state.selectedPersonCapacity, selectedCategory)
+                              }}
                             >
                               <FormattedMessage {...messages.next} />
                             </Button>

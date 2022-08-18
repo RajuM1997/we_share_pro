@@ -540,7 +540,6 @@ const schema = new Schema({
       getBlogHome,
       getEnabledBlog,
       getCheckUserStatus,
-      getCheckUserStatus,
       messageManagement,
       reviewsManagement,
       reportUserManagement,

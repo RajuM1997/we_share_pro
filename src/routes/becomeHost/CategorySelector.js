@@ -56,7 +56,9 @@ class CategorySelector extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      selectedCategory: null,
+    };
   }
 
   renderSelectField = ({
@@ -98,7 +100,6 @@ class CategorySelector extends Component {
       handleSubmit,
       submitting,
       dispatch,
-      continuePage,
       category,
       selectedCategory,
       onSelectChanged,
@@ -148,8 +149,7 @@ class CategorySelector extends Component {
                         name="category"
                         value={selectedCategory}
                         onChange={(event) => {
-                          console.log("event", event);
-                          onSelectChanged(event);
+                          this.setState({'selectedCategory': event?.target?.value})
                         }}
                         component={this.renderFormControlSelect}
                         className={cx(
@@ -180,7 +180,9 @@ class CategorySelector extends Component {
                 <FormGroup className={cx(s.formGroup, "floatLeft")}>
                   <Button
                     className={cx(s.button, bt.btnPrimary, bt.btnLarge)}
-                    onClick={() => continuePage(selectedCategory)}
+                    onClick={() => {
+                      onSelectChanged(this.state.selectedCategory);
+                    }}
                   >
                     <FormattedMessage {...messages.continue} />
                   </Button>
