@@ -17,6 +17,7 @@ import { connect } from "react-redux";
 import PageRenderer from "../../components/NewListPlaceStep1/PageRenderer";
 import CategoryAndSubCtegorySelector from "./CategoryAndSubCtegorySelector";
 import {getFieldsBySubCategory, getPageFieldBySubCategory} from "../../helpers/graphQLHelper";
+import ExistingPage1 from "../../components/ListPlaceStep1/ExistingPage1";
 
 const groupBy = function(xs, key) {
   return xs.reduce(function(rv, x) {
@@ -174,7 +175,7 @@ class BecomeHost extends React.Component {
           {
             this.state.steps && this.state.steps[this?.state?.currentStep] === 'visible' ? (
                 <>
-                  <h1>Step</h1>
+                  <ExistingPage1 />
                   <button onClick={()=>{
                     const maxStep = Math.max(...Object.keys(this.state?.steps || {}));
                     console.log("maxStep", maxStep)

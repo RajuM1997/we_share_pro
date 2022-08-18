@@ -226,7 +226,11 @@ class AddListSettingsForm extends Component {
               <option value="text">Text Input</option>
               <option value="number">Number Input</option>
               <option value="image">Image</option>
-              {/*<option value="checkboxImage">Check Box And Image</option>*/}
+              <option value="coverImage">Cover Image</option>
+              <option value="title">Title</option>
+              <option value="description">Description</option>
+              <option value="price">Price</option>
+              <option value="checkboxImage">Check Box And Image</option>
               <option value="map">Map</option>
             </Field>
 
