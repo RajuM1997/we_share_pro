@@ -20,6 +20,7 @@ import ListPlaceStep1 from "../../components/ListPlaceStep1/ListPlaceStep1";
 import PageRenderer from "../../components/NewListPlaceStep1/PageRenderer";
 import { Field } from "../../components/ListsPlaceStep1/FakeDb";
 import CategoryAndSubCtegorySelector from "./CategoryAndSubCtegorySelector";
+import ExistingPage1 from "../../components/ListPlaceStep1/ExistingPage1";
 
 const groupBy = function(xs, key) {
   return xs.reduce(function(rv, x) {
@@ -230,6 +231,7 @@ class BecomeHost extends React.Component {
               nextPage={this.nextPage}
             />
           )}
+          <ExistingPage1 />
         </div>
       </div>
     );
