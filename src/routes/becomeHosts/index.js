@@ -42,7 +42,7 @@ export default async function action({ params, store, query }) {
   const formBaseURI = "/become-a-hosts/";
   const className = "hiddenFooterMobile";
   await store.dispatch(getSideMenu());
-
+  console.log("list id", listId);
   let mode;
 
   if ("mode" in query) {

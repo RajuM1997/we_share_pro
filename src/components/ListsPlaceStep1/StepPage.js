@@ -17,7 +17,7 @@ import bt from "../../components/commonStyle.css";
 import defaultPic from "../../../public/SiteImages/vector.png";
 
 // Component
-import Loader from "../Loader";
+import Loader from "../Loader/Loader";
 
 // Redux action
 import {
@@ -31,7 +31,7 @@ import {
   closeCommentModal,
 } from "../../actions/modalActions";
 import CommentModal from "../siteadmin/ListingApprovalManagement/CommentModal/CommentModal";
-class ExistingPage1 extends Component {
+class StepPage extends Component {
   static propTypes = {
     listingSteps: PropTypes.shape({
       step1: PropTypes.string.isRequired,
@@ -53,7 +53,7 @@ class ExistingPage1 extends Component {
   };
   static defaultProps = {
     listingSteps: {
-      step1: "inactive",
+      step1: "completed",
       step2: "inactive",
       step3: "inactive",
       step4: "active",
@@ -105,7 +105,6 @@ class ExistingPage1 extends Component {
       photosCount,
       stepsLoading,
       account,
-      steps,
       publishListLoading,
     } = this.props;
     const { formatMessage } = this.props.intl;
@@ -729,5 +728,5 @@ const mapDispatch = {
 };
 
 export default injectIntl(
-  withStyles(s, bt)(connect(mapState, mapDispatch)(ExistingPage1))
+  withStyles(s, bt)(connect(mapState, mapDispatch)(StepPage))
 );

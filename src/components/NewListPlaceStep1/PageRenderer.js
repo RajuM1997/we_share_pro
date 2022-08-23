@@ -37,9 +37,8 @@ import PhotosUpload from "../PhotosUpload/PhotosUpload";
 //Images
 import DefaultIcon from "../../../public/SiteIcons/defaultIcon.png";
 import Calendar from "../ListsPlaceStep1/Calendar";
-import HostCategoryPage from "./HostCategoryPage";
-import HostSubCategoryPage from "./HostSubCategoryPage";
-import { ItemAssignmentContext } from "twilio/lib/rest/numbers/v2/regulatoryCompliance/bundle/itemAssignment";
+import Uploader from "./Uploader/Uploader";
+import Photos from "../ListPlaceStep1/Photos";
 
 class PageRenderer extends Component {
   static propTypes = {
@@ -301,7 +300,7 @@ class PageRenderer extends Component {
                               <h2>map</h2>
                             </Col>
                           );
-                        } else if (item.type === "textarea") {
+                        } else if (item.type === "description") {
                           return (
                             <Col
                               componentClass={ControlLabel}
@@ -337,25 +336,49 @@ class PageRenderer extends Component {
                                 {item.title}
                               </ControlLabel>
 
-                              {item.options &&
-                                item.options.map((inputData) => {
-                                  return (
-                                    <input
-                                      name={inputData.name}
-                                      className={cx(
-                                        s.formControlInput,
-                                        s.jumboSelect,
-                                        s.formControlInputMaxWidth
-                                      )}
-                                      onChange={(e) => {
-                                        console.log(e);
-                                        updateField(item.name, e.target.value);
-                                      }}
-                                      type={inputData?.type}
-                                      placeholder={inputData?.placeholder}
-                                    />
-                                  );
-                                })}
+                              <input
+                                name={item?.name}
+                                className={cx(
+                                  s.formControlInput,
+                                  s.jumboSelect,
+                                  s.formControlInputMaxWidth
+                                )}
+                                onChange={(e) => {
+                                  console.log(e);
+                                  updateField(item.name, e.target.value);
+                                }}
+                                type={item?.type}
+                                placeholder={item?.placeholder}
+                              />
+                            </Col>
+                          );
+                        } else if (item.type === "number") {
+                          return (
+                            <Col
+                              componentClass={ControlLabel}
+                              xs={12}
+                              sm={12}
+                              md={6}
+                              lg={6}
+                            >
+                              <ControlLabel className={s.landingLabel}>
+                                {item.title}
+                              </ControlLabel>
+
+                              <input
+                                name={item?.name}
+                                className={cx(
+                                  s.formControlInput,
+                                  s.jumboSelect,
+                                  s.formControlInputMaxWidth
+                                )}
+                                onChange={(e) => {
+                                  console.log(e);
+                                  updateField(item.name, e.target.value);
+                                }}
+                                type={item?.type}
+                                placeholder={item?.placeholder}
+                              />
                             </Col>
                           );
                         } else if (item.type === "calendar") {
@@ -374,7 +397,7 @@ class PageRenderer extends Component {
                               {/* <Calendar /> */}
                             </Col>
                           );
-                        } else if (item.type === "image") {
+                        } else if (item.type === "coverImage") {
                           return (
                             <Col
                               componentClass={ControlLabel}
@@ -383,17 +406,10 @@ class PageRenderer extends Component {
                               md={12}
                               lg={12}
                             >
-                              <PhotosUpload
-                                listId={listId}
-                                placeholder={item.title}
-                                onChange={(e) => {
-                                  console.log(e.target.value);
-                                  updateField(item.name, e.target.value);
-                                }}
-                              />
+                              <PhotosUpload placeholder={item?.title} />
                             </Col>
                           );
-                        } else if (item.type === "image") {
+                        } else if (item.type === "price") {
                           return (
                             <Col
                               componentClass={ControlLabel}
@@ -402,9 +418,15 @@ class PageRenderer extends Component {
                               md={12}
                               lg={12}
                             >
-                              <PhotosUpload
-                                listId={listId}
-                                placeholder={item.title}
+                              <Field
+                                name="basePrice"
+                                type="text"
+                                component={this.renderFormControl}
+                                label={formatMessage(messages.basePriceLabel)}
+                                className={cx(
+                                  s.formControlInput,
+                                  s.jumboSelect
+                                )}
                               />
                             </Col>
                           );

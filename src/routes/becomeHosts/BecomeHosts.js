@@ -30,7 +30,7 @@ class BecomeHosts extends React.Component {
       <div className={s.root}>
         <div className={cx(s.container, "existingPage")}>
           <ListsPlaceStep1
-            listId={listId}
+            listId={1}
             formPage={formPage}
             formBaseURI={formBaseURI}
             mode={mode}

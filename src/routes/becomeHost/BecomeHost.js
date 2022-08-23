@@ -16,7 +16,10 @@ import { connect } from "react-redux";
 // Component
 import PageRenderer from "../../components/NewListPlaceStep1/PageRenderer";
 import CategoryAndSubCtegorySelector from "./CategoryAndSubCtegorySelector";
-import {getFieldsBySubCategory, getPageFieldBySubCategory} from "../../helpers/graphQLHelper";
+import {
+  getFieldsBySubCategory,
+  getPageFieldBySubCategory,
+} from "../../helpers/graphQLHelper";
 import ExistingPage1 from "../../components/ListPlaceStep1/ExistingPage1";
 
 const groupBy = function(xs, key) {
@@ -92,52 +95,54 @@ class BecomeHost extends React.Component {
     }));
   }
 
-  async handleSubCategoryChange(selectedSubCategory, personCapacity, selectedCategory) {
-    this.setState({selectedSubCategory, personCapacity, selectedCategory});
-    if(selectedSubCategory) {
+  async handleSubCategoryChange(
+    selectedSubCategory,
+    personCapacity,
+    selectedCategory
+  ) {
+    this.setState({ selectedSubCategory, personCapacity, selectedCategory });
+    if (selectedSubCategory) {
       try {
         const pages = await getPageFieldBySubCategory(selectedSubCategory);
         const fields = await getFieldsBySubCategory(selectedSubCategory);
-        const data = fields?.map(
-            (page, index) => {
-              const fields = JSON.parse(page.fields);
-              const pageInfo = pages.find(item => item?.pageId === page?.pageId);
-              return {
-                ...page,
-                pageIndex: index,
-                step: pageInfo?.step || -1,
-                fields,
-              };
-            }
-        );
+        const data = fields?.map((page, index) => {
+          const fields = JSON.parse(page.fields);
+          const pageInfo = pages.find((item) => item?.pageId === page?.pageId);
+          return {
+            ...page,
+            pageIndex: index,
+            step: pageInfo?.step || -1,
+            fields,
+          };
+        });
         const stepPages = groupBy(data, "step");
         for (const property in stepPages) {
-          stepPages[property] = Object.values(groupBy(stepPages[property], "pageId"));
-          this.setState(thisSate => ({
+          stepPages[property] = Object.values(
+            groupBy(stepPages[property], "pageId")
+          );
+          this.setState((thisSate) => ({
             steps: {
               ...thisSate.steps,
-              [property]: 'pending',
-            }
+              [property]: "pending",
+            },
           }));
         }
         console.log("stepPages", stepPages);
-        this.setState({pageData: stepPages});
-      } catch (e) {
-
-      }
+        this.setState({ pageData: stepPages });
+      } catch (e) {}
     }
   }
 
   handleCategoryChange(selectedCategory) {
-    this.setState({selectedCategory});
+    this.setState({ selectedCategory });
   }
 
   handleCompleteStep() {
-    this.setState(thisSate => ({
+    this.setState((thisSate) => ({
       steps: {
         ...thisSate.steps,
-        [thisSate.currentStep]: 'visible',
-      }
+        [thisSate.currentStep]: "visible",
+      },
     }));
   }
 
@@ -172,62 +177,70 @@ class BecomeHost extends React.Component {
     return (
       <div className={s.root}>
         <div className={cx(s.container, "existingPage")}>
-          {
-            this.state.steps && this.state.steps[this?.state?.currentStep] === 'visible' ? (
-                <>
-                  <ExistingPage1 />
-                  <button onClick={()=>{
-                    const maxStep = Math.max(...Object.keys(this.state?.steps || {}));
-                    console.log("maxStep", maxStep)
-                    console.log("currentStep", this.state.currentStep)
-                    if (maxStep === this.state.currentStep) {
-                      alert("Do Form Submit")
-                    } else {
-                      this.setState(thisSate => ({
-                        steps: {
-                          ...thisSate.steps,
-                          [thisSate.currentStep]: 'completed',
-                        },
-                        currentStep: thisSate.currentStep < maxStep ?  thisSate.currentStep + 1 : maxStep,
-                        currentPageIndex: 0,
-                      }));
-                    }
-                  }}>Next</button>
-                </>
-            ) : (
-                <>
-                  {this.state.selectedCategory && this.state.selectedSubCategory ? (
-                      <PageRenderer
-                          totalPage={pageData?.length}
-                          currentPageData={{
-                            fields: currentPageFields,
-                          }}
-                          pageIndex={this.state.currentPageIndex}
-                          nextPage={this.nextPage}
-                          previousPage={this.previousPage}
-                          listId={listId}
-                          formPage={formPage}
-                          formBaseURI={formBaseURI}
-                          mode={mode}
-                          baseCurrency={baseCurrency}
-                          formData={this.state.formData[currentPageId] || {}}
-                          updateField={this.updateFileByPageId(currentPageId)}
-                          handleCompleteStep={this.handleCompleteStep}
-                      />
-                  ) : (
-                      <CategoryAndSubCtegorySelector
-                          category={getCategoryData.getCategoryAdmin}
-                          subCategory={getSubCategoryData.getSubCategoryAdmin}
-                          continuePage={this.continuePage}
-                          onSelectChanged={this.handleCategoryChange}
-                          onSelectSubCategoryChanged={this.handleSubCategoryChange}
-                          selectedCategory={this.state.selectedCategory}
-                          selectedSubCategory={this.state.selectedSubCategory}
-                      />
-                  )}
-                </>
-            )
-          }
+          {this.state.steps &&
+          this.state.steps[this?.state?.currentStep] === "visible" ? (
+            <>
+              <ExistingPage1 steps={this.state.steps} />
+              <button
+                onClick={() => {
+                  const maxStep = Math.max(
+                    ...Object.keys(this.state?.steps || {})
+                  );
+                  console.log("maxStep", maxStep);
+                  console.log("currentStep", this.state.currentStep);
+                  if (maxStep === this.state.currentStep) {
+                    alert("Do Form Submit");
+                  } else {
+                    this.setState((thisSate) => ({
+                      steps: {
+                        ...thisSate.steps,
+                        [thisSate.currentStep]: "completed",
+                      },
+                      currentStep:
+                        thisSate.currentStep < maxStep
+                          ? thisSate.currentStep + 1
+                          : maxStep,
+                      currentPageIndex: 0,
+                    }));
+                  }
+                }}
+              >
+                Next
+              </button>
+            </>
+          ) : (
+            <>
+              {this.state.selectedCategory && this.state.selectedSubCategory ? (
+                <PageRenderer
+                  totalPage={pageData?.length}
+                  currentPageData={{
+                    fields: currentPageFields,
+                  }}
+                  pageIndex={this.state.currentPageIndex}
+                  nextPage={this.nextPage}
+                  previousPage={this.previousPage}
+                  listId={this.state.currentPageIndex}
+                  formPage={formPage}
+                  formBaseURI={formBaseURI}
+                  mode={mode}
+                  baseCurrency={baseCurrency}
+                  formData={this.state.formData[currentPageId] || {}}
+                  updateField={this.updateFileByPageId(currentPageId)}
+                  handleCompleteStep={this.handleCompleteStep}
+                />
+              ) : (
+                <CategoryAndSubCtegorySelector
+                  category={getCategoryData.getCategoryAdmin}
+                  subCategory={getSubCategoryData.getSubCategoryAdmin}
+                  continuePage={this.continuePage}
+                  onSelectChanged={this.handleCategoryChange}
+                  onSelectSubCategoryChanged={this.handleSubCategoryChange}
+                  selectedCategory={this.state.selectedCategory}
+                  selectedSubCategory={this.state.selectedSubCategory}
+                />
+              )}
+            </>
+          )}
         </div>
       </div>
     );

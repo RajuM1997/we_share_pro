@@ -52,6 +52,10 @@ export const smallBannerUploadDir =
 export const subCategoryuploadDir =
   process.env.LOGOUPLOAD_DIR || "./images/subCategory/";
 
+// cover photo upload directory
+export const coverPhotouploadDir =
+  process.env.LOGOUPLOAD_DIR || "./images/coverPhoto/";
+
 // offer upload directory
 export const offeruploadDir = process.env.LOGOUPLOAD_DIR || "./images/offer/";
 
