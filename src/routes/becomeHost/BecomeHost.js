@@ -80,6 +80,7 @@ class BecomeHost extends React.Component {
     this.handleSubCategoryChange = this.handleSubCategoryChange.bind(this);
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
     this.handleCompleteStep = this.handleCompleteStep.bind(this);
+    this.handleOnNextStep = this.handleOnNextStep.bind(this);
   }
 
   nextPage() {
@@ -159,6 +160,28 @@ class BecomeHost extends React.Component {
     }));
   };
 
+  handleOnNextStep() {
+    const maxStep = Math.max(
+        ...Object.keys(this.state?.steps || {})
+    );
+    console.log("maxStep", maxStep);
+    console.log("currentStep", this.state.currentStep);
+    if (maxStep === this.state.currentStep) {
+      alert("Do Form Submit");
+    } else {
+      this.setState((thisSate) => ({
+        steps: {
+          ...thisSate.steps,
+          [thisSate.currentStep]: "completed",
+        },
+        currentStep:
+            thisSate.currentStep < maxStep
+                ? thisSate.currentStep + 1
+                : maxStep,
+        currentPageIndex: 0,
+      }));
+    }
+  }
   render() {
     const {
       title,
@@ -179,35 +202,7 @@ class BecomeHost extends React.Component {
         <div className={cx(s.container, "existingPage")}>
           {this.state.steps &&
           this.state.steps[this?.state?.currentStep] === "visible" ? (
-            <>
-              <ExistingPage1 steps={this.state.steps} />
-              <button
-                onClick={() => {
-                  const maxStep = Math.max(
-                    ...Object.keys(this.state?.steps || {})
-                  );
-                  console.log("maxStep", maxStep);
-                  console.log("currentStep", this.state.currentStep);
-                  if (maxStep === this.state.currentStep) {
-                    alert("Do Form Submit");
-                  } else {
-                    this.setState((thisSate) => ({
-                      steps: {
-                        ...thisSate.steps,
-                        [thisSate.currentStep]: "completed",
-                      },
-                      currentStep:
-                        thisSate.currentStep < maxStep
-                          ? thisSate.currentStep + 1
-                          : maxStep,
-                      currentPageIndex: 0,
-                    }));
-                  }
-                }}
-              >
-                Next
-              </button>
-            </>
+              <ExistingPage1 currentStep={this.state.currentStep} handleOnNextStep={this.handleOnNextStep}/>
           ) : (
             <>
               {this.state.selectedCategory && this.state.selectedSubCategory ? (

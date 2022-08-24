@@ -33,148 +33,42 @@ import {
 import CommentModal from "../siteadmin/ListingApprovalManagement/CommentModal/CommentModal";
 class ExistingPage1 extends Component {
   static propTypes = {
-    listingSteps: PropTypes.shape({
-      step1: PropTypes.string.isRequired,
-      step2: PropTypes.string.isRequired,
-      step3: PropTypes.string.isRequired,
-      listing: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        isReady: PropTypes.bool.isRequired,
-        isPublished: PropTypes.bool.isRequired,
-      }),
-      user: PropTypes.shape({
-        userBanStatus: PropTypes.number,
-      }),
-    }),
-    nextPage: PropTypes.any.isRequired,
-    stepsLoading: PropTypes.bool,
-    ManagePublishStatus: PropTypes.any.isRequired,
-    publishListLoading: PropTypes.bool,
+    currentStep: PropTypes.number.isRequired,
+    handleOnNextStep: PropTypes.func.isRequired
   };
   static defaultProps = {
-    listingSteps: {
-      step1: "inactive",
-      step2: "inactive",
-      step3: "inactive",
-      step4: "active",
-      listing: {
-        id: 0,
-        isReady: false,
-        isPublished: false,
-      },
-      user: {
-        userBanStatus: 0,
-      },
-    },
-    photosCount: 0,
-    stepsLoading: false,
-    publishListLoading: false,
+    currentStep: 1,
+    handleOnNextStep: () => {}
   };
 
   constructor(props) {
     super(props);
-    this.handleApprove = this.handleApprove.bind(this);
-    this.handleDecline = this.handleDecline.bind(this);
   }
 
-  async handleApprove(event) {
-    const {
-      approveListing,
-      listingSteps: {
-        listing: { id },
-      },
-      openCommentModal,
-    } = this.props;
-    if (event.target.value === "approved") {
-      await approveListing(id, "approved");
-    } else if (event.target.value === "declined") {
-      openCommentModal(id);
-    }
-  }
-
-  async handleDecline(listId, comment) {
-    const { closeCommentModal, approveListing } = this.props;
-    await approveListing(listId, "declined", comment);
-    closeCommentModal();
-  }
 
   render() {
     const {
-      nextPage,
-      listingSteps,
-      photosCount,
-      stepsLoading,
-      account,
-      steps,
-      publishListLoading,
+      currentStep,
+      handleOnNextStep
     } = this.props;
     const { formatMessage } = this.props.intl;
-    const {
-      listingSteps: {
-        listing: { id, isReady, isPublished, user, listApprovalStatus },
-      },
-    } = this.props;
-
-    let userDelete = user && user.userDeletedAt;
     let isShowButton = false,
       stepOneCircle = false,
       stepTwoCircle = false,
       stepThreeCircle = false;
-    let stepFour = false;
 
-    if (!stepsLoading) {
-      return <Loader type={"text"} />;
-    }
-
-    if (!userDelete) {
-      isShowButton = true;
-    } else {
-      isShowButton = false;
-    }
-
-    let userBanStatusValue;
-    if (user) {
-      const {
-        listingSteps: {
-          listing: {
-            user: { userBanStatus },
-          },
-        },
-      } = this.props;
-      userBanStatusValue = userBanStatus;
-    }
-    const {
-      listingSteps: { step1, step2, step3, step4 },
-    } = this.props;
-    const { ManagePublishStatus, submitForVerification } = this.props;
-    let isPhotoAvailable = false;
-    if (photosCount > 0) {
-      isPhotoAvailable = true;
-    }
-
-    if (step1 == "completed") {
+    if (currentStep === 1) {
       stepOneCircle = true;
     }
-    if (step2 == "completed" && isPhotoAvailable) {
+    if (currentStep === 2) {
       stepTwoCircle = true;
+      stepOneCircle = true;
     }
-    if (step4 == "completed") {
+    if (currentStep === 3) {
+      stepTwoCircle = true;
+      stepOneCircle = true;
       stepThreeCircle = true;
     }
-
-    if (step3 == "active") {
-      stepFour = true;
-    }
-
-    if (step3 == "completed" && step4 == "active") {
-      stepFour = true;
-    }
-
-    let isAdmin = false;
-    if (!account) {
-      isAdmin = true;
-    }
-
     return (
       <div className={cx(s.mainSectionPadding, "noPaddingBottom")}>
         <Grid>
@@ -233,23 +127,6 @@ class ExistingPage1 extends Component {
                               />
                             </span>
                           </p>
-                          {step1 == "active" && (
-                            <Button
-                              className={cx(s.button, bt.btnPrimary)}
-                              onClick={() => nextPage("map")}
-                            >
-                              <FormattedMessage {...messages.continue} />
-                            </Button>
-                          )}
-                          {step1 == "completed" && (
-                            <a
-                              href="javascript:void(0);"
-                              className={s.modalCaptionLink}
-                              onClick={() => nextPage("room")}
-                            >
-                              <FormattedMessage {...messages.change} />
-                            </a>
-                          )}
                         </div>
                       </div>
                     </div>
@@ -304,30 +181,13 @@ class ExistingPage1 extends Component {
                               />
                             </span>
                           </p>
-                          {step2 == "active" && (
+                          {currentStep === 1 && (
                             <Button
                               className={cx(s.button, bt.btnPrimary)}
-                              onClick={() => nextPage("photos")}
+                              onClick={handleOnNextStep}
                             >
                               <FormattedMessage {...messages.continue} />
                             </Button>
-                          )}
-                          {step2 == "completed" && !isPhotoAvailable && (
-                            <Button
-                              className={cx(s.button, bt.btnPrimary)}
-                              onClick={() => nextPage("photos")}
-                            >
-                              <FormattedMessage {...messages.continue} />
-                            </Button>
-                          )}
-                          {step2 == "completed" && isPhotoAvailable && (
-                            <a
-                              href="javascript:void(0);"
-                              className={s.modalCaptionLink}
-                              onClick={() => nextPage("photos")}
-                            >
-                              <FormattedMessage {...messages.change} />
-                            </a>
                           )}
                         </div>
                       </div>
@@ -382,22 +242,13 @@ class ExistingPage1 extends Component {
                               />
                             </span>
                           </p>
-                          {stepFour == true && (
+                          {currentStep === 2 && (
                             <Button
                               className={cx(s.button, bt.btnPrimary)}
-                              onClick={() => nextPage("guest-requirements")}
+                              onClick={handleOnNextStep}
                             >
                               <FormattedMessage {...messages.continue} />
                             </Button>
-                          )}
-                          {step4 == "completed" && (
-                            <a
-                              href="javascript:void(0);"
-                              className={s.modalCaptionLink}
-                              onClick={() => nextPage("guest-requirements")}
-                            >
-                              <FormattedMessage {...messages.change} />
-                            </a>
                           )}
                         </div>
                       </div>
@@ -409,296 +260,33 @@ class ExistingPage1 extends Component {
               <Col xs={12} sm={12} md={12} lg={12}>
                 <hr className={s.horizontalLineThrough} />
               </Col>
-              {!isShowButton && (
-                <Col xs={12} sm={12} md={12} lg={12}>
-                  <h3 className={s.spaceTop1}>
-                    <FormattedMessage {...messages.listDeleted} />
-                  </h3>
-                </Col>
-              )}
-              {/* ````````````````Publish Button````````````` */}
-              {listingSteps &&
-                isReady &&
-                listApprovalStatus === "approved" &&
-                !isPublished &&
-                !userBanStatusValue &&
-                isShowButton && (
-                  <Col xs={12} sm={12} md={12} lg={12}>
-                    <h3 className={s.spaceTop1}>
-                      <FormattedMessage {...messages.readyToPublish} />
-                    </h3>
-                    <Col
-                      xs={12}
-                      sm={12}
-                      md={12}
-                      lg={12}
-                      className={cx(s.spaceTop3, s.noPadding)}
-                    >
-                      <div className={s.displayInline}>
-                        <Loader
-                          type={"button"}
-                          className={cx(s.button, bt.btnPrimary)}
-                          handleClick={() => ManagePublishStatus(id, "publish")}
-                          show={publishListLoading}
-                          label={formatMessage(messages.publishNow)}
-                        />
-                      </div>
 
-                      <a
-                        target="_blank"
-                        href={"/rooms/" + id + "/preview"}
-                        className={cx(s.previewLink, "prviewLinkAR")}
+              {
+                currentStep === 3 && (
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                      <h3 className={s.spaceTop1}>
+                        <FormattedMessage {...messages.readyToPublish} />
+                      </h3>
+                      <Col
+                          xs={12}
+                          sm={12}
+                          md={12}
+                          lg={12}
+                          className={cx(s.spaceTop3, s.noPadding)}
                       >
-                        <FormattedMessage {...messages.previewListing} />
-                      </a>
-                    </Col>
-                  </Col>
-                )}
-              {/* ````````````````UnPublish Button````````````` */}
-              {listingSteps &&
-                isReady &&
-                listApprovalStatus === "approved" &&
-                isPublished &&
-                !userBanStatusValue &&
-                isShowButton && (
-                  <Col xs={12} sm={12} md={12} lg={12}>
-                    <h3 className={s.spaceTop1}>
-                      <FormattedMessage {...messages.listingPublished} />
-                    </h3>
-                    <Col
-                      xs={12}
-                      sm={12}
-                      md={12}
-                      lg={12}
-                      className={cx(s.spaceTop3, s.noPadding)}
-                    >
-                      <div className={s.displayInline}>
-                        <Loader
-                          type={"button"}
-                          className={cx(s.button, bt.btnPrimary)}
-                          handleClick={() =>
-                            ManagePublishStatus(id, "unPublish")
-                          }
-                          show={publishListLoading}
-                          label={formatMessage(messages.unPublishNow)}
-                        />
-                      </div>
-                      <a
-                        target="_blank"
-                        href={"/rooms/" + id + "/preview"}
-                        className={cx(s.previewLink, "prviewLinkAR")}
-                      >
-                        <FormattedMessage {...messages.previewListing} />{" "}
-                      </a>
-                    </Col>
-                  </Col>
-                )}
-              {/* ````````````````Submit for verification Button````````````` */}
-              {!isAdmin &&
-                listingSteps &&
-                isReady &&
-                !listApprovalStatus &&
-                !userBanStatusValue &&
-                isShowButton && (
-                  <Col xs={12} sm={12} md={12} lg={12}>
-                    <h3 className={s.spaceTop1}>
-                      <FormattedMessage {...messages.readyForVerification} />
-                    </h3>
-                    <Col
-                      xs={12}
-                      sm={12}
-                      md={12}
-                      lg={12}
-                      className={cx(s.spaceTop3, s.noPadding)}
-                    >
-                      <div className={s.displayInline}>
-                        <Loader
-                          type={"button"}
-                          className={cx(s.button, bt.btnPrimary)}
-                          handleClick={() =>
-                            submitForVerification(id, "pending")
-                          }
-                          show={publishListLoading}
-                          label={formatMessage(messages.submitForVerification)}
-                        />
-                      </div>
-
-                      <a
-                        target="_blank"
-                        href={"/rooms/" + id + "/preview"}
-                        className={cx(s.previewLink, "prviewLinkAR")}
-                      >
-                        <FormattedMessage {...messages.previewListing} />
-                      </a>
-                    </Col>
-                  </Col>
-                )}
-
-              {!isAdmin &&
-                listingSteps &&
-                isReady &&
-                listApprovalStatus === "pending" &&
-                !userBanStatusValue &&
-                isShowButton && (
-                  <Col xs={12} sm={12} md={12} lg={12}>
-                    <h3 className={s.spaceTop1}>
-                      <FormattedMessage {...messages.readyForApproval} />
-                    </h3>
-                    <Col
-                      xs={12}
-                      sm={12}
-                      md={12}
-                      lg={12}
-                      className={cx(s.spaceTop3, s.noPadding)}
-                    >
-                      <div className={s.displayInline}>
-                        <Loader
-                          type={"button"}
-                          className={cx(s.button, bt.btnPrimary)}
-                          disabled={true}
-                          label={formatMessage(messages.waitingForAdmin)}
-                        />
-                      </div>
-                      <a
-                        target="_blank"
-                        href={"/rooms/" + id + "/preview"}
-                        className={cx(s.previewLink, "prviewLinkAR")}
-                      >
-                        <FormattedMessage {...messages.previewListing} />
-                      </a>
-                    </Col>
-                  </Col>
-                )}
-
-              {/* ````````````````Submit for appeal Button````````````` */}
-              {!isAdmin &&
-                listingSteps &&
-                isReady &&
-                listApprovalStatus === "declined" &&
-                !userBanStatusValue &&
-                isShowButton && (
-                  <Col xs={12} sm={12} md={12} lg={12}>
-                    <h3 className={s.spaceTop1}>
-                      <FormattedMessage {...messages.readyForVerification} />
-                    </h3>
-                    <Col
-                      xs={12}
-                      sm={12}
-                      md={12}
-                      lg={12}
-                      className={cx(s.spaceTop3, s.noPadding)}
-                    >
-                      <div className={s.displayInline}>
-                        <Loader
-                          type={"button"}
-                          className={cx(s.button, bt.btnPrimary)}
-                          handleClick={() =>
-                            submitForVerification(id, "pending")
-                          }
-                          label={formatMessage(messages.submitForAppeal)}
-                        />
-                      </div>
-
-                      <a
-                        target="_blank"
-                        href={"/rooms/" + id + "/preview"}
-                        className={cx(s.previewLink, "prviewLinkAR")}
-                      >
-                        <FormattedMessage {...messages.previewListing} />
-                      </a>
-                    </Col>
-                  </Col>
-                )}
-
-              {/* ````````````````Approve/Decline Admin Button````````````` */}
-
-              {isAdmin &&
-                listingSteps &&
-                isReady &&
-                listApprovalStatus === "pending" &&
-                !userBanStatusValue &&
-                isShowButton && (
-                  <Col xs={12} sm={12} md={12} lg={12}>
-                    <Row className={s.spaceTop4}>
-                      <Col lg={4} md={4} sm={4} xs={12}>
-                        <div className={"publishArrow"}>
-                          <select
-                            className={cx(s.formSelect, s.formSelectNew)}
-                            value={listApprovalStatus}
-                            onChange={this.handleApprove}
-                          >
-                            <option value="pending">
-                              {formatMessage(messages.messageStatus5)}
-                            </option>
-                            <option value="approved">
-                              {formatMessage(messages.approved)}
-                            </option>
-                            <option value="declined">
-                              {formatMessage(messages.declined)}
-                            </option>
-                          </select>
+                        <div className={s.displayInline}>
+                          <Loader
+                              type={"button"}
+                              className={cx(s.button, bt.btnPrimary)}
+                              handleClick={() => {}}
+                              show={false}
+                              label={formatMessage(messages.publishNow)}
+                          />
                         </div>
                       </Col>
-                      <Col lg={8} md={8} sm={8} xs={12}>
-                        <a
-                          target="_blank"
-                          href={"/rooms/" + id + "/preview"}
-                          className={cx(s.previewLink, "prviewLinkAR")}
-                        >
-                          <FormattedMessage {...messages.previewListing} />
-                        </a>
-                      </Col>
-                    </Row>
-                  </Col>
-                )}
-
-              {isAdmin &&
-                listingSteps &&
-                isReady &&
-                listApprovalStatus === "declined" &&
-                !userBanStatusValue &&
-                isShowButton && (
-                  <Col xs={12} sm={12} md={12} lg={12}>
-                    <h3 className={s.spaceTop1}>
-                      <FormattedMessage {...messages.declineAdmin} />
-                    </h3>
-                    <Col
-                      xs={12}
-                      sm={12}
-                      md={12}
-                      lg={12}
-                      className={cx(s.spaceTop3, s.noPadding)}
-                    >
-                      <a
-                        target="_blank"
-                        href={"/rooms/" + id + "/preview"}
-                        className={cx(s.previewLink, "prviewLinkAR")}
-                      >
-                        <FormattedMessage {...messages.previewListing} />
-                      </a>
                     </Col>
-                  </Col>
-                )}
-
-              {userBanStatusValue == true && isShowButton && (
-                <Col xs={12} sm={12} md={12} lg={12}>
-                  <Col
-                    xs={12}
-                    sm={12}
-                    md={12}
-                    lg={12}
-                    className={cx(s.spaceTop3, s.noPadding)}
-                  >
-                    <a
-                      target="_blank"
-                      href={"/rooms/" + id + "/preview"}
-                      className={cx(s.previewLinkUserBan)}
-                    >
-                      <FormattedMessage {...messages.previewListing} />
-                    </a>
-                  </Col>
-                </Col>
-              )}
+                )
+              }
             </Col>
 
             <Col xs={12} sm={5} md={5} lg={5} className={"hidden-xs"}>
@@ -714,20 +302,9 @@ class ExistingPage1 extends Component {
     );
   }
 }
-const mapState = (state) => ({
-  listingSteps: state.location.listingSteps,
-  stepsLoading: state.location.stepsLoading,
-  account: state.account.data,
-  publishListLoading: state.location.publishListLoading,
-});
-const mapDispatch = {
-  ManagePublishStatus,
-  submitForVerification,
-  approveListing,
-  openCommentModal,
-  closeCommentModal,
-};
+const mapState = (state) => ({});
+const mapDispatch = {};
 
 export default injectIntl(
-  withStyles(s, bt)(connect(mapState, mapDispatch)(ExistingPage1))
+  withStyles(s, bt)(ExistingPage1)
 );
