@@ -131,9 +131,9 @@ class EditPageFieldManagement extends React.Component {
                     <option value="" selected disabled>
                       Please Select
                     </option>
-                    <option value="step1">Step1</option>
-                    <option value="step3">Step2</option>
-                    <option value="step2">Step3</option>
+                    <option value={1}>Step1</option>
+                    <option value={2}>Step2</option>
+                    <option value={3}>Step3</option>
                   </Field>
                 </div>
                 <FormGroup className={s.formGroup}>

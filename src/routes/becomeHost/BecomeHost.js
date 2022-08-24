@@ -153,7 +153,7 @@ class BecomeHost extends React.Component {
       formData: {
         ...thisState.formData,
         [currentPageId]: {
-          ...(thisState[currentPageId] || {}),
+          ...(thisState.formData[currentPageId] || {}),
           [key]: value,
         },
       },

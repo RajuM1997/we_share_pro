@@ -253,28 +253,36 @@ class PageRenderer extends Component {
                               md={12}
                               lg={12}
                             >
+                              <pre>{JSON.stringify(item, null, 4)}</pre>
                               <ControlLabel className={s.landingLabel}>
                                 {item.title}
                               </ControlLabel>
 
                               {item?.fields &&
                                 item.fields?.map((optionData) => {
-                                  console.log(optionData);
+                                  // console.log("optionData",optionData);
+                                  // console.log("optionDataitem",item);
                                   return (
                                     <div className={s.checkInput}>
                                       <input
                                         type="checkbox"
-                                        name={item.label}
+                                        name={optionData.label}
                                         value={optionData.value}
                                         className={cx(
                                           s.pullRight,
                                           s.customBorder
                                         )}
                                         onChange={(e) => {
-                                          console.log(e);
+                                          const fieldValue = [...(formData[item.name] || [])];
+                                          const itemIndex = fieldValue.findIndex(ele => ele === e.target.value);
+                                          if (!e.target.checked && itemIndex > -1) {
+                                            fieldValue.splice(itemIndex, 1);
+                                          } else {
+                                            fieldValue.push(e.target.value);
+                                          }
                                           updateField(
-                                            item.label,
-                                            e.target.value
+                                            item.name,
+                                            fieldValue
                                           );
                                         }}
                                       />
