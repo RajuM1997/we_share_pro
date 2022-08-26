@@ -213,7 +213,7 @@ class Page5 extends Component {
                     s.pullRight,
                     "floatLeft"
                   )}
-                  onClick={() => nextPage("photos")}
+                  onClick={() => nextPage("review-how-guests-book")}
                 >
                   <FormattedMessage {...messages.next} />
                 </Button>
