@@ -122,6 +122,7 @@ class Pricing extends Component {
     const { isDisabled } = this.state;
     const { formatMessage } = this.props.intl;
     const { base, availableCurrencies, mapUpdateLoading } = this.props;
+    console.log(availableCurrencies);
     return (
       <Grid fluid>
         <Row className={s.landingContainer}>

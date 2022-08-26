@@ -228,10 +228,22 @@ class AddListSettingsForm extends Component {
               <option value="image">Image</option>
               <option value="coverImage">Cover Image</option>
               <option value="title">Title</option>
-              <option value="description">Description</option>
+              <option value="textarea">Textarea</option>
               <option value="price">Price</option>
-              <option value="checkboxImage">Check Box And Image</option>
+              <option value="address">Address</option>
               <option value="map">Map</option>
+              <option value="spaces">Spaces</option>
+              <option value="houseType">House Type</option>
+              <option value="roomType">Room Type</option>
+              <option value="buildingSize">Building Size</option>
+              <option value="bedroom">Bedroom</option>
+              <option value="bathroomType">Bathroom Type</option>
+              <option value="bookingNoticeTime">Booking Notice Time</option>
+              <option value="maxDaysNotice">Max Days Notice</option>
+              <option value="reviewGuestBook">Review Guest Book</option>
+              <option value="guestRequirements">Guest Requirements</option>
+              <option value="houseRules">House Rules</option>
+              <option value="localLaws">Local Laws</option>
             </Field>
 
             {(this.state.type === "select" ||

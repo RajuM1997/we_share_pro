@@ -61,6 +61,45 @@
   box-shadow: none;
   /*Drop Down Caret Icon */
 }
+
+.checkBox {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0.3rem;
+  padding: 5px 0;
+}
+.checkBoxInput {
+  margin: 0px !important;
+}
+
+.checkBoxInput[type="checkbox"] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  outline: none;
+  content: none;
+  margin-top: 0;
+}
+.checkBoxInput[type="checkbox"]::before {
+  font-family: "FontAwesome";
+  content: "\f00c";
+  font-size: 15px;
+  color: transparent !important;
+  background: transparent;
+  display: block;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ccc;
+}
+.checkBoxInput[type="checkbox"]:checked:before {
+  color: rgb(81, 81, 236) !important;
+}
+.checkBoxLabel {
+  margin: 0px;
+  font-weight: 500;
+}
+
 /* Landscape */
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 768px) {

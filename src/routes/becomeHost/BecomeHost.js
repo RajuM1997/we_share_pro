@@ -10,6 +10,7 @@ import { graphql, compose } from "react-apollo";
 // query
 import getCategoryQuery from "./getCategory.graphql";
 import getSubCategoryQuery from "./getSubCategory.graphql";
+import getCountriesQuery from "./getCountries.graphql";
 // Redux
 import { connect } from "react-redux";
 
@@ -51,12 +52,19 @@ class BecomeHost extends React.Component {
       loading: PropTypes.bool,
       getPageFieldData: PropTypes.array,
     }),
+    getCountriesData: PropTypes.shape({
+      loading: PropTypes.bool,
+      getCountriesData: PropTypes.array,
+    }),
   };
   static defaultProps = {
     data: {
       loading: true,
     },
     categoryData: {
+      loading: true,
+    },
+    getCountriesData: {
       loading: true,
     },
     pageData: {},
@@ -164,6 +172,7 @@ class BecomeHost extends React.Component {
       title,
       getCategoryData,
       getSubCategoryData,
+      getCountriesData,
       formPage,
       formBaseURI,
       mode,
@@ -173,6 +182,7 @@ class BecomeHost extends React.Component {
     const pageData = this.state?.pageData[this.state.currentStep] || [];
     const currentPageFields = pageData[this.state.currentPageIndex] || [];
     const { pageId: currentPageId } = currentPageFields[0] || {};
+    console.log(getCountriesData);
 
     return (
       <div className={s.root}>
@@ -227,6 +237,7 @@ class BecomeHost extends React.Component {
                   formData={this.state.formData[currentPageId] || {}}
                   updateField={this.updateFileByPageId(currentPageId)}
                   handleCompleteStep={this.handleCompleteStep}
+                  countryList={getCountriesData}
                 />
               ) : (
                 <CategoryAndSubCtegorySelector
@@ -259,6 +270,12 @@ export default compose(
   }),
   graphql(getSubCategoryQuery, {
     name: "getSubCategoryData",
+    options: {
+      ssr: true,
+    },
+  }),
+  graphql(getCountriesQuery, {
+    name: "getCountriesData",
     options: {
       ssr: true,
     },
