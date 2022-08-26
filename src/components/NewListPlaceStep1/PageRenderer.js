@@ -253,7 +253,6 @@ class PageRenderer extends Component {
                               md={12}
                               lg={12}
                             >
-                              <pre>{JSON.stringify(item, null, 4)}</pre>
                               <ControlLabel className={s.landingLabel}>
                                 {item.title}
                               </ControlLabel>
@@ -414,7 +413,7 @@ class PageRenderer extends Component {
                               md={12}
                               lg={12}
                             >
-                              <PhotosUpload placeholder={item?.title} />
+                              <PhotosUpload placeholder={item?.title} photos={formData['coverImage'] || []} updatePhotos={updateField}/>
                             </Col>
                           );
                         } else if (item.type === "price") {

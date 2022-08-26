@@ -26,9 +26,6 @@ import { maxUploadSize } from "../../config";
 
 class PhotosUpload extends Component {
   static propTypes = {
-    createListPhotos: PropTypes.any.isRequired,
-    removeListPhotos: PropTypes.any.isRequired,
-    listId: PropTypes.number.isRequired,
   };
 
   constructor(props) {
@@ -37,6 +34,7 @@ class PhotosUpload extends Component {
     this.complete = this.complete.bind(this);
     this.dropzone = null;
     this.addedfile = this.addedfile.bind(this);
+    this.onDeletePhoto = this.onDeletePhoto.bind(this);
     this.state = {
       djsConfig: {},
     };
@@ -110,22 +108,34 @@ class PhotosUpload extends Component {
       this.dropzone.removeFile(file);
     }
   }
+  onDeletePhoto(fileName) {
+    const thisPhotos = [...this.props.photos];
+    const itemIndex = this.props.photos.findIndex(ele => ele?.filename === fileName);
+    if (itemIndex > -1) {
+      thisPhotos.splice(itemIndex, 1);
+    }
+    this.props.updatePhotos(
+        'coverImage',
+        thisPhotos
+    );
+  }
 
   complete(file) {
-    const { listId, createListPhotos } = this.props;
+    const { updatePhotos, photos = []} = this.props;
     if (file && file.xhr) {
       const { files } = JSON.parse(file.xhr.response);
-      let fileName = files[0].filename;
-      let fileType = files[0].mimetype;
-      if (listId != undefined) {
-        createListPhotos(listId, fileName, fileType);
+      if (files[0]) {
+        updatePhotos('coverImage', [
+            ...photos,
+            ...files,
+        ])
       }
       this.dropzone.removeFile(file);
     }
   }
 
   render() {
-    const { placeholder, listId } = this.props;
+    const { photos, updatePhotos } = this.props;
     const { djsConfig } = this.state;
 
     const componentConfig = {
@@ -153,7 +163,7 @@ class PhotosUpload extends Component {
           <FormattedMessage {...messages.uploadSizedLabel} />
           {maxUploadSize}MB
         </div>
-        <PhotosList listId={listId} />
+        <PhotosList photos={photos || []} onDeletePhoto={this.onDeletePhoto}/>
       </div>
     );
   }
@@ -162,8 +172,6 @@ class PhotosUpload extends Component {
 const mapState = (state) => ({});
 
 const mapDispatch = {
-  createListPhotos,
-  removeListPhotos,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(PhotosUpload));

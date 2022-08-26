@@ -18,9 +18,7 @@ import messages from "../../locale/messages";
 import s from "./PhotosList.css";
 class PhotosList extends Component {
   static propTypes = {
-    removeListPhotos: PropTypes.any.isRequired,
-    listId: PropTypes.number.isRequired,
-    listPhotos: PropTypes.arrayOf(
+    photos: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
@@ -30,15 +28,15 @@ class PhotosList extends Component {
   };
 
   static defaultProps = {
-    listPhotos: [],
+    photos: [],
   };
 
   render() {
-    const { removeListPhotos, listId, listPhotos } = this.props;
+    const { photos, onDeletePhoto } = this.props;
     return (
       <div className={cx("row")}>
-        {listPhotos &&
-          listPhotos.map((item, key) => {
+        {photos &&
+        photos.map((item, key) => {
             return (
               <div
                 key={key}
@@ -50,13 +48,15 @@ class PhotosList extends Component {
                   <div className={s.listPhotoMedia}>
                     <img
                       className={s.imgResponsive}
-                      src={"/images/upload/x_medium_" + item.name}
+                      src={"/images/upload/x_medium_" + item.filename}
                     />
                   </div>
                 </div>
                 <a
                   href="javascript:void(0);"
-                  onClick={() => removeListPhotos(item.listId, item.name, true)}
+                  onClick={() => {
+                    onDeletePhoto(item.filename)
+                  }}
                 >
                   <FormattedMessage {...messages.removeFile} />
                 </a>
@@ -67,13 +67,4 @@ class PhotosList extends Component {
     );
   }
 }
-
-const mapState = (state) => ({
-  listPhotos: state.location.listPhotos,
-});
-
-const mapDispatch = {
-  removeListPhotos,
-};
-
-export default withStyles(s)(connect(mapState, mapDispatch)(PhotosList));
+export default withStyles(s)(PhotosList);
