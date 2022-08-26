@@ -1,23 +1,23 @@
- {
+{
   "development": {
-    "username": "shovon",
-    "password": "12344321",
-    "database": "rentall",
+    "username": "root",
+    "password": "Root123!",
+    "database": "rentall_v_3_2",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
-    "username": "shovon",
-    "password": "12344321",
-    "database": "rentall",
-    "host": "localhost",
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "shovon",
-    "password": "12344321",
-    "database": "rentall",
-    "host": "localhost",
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   }
 }
