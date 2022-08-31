@@ -361,17 +361,21 @@ class PageRenderer extends Component {
                                           s.customBorder
                                         )}
                                         onChange={(e) => {
-                                          const fieldValue = [...(formData[item.name] || [])];
-                                          const itemIndex = fieldValue.findIndex(ele => ele === e.target.value);
-                                          if (!e.target.checked && itemIndex > -1) {
+                                          const fieldValue = [
+                                            ...(formData[item.name] || []),
+                                          ];
+                                          const itemIndex = fieldValue.findIndex(
+                                            (ele) => ele === e.target.value
+                                          );
+                                          if (
+                                            !e.target.checked &&
+                                            itemIndex > -1
+                                          ) {
                                             fieldValue.splice(itemIndex, 1);
                                           } else {
                                             fieldValue.push(e.target.value);
                                           }
-                                          updateField(
-                                            item.name,
-                                            fieldValue
-                                          );
+                                          updateField(item.name, fieldValue);
                                         }}
                                       />
                                       <span> {optionData.label}</span>
@@ -502,7 +506,11 @@ class PageRenderer extends Component {
                               md={12}
                               lg={12}
                             >
-                              <PhotosUpload placeholder={item?.title} photos={formData['coverImage'] || []} updatePhotos={updateField}/>
+                              <PhotosUpload
+                                placeholder={item?.title}
+                                photos={formData["coverImage"] || []}
+                                updatePhotos={updateField}
+                              />
                             </Col>
                           );
                         } else if (item.type === "price") {
@@ -820,47 +828,72 @@ class PageRenderer extends Component {
                           );
                         } else if (item.type === "bathroomType") {
                           return (
-                            <select
-                              name="bathroomType"
-                              component={this.renderFormControlSelect}
-                              className={cx(
-                                s.formControlSelect,
-                                s.jumboSelect,
-                                s.jumboSelectPadding
-                              )}
+                            <Col
+                              xs={12}
+                              sm={7}
+                              md={7}
+                              lg={12}
+                              className={s.landingContent}
                             >
-                              {bathroomType?.map((value, key) => {
-                                return (
-                                  value.isEnable == 1 && (
-                                    <option value={value.id} key={key}>
-                                      {value.itemName}
-                                    </option>
-                                  )
-                                );
-                              })}
-                            </select>
+                              <select
+                                name="bathroomType"
+                                component={this.renderFormControlSelect}
+                                className={cx(
+                                  s.formControlSelect,
+                                  s.jumboSelect,
+                                  s.jumboSelectPadding
+                                )}
+                              >
+                                {bathroomType?.map((value, key) => {
+                                  return (
+                                    value.isEnable == 1 && (
+                                      <option value={value.id} key={key}>
+                                        {value.itemName}
+                                      </option>
+                                    )
+                                  );
+                                })}
+                              </select>
+                            </Col>
                           );
                         } else if (item.type === "bookingNoticeTime") {
                           return (
-                            <select
-                              name="bookingNoticeTime"
-                              component={this.renderFormControlSelect}
-                              className={cx(s.formControlSelect, s.jumboSelect)}
+                            <Col
+                              xs={12}
+                              sm={7}
+                              md={7}
+                              lg={12}
+                              className={s.landingContent}
                             >
-                              {bookingNoticeTime?.map((value, key) => {
-                                return (
-                                  value.isEnable == 1 && (
-                                    <option value={value.id} key={key}>
-                                      {value.itemName}
-                                    </option>
-                                  )
-                                );
-                              })}
-                            </select>
+                              <select
+                                name="bookingNoticeTime"
+                                component={this.renderFormControlSelect}
+                                className={cx(
+                                  s.formControlSelect,
+                                  s.jumboSelect
+                                )}
+                              >
+                                {bookingNoticeTime?.map((value, key) => {
+                                  return (
+                                    value.isEnable == 1 && (
+                                      <option value={value.id} key={key}>
+                                        {value.itemName}
+                                      </option>
+                                    )
+                                  );
+                                })}
+                              </select>
+                            </Col>
                           );
                         } else if (item.type === "maxDaysNotice") {
                           return (
-                            <>
+                            <Col
+                              xs={12}
+                              sm={7}
+                              md={7}
+                              lg={12}
+                              className={s.landingContent}
+                            >
                               <select
                                 name="maxDaysNotice"
                                 component={this.renderFormControlSelect}
@@ -911,11 +944,17 @@ class PageRenderer extends Component {
                                   {formatMessage(messages.strict)}
                                 </option>
                               </select>
-                            </>
+                            </Col>
                           );
                         } else if (item.type === "localLaws") {
                           return (
-                            <>
+                            <Col
+                              xs={12}
+                              sm={7}
+                              md={7}
+                              lg={12}
+                              className={s.landingContent}
+                            >
                               <h3
                                 className={cx(s.landingContentTitle, s.space5)}
                               >
@@ -963,7 +1002,7 @@ class PageRenderer extends Component {
                                   </p>
                                 </div>
                               </div>
-                            </>
+                            </Col>
                           );
                         } else if (item.type === "reviewGuestBook") {
                           return (
@@ -971,7 +1010,7 @@ class PageRenderer extends Component {
                               xs={12}
                               sm={7}
                               md={7}
-                              lg={7}
+                              lg={12}
                               className={s.landingContent}
                             >
                               <h3
@@ -1050,7 +1089,7 @@ class PageRenderer extends Component {
                               xs={12}
                               sm={7}
                               md={7}
-                              lg={7}
+                              lg={12}
                               className={s.landingContent}
                             >
                               <h3
@@ -1106,7 +1145,7 @@ class PageRenderer extends Component {
                               xs={12}
                               sm={7}
                               md={7}
-                              lg={7}
+                              lg={12}
                               className={s.landingContent}
                             >
                               <h3 className={s.landingContentTitle}>
@@ -1133,7 +1172,7 @@ class PageRenderer extends Component {
                               xs={12}
                               sm={7}
                               md={7}
-                              lg={7}
+                              lg={12}
                               className={s.landingContent}
                             >
                               <h3 className={s.landingContentTitle}>

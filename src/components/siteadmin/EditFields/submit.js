@@ -12,12 +12,14 @@ async function submit(values, dispatch) {
     $title: String,
     $type: String,
     $pageId: Int,
+    $subCategoryId: Int,
   ) {
     updateFields(
       name: $name,
       title: $title,
       type: $type,
       pageId: $pageId,
+      subCategoryId: $subCategoryId,
     ) {
         status
     }

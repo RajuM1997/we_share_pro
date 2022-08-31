@@ -5,6 +5,7 @@ query editFields($id: Int!) {
     type
     title
     pageId
+    subCategoryId
     isEnable
   }
 }

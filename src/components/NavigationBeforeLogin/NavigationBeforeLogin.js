@@ -77,7 +77,26 @@ class NavigationBeforeLogin extends React.Component {
       <div className={!this.state.change ? s.active_navbar_default : ""}>
         <div className={s.nav_search_main}>
           <div className={s.search_container}>
-            {!this.state.change && <SearchOption />}
+            {!this.state.change && (
+              <>
+                <SearchOption />
+
+                <div className={s.logSin}>
+                  <NavLink to="#" noLink onClick={openLoginModal}>
+                    <FormattedMessage {...messages.login} />
+                  </NavLink>
+                  <span className={s.rightBorder}></span>
+                  <NavLink
+                    to="#"
+                    noLink
+                    onClick={openSignupModal}
+                    className={s.signup}
+                  >
+                    <FormattedMessage {...messages.signup} />
+                  </NavLink>
+                </div>
+              </>
+            )}
           </div>
         </div>
         <LoginModal />
@@ -104,6 +123,7 @@ class NavigationBeforeLogin extends React.Component {
           >
             {formatLocale(currentLocale)}
           </NavLink>
+          <span className={s.rightBorder}></span>
           <NavLink
             noLink
             onClick={(e) => openHeaderModal("currencyModal")}
@@ -112,15 +132,19 @@ class NavigationBeforeLogin extends React.Component {
             {showCurrencySymbol(displayCurrency, currentLocale) +
               displayCurrency}
           </NavLink>
+          <span className={s.rightBorder}></span>
           <NavLink to="/whyhost">
             <FormattedMessage {...messages.becomeAHost} />
           </NavLink>
+          <span className={s.rightBorder}></span>
           <NavLink to="/whyhosts">
             <FormattedMessage {...messages.becomeAHost2} />
           </NavLink>
+          <span className={s.rightBorder}></span>
           <NavLink to="/">
             <FormattedMessage {...messages.howItWork} />
           </NavLink>
+          <span className={s.rightBorder}></span>
           {/* <NavLink to="/help">
           
             <FormattedMessage {...messages.help} />
@@ -128,6 +152,7 @@ class NavigationBeforeLogin extends React.Component {
           <NavLink to="#" noLink onClick={openLoginModal}>
             <FormattedMessage {...messages.login} />
           </NavLink>
+          <span className={s.rightBorder}></span>
           <NavLink to="#" noLink onClick={openSignupModal} className={s.signup}>
             <FormattedMessage {...messages.signup} />
           </NavLink>

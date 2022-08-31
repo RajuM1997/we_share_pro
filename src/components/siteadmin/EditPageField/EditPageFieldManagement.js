@@ -45,6 +45,12 @@ class EditPageFieldManagement extends React.Component {
   static defaultProps = {
     data: [],
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: 0,
+    };
+  }
 
   renderFormControl = ({
     input,
@@ -71,11 +77,14 @@ class EditPageFieldManagement extends React.Component {
       submitting,
       dispatch,
       initialValues,
-      id,
+      subId,
     } = this.props;
     const { data } = this.props;
     const { formatMessage } = this.props.intl;
-
+    // console.log(initialValues.id);
+    // for (const key of initialValues) {
+    //   console.log(key[initialValues]);
+    // }
     return (
       <div
         className={cx(
@@ -93,7 +102,7 @@ class EditPageFieldManagement extends React.Component {
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={`/siteadmin/fieldSetting/${id}`}
+                to={`/siteadmin/fieldSetting/${data.subCategoryId}`}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,
@@ -114,6 +123,7 @@ class EditPageFieldManagement extends React.Component {
                   label={formatMessage(messages.categoryAdminTitle)}
                 />
                 <Field
+                  disabled
                   name="pageId"
                   type="number"
                   component={this.renderFormControl}

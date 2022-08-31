@@ -46,6 +46,28 @@
   padding-right: 0px;
   padding-bottom: 10px;
 }
+.rightBorder {
+  height: 15px;
+  width: 2px;
+  position: absolute;
+  bottom: 20px;
+  background: #fff;
+}
+.logSin {
+  position: absolute;
+  display: flex;
+  top: 0px;
+  right: -200px;
+}
+.logSin li {
+  list-style: none;
+  margin-right: 30px !important;
+}
+.logSin li a {
+  text-decoration: none;
+  color: #111111;
+  font-size: 17px;
+}
 @media screen and (max-width: 1200px) {
   .breakPointScreen {
     display: block !important;

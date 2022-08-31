@@ -93,7 +93,7 @@ class EditFieldsManagement extends React.Component {
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={`/siteadmin/fields/${id}`}
+                to={`/siteadmin`}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,
@@ -122,6 +122,7 @@ class EditFieldsManagement extends React.Component {
                   className={cx(bt.commonControlInput)}
                 />
                 <Field
+                  disabled
                   name="pageId"
                   type="number"
                   component={this.renderFormControl}

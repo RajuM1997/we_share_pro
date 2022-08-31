@@ -12,12 +12,14 @@ async function submit(values, dispatch) {
     $title: String,
     $step: String,
     $pageId: String,
+    $subCategoryId:  Int,
   ) {
     updatePageField(
       id: $id,
       title: $title,
       step: $step,
       pageId: $pageId,
+      subCategoryId: $subCategoryId,
     ) {
         status
     }
@@ -41,7 +43,7 @@ async function submit(values, dispatch) {
 
   if (data.updatePageField.status === "success") {
     toastr.success("Update Page Field", "Changes are updated!");
-    history.push("/siteadmin/fieldSetting");
+    history.push(`/siteadmin/fieldSetting/${values.subCategoryId}`);
   } else {
     toastr.error("Update Page Field", "Updating category failed");
   }

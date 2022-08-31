@@ -3,6 +3,7 @@ query editPageField($id: Int!) {
     id
     title
     pageId
+    subCategoryId
     isEnable
     step
   }

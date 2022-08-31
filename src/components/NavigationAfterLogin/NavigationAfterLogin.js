@@ -160,19 +160,23 @@ class NavigationAfterLogin extends React.Component {
           >
             <FormattedMessage {...messages.home} />
           </NavLink>
+
           <NavLink noLink onClick={(e) => openHeaderModal("languageModal")}>
             {formatLocale(currentLocale)}
           </NavLink>
+          <span className={s.rightBorder}></span>
           <NavLink noLink onClick={(e) => openHeaderModal("currencyModal")}>
             {showCurrencySymbol(displayCurrency, currentLocale) +
               displayCurrency}
           </NavLink>
+          <span className={s.rightBorder}></span>
           <NavLink
             to="/dashboard"
             className={cx("visible-xs", s.breakPointScreen)}
           >
             <FormattedMessage {...messages.dashboard} />
           </NavLink>
+          <span className={s.rightBorder}></span>
           <NavDropdown
             className={cx("hidden-xs", s.nonBreakPointScreen)}
             eventKey={3}
@@ -193,6 +197,7 @@ class NavigationAfterLogin extends React.Component {
               <FormattedMessage {...messages.transactionHistory} />
             </MenuItemLink>
           </NavDropdown>
+          <span className={s.rightBorder}></span>
           <NavDropdown
             className={cx("hidden-xs", s.nonBreakPointScreen)}
             eventKey={3}
@@ -213,6 +218,7 @@ class NavigationAfterLogin extends React.Component {
               <FormattedMessage {...messages.transactionHistory} />
             </MenuItemLink>
           </NavDropdown>
+          <span className={s.rightBorder}></span>
           <NavLink
             // to={"/users/show/" + isVerified}
             to={"/user/edit"}
@@ -220,25 +226,32 @@ class NavigationAfterLogin extends React.Component {
           >
             <FormattedMessage {...messages.profile} />
           </NavLink>
+          <span className={s.rightBorder}></span>
           <NavLink
             to="/user/payout"
             className={cx("visible-xs", s.breakPointScreen)}
           >
             <FormattedMessage {...messages.accountSettings} />
           </NavLink>
+          <span className={s.rightBorder}></span>
           <NavLink to="/wishlists">
             <FormattedMessage {...messages.saved} />
           </NavLink>
+          <span className={s.rightBorder}></span>
           <NavLink to="/trips/current">
             <FormattedMessage {...messages.trips} />
           </NavLink>
+          <span className={s.rightBorder}></span>
           <NavLink to="/rooms" className={cx("visible-xs", s.breakPointScreen)}>
             <FormattedMessage {...messages.host} />
           </NavLink>
+          <span className={s.rightBorder}></span>
           <NavLink to="/rooms" className={cx("visible-xs", s.breakPointScreen)}>
             <FormattedMessage {...messages.hosts} />
           </NavLink>
+          <span className={s.rightBorder}></span>
           <Message />
+          <span className={s.rightBorder}></span>
           <NavLink to="/help">
             <FormattedMessage {...messages.help} />
           </NavLink>
