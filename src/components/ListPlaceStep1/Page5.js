@@ -248,7 +248,6 @@ class Page5 extends Component {
           <h3 className={s.landingContentTitle}>
             <FormattedMessage {...messages.whereLocated} />
           </h3>
-
           <FormGroup className={s.formGroup}>
             <ControlLabel className={s.landingLabel}>
               <FormattedMessage {...messages.country} />

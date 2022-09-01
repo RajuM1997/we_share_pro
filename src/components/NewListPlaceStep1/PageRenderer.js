@@ -1242,7 +1242,7 @@ class PageRenderer extends Component {
               </form>
             </div>
           </Col>
-          {currentPageData?.type === "calendar" && "image" ? (
+          {currentPageData?.type === "calendar" && "coverImage" ? (
             ""
           ) : (
             <ListPlaceTips />
