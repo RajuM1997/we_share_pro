@@ -22,6 +22,8 @@ import {
   getPageFieldBySubCategory,
 } from "../../helpers/graphQLHelper";
 import ExistingPage1 from "../../components/ListPlaceStep1/ExistingPage1";
+import PageReRendererStep3 from "./PageReRendererStep3";
+import PageReRendererStep1 from "./PageReRendererStep1";
 
 const groupBy = function(xs, key) {
   return xs.reduce(function(rv, x) {
@@ -169,9 +171,7 @@ class BecomeHost extends React.Component {
   };
 
   handleOnNextStep() {
-    const maxStep = Math.max(
-        ...Object.keys(this.state?.steps || {})
-    );
+    const maxStep = Math.max(...Object.keys(this.state?.steps || {}));
     console.log("maxStep", maxStep);
     console.log("currentStep", this.state.currentStep);
     if (maxStep === this.state.currentStep) {
@@ -183,9 +183,7 @@ class BecomeHost extends React.Component {
           [thisSate.currentStep]: "completed",
         },
         currentStep:
-            thisSate.currentStep < maxStep
-                ? thisSate.currentStep + 1
-                : maxStep,
+          thisSate.currentStep < maxStep ? thisSate.currentStep + 1 : maxStep,
         currentPageIndex: 0,
       }));
     }
@@ -212,7 +210,10 @@ class BecomeHost extends React.Component {
         <div className={cx(s.container, "existingPage")}>
           {this.state.steps &&
           this.state.steps[this?.state?.currentStep] === "visible" ? (
-              <ExistingPage1 currentStep={this.state.currentStep} handleOnNextStep={this.handleOnNextStep}/>
+            <ExistingPage1
+              currentStep={this.state.currentStep}
+              handleOnNextStep={this.handleOnNextStep}
+            />
           ) : (
             <>
               {this.state.selectedCategory && this.state.selectedSubCategory ? (
@@ -247,6 +248,25 @@ class BecomeHost extends React.Component {
               )}
             </>
           )}
+          <PageReRendererStep1
+            totalPage={pageData?.length}
+            currentPageData={{
+              fields: currentPageFields,
+            }}
+            pageIndex={this.state.currentPageIndex}
+            nextPage={this.nextPage}
+            previousPage={this.previousPage}
+            listId={this.state.currentPageIndex}
+            formPage={formPage}
+            formBaseURI={formBaseURI}
+            mode={mode}
+            baseCurrency={baseCurrency}
+            formData={this.state.formData[currentPageId] || {}}
+            updateField={this.updateFileByPageId(currentPageId)}
+            handleCompleteStep={this.handleCompleteStep}
+            countryList={getCountriesData}
+          />
+          <PageReRendererStep3 />
         </div>
       </div>
     );
