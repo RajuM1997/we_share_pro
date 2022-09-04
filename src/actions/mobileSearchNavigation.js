@@ -18,7 +18,7 @@ export function showMap() {
     });
     return true;
   };
-};
+}
 
 export function showResults() {
 
@@ -34,7 +34,7 @@ export function showResults() {
     });
     return true;
   };
-};
+}
 
 
 export function showForm() {
@@ -51,7 +51,7 @@ export function showForm() {
     });
     return true;
   };
-};
+}
 
 export function showFilter() {
 
@@ -67,4 +67,4 @@ export function showFilter() {
     });
     return true;
   };
-};
+}

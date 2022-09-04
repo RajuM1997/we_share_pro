@@ -24,7 +24,7 @@ const ShowListPhotos = {
           id: listId,
           userId: request.user.id
         }
-      };
+      }
       return await ListPhotos.findAll({
         where: { listId },
         include: [

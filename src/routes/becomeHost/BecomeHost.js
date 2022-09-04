@@ -114,32 +114,142 @@ class BecomeHost extends React.Component {
     this.setState({ selectedSubCategory, personCapacity, selectedCategory });
     if (selectedSubCategory) {
       try {
-        const pages = await getPageFieldBySubCategory(selectedSubCategory);
         const fields = await getFieldsBySubCategory(selectedSubCategory);
         const data = fields?.map((page, index) => {
           const fields = JSON.parse(page.fields);
-          const pageInfo = pages.find((item) => item?.pageId === page?.pageId);
           return {
             ...page,
             pageIndex: index,
-            step: pageInfo?.step || -1,
+            step: 2,
             fields,
           };
         });
-        const stepPages = groupBy(data, "step");
-        for (const property in stepPages) {
-          stepPages[property] = Object.values(
-            groupBy(stepPages[property], "pageId")
-          );
-          this.setState((thisSate) => ({
-            steps: {
-              ...thisSate.steps,
-              [property]: "pending",
-            },
-          }));
-        }
-        console.log("stepPages", stepPages);
-        this.setState({ pageData: stepPages });
+        const step2Fields = groupBy(data, "pageId");
+
+        // for (const property in stepPages) {
+        //   stepPages[property] = Object.values(
+        //     groupBy(stepPages[property], "pageId")
+        //   );
+        //   this.setState((thisSate) => ({
+        //     steps: {
+        //       ...thisSate.steps,
+        //       [property]: "pending",
+        //     },
+        //   }));
+        // }
+        console.log("stepPages", step2Fields);
+        this.setState(() => ({
+          steps: {
+            1: "pending",
+            2: "pending",
+            3: "pending",
+          },
+        }));
+        this.setState({ pageData: {
+            1: [
+                [
+                  {
+                    "type": "title",
+                    "pageId": 1,
+                    "step": 1
+                  },
+                ],
+                [
+                  {
+                    "type": "description",
+                    "pageId": 2,
+                    "step": 1
+                  },
+                ],
+                [
+                  {
+                    "type": "location",
+                    "pageId": 3,
+                    "step": 1
+                  },
+                ],
+                [
+                  {
+                    "type": "address",
+                    "pageId": 4,
+                    "step": 1
+                  },
+                ],
+                [
+                  {
+                    "type": "photosUpload",
+                    "pageId": 5,
+                    "step": 1
+                  }
+                ]
+            ],
+            2: Object.values(step2Fields),
+            3: [
+              [
+                {
+                  "type": "guestRequirements",
+                  "pageId": 1,
+                  "step": 3
+                },
+              ],
+              [
+                {
+                  "type": "reviewGuestBook",
+                  "pageId": 2,
+                  "step": 3
+                },
+              ],
+              [
+                {
+                  "type": "bookingNoticeTime",
+                  "pageId": 3,
+                  "step": 3
+                },
+              ],
+              [
+                {
+                  "type": "bookingWindow",
+                  "pageId": 4,
+                  "step": 3
+                },
+              ],
+              [
+                {
+                  "type": "tripLength",
+                  "pageId": 5,
+                  "step": 3
+                }
+              ],
+              [
+                {
+                  "type": "pricingDescription",
+                  "pageId": 6,
+                  "step": 3
+                }
+              ],
+              [
+                {
+                  "type": "discount",
+                  "pageId": 7,
+                  "step": 3
+                }
+              ],
+              [
+                {
+                  "type": "instantBooking",
+                  "pageId": 8,
+                  "step": 3
+                }
+              ],
+              [
+                {
+                  "type": "localLaws",
+                  "pageId": 9,
+                  "step": 3
+                }
+              ]
+            ],
+        } });
       } catch (e) {}
     }
   }
@@ -162,8 +272,12 @@ class BecomeHost extends React.Component {
       ...thisState,
       formData: {
         ...thisState.formData,
-        [currentPageId]: {
-          ...(thisState.formData[currentPageId] || {}),
+        ...currentPageId ? {
+          [currentPageId]: {
+            ...(thisState.formData[currentPageId] || {}),
+            [key]: value,
+          }
+        } : {
           [key]: value,
         },
       },
@@ -208,6 +322,7 @@ class BecomeHost extends React.Component {
     return (
       <div className={s.root}>
         <div className={cx(s.container, "existingPage")}>
+          <pre>{JSON.stringify(this.state.formData, null, 4)}</pre>
           {this.state.steps &&
           this.state.steps[this?.state?.currentStep] === "visible" ? (
             <ExistingPage1
@@ -217,24 +332,74 @@ class BecomeHost extends React.Component {
           ) : (
             <>
               {this.state.selectedCategory && this.state.selectedSubCategory ? (
-                <PageRenderer
-                  totalPage={pageData?.length}
-                  currentPageData={{
-                    fields: currentPageFields,
-                  }}
-                  pageIndex={this.state.currentPageIndex}
-                  nextPage={this.nextPage}
-                  previousPage={this.previousPage}
-                  listId={this.state.currentPageIndex}
-                  formPage={formPage}
-                  formBaseURI={formBaseURI}
-                  mode={mode}
-                  baseCurrency={baseCurrency}
-                  formData={this.state.formData[currentPageId] || {}}
-                  updateField={this.updateFileByPageId(currentPageId)}
-                  handleCompleteStep={this.handleCompleteStep}
-                  countryList={getCountriesData}
-                />
+               <>
+                 {
+                   this?.state?.currentStep === 1 && (
+                     <PageReRendererStep1
+                       totalPage={pageData?.length}
+                       currentPageData={{
+                         fields: currentPageFields,
+                       }}
+                       pageIndex={this.state.currentPageIndex}
+                       nextPage={this.nextPage}
+                       previousPage={this.previousPage}
+                       listId={this.state.currentPageIndex}
+                       formPage={formPage}
+                       formBaseURI={formBaseURI}
+                       mode={mode}
+                       baseCurrency={baseCurrency}
+                       formData={this.state.formData || {}}
+                       updateField={this.updateFileByPageId()}
+                       handleCompleteStep={this.handleCompleteStep}
+                       countryList={getCountriesData}
+                     />
+                   )
+                 }
+                 {
+                   this?.state?.currentStep === 2 && (
+                     <PageRenderer
+                       totalPage={pageData?.length}
+                       currentPageData={{
+                         fields: currentPageFields,
+                       }}
+                       pageIndex={this.state.currentPageIndex}
+                       nextPage={this.nextPage}
+                       previousPage={this.previousPage}
+                       listId={this.state.currentPageIndex}
+                       formPage={formPage}
+                       formBaseURI={formBaseURI}
+                       mode={mode}
+                       baseCurrency={baseCurrency}
+                       formData={this.state.formData[currentPageId] || {}}
+                       updateField={this.updateFileByPageId(currentPageId)}
+                       handleCompleteStep={this.handleCompleteStep}
+                       countryList={getCountriesData}
+                     />
+                   )
+                 }
+                 {
+                   this?.state?.currentStep === 3 && (
+                     <PageReRendererStep3
+                       totalPage={pageData?.length}
+                       currentPageData={{
+                         fields: currentPageFields,
+                       }}
+                       pageIndex={this.state.currentPageIndex}
+                       nextPage={this.nextPage}
+                       previousPage={this.previousPage}
+                       listId={this.state.currentPageIndex}
+                       formPage={formPage}
+                       formBaseURI={formBaseURI}
+                       mode={mode}
+                       baseCurrency={baseCurrency}
+                       formData={this.state.formData || {}}
+                       updateField={this.updateFileByPageId()}
+                       handleCompleteStep={this.handleCompleteStep}
+                       countryList={getCountriesData}
+                     />
+                   )
+                 }
+               </>
               ) : (
                 <CategoryAndSubCtegorySelector
                   category={getCategoryData.getCategoryAdmin}
@@ -248,25 +413,7 @@ class BecomeHost extends React.Component {
               )}
             </>
           )}
-          <PageReRendererStep1
-            totalPage={pageData?.length}
-            currentPageData={{
-              fields: currentPageFields,
-            }}
-            pageIndex={this.state.currentPageIndex}
-            nextPage={this.nextPage}
-            previousPage={this.previousPage}
-            listId={this.state.currentPageIndex}
-            formPage={formPage}
-            formBaseURI={formBaseURI}
-            mode={mode}
-            baseCurrency={baseCurrency}
-            formData={this.state.formData[currentPageId] || {}}
-            updateField={this.updateFileByPageId(currentPageId)}
-            handleCompleteStep={this.handleCompleteStep}
-            countryList={getCountriesData}
-          />
-          <PageReRendererStep3 />
+          {/*<PageReRendererStep3 />*/}
         </div>
       </div>
     );

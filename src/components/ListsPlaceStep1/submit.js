@@ -57,7 +57,7 @@ async function submit(values, dispatch) {
       "Invalid Address!",
       "Your address seems to be invalid, please go back to edit your address!"
     );
-    return;
+
   } else {
     dispatch(setLoaderStart("location"));
 

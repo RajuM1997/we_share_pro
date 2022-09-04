@@ -19,7 +19,7 @@ export function formattingTime(time) {
       return updatedTime + amPM;
     }
   }
-};
+}
 
 export function checkInData(checkDataValue) {
   let checkIn;
@@ -32,7 +32,7 @@ export function checkInData(checkDataValue) {
   }
 
   return checkIn;
-};
+}
 
 export function checkIn(checkInStart, checkInEnd) {
   let checkIn;
@@ -49,8 +49,8 @@ export function checkIn(checkInStart, checkInEnd) {
   }
 
   return checkIn;
-};
+}
 
 export function checkValue(value, defaultValue) {
   return value !== null ? value : defaultValue;
-};
+}

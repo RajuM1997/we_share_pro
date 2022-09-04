@@ -46,7 +46,7 @@ const pushNotificationRoutes = app => {
             getdeviceIds.map(async (item) => {
                 deviceId.push(item.deviceId);
             })
-        };
+        }
 
         var message = {
             registration_ids: deviceId,

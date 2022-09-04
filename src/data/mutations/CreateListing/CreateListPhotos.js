@@ -29,7 +29,7 @@ const CreateListPhotos = {
           id: listId,
           userId: request.user.id
         }
-      };
+      }
 
       // Check whether listing is available
       const isListingAvailable = await Listing.findOne({ where });

@@ -168,7 +168,7 @@ class EditWishListGroupForm extends Component {
       }
     } else {
       toastr.error(wishListLabel, wishListErrorLabel);
-      return;
+
     }
   }
 

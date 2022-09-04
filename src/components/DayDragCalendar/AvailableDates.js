@@ -54,7 +54,7 @@ class AvailableDates extends Component {
     }
 
     componentDidMount() {
-        const { start, end } = this.props;;
+        const { start, end } = this.props;
         let dateRange = [], rangeStart, rangeEnd;
         if (start && !end) {
             rangeStart = new Date(start);
@@ -121,7 +121,7 @@ class AvailableDates extends Component {
     }
 
     async submitForm() {
-        
+
         const { listId, resetCalendar, dispatch, mutate } = this.props;
         const { isSpecialPrice, start, end, selectedDays, getListBlockedDates, getListingDataStep3 } = this.props;
         const { dateRange, isLoading } = this.state;
@@ -246,7 +246,7 @@ class AvailableDates extends Component {
             await resetCalendar();
             window.scroll({ top: 0 });
             // toastr.success("Success!", successMsg);
-            // } 
+            // }
             // else {
             //     // toastr.error("Error!", errorMsg);
             // }

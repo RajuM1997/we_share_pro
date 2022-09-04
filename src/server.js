@@ -391,10 +391,10 @@ app.get("*", async (req, res, next) => {
           if (currentLocation.includes(value)) {
             if (req.url) {
               res.redirect("/login?refer=" + currentLocation);
-              return;
+
             } else {
               res.redirect("/login");
-              return;
+
             }
           }
         });

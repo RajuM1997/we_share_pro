@@ -39,8 +39,8 @@ const updateListingStep2 = {
           id,
           userId: request.user.id
         }
-      };
-        
+      }
+
       const doUpdateListing = await Listing.update({
         title,
         description,

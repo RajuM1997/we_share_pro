@@ -88,7 +88,7 @@ const updateListing = {
           id,
           userId: request.user.id
         }
-      };
+      }
 
       const doUpdateListing = await Listing.update({
         residenceType: residenceType,
@@ -204,7 +204,7 @@ const updateListing = {
             );
           }
         }
-        
+
       }
 
 

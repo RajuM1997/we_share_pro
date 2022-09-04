@@ -97,14 +97,14 @@ const getPayouts = {
                                     userId
                                 }
                             });
-                        };
-                    };
+                        }
+                    }
                 } else {
                     return {
                         status: 400,
                         errorMessage: 'Oops! The User is Different'
                     };
-                };
+                }
             }
             const getPaymentMethods = await PaymentMethods.findAll({
                 attributes: ['id'],

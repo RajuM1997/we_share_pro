@@ -75,7 +75,7 @@ const updateListingStep3 = {
           id,
           userId: request.user.id
         }
-      };
+      }
 
       // Confirm whether the Listing Id is available
       const isListingAvailable = await Listing.findById(id);

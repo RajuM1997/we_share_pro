@@ -36,7 +36,7 @@ const submitForVerification = {
           id,
           userId: request.user.id
         }
-      };
+      }
 
       const doUpdateListing = await Listing.update({
         listApprovalStatus

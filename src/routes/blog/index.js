@@ -63,6 +63,6 @@ export default async function action(store, params, path) {
             component: <Layout><NotFound title={title} /></Layout>,
             status: 404,
         };
-    };
+    }
 }
 

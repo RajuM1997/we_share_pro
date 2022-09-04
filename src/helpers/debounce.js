@@ -15,4 +15,4 @@ export  function debounce(func, wait) {
         console.log('error');
         console.log(e);
     }
-};
+}

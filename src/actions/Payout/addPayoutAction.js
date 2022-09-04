@@ -121,7 +121,7 @@ export function addPayout(
           history.push('/user/payout');
         }
       } else { // Stripe
-        
+
         let userDetails = {
           userId,
           payEmail
@@ -193,7 +193,7 @@ export function startPayoutLoading() {
       }
     });
   }
-};
+}
 
 export function stopPayoutLoading() {
   return async (dispatch, getState, { client }) => {
@@ -204,4 +204,4 @@ export function stopPayoutLoading() {
       }
     });
   }
-};
+}
