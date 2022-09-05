@@ -34,7 +34,7 @@ const RemoveListPhotos = {
           id: listId,
           userId: request.user.id
         }
-      };
+      }
       let iscoverPhotoDeleted = false;
       // Check whether listing is available
       const isListingAvailable = await Listing.findOne({ where });

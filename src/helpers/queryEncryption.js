@@ -7,8 +7,8 @@ export function encode(data) {
         return encryptedData;
     } else {
         return null;
-    };
-};
+    }
+}
 
 
 export function decode(data) {
@@ -18,5 +18,5 @@ export function decode(data) {
         return decodedData;
     } else {
         return null;
-    };
-};
+    }
+}

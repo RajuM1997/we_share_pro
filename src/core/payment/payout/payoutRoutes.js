@@ -37,7 +37,7 @@ const payoutRoutes = app => {
             reservationId
           }
         });
-        
+
         if (transactionHistory != null) {
           status = 400;
           errorMessage = 'Invalid request';
@@ -60,7 +60,7 @@ const payoutRoutes = app => {
             data.map((item) => {
               ratesData[item.dataValues.currencyCode] = item.dataValues.rate;
             })
-          };
+          }
 
 
           if (reservation) {
@@ -74,7 +74,7 @@ const payoutRoutes = app => {
                 status = 200 : (status = 400, errorMessage = 'Invalid request');
 
             } else if (reservation.reservationState == 'cancelled') {
-              
+
               let cancelData = await CancellationDetails.findOne({
                 where: {
                   reservationId
@@ -95,8 +95,8 @@ const payoutRoutes = app => {
           } else {
             status = 400;
             errorMessage = 'Invalid requestss';
-          };
-        };
+          }
+        }
 
         if (status == 200) {
           var create_payout_json = {
@@ -173,12 +173,12 @@ const payoutRoutes = app => {
           });
         } else {
           res.send({ status: 400, errorMessage });
-        };
+        }
 
 
       } else {
         res.send({ status: 400, errorMessage: 'Invalid request' });
-      };
+      }
     } catch (err) {
       res.send({ status: 400, errorMessage: err})
     }

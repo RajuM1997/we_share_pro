@@ -7,6 +7,7 @@ import UserVerifiedInfo from "./UserVerifiedInfo";
 import EmailToken from "./EmailToken";
 import Reviews from "./Reviews";
 import ForgotPassword from "./ForgotPassword";
+import HostListing from "./HostListing";
 
 //Payment
 import PaymentMethods from "./PaymentMethods";
@@ -658,4 +659,5 @@ export {
   SingleCategory,
   Fields,
   PageField,
+  HostListing,
 };

@@ -170,6 +170,6 @@ class SlideComponent extends React.Component {
     );
 
   }
-};
+}
 
 export default withStyles(s)(SlideComponent);

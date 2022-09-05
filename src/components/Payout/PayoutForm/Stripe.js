@@ -137,7 +137,7 @@ class Stripe extends Component {
                 toastr.error('Error!', generateTokens.errorMessage);
                 await stopPayoutLoading();
             }
-            return;
+
         }
     }
 

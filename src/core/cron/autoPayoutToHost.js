@@ -64,7 +64,7 @@ const autoPayoutToHost = app => {
                     data.map((item) => {
                         ratesData[item.dataValues.currencyCode] = item.dataValues.rate;
                     })
-                };
+                }
 
                 if (getReservation && getReservation.length > 0) {
                     await Promise.all(getReservation.map(async (item, index) => {

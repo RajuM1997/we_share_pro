@@ -1257,7 +1257,6 @@ const mapState = (state) => ({
   listingFields: state.listingFields.data,
   availableCurrencies: state.currency.availableCurrencies,
   base: state.currency.base,
-  mapUpdateLoading: state.location.mapUpdateLoading,
   isLocationChosen: state.location.isLocationChosen,
   isExistingList: state.location.isExistingList,
   loading: state.loader.location,

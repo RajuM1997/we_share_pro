@@ -171,29 +171,6 @@ class AddPageFieldManagement extends React.Component {
                     ))}
                   </Field>
                 </div>
-                <div className={s.selectField}>
-                  <label
-                    className={s.labelTextNew}
-                    style={{ marginRight: "20px", marginBottom: "10px" }}
-                  >
-                    Step
-                  </label>
-                  <Field
-                    name="step"
-                    component="select"
-                    type="select"
-                    className={bt.commonControlInput}
-                    label={formatMessage(messages.fieldsPageId)}
-                    style={{ marginBottom: "10px" }}
-                  >
-                    <option value="" selected disabled>
-                      Please Select
-                    </option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                  </Field>
-                </div>
                 <FormGroup className={s.formGroup}>
                   <Row>
                     <Col

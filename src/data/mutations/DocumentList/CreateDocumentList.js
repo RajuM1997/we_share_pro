@@ -31,7 +31,7 @@ const CreateDocumentList = {
           id: userId,
           userId: request.user.id
         }
-      };
+      }
 
       // Check whether listing is available
       //  const isListingAvailable = await Listing.findOne({ where });

@@ -115,7 +115,7 @@ class PhotosUpload extends Component {
       thisPhotos.splice(itemIndex, 1);
     }
     this.props.updatePhotos(
-        'coverImage',
+        'coverPhoto',
         thisPhotos
     );
   }
@@ -125,7 +125,7 @@ class PhotosUpload extends Component {
     if (file && file.xhr) {
       const { files } = JSON.parse(file.xhr.response);
       if (files[0]) {
-        updatePhotos('coverImage', [
+        updatePhotos('coverPhoto', [
             ...photos,
             ...files,
         ])

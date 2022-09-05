@@ -15,7 +15,7 @@ const managePublish = {
   args: {
     listId: { type: new NonNull(IntType) },
     action: { type: new NonNull(StringType) },
-  }, 
+  },
 
   async resolve({ request }, { listId, action }) {
 
@@ -29,7 +29,7 @@ const managePublish = {
                 isReady: true,
                 userId: request.user.id
             }
-        };
+        }
 
         var published;
         // Publish

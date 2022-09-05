@@ -48,7 +48,7 @@ const stripePayout = app => {
                         data.map((item) => {
                             ratesData[item.dataValues.currencyCode] = item.dataValues.rate;
                         })
-                    };
+                    }
 
 
                     if (reservation) {

@@ -62,16 +62,16 @@ const iCalRoutes = app => {
 
 					} else {
 						res.send({ status: 400 });
-						return;
+
 					}
 
 				} else {
 					res.send({ status: 400 });
-					return;
+
 				}
 			}).catch((error) => {
 				res.send({ status: 400 });
-				return;
+
 			});
 		}
 	})

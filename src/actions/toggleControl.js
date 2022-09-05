@@ -15,7 +15,7 @@ export function openSearchFilter() {
     });
     return true;
   };
-};
+}
 
 export function closeSearchFilter() {
 
@@ -31,7 +31,7 @@ export function closeSearchFilter() {
     dispatch(change('SearchForm', 'houseRules', []));
     return true;
   };
-};
+}
 
 
 export function closeAndSubmitSearchFilter() {
@@ -45,4 +45,4 @@ export function closeAndSubmitSearchFilter() {
     });
     return true;
   };
-};
+}

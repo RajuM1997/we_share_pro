@@ -36,7 +36,7 @@ const submit = (subCategoryId) => async (values, dispatch) => {
       },
       body: JSON.stringify({
         query: mutation,
-        variables: { subCategoryId: Number(subCategoryId), pageId: Number(values?.pageId), step: Number(values?.step), title: values?.title },
+        variables: { subCategoryId: Number(subCategoryId), pageId: Number(values?.pageId), step: 2, title: values?.title },
       }),
       credentials: "include",
     });

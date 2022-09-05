@@ -12,11 +12,11 @@ export function checkIn(checkInStart, checkInEnd) {
     checkIn = generateTime(checkInStart) + ' - ' + generateTime(checkInEnd);
   }
  return checkIn;
-};
+}
 
 export function checkValue(value, defaultValue) {
   return value !== null ? value : defaultValue;
-};
+}
 
 export function generateTime(time) {
   let timeLabel;

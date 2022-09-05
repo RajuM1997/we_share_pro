@@ -6,10 +6,10 @@ import {
     GraphQLNonNull as NonNull,
     GraphQLFloat as FloatType,
   } from 'graphql';
-  
+
   // GraphQL Type
   import EditListingType from '../types/EditListingType';
-  
+
   // Sequelize models
   import {
     Listing,
@@ -19,11 +19,11 @@ import {
     ListPhotos,
     Currencies
   } from '../../data/models';
-  
+
   const updateListingStep4 = {
-  
+
     type: EditListingType,
-  
+
     args: {
       id: { type: IntType },
       houseRules: { type: new List(IntType) },
@@ -42,7 +42,7 @@ import {
       bookingType: { type: new NonNull(StringType) },
       cancellationPolicy: { type: IntType },
     },
-  
+
     async resolve({ request, response }, {
       id,
       houseRules,
@@ -61,34 +61,34 @@ import {
       bookingType,
       cancellationPolicy
     }) {
-  
+
       let isListUpdated = false;
-  
+
       // Check whether user is logged in
       if (request.user || request.user.admin) {
-  
+
         let where = { id };
         if (!request.user.admin) {
           where = {
             id,
             userId: request.user.id
           }
-        };
-  
+        }
+
         // Confirm whether the Listing Id is available
         const isListingAvailable = await Listing.findById(id);
-  
+
         if (isListingAvailable != null) {
-  
+
           // Currency
           let getCurrenice = await Currencies.findOne({
             where: {
               isBaseCurrency: true
             }
           });
-  
+
           let currencyValue = currency ? currency : getCurrenice.symbol;
-  
+
           // Update Booking Type
           if (bookingType) {
             const updateBookingType = await Listing.update({
@@ -97,7 +97,7 @@ import {
                 where
               })
           }
-  
+
           // House Rules
           if (houseRules) {
             const removeHouseRules = await UserHouseRules.destroy({
@@ -114,8 +114,8 @@ import {
               });
             }
           }
-  
-  
+
+
           // Blocked Dates
           if (blockedDates) {
             // Collect all records of Blocked Dates except Reservation Dates
@@ -130,7 +130,7 @@ import {
                 },
               }
             });
-  
+
             // // Remove all the blocked dates except reservation dates
             // const removeBlockedDates = await ListBlockedDates.destroy({
             //   where: {
@@ -140,7 +140,7 @@ import {
             //     }
             //   }
             // });
-  
+
             //if(blockedDates.length > 0) {
             if (blockedDatesData.length > 0) {
               let blockedDatesItems = [];
@@ -204,11 +204,11 @@ import {
             }
             //}
           }
-  
-  
+
+
           // Check if record already available for this listing
           const isListingIdAvailable = await ListingData.findOne({ where: { listId: id } });
-  
+
           if (isListingIdAvailable != null) {
             // Update Record
             const updateData = ListingData.update({
@@ -248,13 +248,13 @@ import {
               monthlyDiscount: monthlyDiscount,
               cancellationPolicy
             });
-  
+
             if (createData) {
               isListUpdated = true;
             }
           }
-  
-  
+
+
           if (isListUpdated) {
             // const photosCount = await ListPhotos.count({ where: { listId: id } });
             // if (photosCount > 0) {
@@ -272,20 +272,20 @@ import {
               status: 'failed'
             }
           }
-  
+
         } else {
           return {
             status: 'notAvailable'
           }
         }
-  
+
       } else {
         return {
           status: "notLoggedIn",
         };
       }
-  
+
     },
   };
-  
+
   export default updateListingStep4;
