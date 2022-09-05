@@ -57,7 +57,28 @@ var durationFn = function(deltaTop) {
   return deltaTop;
 };
 class ViewListings extends React.Component {
+  // static PropTypes = {
+  //   getListingData: PropTypes.shape({
+  //     loading: PropTypes.bool,
+  //     UserListing: PropTypes.object,
+  //   }),
+  // };
+  // static defaultProps = {
+  //   getListingData: {
+  //     loading: false,
+  //     UserListing: {
+  //       userId: null,
+  //     },
+  //   },
+  // };
   render() {
+    // const {
+    //   listId,
+    //   title,
+    //   getListingData: { loading, UserListing },
+    //   preview,
+    //   averageBasePrice,
+    // } = this.props;
     return (
       <div className={s.root}>
         <div className={s.container}>
@@ -209,11 +230,11 @@ class ViewListings extends React.Component {
                             />
                           </Grid>
                         </Element> */}
-                      {/* <Element name="test4" className="element">
-                          <Grid fluid className={cx(s.paddingTop2)}>
-                            <LocationMap data={UserListing} />
-                          </Grid>
-                        </Element> */}
+                      <Element name="test4" className="element">
+                        <Grid fluid className={cx(s.paddingTop2)}>
+                          <LocationMap />
+                        </Grid>
+                      </Element>
                     </Row>
                   </Col>
                   {/*  <Col

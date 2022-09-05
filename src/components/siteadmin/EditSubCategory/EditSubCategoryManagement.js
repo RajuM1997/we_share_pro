@@ -93,7 +93,7 @@ class EditSubCategoryManagement extends React.Component {
           <Col xs={12} sm={12} md={12} lg={9}>
             <PlaceGeoSuggest
               {...input}
-              label={""}
+              label={" "}
               className={className}
               formName={"EditSubCategory"}
             />

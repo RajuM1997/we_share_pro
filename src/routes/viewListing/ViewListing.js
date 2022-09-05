@@ -172,6 +172,7 @@ class ViewListing extends React.Component {
     if (reviewsCount > 0 && reviewsStarRating > 0) {
       starRatingValue = Math.round(reviewsStarRating / reviewsCount);
     }
+    console.log(UserListing);
 
     return (
       <div className={s.root}>
