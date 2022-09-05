@@ -197,6 +197,7 @@ class PageReRendererStep1 extends Component {
                 <div className={s.landingMainContent}>
                   <FormGroup className={s.formGroup}>
                     <textarea
+                      width="100%"
                       name="description"
                       component={this.renderFormControlTextArea}
                       className={s.textareaInput}
@@ -247,7 +248,8 @@ class PageReRendererStep1 extends Component {
                   className={cx(
                     s.formControlSelect,
                     s.jumboSelect,
-                    s.formControlSelectLarge
+                    s.formControlSelectLarge,
+                    s.country
                   )}
                 >
                   {countryList.getCountries?.map((item) => {
@@ -279,7 +281,7 @@ class PageReRendererStep1 extends Component {
                 />
               </FormGroup>
 
-              <Col xs={12} sm={6} md={6} lg={6}>
+              <Col xs={12} sm={6} md={6} lg={6} style={{ padding: 0 }}>
                 <FormGroup className={s.formGroup}>
                   <ControlLabel className={s.landingLabel}>
                     <FormattedMessage {...messages.city} />
@@ -291,7 +293,7 @@ class PageReRendererStep1 extends Component {
                   />
                 </FormGroup>
               </Col>
-              <Col xs={12} sm={6} md={6} lg={6}>
+              <Col xs={12} sm={6} md={6} lg={6} style={{ padding: 0 }}>
                 <FormGroup className={s.formGroup}>
                   <ControlLabel className={s.landingLabel}>
                     <FormattedMessage {...messages.state} />
@@ -313,6 +315,33 @@ class PageReRendererStep1 extends Component {
                   className={cx(s.formControlInput, s.jumboInput)}
                 />
               </Col>
+            </Col>
+          </>
+          <ListPlaceTips />
+        </Row>
+        <Row className={cx(s.landingContainer, "arrowPosition")}>
+          <>
+            <Col xs={12} sm={12} md={7} lg={7} className={s.landingContent}>
+              <div>
+                <h3 className={s.landingContentTitle}>
+                  <FormattedMessage {...messages.whereLocated} />
+                </h3>
+                <form>
+                  <div className={s.landingMainContent}>
+                    <FormGroup className={s.formGroup}>
+                      <div className={s.google_map}>
+                        <iframe
+                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d462561.6574537445!2d55.22748795!3d25.076022449999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sbd!4v1662387096365!5m2!1sen!2sbd"
+                          className={s.mapIframe}
+                          allowfullscreen=""
+                          loading="lazy"
+                          referrerpolicy="no-referrer-when-downgrade"
+                        ></iframe>
+                      </div>
+                    </FormGroup>
+                  </div>
+                </form>
+              </div>
             </Col>
           </>
           <ListPlaceTips />
