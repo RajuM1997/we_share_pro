@@ -11,8 +11,8 @@ const submit = async (values) => {
     } else {
         const mutation = `
           mutation createHostListing(
-            $userId: Int,
-            $categoryId: Int,
+            $userId: String,
+            $categoryId: String,
             $subCategoryId: Int,
             $personCapacity: Int,
             $itemTitle: String,

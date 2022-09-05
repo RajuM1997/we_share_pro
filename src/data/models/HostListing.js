@@ -126,11 +126,11 @@ const HostListing = Model.define("HostListing", {
         allowNull: false,
     },
     coverPhoto: {
-        type: DataType.STRING,
+        type: DataType.TEXT('long'),
         allowNull: false,
     },
     dynamicFields: {
-        type: DataType.STRING,
+        type: DataType.TEXT('long'),
         allowNull: false,
     },
 });
