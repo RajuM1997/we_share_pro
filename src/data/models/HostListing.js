@@ -33,6 +33,14 @@ const HostListing = Model.define("HostListing", {
         type: DataType.STRING,
         allowNull: false,
     },
+    fullAddress: {
+        type: DataType.STRING,
+        allowNull: false,
+    },
+    buildingName: {
+        type: DataType.STRING,
+        allowNull: false,
+    },
     country: {
         type: DataType.STRING,
         allowNull: false,
@@ -55,17 +63,49 @@ const HostListing = Model.define("HostListing", {
     },
     status: {
         type: DataType.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     lat: {
         type: DataType.DOUBLE,
-        allowNull: false,
+        allowNull: true,
     },
     lng: {
         type: DataType.DOUBLE,
-        allowNull: false,
+        allowNull: true,
     },
     serviceUnit: {
+        type: DataType.STRING,
+        allowNull: false,
+    },
+    bookingNoticeTime: {
+        type: DataType.STRING,
+        allowNull: false,
+    },
+    bookingNoticeCheckInStart: {
+        type: DataType.STRING,
+        allowNull: false,
+    },
+    bookingNoticeCheckInEnd: {
+        type: DataType.STRING,
+        allowNull: false,
+    },
+    maxDaysNotice: {
+        type: DataType.STRING,
+        allowNull: false,
+    },
+    cancellationPolicy: {
+        type: DataType.STRING,
+        allowNull: false,
+    },
+    weeklyDiscount: {
+        type: DataType.INTEGER,
+        allowNull: false,
+    },
+    monthlyDiscount: {
+        type: DataType.INTEGER,
+        allowNull: false,
+    },
+    bookingType: {
         type: DataType.STRING,
         allowNull: false,
     },
@@ -87,14 +127,6 @@ const HostListing = Model.define("HostListing", {
     },
     coverPhoto: {
         type: DataType.STRING,
-        allowNull: false,
-    },
-    discountType: {
-        type: DataType.STRING,
-        allowNull: false,
-    },
-    discount: {
-        type: DataType.INTEGER,
         allowNull: false,
     },
     dynamicFields: {

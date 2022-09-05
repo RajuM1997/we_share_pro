@@ -28,13 +28,19 @@ const HostListing = new ObjectType({
         lat: { type: FloatType },
         lng: { type: FloatType },
         serviceUnit: { type: StringType },
+        bookingNoticeTime: { type: StringType },
+        bookingNoticeCheckInStart: { type: StringType },
+        bookingNoticeCheckInEnd: { type: StringType },
+        maxDaysNotice: { type: StringType },
+        cancellationPolicy: { type: StringType },
         minUnit: { type: IntType },
         maxUnit: { type: IntType },
         basePrice: { type: FloatType },
         currency: { type: StringType },
-        coverPhoto: { type: IntType },
-        discountType: { type: StringType },
-        discount: { type: IntType },
+        coverPhoto: { type: StringType },
+        weeklyDiscount: { type: IntType },
+        monthlyDiscount: { type: IntType },
+        bookingType: { type: StringType },
         dynamicFields: { type: StringType },
     }
 });
@@ -61,20 +67,26 @@ const HostListingType = new ObjectType({
         lat: { type: FloatType },
         lng: { type: FloatType },
         serviceUnit: { type: StringType },
+        bookingNoticeTime: { type: StringType },
+        bookingNoticeCheckInStart: { type: StringType },
+        bookingNoticeCheckInEnd: { type: StringType },
+        maxDaysNotice: { type: StringType },
+        cancellationPolicy: { type: StringType },
         minUnit: { type: IntType },
         maxUnit: { type: IntType },
         basePrice: { type: FloatType },
         currency: { type: StringType },
-        coverPhoto: { type: IntType },
-        discountType: { type: StringType },
-        discount: { type: IntType },
+        coverPhoto: { type: StringType },
+        weeklyDiscount: { type: IntType },
+        monthlyDiscount: { type: IntType },
+        bookingType: { type: StringType },
         dynamicFields: { type: StringType },
-        Listing: {
-            type: new List(HostListing),
-            resolve (HostListingType) {
-                return HostListingType.getListing();
-            }
-        },
+        // Listing: {
+        //     type: new List(HostListing),
+        //     resolve (HostListingType) {
+        //         return HostListingType.getListing();
+        //     }
+        // },
     },
 });
 

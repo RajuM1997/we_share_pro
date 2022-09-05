@@ -49,7 +49,8 @@ class ExistingPage1 extends Component {
   render() {
     const {
       currentStep,
-      handleOnNextStep
+      handleOnNextStep,
+      handleCompleteHostListing
     } = this.props;
     const { formatMessage } = this.props.intl;
     let isShowButton = false,
@@ -278,7 +279,7 @@ class ExistingPage1 extends Component {
                           <Loader
                               type={"button"}
                               className={cx(s.button, bt.btnPrimary)}
-                              handleClick={() => {}}
+                              handleClick={handleCompleteHostListing}
                               show={false}
                               label={formatMessage(messages.publishNow)}
                           />

@@ -24,6 +24,7 @@ import {
 import ExistingPage1 from "../../components/ListPlaceStep1/ExistingPage1";
 import PageReRendererStep3 from "./PageReRendererStep3";
 import PageReRendererStep1 from "./PageReRendererStep1";
+import submit from "./submit";
 
 const groupBy = function(xs, key) {
   return xs.reduce(function(rv, x) {
@@ -86,11 +87,12 @@ class BecomeHost extends React.Component {
     };
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
-    this.updateFileByPageId = this.updateFileByPageId.bind(this);
+    this.updateFieldByPageId = this.updateFieldByPageId.bind(this);
     this.handleSubCategoryChange = this.handleSubCategoryChange.bind(this);
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
     this.handleCompleteStep = this.handleCompleteStep.bind(this);
     this.handleOnNextStep = this.handleOnNextStep.bind(this);
+    this.handleCompleteHostListing = this.handleCompleteHostListing.bind(this);
   }
 
   nextPage() {
@@ -267,22 +269,36 @@ class BecomeHost extends React.Component {
     }));
   }
 
-  updateFileByPageId = (currentPageId) => (key, value) => {
+  updateFieldByPageId = (currentPageId) => (key, value) => {
     this.setState((thisState) => ({
       ...thisState,
       formData: {
         ...thisState.formData,
-        ...currentPageId ? {
-          [currentPageId]: {
-            ...(thisState.formData[currentPageId] || {}),
-            [key]: value,
-          }
-        } : {
+        dynamicFields: {
+          ...(thisState.formData?.dynamicFields || {}),
+          ...currentPageId ? {
+              ...(thisState.formData?.dynamicFields[currentPageId] || {}),
+              [key]: value,
+          } : {},
+        },
+        ...currentPageId ? {} : {
           [key]: value,
         },
       },
     }));
   };
+
+  async handleCompleteHostListing() {
+    let currentUser = this.props.account.userId;
+    const data = await submit({
+      userId: currentUser,
+      categoryId: this.state.selectedCategory,
+      subCategoryId: this.state.selectedSubCategory,
+      personCapacity: this.state.personCapacity,
+      ...this.state.formData,
+    })
+    console.log("handleCompleteHostListing", data);
+  }
 
   handleOnNextStep() {
     const maxStep = Math.max(...Object.keys(this.state?.steps || {}));
@@ -322,12 +338,12 @@ class BecomeHost extends React.Component {
     return (
       <div className={s.root}>
         <div className={cx(s.container, "existingPage")}>
-          <pre>{JSON.stringify(this.state.formData, null, 4)}</pre>
           {this.state.steps &&
           this.state.steps[this?.state?.currentStep] === "visible" ? (
             <ExistingPage1
               currentStep={this.state.currentStep}
               handleOnNextStep={this.handleOnNextStep}
+              handleCompleteHostListing={this.handleCompleteHostListing}
             />
           ) : (
             <>
@@ -349,7 +365,7 @@ class BecomeHost extends React.Component {
                        mode={mode}
                        baseCurrency={baseCurrency}
                        formData={this.state.formData || {}}
-                       updateField={this.updateFileByPageId()}
+                       updateField={this.updateFieldByPageId()}
                        handleCompleteStep={this.handleCompleteStep}
                        countryList={getCountriesData}
                      />
@@ -371,7 +387,7 @@ class BecomeHost extends React.Component {
                        mode={mode}
                        baseCurrency={baseCurrency}
                        formData={this.state.formData[currentPageId] || {}}
-                       updateField={this.updateFileByPageId(currentPageId)}
+                       updateField={this.updateFieldByPageId(currentPageId)}
                        handleCompleteStep={this.handleCompleteStep}
                        countryList={getCountriesData}
                      />
@@ -393,7 +409,7 @@ class BecomeHost extends React.Component {
                        mode={mode}
                        baseCurrency={baseCurrency}
                        formData={this.state.formData || {}}
-                       updateField={this.updateFileByPageId()}
+                       updateField={this.updateFieldByPageId()}
                        handleCompleteStep={this.handleCompleteStep}
                        countryList={getCountriesData}
                      />
@@ -419,7 +435,9 @@ class BecomeHost extends React.Component {
     );
   }
 }
-const mapState = (state) => ({});
+const mapState = (state) => ({
+  account: state.account.data,
+});
 
 const mapDispatch = {};
 export default compose(

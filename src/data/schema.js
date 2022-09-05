@@ -419,6 +419,12 @@ import getSiteSettingsLogo from "./queries/siteadmin/getSiteSettingsLogo";
 
 import removeFavIconLogo from "./mutations/SiteAdmin/Logo/removeFavIconLogo";
 
+
+import createHostListing from './mutations/HostListing/CreateHostListing';
+import getHostListingBySubCategory from './queries/HostListing/getHostListingBySubCategory';
+import getHostListingByUserId from './queries/HostListing/getHostListingByUserId';
+import getHostListingDetailsById from './queries/HostListing/getHostListingDetailsById';
+
 const schema = new Schema({
   query: new ObjectType({
     name: "Query",
@@ -582,6 +588,9 @@ const schema = new Schema({
       getPageFieldAdmin,
       editPageField,
       editFields,
+      getHostListingBySubCategory,
+      getHostListingDetailsById,
+      getHostListingByUserId,
     },
   }),
   mutation: new ObjectType({
@@ -708,6 +717,7 @@ const schema = new Schema({
       updateFields,
       updateFieldsStatus,
       deleteFields,
+      createHostListing,
     },
   }),
 });

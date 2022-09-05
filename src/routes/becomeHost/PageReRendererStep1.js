@@ -218,7 +218,6 @@ class PageReRendererStep1 extends Component {
                           <FormGroup className={s.formGroup}>
                             <input
                                 name="fullAddress"
-                                name="itemDescription"
                                 component={this.renderPlacesSuggest}
                                 label={formatMessage(messages.yourFullAddress)}
                                 className={cx(s.formControlInput, s.jumboInput)}

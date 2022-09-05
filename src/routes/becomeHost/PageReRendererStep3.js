@@ -145,6 +145,7 @@ class PageReRendererStep3 extends Component {
       baseCurrency,
       availableCurrencies,
       countryList,
+      sideMenuData
     } = this.props;
     // console.log(countryList.getCountries);
     const {
@@ -311,6 +312,9 @@ class PageReRendererStep3 extends Component {
                                     name="bookingNoticeTime"
                                     component={this.renderFormControlSelect}
                                     className={cx(s.formControlSelect, s.jumboSelect)}
+                                    onChange={(event)=>{
+                                      updateField('bookingNoticeTime', event.target.value);
+                                    }}
                                 >
                                   {bookingNoticeTime.map((value, key) => {
                                     return (
@@ -331,11 +335,20 @@ class PageReRendererStep3 extends Component {
                                   <FormattedMessage {...messages.advanceNoticeFrom} />
                                 </ControlLabel>
                                 <select
-                                    name="checkInStart"
+                                    name="bookingNoticeCheckInStart"
                                     component={this.renderTimeSelect}
                                     className={cx(s.formControlSelect, s.jumboSelect)}
+                                    onChange={(event)=>{
+                                      updateField('bookingNoticeCheckInStart', event.target.value);
+                                    }}
                                 >
-                                  <option value="">8</option>{" "}
+                                  {
+                                    sideMenuData?.map(ele => (
+                                        <option value={ele.title} key={ele.title}>
+                                          {ele.title}
+                                        </option>
+                                    ))
+                                  }
                                 </select>
                               </FormGroup>
                               <FormGroup className={s.formGroup}>
@@ -343,12 +356,20 @@ class PageReRendererStep3 extends Component {
                                   <FormattedMessage {...messages.advanceNoticeTo} />
                                 </ControlLabel>
                                 <select
-                                    name="checkInEnd"
+                                    name="bookingNoticeCheckInEnd"
                                     component={this.renderTimeSelect}
                                     className={cx(s.formControlSelect, s.jumboSelect)}
+                                    onChange={(event)=>{
+                                      updateField('bookingNoticeCheckInEnd', event.target.value);
+                                    }}
                                 >
-                                  {" "}
-                                  <option value="">8</option>
+                                  {
+                                    sideMenuData?.map(ele => (
+                                        <option value={ele.title} key={ele.title}>
+                                          {ele.title}
+                                        </option>
+                                    ))
+                                  }
                                 </select>
                               </FormGroup>
                             </div>
@@ -369,6 +390,9 @@ class PageReRendererStep3 extends Component {
                                     name="maxDaysNotice"
                                     component={this.renderFormControlSelect}
                                     className={cx(s.formControlSelect, s.jumboSelect)}
+                                    onChange={(event)=>{
+                                      updateField('maxDaysNotice', event.target.value);
+                                    }}
                                 >
                                   <option value={"available"}>
                                     {formatMessage(messages.datesOption5)}
@@ -401,6 +425,9 @@ class PageReRendererStep3 extends Component {
                                     name="cancellationPolicy"
                                     component={this.renderFormControlSelect}
                                     className={cx(s.formControlSelect, s.jumboSelect)}
+                                    onChange={(event)=>{
+                                      updateField('cancellationPolicy', event.target.value);
+                                    }}
                                 >
                                   <option value={"1"}>
                                     {formatMessage(messages.flexible)}
@@ -440,27 +467,52 @@ class PageReRendererStep3 extends Component {
                                           className={cx(s.formGroup, s.space4)}
                                       >
                                         <select
-                                            name="minNight"
+                                            name="serviceUnit"
                                             component={this.renderFormControlSelect}
                                             className={cx(
                                                 s.formControlSelect,
                                                 s.jumboSelect
                                             )}
+                                            onChange={(event)=>{
+                                              updateField('serviceUnit', event.target.value);
+                                            }}
                                         >
-                                          <option value="">3Night Max</option>
+                                          <option value="daily">Daily</option>
+                                          <option value="weekly">Weekly</option>
+                                          <option value="monthly">Monthly</option>
+                                        </select>
+                                      </FormGroup>
+                                      <FormGroup
+                                          className={cx(s.formGroup, s.space4)}
+                                      >
+                                        <select
+                                            name="minUnit"
+                                            component={this.renderFormControlSelect}
+                                            className={cx(
+                                                s.formControlSelect,
+                                                s.jumboSelect
+                                            )}
+                                            onChange={(event)=>{
+                                              updateField('minUnit', event.target.value);
+                                            }}
+                                        >
+                                          <option value={1}>1</option>
                                         </select>
                                       </FormGroup>
 
                                       <FormGroup className={s.formGroup}>
                                         <select
-                                            name="maxNight"
+                                            name="maxUnit"
                                             component={this.renderFormControlSelect}
                                             className={cx(
                                                 s.formControlSelect,
                                                 s.jumboSelect
                                             )}
+                                            onChange={(event)=>{
+                                              updateField('maxUnit', event.target.value);
+                                            }}
                                         >
-                                          <option value="">3Night Max</option>
+                                          <option value={1}>1</option>
                                         </select>
                                       </FormGroup>
                                     </div>
@@ -496,22 +548,12 @@ class PageReRendererStep3 extends Component {
                                     component={this.renderFormControl}
                                     label={formatMessage(messages.basePriceLabel)}
                                     className={cx(s.formControlInput, s.jumboSelect)}
+                                    onChange={(event)=>{
+                                      updateField('basePrice', event.target.value);
+                                    }}
                                 />
                               </FormGroup>
 
-                              <FormGroup className={cx(s.formGroup, s.space4)}>
-                                <ControlLabel className={s.landingStep3}>
-                                  <FormattedMessage {...messages.cleaningPrice} />
-                                </ControlLabel>
-                                <br />
-                                <input
-                                    name="cleaningPrice"
-                                    type="text"
-                                    component={this.renderFormControl}
-                                    label={formatMessage(messages.cleaningPrice)}
-                                    className={cx(s.formControlInput, s.jumboSelect)}
-                                />
-                              </FormGroup>
                               <FormGroup className={s.formGroup}>
                                 <ControlLabel className={s.landingStep3}>
                                   <FormattedMessage {...messages.currency} />
@@ -521,6 +563,9 @@ class PageReRendererStep3 extends Component {
                                     name="currency"
                                     component={this.renderFormControlSelect}
                                     className={cx(s.formControlSelect, s.jumboSelect)}
+                                    onChange={(event)=>{
+                                      updateField('currency', event.target.value);
+                                    }}
                                 >
                                   {availableCurrencies.map((currency, key) => {
                                     if (currency.isEnable === true) {
@@ -575,6 +620,9 @@ class PageReRendererStep3 extends Component {
                                         s.formControlInputMaxWidth
                                     )}
                                     prefixLabel={"%"}
+                                    onChange={(event)=>{
+                                      updateField('weeklyDiscount', event.target.value);
+                                    }}
                                 />
                               </FormGroup>
 
@@ -598,6 +646,9 @@ class PageReRendererStep3 extends Component {
                                         s.formControlInputMaxWidth
                                     )}
                                     prefixLabel={"%"}
+                                    onChange={(event)=>{
+                                      updateField('monthlyDiscount', event.target.value);
+                                    }}
                                 />
                               </FormGroup>
                             </div>
@@ -650,6 +701,9 @@ class PageReRendererStep3 extends Component {
                                             type="radio"
                                             value="instant"
                                             className={s.BookingradioInput}
+                                            onChange={(event)=>{
+                                              updateField('bookingType', event.target.value);
+                                            }}
                                         />
                                       </span>
                                       <span className={s.displayTableCell}>
@@ -679,6 +733,9 @@ class PageReRendererStep3 extends Component {
                                               type="radio"
                                               value="request"
                                               className={s.BookingradioInput}
+                                              onChange={(event)=>{
+                                                updateField('bookingType', event.target.value);
+                                              }}
                                           />
                                         </span>
                                         <span className={s.displayTableCell}>
@@ -823,6 +880,7 @@ const mapState = (state) => ({
   beds: selector(state, "beds"),
   bedCount: selector(state, "beds"),
   bedTypes: selector(state, "bedTypes"),
+  sideMenuData: state.sideMenu.data
 });
 const mapDispatch = {};
 export default injectIntl(
