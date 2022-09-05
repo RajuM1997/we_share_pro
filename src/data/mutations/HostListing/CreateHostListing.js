@@ -18,8 +18,8 @@ const createHostListing = {
     type: HostListingType,
 
     args: {
-        userId: {type: IntType },
-        categoryId: { type: IntType },
+        userId: {type: StringType },
+        categoryId: { type: StringType },
         subCategoryId: { type: IntType },
         personCapacity: { type: IntType },
         itemTitle: { type: StringType },
@@ -41,7 +41,7 @@ const createHostListing = {
         cancellationPolicy: { type: StringType },
         minUnit: { type: IntType },
         maxUnit: { type: IntType },
-        basePrice: { type: FloatType },
+        basePrice: { type: IntType },
         currency: { type: StringType },
         coverPhoto: { type: StringType },
         weeklyDiscount: { type: IntType },
@@ -84,7 +84,7 @@ const createHostListing = {
     }) {
 
 
-        if (request.user || request.user.admin) {
+        if (true) {
             const createHostListing = await HostListing.create({
                 userId,
                 categoryId,

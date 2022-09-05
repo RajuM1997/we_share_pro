@@ -429,7 +429,6 @@ class BecomeHost extends React.Component {
               )}
             </>
           )}
-          {/*<PageReRendererStep3 />*/}
         </div>
       </div>
     );

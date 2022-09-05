@@ -10,11 +10,11 @@ const HostListing = Model.define("HostListing", {
         autoIncrement: true,
     },
     userId: {
-        type: DataType.INTEGER,
+        type: DataType.STRING,
         allowNull: false,
     },
     categoryId: {
-        type: DataType.INTEGER,
+        type: DataType.STRING,
         allowNull: false,
     },
     subCategoryId: {

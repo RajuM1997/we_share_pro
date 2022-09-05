@@ -7,12 +7,12 @@ import {
 } from "graphql/type/scalars";
 
 const HostListing = new ObjectType({
-    name: 'Listing',
-    description: "Listing",
+    name: 'HostListing',
+    description: "HostListing",
     fields: {
         id: {type: IntType },
-        userId: {type: IntType },
-        categoryId: { type: IntType },
+        userId: {type: StringType },
+        categoryId: { type: StringType },
         subCategoryId: { type: IntType },
         personCapacity: { type: IntType },
         itemTitle: { type: StringType },
@@ -35,7 +35,7 @@ const HostListing = new ObjectType({
         cancellationPolicy: { type: StringType },
         minUnit: { type: IntType },
         maxUnit: { type: IntType },
-        basePrice: { type: FloatType },
+        basePrice: { type: IntType },
         currency: { type: StringType },
         coverPhoto: { type: StringType },
         weeklyDiscount: { type: IntType },
@@ -46,12 +46,12 @@ const HostListing = new ObjectType({
 });
 
 const HostListingType = new ObjectType({
-    name: 'Listing',
-    description: "Listing",
+    name: 'HostListingType',
+    description: "HostListingType",
     fields: {
         id: {type: IntType },
-        userId: {type: IntType },
-        categoryId: { type: IntType },
+        userId: {type: StringType },
+        categoryId: { type: StringType },
         subCategoryId: { type: IntType },
         personCapacity: { type: IntType },
         itemTitle: { type: StringType },
@@ -74,7 +74,7 @@ const HostListingType = new ObjectType({
         cancellationPolicy: { type: StringType },
         minUnit: { type: IntType },
         maxUnit: { type: IntType },
-        basePrice: { type: FloatType },
+        basePrice: { type: IntType },
         currency: { type: StringType },
         coverPhoto: { type: StringType },
         weeklyDiscount: { type: IntType },
