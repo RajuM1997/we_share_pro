@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import ReduxToastr from 'react-redux-toastr'
 
 // Style
-// import withStyles from 'isomorphic-style-loader/lib/withStyles';
-// import s from '!isomorphic-style-loader!css-loader!sass-loader!react-redux-toastr/src/styles/index.scss';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import s from 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 
 class Toaster extends React.Component {
   static propTypes = {};
@@ -22,4 +22,6 @@ class Toaster extends React.Component {
   }
 }
 
-export default Toaster;
+export default withStyles(s)(
+    Toaster
+);
