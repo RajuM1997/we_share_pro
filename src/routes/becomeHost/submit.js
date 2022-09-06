@@ -106,7 +106,7 @@ const submit = async (values) => {
 
     const { data } = await resp.json();
     console.log(data);
-    if (data?.createHostListing?.status === "success") {
+    if (data?.createHostListing.status === "success") {
       toastr.success("Listing", "Successfully Added!");
       // history.push("/siteadmin/category");
     } else {

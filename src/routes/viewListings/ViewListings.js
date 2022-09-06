@@ -31,12 +31,6 @@ import StarRating from "../../components/StarRating/StarRating";
 import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
 import BookingModal from "../../components/ViewListings/BookingModal/BookingModal";
 import SimilarListings from "../../components/ViewListings/SimilarListings/SimilarListings";
-
-// Graphql
-// import BlockedDatesQuery from "./BlockedDates.graphql";
-// import ListingDataQuery from "./getListingData.graphql";
-// import MoreReviewsQuery from "./MoreReviews.graphql";
-// import SimilarListsQuery from "./getSimilarListing.graphql";
 import AutoAffix from "react-overlays/lib/AutoAffix";
 
 // ES6 Imports
@@ -57,28 +51,7 @@ var durationFn = function(deltaTop) {
   return deltaTop;
 };
 class ViewListings extends React.Component {
-  // static PropTypes = {
-  //   getListingData: PropTypes.shape({
-  //     loading: PropTypes.bool,
-  //     UserListing: PropTypes.object,
-  //   }),
-  // };
-  // static defaultProps = {
-  //   getListingData: {
-  //     loading: false,
-  //     UserListing: {
-  //       userId: null,
-  //     },
-  //   },
-  // };
   render() {
-    // const {
-    //   listId,
-    //   title,
-    //   getListingData: { loading, UserListing },
-    //   preview,
-    //   averageBasePrice,
-    // } = this.props;
     return (
       <div className={s.root}>
         <div className={s.container}>

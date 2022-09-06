@@ -567,7 +567,6 @@ class ViewListing extends React.Component {
             </div>
           </div>
         </div>
-        <ViewListings />
       </div>
     );
   }

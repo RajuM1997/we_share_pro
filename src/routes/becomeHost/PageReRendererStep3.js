@@ -411,9 +411,14 @@ class PageReRendererStep3 extends Component {
                               {bookingNoticeTime.map((value, key) => {
                                 return (
                                   value.isEnable == 1 && (
-                                    <option value={value.id} key={key}>
-                                      {value.itemName}
-                                    </option>
+                                    <>
+                                      <option value="" selected disabled>
+                                        Please Select
+                                      </option>
+                                      <option value={value.id} key={key}>
+                                        {value.itemName}
+                                      </option>
+                                    </>
                                   )
                                 );
                               })}
@@ -493,6 +498,9 @@ class PageReRendererStep3 extends Component {
                                 );
                               }}
                             >
+                              <option value="" selected disabled>
+                                Please Select
+                              </option>
                               <option value={"available"}>
                                 {formatMessage(messages.datesOption5)}
                               </option>
@@ -531,6 +539,9 @@ class PageReRendererStep3 extends Component {
                                 );
                               }}
                             >
+                              <option value="" selected disabled>
+                                Please Select
+                              </option>
                               <option value={"1"}>
                                 {formatMessage(messages.flexible)}
                               </option>
@@ -580,6 +591,9 @@ class PageReRendererStep3 extends Component {
                                         );
                                       }}
                                     >
+                                      <option value="" selected disabled>
+                                        Please Select
+                                      </option>
                                       <option value="daily">Daily</option>
                                       <option value="weekly">Weekly</option>
                                       <option value="monthly">Monthly</option>
@@ -602,6 +616,9 @@ class PageReRendererStep3 extends Component {
                                         );
                                       }}
                                     >
+                                      <option value="" selected disabled>
+                                        Please Select
+                                      </option>
                                       <option value={1}>1</option>
                                     </select>
                                   </FormGroup>
@@ -621,6 +638,9 @@ class PageReRendererStep3 extends Component {
                                         );
                                       }}
                                     >
+                                      <option value="" selected disabled>
+                                        Please Select
+                                      </option>
                                       <option value={1}>1</option>
                                     </select>
                                   </FormGroup>
@@ -677,9 +697,14 @@ class PageReRendererStep3 extends Component {
                               {availableCurrencies.map((currency, key) => {
                                 if (currency.isEnable === true) {
                                   return (
-                                    <option key={key} value={currency.symbol}>
-                                      {currency.symbol}
-                                    </option>
+                                    <>
+                                      <option value="" selected disabled>
+                                        Please Select
+                                      </option>
+                                      <option key={key} value={currency.symbol}>
+                                        {currency.symbol}
+                                      </option>
+                                    </>
                                   );
                                 }
                               })}

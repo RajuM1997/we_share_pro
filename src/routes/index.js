@@ -46,6 +46,11 @@ export default {
       load: () => import(/* webpackChunkName: 'viewListing' */ "./viewListing"),
     },
     {
+      path: "/host_listing/:listId",
+      load: () =>
+        import(/* webpackChunkName: 'viewListing' */ "./viewListings"),
+    },
+    {
       path: "/rooms",
       load: () =>
         import(/* webpackChunkName: 'manageListing' */ "./manageListing"),

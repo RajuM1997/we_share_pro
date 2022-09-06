@@ -1,11 +1,11 @@
 // Fetch Request
-import fetch from "../../../core/fetch/fetch.server";
+import fetch from "../../../core/fetch";
 
 // Toaster
 import { toastr } from "react-redux-toastr";
 import history from "../../../core/history";
 async function submit(values, dispatch) {
-  console.log(values);
+  console.log("editField", values);
   const mutation = `
   mutation updateFields(
     $name: String,
@@ -40,12 +40,13 @@ async function submit(values, dispatch) {
   });
 
   const { data } = await resp.json();
+  console.log(data);
 
   if (data.updateFields.status === "success") {
-    toastr.success("Update Fields", "Changes are updated!");
-    history.push("/siteadmin/");
+    toastr.success("Update Field", "Changes are updated!");
+    history.push(`/siteadmin/fields/${values.subCategoryId}`);
   } else {
-    toastr.error("Update Fields", "Updating Fields failed");
+    toastr.error("Update Field", "Updating category failed");
   }
 }
 

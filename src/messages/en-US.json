@@ -13540,5 +13540,32 @@
     "files": [
       "src/locale/messages.js"
     ]
+  },
+  {
+    "id": "app.adminApproval",
+    "description": "admin approval",
+    "defaultMessage": "Waiting for admin approval",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.hostPreviewListing",
+    "description": "Preview Listing",
+    "defaultMessage": "Preview Listing",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.listingSubmitVerification",
+    "description": "for verification",
+    "defaultMessage": "Your listing is submitted for verification",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
   }
 ]

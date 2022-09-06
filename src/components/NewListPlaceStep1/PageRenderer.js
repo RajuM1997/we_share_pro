@@ -225,12 +225,17 @@ class PageRenderer extends Component {
                                   item.options?.map((optionData) => {
                                     console.log(optionData);
                                     return (
-                                      <option
-                                        value={optionData.label}
-                                        key={optionData.value}
-                                      >
-                                        {optionData?.label}
-                                      </option>
+                                      <>
+                                        <option value="" disabled>
+                                          Please Select
+                                        </option>
+                                        <option
+                                          value={optionData.label}
+                                          key={optionData.value}
+                                        >
+                                          {optionData?.label}
+                                        </option>
+                                      </>
                                     );
                                   })}
                               </select>

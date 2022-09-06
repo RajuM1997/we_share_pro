@@ -140,10 +140,7 @@ class CategoryAndSubCtegorySelector extends Component {
       userData,
       selectedCategory,
     } = this.props;
-    const {
-      isDisabled,
-      personCapacity,
-    } = this.state;
+    const { isDisabled, personCapacity } = this.state;
 
     return (
       <div>
@@ -178,8 +175,10 @@ class CategoryAndSubCtegorySelector extends Component {
                         >
                           <Field
                             name="subCategory"
-                            onChange={(event) =>{
-                                this.setState({selectedSubCategory: event?.target?.value})
+                            onChange={(event) => {
+                              this.setState({
+                                selectedSubCategory: event?.target?.value,
+                              });
                             }}
                             value={selectedSubCategory}
                             component={this.renderFormControlSelect}
@@ -221,8 +220,10 @@ class CategoryAndSubCtegorySelector extends Component {
                               s.jumboSelect,
                               s.noFontWeight
                             )}
-                            onChange={(event) =>{
-                              this.setState({selectedPersonCapacity: event?.target?.value})
+                            onChange={(event) => {
+                              this.setState({
+                                selectedPersonCapacity: event?.target?.value,
+                              });
                             }}
                           >
                             {personCapacity.map((value, key) => {
@@ -233,12 +234,17 @@ class CategoryAndSubCtegorySelector extends Component {
                                 i++
                               ) {
                                 rows.push(
-                                  <option value={i} key={key}>
-                                    for {i}{" "}
-                                    {i > 1
-                                      ? value.otherItemName
-                                      : value.itemName}
-                                  </option>
+                                  <>
+                                    <option value="" selected disabled>
+                                      Please Select
+                                    </option>
+                                    <option value={i} key={key}>
+                                      for {i}{" "}
+                                      {i > 1
+                                        ? value.otherItemName
+                                        : value.itemName}
+                                    </option>
+                                  </>
                                 );
                               }
                               return rows;
@@ -267,7 +273,7 @@ class CategoryAndSubCtegorySelector extends Component {
                                 "floatRight"
                               )}
                               onClick={() => {
-                                onSelectSubCategoryChanged(null, 0, null)
+                                onSelectSubCategoryChanged(null, 0, null);
                               }}
                             >
                               <FormattedMessage {...messages.back} />
@@ -282,7 +288,11 @@ class CategoryAndSubCtegorySelector extends Component {
                               )}
                               disabled={isDisabled}
                               onClick={() => {
-                                onSelectSubCategoryChanged(this.state.selectedSubCategory, this.state.selectedPersonCapacity, selectedCategory)
+                                onSelectSubCategoryChanged(
+                                  this.state.selectedSubCategory,
+                                  this.state.selectedPersonCapacity,
+                                  selectedCategory
+                                );
                               }}
                             >
                               <FormattedMessage {...messages.next} />

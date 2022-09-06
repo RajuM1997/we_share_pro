@@ -265,9 +265,17 @@ class PageReRendererStep1 extends Component {
                             {countryList.getCountries?.map((item) => {
                               console.log("country", item);
                               return (
-                                <option value={item.countryCode} key={item.id}>
-                                  {item.countryName}
-                                </option>
+                                <>
+                                  <option value="" selected disabled>
+                                    Please Select
+                                  </option>
+                                  <option
+                                    value={item.countryCode}
+                                    key={item.id}
+                                  >
+                                    {item.countryName}
+                                  </option>
+                                </>
                               );
                             })}
                           </select>

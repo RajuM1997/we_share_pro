@@ -3305,6 +3305,24 @@ const messages = defineMessages({
     defaultMessage: "Your listing is ready to be published!",
     description: "Listing inde",
   },
+  listingSubmitVerification: {
+    id: "app.listingSubmitVerification",
+    defaultMessage: "Your listing is submitted for verification",
+    description: "for verification",
+  },
+
+  adminApproval: {
+    id: "app.adminApproval",
+    defaultMessage: "Waiting for admin approval",
+    description: "admin approval",
+  },
+
+  hostPreviewListing: {
+    id: "app.hostPreviewListing",
+    defaultMessage: "Preview Listing",
+    description: "Preview Listing",
+  },
+
   publishNow: {
     id: "app.publishNow",
     defaultMessage: "Publish Now",

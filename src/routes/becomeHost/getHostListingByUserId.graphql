@@ -1,0 +1,5 @@
+query getHostListingByUserId($userId: String!) {
+  getHostListingByUserId(userId: $userId) {
+    id
+  }
+}

@@ -34,23 +34,23 @@ import CommentModal from "../siteadmin/ListingApprovalManagement/CommentModal/Co
 class ExistingPage1 extends Component {
   static propTypes = {
     currentStep: PropTypes.number.isRequired,
-    handleOnNextStep: PropTypes.func.isRequired
+    handleOnNextStep: PropTypes.func.isRequired,
   };
   static defaultProps = {
     currentStep: 1,
-    handleOnNextStep: () => {}
+    handleOnNextStep: () => {},
   };
 
   constructor(props) {
     super(props);
   }
 
-
   render() {
     const {
       currentStep,
       handleOnNextStep,
-      handleCompleteHostListing
+      handleCompleteHostListing,
+      shawButton,
     } = this.props;
     const { formatMessage } = this.props.intl;
     let isShowButton = false,
@@ -262,32 +262,67 @@ class ExistingPage1 extends Component {
                 <hr className={s.horizontalLineThrough} />
               </Col>
 
-              {
-                currentStep === 3 && (
-                    <Col xs={12} sm={12} md={12} lg={12}>
+              {currentStep === 3 && (
+                <Col xs={12} sm={12} md={12} lg={12}>
+                  {shawButton ? (
+                    <>
                       <h3 className={s.spaceTop1}>
                         <FormattedMessage {...messages.readyToPublish} />
                       </h3>
                       <Col
-                          xs={12}
-                          sm={12}
-                          md={12}
-                          lg={12}
-                          className={cx(s.spaceTop3, s.noPadding)}
+                        xs={12}
+                        sm={12}
+                        md={12}
+                        lg={12}
+                        className={cx(s.spaceTop3, s.noPadding)}
                       >
                         <div className={s.displayInline}>
                           <Loader
-                              type={"button"}
-                              className={cx(s.button, bt.btnPrimary)}
-                              handleClick={handleCompleteHostListing}
-                              show={false}
-                              label={formatMessage(messages.publishNow)}
+                            type={"button"}
+                            className={cx(s.button, bt.btnPrimary)}
+                            handleClick={handleCompleteHostListing}
+                            show={false}
+                            label={formatMessage(messages.publishNow)}
                           />
                         </div>
                       </Col>
-                    </Col>
-                )
-              }
+                    </>
+                  ) : (
+                    <>
+                      <h3 className={s.spaceTop1}>
+                        <FormattedMessage
+                          {...messages.listingSubmitVerification}
+                        />
+                      </h3>
+                      <Col
+                        xs={12}
+                        sm={12}
+                        md={12}
+                        lg={12}
+                        className={cx(s.spaceTop3, s.noPadding)}
+                      >
+                        <div className={s.publishAfter}>
+                          <Loader
+                            type={"button"}
+                            className={cx(s.button, bt.btnPrimary, s.btnCrisom)}
+                            label={formatMessage(messages.adminApproval)}
+                            style={{
+                              marginButtom: "10px",
+                              background: "crimson",
+                            }}
+                          />
+                          <Loader
+                            type={"button"}
+                            className={s.previewBtn}
+                            // handleClick={handleCompleteHostListing}
+                            label={formatMessage(messages.hostPreviewListing)}
+                          />
+                        </div>
+                      </Col>
+                    </>
+                  )}
+                </Col>
+              )}
             </Col>
 
             <Col xs={12} sm={5} md={5} lg={5} className={"hidden-xs"}>
@@ -306,6 +341,4 @@ class ExistingPage1 extends Component {
 const mapState = (state) => ({});
 const mapDispatch = {};
 
-export default injectIntl(
-  withStyles(s, bt)(ExistingPage1)
-);
+export default injectIntl(withStyles(s, bt)(ExistingPage1));

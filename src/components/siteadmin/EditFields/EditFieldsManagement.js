@@ -75,7 +75,6 @@ class EditFieldsManagement extends React.Component {
     } = this.props;
     const { data } = this.props;
     const { formatMessage } = this.props.intl;
-
     return (
       <div
         className={cx(
@@ -93,7 +92,7 @@ class EditFieldsManagement extends React.Component {
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={`/siteadmin`}
+                to={`/siteadmin/fields/${id}`}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,
@@ -150,13 +149,32 @@ class EditFieldsManagement extends React.Component {
                       Please Select
                     </option>
                     <option value="checkbox">Check Box</option>
-                    <option value="calendar">Calendar</option>
                     <option value="select">Dropdown</option>
                     <option value="text">Text Input</option>
                     <option value="number">Number Input</option>
-                    <option value="image">Image</option>
-                    {/*<option value="checkboxImage">Check Box And Image</option>*/}
-                    <option value="map">Map</option>
+                  </Field>
+                </Col>
+                <Col
+                  xs={12}
+                  sm={12}
+                  md={12}
+                  lg={3}
+                  style={{ paddingLeft: "0px" }}
+                >
+                  <label className={s.labelTextNew}> Option</label>
+                </Col>
+                <Col xs={12} sm={12} md={12} lg={9} className={s.categoryCol}>
+                  <Field
+                    name="fields"
+                    component="select"
+                    type="select"
+                    className={bt.commonControlInput}
+                    label={formatMessage(messages.categoryAdminCategory)}
+                    style={{ marginBottom: "10px", width: "100%" }}
+                  >
+                    <option value="" selected disabled>
+                      Please Select
+                    </option>
                   </Field>
                 </Col>
                 <FormGroup className={s.formGroup}>

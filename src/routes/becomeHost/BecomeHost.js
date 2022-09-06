@@ -11,6 +11,8 @@ import { graphql, compose } from "react-apollo";
 import getCategoryQuery from "./getCategory.graphql";
 import getSubCategoryQuery from "./getSubCategory.graphql";
 import getCountriesQuery from "./getCountries.graphql";
+import getHostListingByUserIdQuery from "./getHostListingByUserId.graphql";
+
 // Redux
 import { connect } from "react-redux";
 
@@ -59,6 +61,10 @@ class BecomeHost extends React.Component {
       loading: PropTypes.bool,
       getCountriesData: PropTypes.array,
     }),
+    getHostListingByUserIdData: PropTypes.shape({
+      loading: PropTypes.bool,
+      getHostListingByUserIdData: PropTypes.array,
+    }),
   };
   static defaultProps = {
     data: {
@@ -68,6 +74,9 @@ class BecomeHost extends React.Component {
       loading: true,
     },
     getCountriesData: {
+      loading: true,
+    },
+    getHostListingByUserIdData: {
       loading: true,
     },
     pageData: {},
@@ -84,6 +93,7 @@ class BecomeHost extends React.Component {
       formData: {},
       selectedCategory: "",
       selectedSubCategory: "",
+      shawButton: true,
     };
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
@@ -310,6 +320,9 @@ class BecomeHost extends React.Component {
       personCapacity: this.state.personCapacity,
       ...this.state.formData,
     });
+    this.setState({
+      shawButton: !this.state.shawButton,
+    });
     console.log("handleCompleteHostListing", data);
   }
 
@@ -337,6 +350,7 @@ class BecomeHost extends React.Component {
       getCategoryData,
       getSubCategoryData,
       getCountriesData,
+      getHostListingByUserIdData,
       formPage,
       formBaseURI,
       mode,
@@ -346,7 +360,7 @@ class BecomeHost extends React.Component {
     const pageData = this.state?.pageData[this.state.currentStep] || [];
     const currentPageFields = pageData[this.state.currentPageIndex] || [];
     const { pageId: currentPageId } = currentPageFields[0] || {};
-    console.log(getCountriesData);
+    // console.log("listingData", getHostListingByUserIdData);
 
     return (
       <div className={s.root}>
@@ -354,6 +368,7 @@ class BecomeHost extends React.Component {
           {this.state.steps &&
           this.state.steps[this?.state?.currentStep] === "visible" ? (
             <ExistingPage1
+              shawButton={this.state.shawButton}
               currentStep={this.state.currentStep}
               handleOnNextStep={this.handleOnNextStep}
               handleCompleteHostListing={this.handleCompleteHostListing}
@@ -465,6 +480,16 @@ export default compose(
     options: {
       ssr: true,
     },
+  }),
+  graphql(getHostListingByUserIdQuery, {
+    name: "getHostListingByUserIdData",
+    options: (props) => ({
+      variables: {
+        listId: props?.userId,
+      },
+      fetchPolicy: "network-only",
+      ssr: false,
+    }),
   }),
   connect(mapState, mapDispatch)
 )(BecomeHost);
