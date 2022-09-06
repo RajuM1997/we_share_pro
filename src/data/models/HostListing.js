@@ -10,11 +10,11 @@ const HostListing = Model.define("HostListing", {
         autoIncrement: true,
     },
     userId: {
-        type: DataType.INTEGER,
+        type: DataType.STRING,
         allowNull: false,
     },
     categoryId: {
-        type: DataType.INTEGER,
+        type: DataType.STRING,
         allowNull: false,
     },
     subCategoryId: {
@@ -126,11 +126,11 @@ const HostListing = Model.define("HostListing", {
         allowNull: false,
     },
     coverPhoto: {
-        type: DataType.STRING,
+        type: DataType.TEXT('long'),
         allowNull: false,
     },
     dynamicFields: {
-        type: DataType.STRING,
+        type: DataType.TEXT('long'),
         allowNull: false,
     },
 });

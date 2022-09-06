@@ -11,8 +11,8 @@ const submit = async (values) => {
   } else {
     const mutation = `
           mutation createHostListing(
-            $userId: Int,
-            $categoryId: Int,
+            $userId: String,
+            $categoryId: String,
             $subCategoryId: Int,
             $personCapacity: Int,
             $itemTitle: String,
@@ -92,19 +92,26 @@ const submit = async (values) => {
           dynamicFields: JSON.stringify(values?.dynamicFields),
           coverPhoto: JSON.stringify(values?.coverPhoto),
           basePrice: Number(values?.basePrice),
+          subCategoryId: Number(values?.subCategoryId),
+          weeklyDiscount: Number(values?.weeklyDiscount),
+          monthlyDiscount: Number(values?.monthlyDiscount),
+          currency: values?.currency || "USD",
+          maxUnit: Number(values?.maxUnit || 0),
+          minUnit: Number(values?.minUnit || 0),
+          country: values?.country || "US",
         },
       }),
       credentials: "include",
     });
 
     const { data } = await resp.json();
-    if (data?.createHostListing.status === "success") {
+    console.log(data);
+    if (data?.createHostListing?.status === "success") {
       toastr.success("Listing", "Successfully Added!");
       // history.push("/siteadmin/category");
     } else {
       toastr.error("Listing", "Failed to Added");
     }
-    console.log(data);
   }
 };
 

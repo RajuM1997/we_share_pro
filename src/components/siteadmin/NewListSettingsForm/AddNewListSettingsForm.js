@@ -225,7 +225,7 @@ class AddListSettingsForm extends Component {
               <option value="select">Dropdown</option>
               <option value="text">Text Input</option>
               <option value="number">Number Input</option>
-              <option value="image">Image</option>
+              {/* <option value="image">Image</option>
               <option value="coverImage">Cover Image</option>
               <option value="title">Title</option>
               <option value="textarea">Textarea</option>
@@ -243,7 +243,7 @@ class AddListSettingsForm extends Component {
               <option value="reviewGuestBook">Review Guest Book</option>
               <option value="guestRequirements">Guest Requirements</option>
               <option value="houseRules">House Rules</option>
-              <option value="localLaws">Local Laws</option>
+              <option value="localLaws">Local Laws</option> */}
             </Field>
 
             {(this.state.type === "select" ||

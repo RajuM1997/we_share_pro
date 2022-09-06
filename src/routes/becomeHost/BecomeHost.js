@@ -147,111 +147,120 @@ class BecomeHost extends React.Component {
             3: "pending",
           },
         }));
-        this.setState({ pageData: {
+        this.setState({
+          pageData: {
             1: [
-                [
-                  {
-                    "type": "title",
-                    "pageId": 1,
-                    "step": 1
-                  },
-                ],
-                [
-                  {
-                    "type": "description",
-                    "pageId": 2,
-                    "step": 1
-                  },
-                ],
-                [
-                  {
-                    "type": "location",
-                    "pageId": 3,
-                    "step": 1
-                  },
-                ],
-                [
-                  {
-                    "type": "address",
-                    "pageId": 4,
-                    "step": 1
-                  },
-                ],
-                [
-                  {
-                    "type": "photosUpload",
-                    "pageId": 5,
-                    "step": 1
-                  }
-                ]
+              [
+                {
+                  type: "title",
+                  pageId: 1,
+                  step: 1,
+                },
+              ],
+              [
+                {
+                  type: "description",
+                  pageId: 2,
+                  step: 1,
+                },
+              ],
+              [
+                {
+                  type: "location",
+                  pageId: 3,
+                  step: 1,
+                },
+              ],
+              [
+                {
+                  type: "address",
+                  pageId: 4,
+                  step: 1,
+                },
+              ],
+              [
+                {
+                  type: "photosUpload",
+                  pageId: 5,
+                  step: 1,
+                },
+              ],
             ],
             2: Object.values(step2Fields),
             3: [
               [
                 {
-                  "type": "guestRequirements",
-                  "pageId": 1,
-                  "step": 3
+                  type: "guestRequirements",
+                  pageId: 1,
+                  step: 3,
                 },
               ],
               [
                 {
-                  "type": "reviewGuestBook",
-                  "pageId": 2,
-                  "step": 3
+                  type: "reviewGuestBook",
+                  pageId: 2,
+                  step: 3,
                 },
               ],
               [
                 {
-                  "type": "bookingNoticeTime",
-                  "pageId": 3,
-                  "step": 3
+                  type: "bookingNoticeTime",
+                  pageId: 3,
+                  step: 3,
                 },
               ],
               [
                 {
-                  "type": "bookingWindow",
-                  "pageId": 4,
-                  "step": 3
+                  type: "bookingWindow",
+                  pageId: 4,
+                  step: 3,
                 },
               ],
               [
                 {
-                  "type": "tripLength",
-                  "pageId": 5,
-                  "step": 3
-                }
+                  type: "tripLength",
+                  pageId: 5,
+                  step: 3,
+                },
               ],
               [
                 {
-                  "type": "pricingDescription",
-                  "pageId": 6,
-                  "step": 3
-                }
+                  type: "pricingDescription",
+                  pageId: 6,
+                  step: 3,
+                },
               ],
               [
                 {
-                  "type": "discount",
-                  "pageId": 7,
-                  "step": 3
-                }
+                  type: "calendar",
+                  pageId: 7,
+                  step: 3,
+                },
               ],
               [
                 {
-                  "type": "instantBooking",
-                  "pageId": 8,
-                  "step": 3
-                }
+                  type: "discount",
+                  pageId: 8,
+                  step: 3,
+                },
               ],
               [
                 {
-                  "type": "localLaws",
-                  "pageId": 9,
-                  "step": 3
-                }
-              ]
+                  type: "instantBooking",
+                  pageId: 9,
+                  step: 3,
+                },
+              ],
+              [
+                {
+                  type: "localLaws",
+                  pageId: 10,
+                  step: 3,
+                },
+              ],
             ],
-        } });
+          },
+        });
       } catch (e) {}
     }
   }
@@ -276,14 +285,18 @@ class BecomeHost extends React.Component {
         ...thisState.formData,
         dynamicFields: {
           ...(thisState.formData?.dynamicFields || {}),
-          ...currentPageId ? {
-              ...(thisState.formData?.dynamicFields[currentPageId] || {}),
+          ...(currentPageId
+            ? {
+                ...(thisState.formData?.dynamicFields[currentPageId] || {}),
+                [key]: value,
+              }
+            : {}),
+        },
+        ...(currentPageId
+          ? {}
+          : {
               [key]: value,
-          } : {},
-        },
-        ...currentPageId ? {} : {
-          [key]: value,
-        },
+            }),
       },
     }));
   };
@@ -296,7 +309,7 @@ class BecomeHost extends React.Component {
       subCategoryId: this.state.selectedSubCategory,
       personCapacity: this.state.personCapacity,
       ...this.state.formData,
-    })
+    });
     console.log("handleCompleteHostListing", data);
   }
 
@@ -348,74 +361,68 @@ class BecomeHost extends React.Component {
           ) : (
             <>
               {this.state.selectedCategory && this.state.selectedSubCategory ? (
-               <>
-                 {
-                   this?.state?.currentStep === 1 && (
-                     <PageReRendererStep1
-                       totalPage={pageData?.length}
-                       currentPageData={{
-                         fields: currentPageFields,
-                       }}
-                       pageIndex={this.state.currentPageIndex}
-                       nextPage={this.nextPage}
-                       previousPage={this.previousPage}
-                       listId={this.state.currentPageIndex}
-                       formPage={formPage}
-                       formBaseURI={formBaseURI}
-                       mode={mode}
-                       baseCurrency={baseCurrency}
-                       formData={this.state.formData || {}}
-                       updateField={this.updateFieldByPageId()}
-                       handleCompleteStep={this.handleCompleteStep}
-                       countryList={getCountriesData}
-                     />
-                   )
-                 }
-                 {
-                   this?.state?.currentStep === 2 && (
-                     <PageRenderer
-                       totalPage={pageData?.length}
-                       currentPageData={{
-                         fields: currentPageFields,
-                       }}
-                       pageIndex={this.state.currentPageIndex}
-                       nextPage={this.nextPage}
-                       previousPage={this.previousPage}
-                       listId={this.state.currentPageIndex}
-                       formPage={formPage}
-                       formBaseURI={formBaseURI}
-                       mode={mode}
-                       baseCurrency={baseCurrency}
-                       formData={this.state.formData[currentPageId] || {}}
-                       updateField={this.updateFieldByPageId(currentPageId)}
-                       handleCompleteStep={this.handleCompleteStep}
-                       countryList={getCountriesData}
-                     />
-                   )
-                 }
-                 {
-                   this?.state?.currentStep === 3 && (
-                     <PageReRendererStep3
-                       totalPage={pageData?.length}
-                       currentPageData={{
-                         fields: currentPageFields,
-                       }}
-                       pageIndex={this.state.currentPageIndex}
-                       nextPage={this.nextPage}
-                       previousPage={this.previousPage}
-                       listId={this.state.currentPageIndex}
-                       formPage={formPage}
-                       formBaseURI={formBaseURI}
-                       mode={mode}
-                       baseCurrency={baseCurrency}
-                       formData={this.state.formData || {}}
-                       updateField={this.updateFieldByPageId()}
-                       handleCompleteStep={this.handleCompleteStep}
-                       countryList={getCountriesData}
-                     />
-                   )
-                 }
-               </>
+                <>
+                  {this?.state?.currentStep === 1 && (
+                    <PageReRendererStep1
+                      totalPage={pageData?.length}
+                      currentPageData={{
+                        fields: currentPageFields,
+                      }}
+                      pageIndex={this.state.currentPageIndex}
+                      nextPage={this.nextPage}
+                      previousPage={this.previousPage}
+                      listId={this.state.currentPageIndex}
+                      formPage={formPage}
+                      formBaseURI={formBaseURI}
+                      mode={mode}
+                      baseCurrency={baseCurrency}
+                      formData={this.state.formData || {}}
+                      updateField={this.updateFieldByPageId()}
+                      handleCompleteStep={this.handleCompleteStep}
+                      countryList={getCountriesData}
+                    />
+                  )}
+                  {this?.state?.currentStep === 2 && (
+                    <PageRenderer
+                      totalPage={pageData?.length}
+                      currentPageData={{
+                        fields: currentPageFields,
+                      }}
+                      pageIndex={this.state.currentPageIndex}
+                      nextPage={this.nextPage}
+                      previousPage={this.previousPage}
+                      listId={this.state.currentPageIndex}
+                      formPage={formPage}
+                      formBaseURI={formBaseURI}
+                      mode={mode}
+                      baseCurrency={baseCurrency}
+                      formData={this.state.formData[currentPageId] || {}}
+                      updateField={this.updateFieldByPageId(currentPageId)}
+                      handleCompleteStep={this.handleCompleteStep}
+                      countryList={getCountriesData}
+                    />
+                  )}
+                  {this?.state?.currentStep === 3 && (
+                    <PageReRendererStep3
+                      totalPage={pageData?.length}
+                      currentPageData={{
+                        fields: currentPageFields,
+                      }}
+                      pageIndex={this.state.currentPageIndex}
+                      nextPage={this.nextPage}
+                      previousPage={this.previousPage}
+                      listId={this.state.currentPageIndex}
+                      formPage={formPage}
+                      formBaseURI={formBaseURI}
+                      mode={mode}
+                      baseCurrency={baseCurrency}
+                      formData={this.state.formData || {}}
+                      updateField={this.updateFieldByPageId()}
+                      handleCompleteStep={this.handleCompleteStep}
+                      countryList={getCountriesData}
+                    />
+                  )}
+                </>
               ) : (
                 <CategoryAndSubCtegorySelector
                   category={getCategoryData.getCategoryAdmin}
@@ -429,7 +436,6 @@ class BecomeHost extends React.Component {
               )}
             </>
           )}
-          {/*<PageReRendererStep3 />*/}
         </div>
       </div>
     );
