@@ -34,6 +34,12 @@ class EditFieldsManagement extends React.Component {
   static defaultProps = {
     data: [],
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      subId: {},
+    };
+  }
 
   renderFormControl = ({
     input,
@@ -73,7 +79,6 @@ class EditFieldsManagement extends React.Component {
       initialValues,
       id,
     } = this.props;
-    const { data } = this.props;
     const { formatMessage } = this.props.intl;
     return (
       <div
@@ -92,7 +97,7 @@ class EditFieldsManagement extends React.Component {
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={`/siteadmin/fields/${id}`}
+                to={`/siteadmin/fields/${initialValues?.subCategoryId}`}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,

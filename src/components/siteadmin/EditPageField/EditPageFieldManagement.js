@@ -102,7 +102,7 @@ class EditPageFieldManagement extends React.Component {
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={`/siteadmin/fieldSetting/${data.subCategoryId}`}
+                to={`/siteadmin/fieldSetting/${initialValues?.subCategoryId}`}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,
