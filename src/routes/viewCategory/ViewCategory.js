@@ -18,16 +18,11 @@ import getHomeBanner from "./getHomeBanner.graphql";
 class ViewCategory extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      bannerData: {},
-    };
   }
   static propTypes = {
     title: PropTypes.string.isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool,
-      getSubCategory: PropTypes.array,
-      getHomeBanner: PropTypes.array,
     }),
   };
 
@@ -36,38 +31,28 @@ class ViewCategory extends Component {
       loading: true,
     },
   };
-  componentDidUpdate(prevProps) {
-    // Typical usage (don't forget to compare props):
-    if (this.props.userID !== prevProps.userID) {
-      this.fetchData(this.props.userID);
-    }
-  }
   render() {
     const {
-      data: { getHomeBanner },
-      singleCategory,
-      title,
-      // query,
+      listing = []
     } = this.props;
 
     return (
       <>
         <div>
-          <CategoryBanner
-            singleCategory={singleCategory}
-            data={getHomeBanner}
-          />
+          {/*<CategoryBanner*/}
+          {/*  singleCategory={singleCategory}*/}
+          {/*  data={getHomeBanner}*/}
+          {/*/>*/}
 
           <CategoryProfile />
-          {/* <p>hello</p> */}
-          {/* <pre>{JSON.stringify(params)}</pre> */}
           <div className="container">
             <Filter />
             <hr />
             <Row>
               <Col md={6} sm={12}>
                 <h6 className={s.maptitle}>79 stays in map area</h6>
-                <SubCategory />
+                {/*<SubCategory />*/}
+                <pre>{JSON.stringify(listing, null, 4)}</pre>
               </Col>
               <Col md={6} sm={12}>
                 <div className={s.map}>

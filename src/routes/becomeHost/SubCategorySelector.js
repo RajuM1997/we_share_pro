@@ -226,6 +226,9 @@ class CategoryAndSubCtegorySelector extends Component {
                               });
                             }}
                           >
+                            <option value="" selected disabled>
+                              Please Select
+                            </option>
                             {personCapacity.map((value, key) => {
                               let rows = [];
                               for (
@@ -234,17 +237,12 @@ class CategoryAndSubCtegorySelector extends Component {
                                 i++
                               ) {
                                 rows.push(
-                                  <>
-                                    <option value="" selected disabled>
-                                      Please Select
-                                    </option>
-                                    <option value={i} key={key}>
-                                      for {i}{" "}
-                                      {i > 1
-                                        ? value.otherItemName
-                                        : value.itemName}
-                                    </option>
-                                  </>
+                                  <option value={i} key={key}>
+                                    for {i}{" "}
+                                    {i > 1
+                                      ? value.otherItemName
+                                      : value.itemName}
+                                  </option>
                                 );
                               }
                               return rows;
