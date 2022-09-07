@@ -45,8 +45,8 @@ class SubCategoryItem extends Component {
             return (
               <Row key={data.id}>
                 <a
-                  href={"/rooms/" + formatURL(data.title) + "-" + data?.id}
-                  // href={`/host_listing/${data?.id}`}
+                  // href={"/rooms/" + formatURL(data.title) + "-" + data?.id}
+                  href={`/host/listing/${data?.id}`}
                   target={"_blank"}
                 >
                   <div className={s.category_main}>
