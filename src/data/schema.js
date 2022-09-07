@@ -422,6 +422,7 @@ import removeFavIconLogo from "./mutations/SiteAdmin/Logo/removeFavIconLogo";
 
 import createHostListing from './mutations/HostListing/CreateHostListing';
 import getHostListingBySubCategory from './queries/HostListing/getHostListingBySubCategory';
+import getHostListingByCategory from './queries/HostListing/getHostListingByCategory';
 import getHostListingByUserId from './queries/HostListing/getHostListingByUserId';
 import getHostListingDetailsById from './queries/HostListing/getHostListingDetailsById';
 
@@ -591,6 +592,7 @@ const schema = new Schema({
       getHostListingBySubCategory,
       getHostListingDetailsById,
       getHostListingByUserId,
+      getHostListingByCategory,
     },
   }),
   mutation: new ObjectType({

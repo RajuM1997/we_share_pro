@@ -51,7 +51,7 @@ const HostListingType = new ObjectType({
     fields: {
         id: {type: IntType },
         userId: {type: StringType },
-        categoryId: { type: StringType },
+        categoryId: { type: IntType },
         subCategoryId: { type: IntType },
         personCapacity: { type: IntType },
         itemTitle: { type: StringType },

@@ -18,6 +18,7 @@ class CategoryAndSubCtegorySelector extends Component {
       }) || [];
     return (
       <div>
+        <pre>{JSON.stringify(category, null, 4)}</pre>
         {!selectedCategory && (
           <CategorySelector
             category={category}

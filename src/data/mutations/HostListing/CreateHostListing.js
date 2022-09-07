@@ -105,7 +105,7 @@ const createHostListing = {
 
     args: {
         userId: {type: StringType },
-        categoryId: { type: StringType },
+        categoryId: { type: IntType },
         subCategoryId: { type: IntType },
         personCapacity: { type: IntType },
         itemTitle: { type: StringType },

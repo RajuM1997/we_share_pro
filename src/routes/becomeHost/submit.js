@@ -12,7 +12,7 @@ const submit = async (values) => {
     const mutation = `
           mutation createHostListing(
             $userId: String,
-            $categoryId: String,
+            $categoryId: Int,
             $subCategoryId: Int,
             $personCapacity: Int,
             $itemTitle: String,
@@ -93,6 +93,7 @@ const submit = async (values) => {
           coverPhoto: JSON.stringify(values?.coverPhoto),
           basePrice: Number(values?.basePrice),
           subCategoryId: Number(values?.subCategoryId),
+          categoryId: Number(values?.categoryId),
           weeklyDiscount: Number(values?.weeklyDiscount),
           monthlyDiscount: Number(values?.monthlyDiscount),
           currency: values?.currency || "USD",

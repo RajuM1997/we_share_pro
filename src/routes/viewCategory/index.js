@@ -6,9 +6,9 @@ import ViewCategory from "./ViewCategory";
 const title = "View Category";
 
 export default async function action({ params }) {
-  const getHostListingBySubCategory = `
-    query getHostListingBySubCategory($subCategoryId: Int!) {
-      getHostListingBySubCategory(subCategoryId: $subCategoryId) {
+  const getHostListingByCategory = `
+    query getHostListingByCategory($categoryId: Int!) {
+      getHostListingByCategory(categoryId: $categoryId) {
         id,
         itemTitle,
         subCategoryId,
@@ -19,7 +19,7 @@ export default async function action({ params }) {
     }
   }
   `;
-  let subCategoryId = Number(params.id);
+  const categoryId = Number(params.id);
   const resp = await fetch("/graphql", {
     method: "post",
     headers: {
@@ -27,14 +27,13 @@ export default async function action({ params }) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      query: getHostListingBySubCategory,
-      variables: { subCategoryId },
+      query: getHostListingByCategory,
+      variables: { categoryId },
     }),
   });
 
   const {data} = await resp.json();
-  // console.log(params);
-  const listing = data?.getHostListingBySubCategory || [];
+  const listing = data?.getHostListingByCategory || [];
   return {
     title: title,
     component: (
