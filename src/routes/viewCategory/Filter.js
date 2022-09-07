@@ -39,7 +39,7 @@ class Filter extends Component {
             <button className={s.common_btn}>4K</button>
             <button className={s.common_btn}>Motor</button>
             <button className={s.common_btn}>
-              <i class="fa fa-filter" aria-hidden="true"></i> Filter
+              <i className="fa fa-filter" aria-hidden="true"></i> Filter
             </button>
           </div>
         </Col>

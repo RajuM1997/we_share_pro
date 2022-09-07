@@ -27,6 +27,7 @@ class SubCategory extends Component {
   render() {
     const {
       data: { loading },
+      listing,
     } = this.props;
 
     const {
@@ -34,7 +35,7 @@ class SubCategory extends Component {
     } = this.props;
     return (
       <>
-        <SubCategoryItem data={getSubCategory} />;
+        <SubCategoryItem data={getSubCategory} listing={listing} />;
       </>
     );
   }

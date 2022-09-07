@@ -16,12 +16,10 @@ class CategoryBanner extends Component {
   }
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
-    console.log("add event");
   }
 
   componentWillUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
-    console.log("remove event");
   }
   // componentDidUpdate(prevProps) {
   //   // Typical usage (don't forget to compare props):
@@ -31,11 +29,15 @@ class CategoryBanner extends Component {
   // }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.data && nextProps.singleCategory.getSingleCategory.category) {
-      nextProps.data.map((element) => {
+    console.log(nextProps);
+    if (
+      nextProps?.data &&
+      nextProps?.singleCategory?.getSingleCategory?.category
+    ) {
+      nextProps?.data.map((element) => {
         if (
-          nextProps.singleCategory.getSingleCategory.category ===
-          element.category
+          nextProps?.singleCategory.getSingleCategory.category ===
+          element?.category
         ) {
           this.setState({ bannerData: element });
         }
@@ -52,8 +54,8 @@ class CategoryBanner extends Component {
   };
   render() {
     const { data, singleCategory } = this.props;
-    console.log(data);
-    console.log(this.state.bannerData);
+    console.log("categoryDate", data);
+    // console.log(this.state.bannerData);
 
     let path = "/images/homeBanner/" + this.state.bannerData.image;
     const style = {
