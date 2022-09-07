@@ -33,44 +33,54 @@ class SubCategoryItem extends Component {
     data: [],
   };
   render() {
-    const { data } = this.props;
-    console.log(data);
+    const { data, listing } = this.props;
+    console.log(listing);
+    // console.log("hello", listing);
     return (
       <>
-        {data &&
-          data.map((data, key) => {
-            let path = "/images/subCategory/" + data.image;
+        {listing &&
+          listing.map((data, key) => {
+            console.log(data);
+            let photo = JSON.parse(data?.coverPhoto);
             return (
               <Row key={data.id}>
                 <a
-                  href={"/rooms/" + formatURL(data.title) + "-" + data.id}
+                  href={"/rooms/" + formatURL(data.title) + "-" + data?.id}
                   // href={`/host_listing/${data?.id}`}
                   target={"_blank"}
                 >
                   <div className={s.category_main}>
                     <Col md={4} sm={12} className={s.padding_e}>
                       <div className={s.category_img}>
-                        <img src={path} alt="" />
+                        {photo?.map(
+                          (item, i) =>
+                            i == 0 && (
+                              <img
+                                src={"/images/upload/x_medium_" + item.filename}
+                                alt=""
+                              />
+                            )
+                        )}
                       </div>
                     </Col>
                     <Col md={8} sm={12} className={s.padding_s}>
                       <div className={s.subtitle}>
-                        <h6>{data.address}</h6>
+                        <h6>{data?.address}</h6>
                         <span className={s.heart}>
                           <img src={heart} alt="heart" />
                         </span>
                       </div>
                       <div className={s.title}>
-                        <h3 className={s.margin_none}>{data.title}</h3>
+                        <h3 className={s.margin_none}>{data?.title}</h3>
                       </div>
                       <div className={s.subtitle}>
                         <h6 className="pb-0">
-                          {data.guests} guests {data.bedrooms} bedrooms{" "}
-                          {data.beds} beds {data.baths} baths
+                          {data?.guests} guests {data?.bedrooms} bedrooms{" "}
+                          {data?.beds} beds {data?.baths} baths
                         </h6>
                       </div>
                       <div className={s.subtitle}>
-                        <h6>{data.description}</h6>
+                        <h6>{data?.description}</h6>
                       </div>
                       <div className={s.mony_review}>
                         <div className={s.review}>

@@ -14,35 +14,35 @@ import { connect } from "react-redux";
 // import { useParams } from "react-router-dom";
 
 // import getCategory from "./getSingleCategory.graphql";
-import getHomeBanner from "./getHomeBanner.graphql";
+import getHomeBannerQuery from "./getHomeBanner.graphql";
 class ViewCategory extends Component {
   constructor(props) {
     super(props);
   }
   static propTypes = {
     title: PropTypes.string.isRequired,
-    data: PropTypes.shape({
+    getHomeBannerData: PropTypes.shape({
       loading: PropTypes.bool,
+      getHomeBannerData: PropTypes.array,
     }),
   };
 
   static defaultProps = {
-    data: {
+    getHomeBannerData: {
       loading: true,
     },
   };
   render() {
-    const {
-      listing = []
-    } = this.props;
+    const { listing = [], singleCategory, getHomeBannerData } = this.props;
+    console.log(getHomeBannerData);
 
     return (
       <>
         <div>
-          {/*<CategoryBanner*/}
-          {/*  singleCategory={singleCategory}*/}
-          {/*  data={getHomeBanner}*/}
-          {/*/>*/}
+          <CategoryBanner
+            singleCategory={singleCategory}
+            data={getHomeBannerData}
+          />
 
           <CategoryProfile />
           <div className="container">
@@ -51,7 +51,7 @@ class ViewCategory extends Component {
             <Row>
               <Col md={6} sm={12}>
                 <h6 className={s.maptitle}>79 stays in map area</h6>
-                {/*<SubCategory />*/}
+                <SubCategory listing={listing} />
                 <pre>{JSON.stringify(listing, null, 4)}</pre>
               </Col>
               <Col md={6} sm={12}>
@@ -78,10 +78,10 @@ class ViewCategory extends Component {
 const mapState = (state) => ({});
 export default compose(
   withStyles(s),
-  graphql(getHomeBanner, {
+  graphql(getHomeBannerQuery, {
+    name: "getHomeBannerData",
     options: {
-      fetchPolicy: "network-only",
-      ssr: false,
+      ssr: true,
     },
   })
 )(ViewCategory);
