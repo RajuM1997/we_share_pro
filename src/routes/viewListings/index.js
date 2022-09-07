@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../../components/Layout";
 import NotFound from "../notFound/NotFound";
 import ViewListings from "./ViewListings";
+import fetch from "../../core/fetch";
 
 const title = "View Listing";
 
@@ -18,12 +19,37 @@ function renderNotFound() {
 }
 
 export default async function action({ params, store, query }) {
-  console.log(params);
+  const getHostListingDetailsById = `
+    query getHostListingDetailsById($id: Int!) {
+      getHostListingDetailsById(id: $id) {
+        id,
+        itemTitle,
+        subCategoryId,
+        coverPhoto,
+        itemDescription,
+        basePrice,
+        currency
+    }
+  }
+  `;
+  const listingId = Number(params.listId);
+  const resp = await fetch("/graphql", {
+    method: "post",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: getHostListingDetailsById,
+      variables: { id: listingId },
+    }),
+  });
+  const {data} = await resp.json();
   return {
     title: title,
     component: (
       <Layout>
-        <ViewListings title={title} />
+        <ViewListings title={title} details={data?.getHostListingDetailsById || []}/>
       </Layout>
     ),
   };

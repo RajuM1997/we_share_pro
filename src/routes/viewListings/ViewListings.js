@@ -63,6 +63,7 @@ class ViewListings extends React.Component {
                   <Col xs={12} sm={12} md={8} lg={8}>
                     <Row>
                       <div className={s.stickyContainer}>
+                        <pre>{JSON.stringify(this.props, null, 4)}</pre>
                         <AutoAffix
                           viewportOffsetTop={0}
                           container={this}
