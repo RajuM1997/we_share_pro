@@ -7,16 +7,14 @@ import { HostListing } from "../../models";
 import HostListingType from "../../types/HostListingType";
 import {GraphQLInt as IntType} from "graphql/type/scalars";
 
-const getHostListingBySubCategory = {
-    type: new List(HostListingType),
+const getHostListingDetailsById = {
+    type: HostListingType,
     args: {
-        subCategoryId: { type: IntType},
+        id: { type: IntType},
     },
-    async resolve({ request }, { subCategoryId }) {
-        return await HostListing.findAll({
-            where: {subCategoryId},
-        });
+    async resolve({ request }, { id }) {
+        return await HostListing.findById(id);
     },
 };
-export default getHostListingBySubCategory;
+export default getHostListingDetailsById;
 

@@ -313,9 +313,11 @@ class BecomeHost extends React.Component {
 
   async handleCompleteHostListing() {
     let currentUser = this.props.account.userId;
+    const category = this.props?.getCategoryData?.getCategoryAdmin?.find(ele => ele.category === this.state.selectedCategory);
+    console.log("categoryId", category);
     const data = await submit({
       userId: currentUser,
-      categoryId: this.state.selectedCategory,
+      categoryId: category?.id,
       subCategoryId: this.state.selectedSubCategory,
       personCapacity: this.state.personCapacity,
       ...this.state.formData,

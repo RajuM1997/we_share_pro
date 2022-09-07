@@ -14,7 +14,7 @@ const HostListing = Model.define("HostListing", {
         allowNull: false,
     },
     categoryId: {
-        type: DataType.STRING,
+        type: DataType.INTEGER,
         allowNull: false,
     },
     subCategoryId: {
