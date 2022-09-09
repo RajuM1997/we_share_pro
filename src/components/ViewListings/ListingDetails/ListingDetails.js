@@ -44,6 +44,7 @@ class ListingDetails extends React.Component {
   render() {
     const { open } = this.state;
     const { formatMessage } = this.props.intl;
+    const { details } = this.props;
     return (
       <Row className={cx(s.pageContent)}>
         <div className={cx(s.horizontalLineThrough)}>
@@ -55,15 +56,15 @@ class ListingDetails extends React.Component {
             <p className={cx(s.listingFontSize)}>
               <span className={cx(s.subText, s.lineBreak)}>
                 {" "}
-                firstArray ...
+                {details?.itemDescription.slice(0, 150)}
               </span>
-              <span className={cx(s.subText, s.lineBreak)}> firstArray</span>)
+              {/* <span className={cx(s.subText, s.lineBreak)}> firstArray</span>) */}
               <span>
                 <Collapse in={open}>
                   <div>
                     {" "}
                     <span className={cx(s.subText, s.lineBreak)}>
-                      firstArray restArray
+                      {details?.itemDescription.slice(150, 2000)}
                     </span>
                   </div>
                 </Collapse>

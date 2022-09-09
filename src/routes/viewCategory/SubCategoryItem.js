@@ -40,13 +40,12 @@ class SubCategoryItem extends Component {
       <>
         {listing &&
           listing.map((data, key) => {
-            console.log(data);
             let photo = JSON.parse(data?.coverPhoto);
             return (
               <Row key={data.id}>
                 <a
-                  // href={"/rooms/" + formatURL(data.title) + "-" + data?.id}
-                  href={`/host/listing/${data?.id}`}
+                  href={"/rooms/" + formatURL(data.title) + "-" + data?.id}
+                  // href={`/host/listing/${data?.id}`}
                   target={"_blank"}
                 >
                   <div className={s.category_main}>
@@ -65,13 +64,13 @@ class SubCategoryItem extends Component {
                     </Col>
                     <Col md={8} sm={12} className={s.padding_s}>
                       <div className={s.subtitle}>
-                        <h6>{data?.address}</h6>
+                        <h6>{data?.fullAddress}</h6>
                         <span className={s.heart}>
-                          <img src={heart} alt="heart" />
+                          {/* <img src={heart} alt="heart" /> */}
                         </span>
                       </div>
                       <div className={s.title}>
-                        <h3 className={s.margin_none}>{data?.title}</h3>
+                        <h3 className={s.margin_none}>{data?.itemTitle}</h3>
                       </div>
                       <div className={s.subtitle}>
                         <h6 className="pb-0">
@@ -84,7 +83,7 @@ class SubCategoryItem extends Component {
                       </div>
                       <div className={s.mony_review}>
                         <div className={s.review}>
-                          <p>
+                          {/* <p>
                             <span className={s.category_star}>
                               <img src={reviewStar} alt="reviewStar" />
                             </span>
@@ -93,12 +92,12 @@ class SubCategoryItem extends Component {
                               {" "}
                               (16 reviews)
                             </span>
-                          </p>
+                          </p> */}
                         </div>
                         <div className={s.review}>
                           <p>
                             <span className={s.category_price}>
-                              1,121 / night
+                              {data?.basePrice} / night
                             </span>
                             <br />
                             <span className={s.totalPrice}>10,088 total</span>

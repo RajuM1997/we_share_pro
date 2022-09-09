@@ -262,13 +262,13 @@ class PageReRendererStep1 extends Component {
                               updateField("country", e.target.value);
                             }}
                           >
+                            <option value="" selected disabled>
+                              Please Select
+                            </option>
                             {countryList.getCountries?.map((item) => {
                               console.log("country", item);
                               return (
                                 <>
-                                  <option value="" selected disabled>
-                                    Please Select
-                                  </option>
                                   <option
                                     value={item.countryCode}
                                     key={item.id}

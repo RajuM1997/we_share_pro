@@ -56,6 +56,7 @@ class DayDragCalendar extends Component {
     this.resetCalendar = this.resetCalendar.bind(this);
     this.renderDay = this.renderDay.bind(this);
     this.resetDatePickerChange = this.resetDatePickerChange.bind(this);
+    this.handleHello = this.handleHello.bind(this);
   }
 
   componentWillMount() {
@@ -182,6 +183,10 @@ class DayDragCalendar extends Component {
     change("ListPlaceStep3", "endDate", endDate);
   }
 
+  handleHello() {
+    console.log("hello");
+    alert("heeeeeellllllo");
+  }
   resetCalendar() {
     const { change } = this.props;
     // this.setState({ dateRange: [], from: null, to: null, startDate: null, endDate: null });
@@ -203,12 +208,14 @@ class DayDragCalendar extends Component {
 
   render() {
     const { selectedDays, from, to, dateRange } = this.state;
+    // console.log(dateRange);
     const {
       disabledDates,
       formName,
       listId,
       availableDates,
       todayLabel,
+      handleCalender,
     } = this.props;
     const { availableDatesPrices } = this.props;
     const { sources } = this.state;
@@ -246,6 +253,7 @@ class DayDragCalendar extends Component {
       <Row>
         <Col lg={8} md={10} sm={10} xs={12} className={"saveCalender"}>
           <DayPicker
+            onClick={handleCalender(selectedDays, from, to, dateRange)}
             selectedDays={[this.isDaySelected, from, { from, to }]}
             onDayClick={this.handleDayClick}
             modifiers={modifiers}

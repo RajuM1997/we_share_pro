@@ -52,11 +52,14 @@ var durationFn = function(deltaTop) {
 };
 class ViewListings extends React.Component {
   render() {
+    const { details } = this.props;
+    console.log(details);
+    let photos = JSON.parse(details.coverPhoto);
     return (
       <div className={s.root}>
         <div className={s.container}>
           <div className={s.pageContainer}>
-            <Photos />
+            <Photos listPhotos={photos} />
             <Element name="test1" className="element">
               <Grid fluid className={cx(s.horizontalLineThrough)}>
                 <Row className={cx(s.pageContent)}>
@@ -159,7 +162,7 @@ class ViewListings extends React.Component {
                               s.listingIntroSection
                             )}
                           >
-                            <ListingIntro />
+                            <ListingIntro details={details} />
                           </Col>
                         </Row>
                       </Grid>
@@ -167,7 +170,7 @@ class ViewListings extends React.Component {
                         fluid
                         className={cx(s.horizontalLineThrough, s.noBorder)}
                       >
-                        <ListingDetails />
+                        <ListingDetails details={details} />
                       </Grid>
                       <Grid fluid className={"availabilityMobile"}>
                         <AvailabilityCalendar />

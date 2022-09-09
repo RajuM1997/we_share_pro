@@ -43,7 +43,8 @@ class Photos extends React.Component {
   }
 
   componentDidMount() {
-    const { data, setStickyTop } = this.props;
+    const { listPhotos, setStickyTop } = this.props;
+    console.log("didM", listPhotos);
     //let listPhotos = data.listPhotos;
     let sources = [];
     let sourceObject = {};
@@ -52,29 +53,29 @@ class Photos extends React.Component {
       stickyHeight = 412;
 
     //if (listPhotos != null && listPhotos.length > 0) {
-    if (data?.listPhotos != null && data?.listPhotos.length > 0) {
-      coverPhoto = data?.listPhotos[0]?.name;
+    if (listPhotos != null && listPhotos.length > 0) {
+      coverPhoto = listPhotos[0]?.filename;
 
-      if (data?.coverPhoto != undefined && data?.coverPhoto != null) {
-        data?.listPhotos?.map((item, key) => {
-          if (item?.id === data?.coverPhoto) {
-            sourceObject = {};
-            sourceObject["src"] = "/images/upload/x_large_" + item.name;
-            sources.push(sourceObject);
-          }
+      if (coverPhoto != undefined && coverPhoto != null) {
+        listPhotos?.map((item, key) => {
+          // if (item?.id === coverPhoto) {
+          sourceObject = {};
+          sourceObject["src"] = "/images/upload/x_medium_" + item.filename;
+          sources.push(sourceObject);
+          // }
         });
 
-        data?.listPhotos.map((item, key) => {
-          if (item?.id != data?.coverPhoto) {
-            sourceObject = {};
-            sourceObject["src"] = "/images/upload/x_large_" + item.name;
-            sources.push(sourceObject);
-          }
+        listPhotos.map((item, key) => {
+          // if (item?.id != coverPhoto) {
+          sourceObject = {};
+          sourceObject["src"] = "/images/upload/x_medium_" + item.filename;
+          sources.push(sourceObject);
+          // }
         });
       } else {
-        data?.listPhotos.map((item, key) => {
+        listPhotos.map((item, key) => {
           sourceObject = {};
-          sourceObject["src"] = "/images/upload/x_large_" + item.name;
+          sourceObject["src"] = "/images/upload/x_medium_" + item.filename;
           sources.push(sourceObject);
         });
       }
@@ -85,7 +86,8 @@ class Photos extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { data } = nextProps;
+    const { data, listPhotos } = nextProps;
+    // console.log("listP", nextProps);
     //let listPhotos = data.listPhotos;
     let sources = [];
     let sourceObject = {};
@@ -95,30 +97,30 @@ class Photos extends React.Component {
       stickyHeight = 412;
 
     // if (listPhotos != null && listPhotos.length > 0) {
-    if (data?.listPhotos != null && data?.listPhotos.length > 0) {
-      coverPhoto = data?.listPhotos[0]?.name;
+    if (listPhotos != null && listPhotos.length > 0) {
+      coverPhoto = listPhotos[0]?.filename;
 
-      if (data?.coverPhoto != undefined && data?.coverPhoto != null) {
-        data?.listPhotos.map((item, key) => {
-          if (item?.id === data?.coverPhoto) {
+      if (coverPhoto != undefined && coverPhoto != null) {
+        listPhotos.map((item, key) => {
+          if (item?.id === coverPhoto) {
             sourceObject = {};
-            sourceObject["src"] = "/images/upload/x_large_" + item.name;
+            sourceObject["src"] = "/images/upload/x_medium_" + item.filename;
             sources.push(sourceObject);
           }
         });
 
-        data?.listPhotos.map((item, key) => {
-          if (item.id != data?.coverPhoto) {
+        listPhotos.map((item, key) => {
+          if (item.id != coverPhoto) {
             sourceObject = {};
-            sourceObject["src"] = "/images/upload/x_large_" + item.name;
+            sourceObject["src"] = "/images/upload/x_medium_" + item.filename;
             sources.push(sourceObject);
           }
         });
       } else {
-        data?.listPhotos.map((item, key) => {
+        listPhotos.map((item, key) => {
           sourceObject = {};
-          sourceObject["src"] = "/images/upload/x_large_" + item.name;
-          sourceObject["src"] = "/images/upload/x_large_" + item.name;
+          sourceObject["src"] = "/images/upload/x_medium_" + item.filename;
+          sourceObject["src"] = "/images/upload/x_medium_" + item.filename;
           sources.push(sourceObject);
         });
       }
@@ -136,7 +138,9 @@ class Photos extends React.Component {
 
   render() {
     const { sources } = this.state;
+    // console.log("image url", sources);
     const {
+      listPhotos,
       data,
       openImageLightBox,
       closeImageLightBox,
@@ -145,10 +149,11 @@ class Photos extends React.Component {
       loading,
     } = this.props;
 
-    let coverPhoto = data?.coverPhoto;
-    let listPhotos = data?.listPhotos;
+    // let coverPhoto = coverPhoto;
+    let listPhoto = listPhotos;
     let wishListStatus = data?.wishListStatus;
     let isListOwner = data?.isListOwner;
+    // console.log(coverPhoto);
 
     return (
       <div className={s.bannerContainer} data-sticky-top>
@@ -165,27 +170,27 @@ class Photos extends React.Component {
           sources={sources}
         />
 
-        {listPhotos && listPhotos?.length == 0 && (
+        {listPhoto && listPhoto?.length == 0 && (
           <ListDefaultPhoto
             className={s.bannerImage}
-            coverPhoto={coverPhoto}
-            listPhotos={listPhotos}
-            photoType={"xx_large"}
+            // coverPhoto={coverPhoto}
+            listPhoto={listPhoto}
+            photoType={"x_medium_"}
             bgImage
             openImageLightBox={openImageLightBox}
           ></ListDefaultPhoto>
         )}
 
-        {listPhotos && listPhotos?.length > 0 && listPhotos?.length <= 3 && (
+        {listPhoto && listPhoto?.length > 0 && listPhoto?.length <= 3 && (
           <ListCoverPhoto
             className={s.bannerImage}
-            coverPhoto={coverPhoto}
-            listPhotos={listPhotos}
-            photoType={"xx_large"}
+            // coverPhoto={coverPhoto}
+            listPhoto={listPhoto}
+            photoType={"x_medium_"}
             bgImage
             openImageLightBox={openImageLightBox}
           >
-            {listPhotos && listPhotos?.length > 0 && (
+            {listPhoto && listPhoto?.length > 0 && (
               <Button
                 className={cx(s.btn, s.viewPhotosBtn, "viewPhotosBtnRtl")}
                 onClick={openImageLightBox}
@@ -199,9 +204,9 @@ class Photos extends React.Component {
         {sources && sources.length > 0 && sources.length > 3 && (
           <ListGridCoverPhoto
             className={s.bannerImage}
-            coverPhoto={coverPhoto}
-            listPhotos={sources}
-            photoType={"xx_large"}
+            // coverPhoto={coverPhoto}
+            listPhoto={sources}
+            photoType={"x_medium_"}
             bgImage
             openImageLightBox={openImageLightBox}
           ></ListGridCoverPhoto>

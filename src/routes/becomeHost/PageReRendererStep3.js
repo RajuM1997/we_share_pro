@@ -32,7 +32,7 @@ import ListPlaceTips from "../../components/ListPlaceTips/ListPlaceTips";
 import Calendar from "../../components/ListsPlaceStep1/Calendar";
 import PhotosUpload from "../../components/PhotosUpload/PhotosUpload";
 import * as FontAwesome from "react-icons/lib/fa";
-import DayDragCalendar from "../../components/DayDragCalendar/DayDragCalendar";
+import HostCalendar from "./HostCalendar";
 
 class PageReRendererStep3 extends Component {
   static propTypes = {
@@ -58,6 +58,7 @@ class PageReRendererStep3 extends Component {
     };
     this.continuePage = this.continuePage.bind(this);
     this.prePage = this.prePage.bind(this);
+    this.handleCalender = this.handleCalender.bind(this);
   }
 
   componentWillMount() {
@@ -131,6 +132,9 @@ class PageReRendererStep3 extends Component {
     }));
   }
 
+  handleCalender(selectedDays, from, to, dateRange) {
+    console.log("hello", selectedDays, from, to, dateRange);
+  }
   render() {
     // console.log(this.state.selectedCategory);
     const {
@@ -218,97 +222,6 @@ class PageReRendererStep3 extends Component {
                         </>
                       </Row>
                     </FormGroup>
-                  )}
-                  {fieldType === "calendar" && (
-                    <Row
-                      className={cx(s.landingContainer, s.fullWidthCalendar)}
-                    >
-                      <Col
-                        xs={12}
-                        sm={12}
-                        md={12}
-                        lg={12}
-                        className={s.landingContent}
-                      >
-                        <div>
-                          <h3 className={s.landingContentTitle}>
-                            <FormattedMessage {...messages.calendar} />
-                          </h3>
-                          <div className={s.lableWeight}>
-                            <p className={cx(s.bookedWidth)}>
-                              <span
-                                className={cx(
-                                  s.notAvailableColor,
-                                  "availableRTl"
-                                )}
-                              ></span>
-                              <FormattedMessage {...messages.booked} />
-                            </p>
-                            <p className={s.calenderColorText}>
-                              <span
-                                className={cx(s.bookedColor, "availableRTl")}
-                              ></span>
-                              <FormattedMessage {...messages.notAvailable} />
-                            </p>
-                            <p className={s.calenderColorText}>
-                              <span
-                                className={cx(s.availableColor, "availableRTl")}
-                              ></span>
-                              <FormattedMessage {...messages.availableLabel} />
-                            </p>
-                            <p className={s.calenderColorText}>
-                              <span
-                                className={cx(s.specialColor, "availableRTl")}
-                              ></span>
-                              <FormattedMessage {...messages.sessionPrice} />
-                            </p>
-                          </div>
-                          <h3 className={s.landingStep3}>
-                            <FormattedMessage {...messages.unBlockInfo} />
-                          </h3>
-                          <form>
-                            <div className={s.landingMainContent}>
-                              <FormGroup
-                                className={cx(s.formGroup, s.posRelative)}
-                              >
-                                <DayDragCalendar
-                                // formName={"ListPlaceStep3"}
-                                // disabledDates={disabledDates}
-                                // blockedDates={blockedDates}
-                                // listId={listId}
-                                // availableDates={availableDates}
-                                // availableDatesPrices={availableDatesPrices}
-                                // sources={sources}
-                                // minNight={minNight}
-                                // maxNight={maxNight}
-                                // houseRules={houseRules}
-                                // checkInEnd={checkInEnd}
-                                // checkInStart={checkInStart}
-                                // cancellationPolicy={cancellationPolicy}
-                                // maxDaysNotice={maxDaysNotice}
-                                // bookingNoticeTime={bookingNoticeTime}
-                                // baseCurrency={baseCurrency}
-                                // currency={currency}
-                                // isAdminCurrency={isAdminCurrency}
-                                // basePrice={basePrice}
-                                // cleaningPrice={cleaningPrice}
-                                // transitionDuration={0}
-                                // todayLabel={formatMessage(
-                                //   messages.todayLabel
-                                // )}
-                                />
-                              </FormGroup>
-                            </div>
-                            <div
-                              className={cx(
-                                s.nextPosition,
-                                s.nextPositionCalendar
-                              )}
-                            ></div>
-                          </form>
-                        </div>
-                      </Col>
-                    </Row>
                   )}
                   {fieldType === "reviewGuestBook" && (
                     <FormGroup className={s.formGroup}>
@@ -408,13 +321,13 @@ class PageReRendererStep3 extends Component {
                                 );
                               }}
                             >
+                              <option value="" selected disabled>
+                                Please Select
+                              </option>
                               {bookingNoticeTime.map((value, key) => {
                                 return (
                                   value.isEnable == 1 && (
                                     <>
-                                      <option value="" selected disabled>
-                                        Please Select
-                                      </option>
                                       <option value={value.id} key={key}>
                                         {value.itemName}
                                       </option>
@@ -446,6 +359,9 @@ class PageReRendererStep3 extends Component {
                                 );
                               }}
                             >
+                              <option value="" selected disabled>
+                                Please Select
+                              </option>
                               {sideMenuData?.map((ele) => (
                                 <option value={ele.title} key={ele.title}>
                                   {ele.title}
@@ -468,6 +384,9 @@ class PageReRendererStep3 extends Component {
                                 );
                               }}
                             >
+                              <option value="" selected disabled>
+                                Please Select
+                              </option>
                               {sideMenuData?.map((ele) => (
                                 <option value={ele.title} key={ele.title}>
                                   {ele.title}
@@ -694,13 +613,13 @@ class PageReRendererStep3 extends Component {
                                 updateField("currency", event.target.value);
                               }}
                             >
+                              <option value="" selected disabled>
+                                Please Select
+                              </option>
                               {availableCurrencies.map((currency, key) => {
                                 if (currency.isEnable === true) {
                                   return (
                                     <>
-                                      <option value="" selected disabled>
-                                        Please Select
-                                      </option>
                                       <option key={key} value={currency.symbol}>
                                         {currency.symbol}
                                       </option>
@@ -953,53 +872,95 @@ class PageReRendererStep3 extends Component {
                       </Row>
                     </FormGroup>
                   )}
-                  <FormGroup className={s.formGroup}>
-                    <Col
-                      xs={12}
-                      sm={12}
-                      md={12}
-                      lg={12}
-                      className={s.noPadding}
-                    >
-                      <Button
-                        className={cx(
-                          s.button,
-                          bt.btnPrimaryBorder,
-                          bt.btnLarge,
-                          s.pullLeft,
-                          "floatRight"
-                        )}
-                        disabled={pageIndex === 0}
-                        onClick={previousPage}
+                  {fieldType !== "calendar" && (
+                    <FormGroup className={s.formGroup}>
+                      <Col
+                        xs={12}
+                        sm={12}
+                        md={12}
+                        lg={12}
+                        className={s.noPadding}
                       >
-                        <FormattedMessage {...messages.back} />
-                      </Button>
-                      <Button
-                        className={cx(
-                          s.button,
-                          bt.btnPrimary,
-                          bt.btnLarge,
-                          s.pullRight,
-                          "floatLeft"
-                        )}
-                        onClick={() => {
-                          if (totalPage - 1 === pageIndex) {
-                            handleCompleteStep();
-                          } else {
-                            nextPage();
-                          }
-                        }}
-                      >
-                        <FormattedMessage {...messages.next} />
-                      </Button>
-                    </Col>
-                  </FormGroup>
+                        <Button
+                          className={cx(
+                            s.button,
+                            bt.btnPrimaryBorder,
+                            bt.btnLarge,
+                            s.pullLeft,
+                            "floatRight"
+                          )}
+                          disabled={pageIndex === 0}
+                          onClick={previousPage}
+                        >
+                          <FormattedMessage {...messages.back} />
+                        </Button>
+                        <Button
+                          className={cx(
+                            s.button,
+                            bt.btnPrimary,
+                            bt.btnLarge,
+                            s.pullRight,
+                            "floatLeft"
+                          )}
+                          onClick={() => {
+                            if (totalPage - 1 === pageIndex) {
+                              handleCompleteStep();
+                            } else {
+                              nextPage();
+                            }
+                          }}
+                        >
+                          <FormattedMessage {...messages.next} />
+                        </Button>
+                      </Col>
+                    </FormGroup>
+                  )}
                 </div>
               </form>
             </div>
           </Col>
-          <ListPlaceTips />
+          {fieldType !== "calendar" && <ListPlaceTips />}
         </Row>
+        {fieldType === "calendar" && (
+          <>
+            <HostCalendar handleCalender={this.handleCalender} />
+            <FormGroup className={s.formGroup}>
+              <Col xs={12} sm={12} md={12} lg={12} className={s.noPadding}>
+                <Button
+                  className={cx(
+                    s.button,
+                    bt.btnPrimaryBorder,
+                    bt.btnLarge,
+                    s.pullLeft,
+                    "floatRight"
+                  )}
+                  disabled={pageIndex === 0}
+                  onClick={previousPage}
+                >
+                  <FormattedMessage {...messages.back} />
+                </Button>
+                <Button
+                  className={cx(
+                    s.button,
+                    bt.btnPrimary,
+                    bt.btnLarge,
+                    s.pullRight,
+                    "floatLeft"
+                  )}
+                  onClick={() => {
+                    if (totalPage - 1 === pageIndex) {
+                      handleCompleteStep();
+                    } else {
+                      nextPage();
+                    }
+                  }}
+                >
+                  <FormattedMessage {...messages.next} />
+                </Button>
+              </Col>
+            </FormGroup>
+          </>
+        )}
       </Grid>
     );
   }

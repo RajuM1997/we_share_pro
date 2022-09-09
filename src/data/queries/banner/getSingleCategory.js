@@ -1,19 +1,18 @@
 // GrpahQL
-import { GraphQLInt as IntType, GraphQLNonNull as NonNull } from "graphql";
+import { GraphQLInt as IntType, GraphQLList as List } from "graphql";
 
-import SingleCategoryType from "../../types/SingleCategoryType";
+import SingleCateogryTypes from "../../types/SingleCateogryTypes";
 import { SingleCategory } from "../../models";
 
 const getSingleCategory = {
-  type: SingleCategoryType,
-
+  type: new List(SingleCateogryTypes),
   args: {
-    id: { type: new NonNull(IntType) },
+    id: { type: IntType },
   },
 
   async resolve({ request }, { id }) {
-    return await SingleCategory.findOne({
-      where: { id: id },
+    return await SingleCategory.findAll({
+      where: { id },
     });
   },
 };

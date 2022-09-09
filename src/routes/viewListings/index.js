@@ -23,12 +23,33 @@ export default async function action({ params, store, query }) {
     query getHostListingDetailsById($id: Int!) {
       getHostListingDetailsById(id: $id) {
         id,
-        itemTitle,
+        userId,
+        categoryId,
         subCategoryId,
-        coverPhoto,
+        personCapacity,
+        itemTitle,
         itemDescription,
+        fullAddress,
+        buildingName,
+        country,
+        street,
+        zipcode,
+        lat,
+        lng,
+        serviceUnit,
+        bookingNoticeTime,
+        bookingNoticeCheckInStart,
+        bookingNoticeCheckInEnd,
+        maxDaysNotice,
+        cancellationPolicy,
+        minUnit,
         basePrice,
-        currency
+        currency,
+        coverPhoto,
+        weeklyDiscount,
+        monthlyDiscount,
+        bookingType,
+        dynamicFields,
     }
   }
   `;
@@ -44,12 +65,15 @@ export default async function action({ params, store, query }) {
       variables: { id: listingId },
     }),
   });
-  const {data} = await resp.json();
+  const { data } = await resp.json();
   return {
     title: title,
     component: (
       <Layout>
-        <ViewListings title={title} details={data?.getHostListingDetailsById || []}/>
+        <ViewListings
+          title={title}
+          details={data?.getHostListingDetailsById || []}
+        />
       </Layout>
     ),
   };

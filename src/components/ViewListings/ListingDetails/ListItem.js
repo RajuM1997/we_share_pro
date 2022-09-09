@@ -36,7 +36,7 @@ class ListItem extends React.Component {
       <div className={cx(s.horizontalLineThrough)}>
         <Row>
           <Col xs={12} sm={12} md={12} lg={12} className={cx(s.space1)}>
-            <p className={cx(s.textMutedNew)}> List </p>
+            <p className={cx(s.textMutedNew)}> Shared Spaces </p>
           </Col>
           <Col xs={12} sm={12} md={12} lg={12} className={cx(s.spaceTop1)}>
             <Row>

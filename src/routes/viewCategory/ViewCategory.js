@@ -11,9 +11,6 @@ import s from "./ViewCategorys.css";
 import Filter from "./Filter";
 import { graphql, gql, compose } from "react-apollo";
 import { connect } from "react-redux";
-// import { useParams } from "react-router-dom";
-
-// import getCategory from "./getSingleCategory.graphql";
 import getHomeBannerQuery from "./getHomeBanner.graphql";
 class ViewCategory extends Component {
   constructor(props) {
@@ -33,8 +30,8 @@ class ViewCategory extends Component {
     },
   };
   render() {
-    const { listing = [], singleCategory, getHomeBannerData } = this.props;
-    console.log(getHomeBannerData);
+    const { listing = [], singleCategory, getHomeBannerData, id } = this.props;
+    console.log(listing);
 
     return (
       <>
@@ -52,7 +49,6 @@ class ViewCategory extends Component {
               <Col md={6} sm={12}>
                 <h6 className={s.maptitle}>79 stays in map area</h6>
                 <SubCategory listing={listing} />
-                <pre>{JSON.stringify(listing, null, 4)}</pre>
               </Col>
               <Col md={6} sm={12}>
                 <div className={s.map}>
