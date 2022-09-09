@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import fetch from "../../core/fetch";
-import SingleCategory from "./SingleCategory";
 import ViewCategory from "./ViewCategory";
 
 const title = "View Category";
@@ -42,6 +41,8 @@ export default async function action({ params }) {
   }
   `;
 
+  const id = Number(params.id);
+
   const getSingleCategory = `
     query getSingleCategory($id: Int!) {
      getSingleCategory(id: $id) {
@@ -61,13 +62,13 @@ export default async function action({ params }) {
     }),
   });
 
-  const { datas } = await res.json();
-  const singleCategoryData = datas?.getSingleCategory || [];
+  const { data: singleCategory } = await res.json();
+  const singleCategoryData = singleCategory?.getSingleCategory || [];
   console.log("single category", singleCategoryData);
   // console.log(data);
 
   const categoryId = Number(params.id);
-  const id = Number(params.id);
+
   console.log(id);
   const resp = await fetch("/graphql", {
     method: "post",
