@@ -3033,7 +3033,7 @@ const messages = defineMessages({
   },
   calendar: {
     id: "app.calendar",
-    defaultMessage: "Update your calendar",
+    defaultMessage: "Update your availability on calendar",
     description: "calendar title",
   },
   pricing: {

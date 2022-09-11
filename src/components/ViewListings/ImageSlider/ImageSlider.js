@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import Lightbox from "react-images";
-import { injectIntl } from "react-intl";
-import { isRTL } from "../../../helpers/formatLocale";
-import { openExactImageLightBox } from "../../../actions/ImageLightBox";
+import Lightbox from 'react-images';
+import { injectIntl } from 'react-intl';
+import { isRTL } from '../../../helpers/formatLocale';
+import { openExactImageLightBox} from '../../../actions/ImageLightBox';
 
 class ImageSlider extends Component {
+
   static propTypes = {};
 
   constructor(props) {
@@ -15,7 +15,7 @@ class ImageSlider extends Component {
     this.state = {
       lightboxIsOpen: false,
       currentImage: 0,
-      sources: [],
+      sources: []
     };
     this.closeLightbox = this.closeLightbox.bind(this);
     this.gotoNext = this.gotoNext.bind(this);
@@ -28,7 +28,7 @@ class ImageSlider extends Component {
     if (imageLightBox != undefined) {
       this.setState({ lightboxIsOpen: imageLightBox });
     }
-    if (currentIndex >= 0) {
+    if(currentIndex >= 0){
       this.setState({
         currentImage: currentIndex,
       });
@@ -36,6 +36,7 @@ class ImageSlider extends Component {
     if (sources != undefined) {
       this.setState({ sources });
     }
+
   }
 
   openLightbox(index, event) {
@@ -74,35 +75,35 @@ class ImageSlider extends Component {
   }
   render() {
     const { lightboxIsOpen, currentImage, sources } = this.state;
-    console.log("lightbox", sources);
     const { locale } = this.props.intl;
     return (
-      <div>
-        <Lightbox
-          images={sources}
-          isOpen={lightboxIsOpen}
-          currentImage={currentImage}
-          onClickPrev={this.gotoPrevious}
-          onClickNext={this.gotoNext}
-          onClose={this.closeLightbox}
-          onClickThumbnail={this.gotoImage}
-          showThumbnails={true}
-          showImageCount={true}
-          showCloseButton={true}
-          enableKeyboardInput={true}
-          // showImageCount={!isRTL(locale)}
-        />
-      </div>
+        <div>
+          <Lightbox
+              images={sources}
+              isOpen={lightboxIsOpen}
+              currentImage={currentImage}
+              onClickPrev={this.gotoPrevious}
+              onClickNext={this.gotoNext}
+              onClose={this.closeLightbox}
+              onClickThumbnail={this.gotoImage}
+              showThumbnails={true}
+              showCloseButton={true}
+              enableKeyboardInput={true}
+              showImageCount={!isRTL(locale)}
+          />
+        </div>
     );
   }
+
 }
 
 const mapState = (state) => ({
-  currentIndex: state.viewListing.currentIndex,
+  currentIndex: state.viewListing.currentIndex
 });
 
 const mapDispatch = {
-  openExactImageLightBox,
+  openExactImageLightBox
 };
+
 
 export default injectIntl(connect(mapState, mapDispatch)(ImageSlider));

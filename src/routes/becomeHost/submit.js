@@ -104,13 +104,16 @@ const submit = async (values) => {
       }),
       credentials: "include",
     });
-
-    const { data } = await resp.json();
-    console.log(data);
-    if (data?.createHostListing.status === "success") {
-      toastr.success("Listing", "Successfully Added!");
-      // history.push("/siteadmin/category");
-    } else {
+    try {
+      const { data } = await resp.json();
+      console.log(data);
+      if (data?.createHostListing?.status === "200") {
+        toastr.success("Listing", "Successfully Added!");
+        // history.push("/siteadmin/category");
+      } else {
+        toastr.error("Listing", "Failed to Added");
+      }
+    } catch (e) {
       toastr.error("Listing", "Failed to Added");
     }
   }

@@ -88,7 +88,7 @@ class BecomeHost extends React.Component {
       steps: {},
       pageData: {},
       currentPageIndex: 0,
-      currentStep: 1,
+      currentStep: 3,
       personCapacity: 0,
       formData: {},
       selectedCategory: "",
@@ -430,7 +430,6 @@ class BecomeHost extends React.Component {
                       pageIndex={this.state.currentPageIndex}
                       nextPage={this.nextPage}
                       previousPage={this.previousPage}
-                      listId={this.state.currentPageIndex}
                       formPage={formPage}
                       formBaseURI={formBaseURI}
                       mode={mode}
@@ -453,7 +452,6 @@ class BecomeHost extends React.Component {
                   selectedSubCategory={this.state.selectedSubCategory}
                 />
               )}
-              {/* <PageReRendererStep3 /> */}
             </>
           )}
         </div>

@@ -1,45 +1,38 @@
 // General
 import React from "react";
-import PropTypes from "prop-types";
-import { graphql, compose } from "react-apollo";
-import { formValueSelector } from "redux-form";
+import {compose} from "react-apollo";
+import {formValueSelector} from "redux-form";
 
 // Translation
-import { FormattedMessage } from "react-intl";
+import {FormattedMessage} from "react-intl";
 // Redux
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 
 // Style
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 import s from "./ViewListing.css";
 import bt from "../../components/commonStyle.css";
-import { Button, Grid, Row, Col } from "react-bootstrap";
+import {Button, Col, Grid, Row} from "react-bootstrap";
 import cx from "classnames";
 import * as FontAwesome from "react-icons/lib/fa";
 // Components
 import Photos from "../../components/ViewListings/Photos/Photos";
 import ListingIntro from "../../components/ViewListings/ListingIntro/ListingIntro";
-import Calendar from "../../components/ViewListings/Calendar/Calendar";
 import ListingDetails from "../../components/ViewListings/ListingDetails/ListingDetails";
 import Reviews from "../../components/ViewListings/Reviews/Reviews";
-import HostDetail from "../../components/ViewListings/HostDetail/HostDetail";
 import LocationMap from "../../components/ViewListings/LocationMap/LocationMap";
-import Loader from "../../components/Loader/Loader";
-import NotFound from "../notFound/NotFound";
 import AvailabilityCalendar from "../../components/ViewListings/AvailabilityCalendar/AvailabilityCalendar";
 import StarRating from "../../components/StarRating/StarRating";
 import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
 import BookingModal from "../../components/ViewListings/BookingModal/BookingModal";
-import SimilarListings from "../../components/ViewListings/SimilarListings/SimilarListings";
 import AutoAffix from "react-overlays/lib/AutoAffix";
 
 // ES6 Imports
 import Scroll from "react-scroll"; // Imports all Mixins
-
 // Locale
 import messages from "../../locale/messages";
 
-import { openBookingModal } from "../../actions/BookingModal/modalActions";
+import {openBookingModal} from "../../actions/BookingModal/modalActions";
 
 // Or Access Link,Element,etc as follows
 let Link = Scroll.Link;
@@ -51,22 +44,52 @@ var durationFn = function(deltaTop) {
   return deltaTop;
 };
 class ViewListings extends React.Component {
+  getPhotosData(){
+      const data = {};
+      const { details = {}} = this.props;
+      try {
+          if (details?.coverPhoto) {
+              const photos = JSON.parse(details?.coverPhoto)
+              data.listPhotos = photos?.map((ele, index) => ({
+                  name: ele?.filename,
+                  id: index +1,
+              }))
+          }
+          return {
+              ...data,
+              id: details?.id,
+              title: '',
+              description: '',
+              coverPhoto: 1,
+              country: "GB",
+              street: "Oristano Stazione F.s., Oristano, ",
+              buildingName: "",
+              city: "Province of Oristano",
+              state: "Italy",
+              zipcode: "09170",
+              lat: 39.90105570554223,
+              lng: 8.60587392065429,
+              isListOwner: false,
+              wishListStatus: false,
+          };
+      } catch (e) {
+          return data;
+      }
+  }
   render() {
     const { details } = this.props;
-    console.log(details);
-    let photos = JSON.parse(details.coverPhoto);
     return (
       <div className={s.root}>
         <div className={s.container}>
+            {/*<pre>{JSON.stringify(this.props, null, 4)}</pre>*/}
           <div className={s.pageContainer}>
-            <Photos listPhotos={photos} />
+            <Photos data={this.getPhotosData()} />
             <Element name="test1" className="element">
               <Grid fluid className={cx(s.horizontalLineThrough)}>
                 <Row className={cx(s.pageContent)}>
                   <Col xs={12} sm={12} md={8} lg={8}>
                     <Row>
                       <div className={s.stickyContainer}>
-                        <pre>{JSON.stringify(this.props, null, 4)}</pre>
                         <AutoAffix
                           viewportOffsetTop={0}
                           container={this}

@@ -1,26 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Assets
-import mediumNoImage from "../../../public/SiteImages/medium_no_image.png";
-import largeNoImage from "../../../public/SiteImages/large_no_image.jpeg";
+import mediumNoImage from '../../../public/SiteImages/medium_no_image.png';
+import largeNoImage from '../../../public/SiteImages/large_no_image.jpeg';
 
 class ListDefaultPhoto extends React.Component {
   static propTypes = {
     coverPhoto: PropTypes.number,
     listPhotos: PropTypes.array,
     className: PropTypes.string,
-    bgImage: PropTypes.bool,
+    bgImage: PropTypes.bool
   };
 
   static defaultProps = {
-    bgImage: false,
-  };
+    bgImage: false
+  }
 
   constructor(props) {
     super(props);
     this.state = {
-      photo: null,
+      photo: null
     };
   }
 
@@ -34,7 +34,7 @@ class ListDefaultPhoto extends React.Component {
           if (item.id === coverPhoto) {
             activePhoto = item.name;
           }
-        });
+        })
       }
       this.setState({ photo: activePhoto });
     }
@@ -50,7 +50,7 @@ class ListDefaultPhoto extends React.Component {
           if (item.id === coverPhoto) {
             activePhoto = item.name;
           }
-        });
+        })
       }
       this.setState({ photo: activePhoto });
     }
@@ -59,13 +59,11 @@ class ListDefaultPhoto extends React.Component {
   render() {
     const { className, photoType, bgImage } = this.props;
     const { photo } = this.state;
-    console.log("default photo", photo);
-    let path = "",
-      source;
+    let path = '', source;
     if (photo != null) {
       source = photo;
       if (photoType != undefined) {
-        path = "/images/upload/" + photoType + "_";
+        path = '/images/upload/' + photoType + '_';
       }
     } else {
       if (photoType != undefined) {
@@ -75,21 +73,20 @@ class ListDefaultPhoto extends React.Component {
           source = mediumNoImage;
         }
       } else {
-        source = mediumNoImage;
+        source = mediumNoImage
       }
     }
 
     if (bgImage) {
       return (
-        <div
-          className={className}
-          style={{ backgroundImage: `url(${path}${source})` }}
-        >
-          {this.props.children}
-        </div>
+          <div className={className} style={{ backgroundImage: `url(${path}${source})` }}>
+            {this.props.children}
+          </div>
       );
     } else {
-      return <img src={path + source} className={className} />;
+      return (
+          <img src={path + source} className={className} />
+      );
     }
   }
 }

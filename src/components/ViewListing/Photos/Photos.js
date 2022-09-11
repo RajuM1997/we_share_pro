@@ -172,7 +172,6 @@ class Photos extends React.Component {
           closeImageLightBox={closeImageLightBox}
           sources={sources}
         />
-
         {
           listPhotos && listPhotos.length == 0 && <ListDefaultPhoto
             className={s.bannerImage}
@@ -218,7 +217,7 @@ class Photos extends React.Component {
           </ListGridCoverPhoto >
 
         }
-        
+
         {
           sources && sources.length > 0 && <div><Button
             className={cx(s.btn, s.viewPhotosBtn, 'viewPhotosBtnRtl')}
