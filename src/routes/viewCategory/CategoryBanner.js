@@ -11,7 +11,7 @@ class CategoryBanner extends Component {
     super(props);
     this.state = {
       change: false,
-      bannerData: {},
+      bannerData: null,
     };
   }
   componentDidMount() {
@@ -29,18 +29,18 @@ class CategoryBanner extends Component {
   // }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    if (
-      nextProps?.data &&
-      nextProps?.singleCategory?.getSingleCategory?.category
-    ) {
-      nextProps?.data.map((element) => {
-        if (
-          nextProps?.singleCategory.getSingleCategory.category ===
-          element?.category
-        ) {
-          this.setState({ bannerData: element });
-        }
+    console.log("next props", nextProps);
+    if (nextProps?.data && nextProps?.singleCategoryData) {
+      nextProps?.singleCategoryData.forEach((element) => {
+        // const saveDate =
+        //   nextProps?.singleCategoryData.category === element?.category;
+        // this.setState({ bannerData: saveDate });
+        // console.log("hello", saveDate);
+        const saveData = nextProps?.data.filter(
+          (item) => item.category === element.category
+        );
+        this.setState({ bannerData: Object.assign(saveData) });
+        console.log("this is save data", saveData);
       });
     }
   }
@@ -53,11 +53,22 @@ class CategoryBanner extends Component {
     }
   };
   render() {
-    const { data, singleCategory } = this.props;
-    console.log("categoryDate", data);
-    // console.log(this.state.bannerData);
+    const { data, singleCategoryData } = this.props;
+    // console.log("categoryDate", singleCategoryData);
+    // console.log("bannerData", data);
+    // let bannerImage = data?.filter((item) => {
+    //   return item?.category === singleCategoryData?.category;
+    // });
+    // console.log("baImg", bannerImage);
 
-    let path = "/images/homeBanner/" + this.state.bannerData.image;
+    // console.log(this.state.bannerData);
+    console.log(this.state.bannerData);
+
+    let path;
+    this.state?.bannerData?.map((item) => {
+      return (path = "/images/homeBanner/" + item?.image);
+    });
+    console.log(path);
     const style = {
       background: `url(
       ${path}
@@ -76,49 +87,49 @@ class CategoryBanner extends Component {
             </div>
           )}
         </>
-        <div className={s.category_banner_text}>
-          <div className={s.category_main_title}>
-            <h1>{this.state.bannerData.title}</h1>
-          </div>
-          <>
-            <p
-              className="py-0"
-              style={{ marginBottom: "0px", paddingTop: "10px" }}
-              // data-aos-duration="1000"
-              // data-aos="fade-right"
-            >
-              <span className={s.category_color_title}>
-                {this.state.bannerData.colorText}
-              </span>
+        {this.state.bannerData?.map((item) => {
+          return (
+            <div className={s.category_banner_text}>
+              <div className={s.category_main_title}>
+                <h1>{item?.title}</h1>
+              </div>
               <>
-                {this.state.bannerData.colorText == "Don’t Buy! We Share," ? (
+                <p
+                  className="py-0"
+                  style={{ marginBottom: "0px", paddingTop: "10px" }}
+                  // data-aos-duration="1000"
+                  // data-aos="fade-right"
+                >
+                  <span className={s.category_color_title}>
+                    {item?.colorText}
+                  </span>
                   <>
-                    <br />
-                    <span className={s.category_sub_title}>
-                      {this.state.bannerData.description}
-                    </span>
+                    {item?.colorText == "Don’t Buy! We Share," ? (
+                      <>
+                        <br />
+                        <span className={s.category_sub_title}>
+                          {item?.description}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <span className={s.category_sub_title}>
+                          {item?.description}
+                        </span>
+                      </>
+                    )}
                   </>
-                ) : (
+                  {/* {description} <br /> */}
                   <>
-                    <span className={s.category_sub_title}>
-                      {this.state.bannerData.description}
-                    </span>
+                    {item?.bottomText === "null" ? (
+                      ""
+                    ) : (
+                      <p className={s.category_sub_title}>{item?.bottomText}</p>
+                    )}
                   </>
-                )}
+                </p>
               </>
-              {/* {description} <br /> */}
-              <>
-                {this.state.bannerData.bottomText === "null" ? (
-                  ""
-                ) : (
-                  <p className={s.category_sub_title}>
-                    {this.state.bannerData.bottomText}
-                  </p>
-                )}
-              </>
-            </p>
-          </>
-          {/* <div className={s.category_sub_title}>
+              {/* <div className={s.category_sub_title}>
             <h5>{this.state.bannerData.description}</h5>
           </div>
           <div >
@@ -127,7 +138,9 @@ class CategoryBanner extends Component {
           <div className={s.category_sub_title}>
             <h5>{this.state.bannerData.bottomText}</h5>
           </div> */}
-        </div>
+            </div>
+          );
+        })}
       </div>
     );
   }

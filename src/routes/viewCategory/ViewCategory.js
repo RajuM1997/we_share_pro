@@ -30,15 +30,15 @@ class ViewCategory extends Component {
     },
   };
   render() {
-    const { listing = [], singleCategory, getHomeBannerData, id } = this.props;
-    console.log(listing);
+    const { listing = [], getHomeBannerData, singleCategoryData } = this.props;
+    // console.log(listing);
 
     return (
       <>
         <div>
           <CategoryBanner
-            singleCategory={singleCategory}
-            data={getHomeBannerData}
+            singleCategoryData={singleCategoryData}
+            data={getHomeBannerData?.getHomeBanner}
           />
 
           <CategoryProfile />

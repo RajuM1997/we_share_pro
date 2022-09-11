@@ -47,6 +47,7 @@ export default async function action({ params }) {
     query getSingleCategory($id: Int!) {
      getSingleCategory(id: $id) {
         id
+        category
     }
   }
   `;
@@ -88,7 +89,11 @@ export default async function action({ params }) {
     title: title,
     component: (
       <Layout>
-        <ViewCategory listing={listing} title={title} id={id} />
+        <ViewCategory
+          listing={listing}
+          title={title}
+          singleCategoryData={singleCategoryData}
+        />
       </Layout>
     ),
   };

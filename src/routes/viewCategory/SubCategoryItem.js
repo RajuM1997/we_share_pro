@@ -44,8 +44,8 @@ class SubCategoryItem extends Component {
             return (
               <Row key={data.id}>
                 <a
-                  href={"/rooms/" + formatURL(data.title) + "-" + data?.id}
-                  // href={`/host/listing/${data?.id}`}
+                  // href={"/rooms/" + formatURL(data.title) + "-" + data?.id}
+                  href={`/host/listing/${data?.id}`}
                   target={"_blank"}
                 >
                   <div className={s.category_main}>
@@ -74,8 +74,8 @@ class SubCategoryItem extends Component {
                       </div>
                       <div className={s.subtitle}>
                         <h6 className="pb-0">
-                          {data?.guests} guests {data?.bedrooms} bedrooms{" "}
-                          {data?.beds} beds {data?.baths} baths
+                          {/* {data?.guests} guests {data?.bedrooms} bedrooms{" "}
+                          {data?.beds} beds {data?.baths} baths */}
                         </h6>
                       </div>
                       <div className={s.subtitle}>
@@ -97,10 +97,10 @@ class SubCategoryItem extends Component {
                         <div className={s.review}>
                           <p>
                             <span className={s.category_price}>
-                              {data?.basePrice} / night
+                              {data?.basePrice} / {data?.serviceUnit}
                             </span>
                             <br />
-                            <span className={s.totalPrice}>10,088 total</span>
+                            {/* <span className={s.totalPrice}>10,088 total</span> */}
                           </p>
                         </div>
                       </div>

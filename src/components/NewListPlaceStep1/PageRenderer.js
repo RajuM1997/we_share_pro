@@ -154,24 +154,10 @@ class PageRenderer extends Component {
       availableCurrencies,
       countryList,
     } = this.props;
-    console.log(countryList.getCountries);
-    const {
-      isDisabled,
-      houseType,
-      roomType,
-      buildingSize,
-      bedrooms,
-      bedType,
-      beds,
-      personCapacity,
-      bathroomType,
-      bookingNoticeTime,
-      reviewGuestBook,
-      guestRequirements,
-      houseRules,
-      spaces,
-    } = this.state;
+    // console.log(countryList.getCountries);
+    const { spaces } = this.state;
     const { formatMessage } = this.props.intl;
+    console.log("Current Page Data", currentPageData);
     return (
       <Grid className={s.container}>
         <Row className={cx(s.landingContainer, "arrowPosition")}>
@@ -203,7 +189,7 @@ class PageRenderer extends Component {
                               key={item.id}
                             >
                               <ControlLabel className={s.landingLabel}>
-                                {item?.label}
+                                {item?.title}
                               </ControlLabel>
                               <span className={s.subText}>
                                 {item?.sublabel}
@@ -221,14 +207,14 @@ class PageRenderer extends Component {
                                   updateField(item.name, e.target.value);
                                 }}
                               >
-                                {item?.options &&
-                                  item.options?.map((optionData) => {
+                                <option value="" disabled>
+                                  Please Select
+                                </option>
+                                {item?.fields &&
+                                  item.fields?.map((optionData) => {
                                     console.log(optionData);
                                     return (
                                       <>
-                                        <option value="" disabled>
-                                          Please Select
-                                        </option>
                                         <option
                                           value={optionData.label}
                                           key={optionData.value}

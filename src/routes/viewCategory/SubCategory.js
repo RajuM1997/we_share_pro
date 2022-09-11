@@ -35,7 +35,7 @@ class SubCategory extends Component {
     } = this.props;
     return (
       <>
-        <SubCategoryItem data={getSubCategory} listing={listing} />;
+        <SubCategoryItem data={getSubCategory} listing={listing} />
       </>
     );
   }
