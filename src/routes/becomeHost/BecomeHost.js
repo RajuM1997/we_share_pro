@@ -88,7 +88,7 @@ class BecomeHost extends React.Component {
       steps: {},
       pageData: {},
       currentPageIndex: 0,
-      currentStep: 3,
+      currentStep: 1,
       personCapacity: 0,
       formData: {},
       selectedCategory: "",
@@ -292,12 +292,12 @@ class BecomeHost extends React.Component {
     this.setState((thisState) => ({
       ...thisState,
       formData: {
-        ...thisState.formData,
+        ...thisState?.formData,
         dynamicFields: {
-          ...(thisState.formData?.dynamicFields || {}),
+          ...(thisState?.formData?.dynamicFields || {}),
           ...(currentPageId
             ? {
-                ...(thisState.formData?.dynamicFields[currentPageId] || {}),
+                ...(thisState?.formData?.dynamicFields[currentPageId] || {}),
                 [key]: value,
               }
             : {}),
