@@ -31,10 +31,6 @@ import StarRating from "../../components/StarRating/StarRating";
 import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
 import BookingModal from "../../components/ViewListing/BookingModal/BookingModal";
 import SimilarListings from "../../components/ViewListing/SimilarListings/SimilarListings";
-import ViewListings from "../viewListings/ViewListings";
-
-// /home/raju / projects / rentall - startuppro - v3.2 - master / src / routes / viewListing / ViewListing.js
-// /home/raju/projects/rentall-startuppro-v3.2-master/src/components/ViewListing/Photos/Photos.js
 
 // Graphql
 import BlockedDatesQuery from "./BlockedDates.graphql";
@@ -117,6 +113,7 @@ class ViewListing extends React.Component {
       preview,
       averageBasePrice,
     } = this.props;
+    console.log(UserListing);
     const { ListingBlockedDates } = this.props;
     const { listReviewsData } = this.props;
     const { openBookingModal, baseCurrency } = this.props;
@@ -172,7 +169,7 @@ class ViewListing extends React.Component {
     if (reviewsCount > 0 && reviewsStarRating > 0) {
       starRatingValue = Math.round(reviewsStarRating / reviewsCount);
     }
-    console.log(UserListing);
+    console.log("date", ListingBlockedDates.UserListing.blockedDates);
 
     return (
       <div className={s.root}>

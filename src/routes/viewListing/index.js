@@ -52,7 +52,6 @@ export default async function action({ params, store, query }) {
           maxNight
           minNight
         }
-
       }
     }
   `;
@@ -94,6 +93,7 @@ export default async function action({ params, store, query }) {
     }),
   });
   const { data } = await resp.json();
+  console.log(data);
 
   if ("startdate" in query && "enddate" in query) {
     let today = moment(new Date()).format("YYYY-MM-DD");

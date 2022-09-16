@@ -12,6 +12,7 @@ import { injectIntl, FormattedMessage } from "react-intl";
 
 class ListBedTypes extends React.Component {
   render() {
+    const { data } = this.props;
     return (
       <div className={cx(s.horizontalLineThrough)}>
         <Row>
@@ -22,7 +23,9 @@ class ListBedTypes extends React.Component {
             <Row>
               <Col md={12} lg={12}>
                 <p className={s.splitList}>
-                  <span>ListingBedType</span>
+                  <span>
+                    {data?.bedTypes}: {data?.beds}
+                  </span>
                 </p>
               </Col>
             </Row>

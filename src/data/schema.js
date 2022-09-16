@@ -12,6 +12,7 @@ import userRegister from "./queries/userRegister";
 import userAccount from "./queries/userAccount";
 import userEditProfile from "./queries/userEditProfile";
 import showUserProfile from "./queries/showUserProfile";
+import getUsersProfile from "./queries/getUsersProfile";
 import locationItem from "./queries/locationItem";
 import createListing from "./queries/createListing";
 import showListing from "./queries/showListing";
@@ -419,12 +420,11 @@ import getSiteSettingsLogo from "./queries/siteadmin/getSiteSettingsLogo";
 
 import removeFavIconLogo from "./mutations/SiteAdmin/Logo/removeFavIconLogo";
 
-
-import createHostListing from './mutations/HostListing/CreateHostListing';
-import getHostListingBySubCategory from './queries/HostListing/getHostListingBySubCategory';
-import getHostListingByCategory from './queries/HostListing/getHostListingByCategory';
-import getHostListingByUserId from './queries/HostListing/getHostListingByUserId';
-import getHostListingDetailsById from './queries/HostListing/getHostListingDetailsById';
+import createHostListing from "./mutations/HostListing/CreateHostListing";
+import getHostListingBySubCategory from "./queries/HostListing/getHostListingBySubCategory";
+import getHostListingByCategory from "./queries/HostListing/getHostListingByCategory";
+import getHostListingByUserId from "./queries/HostListing/getHostListingByUserId";
+import getHostListingDetailsById from "./queries/HostListing/getHostListingDetailsById";
 
 const schema = new Schema({
   query: new ObjectType({
@@ -593,6 +593,7 @@ const schema = new Schema({
       getHostListingDetailsById,
       getHostListingByUserId,
       getHostListingByCategory,
+      getUsersProfile,
     },
   }),
   mutation: new ObjectType({

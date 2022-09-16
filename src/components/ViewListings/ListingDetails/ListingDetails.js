@@ -45,6 +45,15 @@ class ListingDetails extends React.Component {
     const { open } = this.state;
     const { formatMessage } = this.props.intl;
     const { details } = this.props;
+    console.log("hosting details", details);
+    const data = JSON.parse(details.dynamicFields);
+    console.log(data);
+    // const listItemsData = Object.assign({}, data.houseRules);
+
+    const listItemsData = data?.houseRules?.reduce((acc, cur, i) => {
+      return { ...acc, [i]: cur };
+    }, {});
+    // console.log("array to obj", listItemsData.value);
     return (
       <Row className={cx(s.pageContent)}>
         <div className={cx(s.horizontalLineThrough)}>
@@ -128,19 +137,19 @@ class ListingDetails extends React.Component {
                   <p className={s.splitList}>
                     <span className={cx(s.text)}>
                       <FormattedMessage {...messages.accommodates} />:{" "}
-                      <strong>personCapacity</strong>
+                      <strong>{data?.personCapacity}</strong>
                     </span>
                   </p>
                   <p className={s.splitList}>
                     <span className={cx(s.text)}>
                       <FormattedMessage {...messages.bathrooms} />:{" "}
-                      <strong>bathrooms</strong>
+                      <strong>{data?.bathrooms}</strong>
                     </span>
                   </p>
                   <p className={s.splitList}>
                     <span className={cx(s.text)}>
                       <FormattedMessage {...messages.bedrooms} />:{" "}
-                      <strong>bedrooms</strong>
+                      <strong>{data?.bedrooms}</strong>
                     </span>
                   </p>
                   {/* <p>
@@ -152,19 +161,19 @@ class ListingDetails extends React.Component {
                   <p className={s.splitList}>
                     <span className={cx(s.text)}>
                       <FormattedMessage {...messages.checkIn} />:{" "}
-                      <strong>checkInStart, checkInEnd</strong>
+                      <strong>{data?.checkInStart}</strong>
                     </span>
                   </p>
                   <p className={s.splitList}>
                     <span className={cx(s.text)}>
                       <FormattedMessage {...messages.propertyType} />:{" "}
-                      <strong>propertyType</strong>
+                      <strong>{data?.houseType}</strong>
                     </span>
                   </p>
                   <p className={s.splitList}>
                     <span className={cx(s.text)}>
                       <FormattedMessage {...messages.roomType} />:{" "}
-                      <strong>roomType</strong>
+                      <strong>{data?.bathroomType}</strong>
                     </span>
                   </p>
                 </Col>
@@ -177,8 +186,9 @@ class ListingDetails extends React.Component {
         <div>
           {" "}
           <ListBedTypes
-          // itemList={listBedTypes}
-          // label={formatMessage(messages.beds)}
+            // itemList={listBedTypes}
+            // label={formatMessage(messages.beds)}
+            data={data}
           />
           <div xs={12} sm={12} md={12} lg={12}>
             <hr />
@@ -187,11 +197,12 @@ class ListingDetails extends React.Component {
         <div>
           {" "}
           <ListItem
-          // itemList={sharedSpaces}
-          // label={formatMessage(messages.sharedSpaces)}
-          // showLabel={formatMessage(messages.showAllSharedSpaces)}
-          // hideLabel={formatMessage(messages.closeAllSharedSpaces)}
-          // icon={false}
+            label={formatMessage(messages.sharedSpaces)}
+            showLabel={formatMessage(messages.showAllSharedSpaces)}
+            hideLabel={formatMessage(messages.closeAllSharedSpaces)}
+            icon={false}
+            data={data}
+            itemName={""}
           />
           <div>
             <hr />
@@ -201,11 +212,13 @@ class ListingDetails extends React.Component {
         <div>
           {" "}
           <ListItem
-          // itemList={userAmenities}
-          // label={formatMessage(messages.aminities)}
-          // showLabel={formatMessage(messages.showAmenities)}
-          // hideLabel={formatMessage(messages.closeAmenities)}
-          // icon={true}
+            // itemList={userAmenities}
+            label={formatMessage(messages.aminities)}
+            showLabel={formatMessage(messages.showAmenities)}
+            hideLabel={formatMessage(messages.closeAmenities)}
+            icon={true}
+            data={data}
+            itemName={""}
           />
           <div>
             <hr />
@@ -214,11 +227,13 @@ class ListingDetails extends React.Component {
         <div>
           {" "}
           <ListItem
-          // itemList={houseRules}
-          // label={formatMessage(messages.houseRules)}
-          // showLabel={formatMessage(messages.showAllHouseRules)}
-          // hideLabel={formatMessage(messages.closeHouseRules)}
-          // icon={false}
+            // itemList={houseRules}
+            label={formatMessage(messages.houseRules)}
+            showLabel={formatMessage(messages.showAllHouseRules)}
+            hideLabel={formatMessage(messages.closeHouseRules)}
+            icon={false}
+            data={data}
+            itemName={listItemsData[0]}
           />
           <div>
             <hr />

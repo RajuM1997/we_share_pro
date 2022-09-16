@@ -1,18 +1,19 @@
 // General
 import React from "react";
-import {compose} from "react-apollo";
-import {formValueSelector} from "redux-form";
+import PropTypes from "prop-types";
+import { graphql, compose } from "react-apollo";
+import { formValueSelector } from "redux-form";
 
 // Translation
-import {FormattedMessage} from "react-intl";
+import { FormattedMessage } from "react-intl";
 // Redux
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 // Style
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 import s from "./ViewListing.css";
 import bt from "../../components/commonStyle.css";
-import {Button, Col, Grid, Row} from "react-bootstrap";
+import { Button, Col, Grid, Row } from "react-bootstrap";
 import cx from "classnames";
 import * as FontAwesome from "react-icons/lib/fa";
 // Components
@@ -26,13 +27,14 @@ import StarRating from "../../components/StarRating/StarRating";
 import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
 import BookingModal from "../../components/ViewListings/BookingModal/BookingModal";
 import AutoAffix from "react-overlays/lib/AutoAffix";
+import Calendar from "../../components/ViewListing/Calendar/Calendar";
 
 // ES6 Imports
 import Scroll from "react-scroll"; // Imports all Mixins
 // Locale
 import messages from "../../locale/messages";
 
-import {openBookingModal} from "../../actions/BookingModal/modalActions";
+import { openBookingModal } from "../../actions/BookingModal/modalActions";
 
 // Or Access Link,Element,etc as follows
 let Link = Scroll.Link;
@@ -44,44 +46,80 @@ var durationFn = function(deltaTop) {
   return deltaTop;
 };
 class ViewListings extends React.Component {
-  getPhotosData(){
-      const data = {};
-      const { details = {}} = this.props;
-      try {
-          if (details?.coverPhoto) {
-              const photos = JSON.parse(details?.coverPhoto)
-              data.listPhotos = photos?.map((ele, index) => ({
-                  name: ele?.filename,
-                  id: index +1,
-              }))
-          }
-          return {
-              ...data,
-              id: details?.id,
-              title: '',
-              description: '',
-              coverPhoto: 1,
-              country: "GB",
-              street: "Oristano Stazione F.s., Oristano, ",
-              buildingName: "",
-              city: "Province of Oristano",
-              state: "Italy",
-              zipcode: "09170",
-              lat: 39.90105570554223,
-              lng: 8.60587392065429,
-              isListOwner: false,
-              wishListStatus: false,
-          };
-      } catch (e) {
-          return data;
+  static propTypes = {
+    account: PropTypes.shape({
+      userId: PropTypes.string,
+      userBanStatus: PropTypes.number,
+    }),
+  };
+
+  static defaultProps = {
+    account: {
+      userId: null,
+      userBanStatus: 0,
+    },
+    isAdmin: false,
+  };
+
+  getPhotosData() {
+    const data = {};
+
+    const { details = {} } = this.props;
+    try {
+      if (details?.coverPhoto) {
+        const photos = JSON.parse(details?.coverPhoto);
+        data.listPhotos = photos?.map((ele, index) => ({
+          name: ele?.filename,
+          id: index + 1,
+        }));
       }
+      return {
+        ...data,
+        id: details?.id,
+        title: "",
+        description: "",
+        coverPhoto: 1,
+        country: "GB",
+        street: "Oristano Stazione F.s., Oristano, ",
+        buildingName: "",
+        city: "Province of Oristano",
+        state: "Italy",
+        zipcode: "09170",
+        lat: 39.90105570554223,
+        lng: 8.60587392065429,
+        isListOwner: false,
+        wishListStatus: false,
+      };
+    } catch (e) {
+      return data;
+    }
   }
   render() {
-    const { details } = this.props;
+    const { details, averageBasePrice } = this.props;
+    const {
+      account: { userId, userBanStatus },
+      isAdmin,
+    } = this.props;
+    console.log(userId);
+    const isBrowser = typeof window !== "undefined";
+    const smallDevice = isBrowser
+      ? window.matchMedia("(max-width: 640px)").matches
+      : undefined;
+    let basePriceValue = details?.basePrice ? details?.basePrice : 0;
+    let currencyValue = details?.currency ? details?.currency : "USD";
+    const ListingBlockedDates = [];
+    let isHost = false;
+    // if (UserListing) {
+    //   if (userId && userId === UserListing.userId) {
+    //     isHost = true;
+    //   } else if (isAdmin) {
+    //     isHost = true;
+    //   }
+    // }
     return (
       <div className={s.root}>
         <div className={s.container}>
-            {/*<pre>{JSON.stringify(this.props, null, 4)}</pre>*/}
+          {/*<pre>{JSON.stringify(this.props, null, 4)}</pre>*/}
           <div className={s.pageContainer}>
             <Photos data={this.getPhotosData()} />
             <Element name="test1" className="element">
@@ -196,7 +234,18 @@ class ViewListings extends React.Component {
                         <ListingDetails details={details} />
                       </Grid>
                       <Grid fluid className={"availabilityMobile"}>
-                        <AvailabilityCalendar />
+                        <AvailabilityCalendar
+                          listId={details.listId}
+                          smallDevice={smallDevice}
+                          // loading={ListingBlockedDates.loading}
+                          blockedDates={
+                            ListingBlockedDates.UserListing != null
+                              ? ListingBlockedDates.UserListing.blockedDates
+                              : undefined
+                          }
+                          listingData={details || undefined}
+                          country={details.country}
+                        />
                       </Grid>
                       <Element name="test2" className="element">
                         <Grid fluid>
@@ -232,78 +281,78 @@ class ViewListings extends React.Component {
                         </Element> */}
                       <Element name="test4" className="element">
                         <Grid fluid className={cx(s.paddingTop2)}>
-                          <LocationMap />
+                          <LocationMap details={details} />
                         </Grid>
                       </Element>
                     </Row>
                   </Col>
-                  {/*  <Col
-                      xs={12}
-                      sm={12}
-                      md={4}
-                      lg={4}
-                      className={s.positionSticky}
-                    >
-                      {!smallDevice && !loading && (
-                        <div
-                          className={cx(
-                            s.responsiveNopadding,
-                            "hidden-xs hidden-sm"
-                          )}
-                        >
-                          <Calendar
-                            id={UserListing.id}
-                            loading={ListingBlockedDates.loading}
-                            blockedDates={
-                              ListingBlockedDates.UserListing != null
-                                ? ListingBlockedDates.UserListing.blockedDates
-                                : undefined
-                            }
-                            personCapacity={UserListing.personCapacity}
-                            listingData={UserListing.listingData || undefined}
-                            isHost={isHost}
-                            bookingType={UserListing.bookingType}
-                            userBanStatus={userBanStatus}
-                            startDate={startDate}
-                            endDate={endDate}
-                            reviewsCount={UserListing.reviewsCount}
-                            reviewsStarRating={UserListing.reviewsStarRating}
-                            guests={guests}
-                            country={UserListing.country}
-                          />
-                        </div>
-                      )}
-                      {!smallDevice && loading && (
-                        <div
-                          className={cx(
-                            s.webDevice,
-                            s.responsiveNopadding,
-                            "hidden-xs hidden-sm"
-                          )}
-                        >
-                          <Calendar
-                            id={UserListing.id}
-                            loading={ListingBlockedDates.loading}
-                            blockedDates={
-                              ListingBlockedDates.UserListing != null
-                                ? ListingBlockedDates.UserListing.blockedDates
-                                : undefined
-                            }
-                            personCapacity={UserListing.personCapacity}
-                            listingData={UserListing.listingData || undefined}
-                            isHost={isHost}
-                            bookingType={UserListing.bookingType}
-                            userBanStatus={userBanStatus}
-                            startDate={startDate}
-                            endDate={endDate}
-                            reviewsCount={UserListing.reviewsCount}
-                            reviewsStarRating={UserListing.reviewsStarRating}
-                            guests={guests}
-                            country={UserListing.country}
-                          />
-                        </div>
-                      )}
-                    </Col> */}
+                  <Col
+                    xs={12}
+                    sm={12}
+                    md={4}
+                    lg={4}
+                    className={s.positionSticky}
+                  >
+                    {!smallDevice && (
+                      <div
+                        className={cx(
+                          s.responsiveNopadding,
+                          "hidden-xs hidden-sm"
+                        )}
+                      >
+                        <Calendar
+                          // id={UserListing.id}
+                          // loading={ListingBlockedDates.loading}
+                          blockedDates={
+                            ListingBlockedDates.UserListing != null
+                              ? ListingBlockedDates.UserListing.blockedDates
+                              : undefined
+                          }
+                          // personCapacity={details.personCapacity}
+                          listingData={details || undefined}
+                          // isHost={isHost}
+                          bookingType={details?.bookingType}
+                          // userBanStatus={userBanStatus}
+                          startDate={10}
+                          endDate={10}
+                          // reviewsCount={UserListing.reviewsCount}
+                          // reviewsStarRating={UserListing.reviewsStarRating}
+                          // guests={guests}
+                          country={details?.country}
+                        />
+                      </div>
+                    )}
+                    {/*  {!smallDevice && (
+                      <div
+                        className={cx(
+                          s.webDevice,
+                          s.responsiveNopadding,
+                          "hidden-xs hidden-sm"
+                        )}
+                      >
+                        <Calendar
+                        // id={UserListing.id}
+                        // loading={ListingBlockedDates.loading}
+                        // blockedDates={
+                        //   ListingBlockedDates.UserListing != null
+                        //     ? ListingBlockedDates.UserListing.blockedDates
+                        //     : undefined
+                        // }
+                        // personCapacity={UserListing.personCapacity}
+                        // listingData={UserListing.listingData || undefined}
+                        // isHost={isHost}
+                        // bookingType={UserListing.bookingType}
+                        // userBanStatus={userBanStatus}
+                        // startDate={startDate}
+                        // endDate={endDate}
+                        // reviewsCount={UserListing.reviewsCount}
+                        // reviewsStarRating={UserListing.reviewsStarRating}
+                        // guests={guests}
+                        // country={UserListing.country}
+                        />
+                      </div>
+                    )} */}
+                  </Col>
                 </Row>
                 {/*  {similarListsData &&
                     similarListsData.getSimilarListing &&
@@ -370,18 +419,15 @@ class ViewListings extends React.Component {
                         {/* )} */}
                         <div className={s.bookItPrice}>
                           <CurrencyConverter
-                            // from={currencyValue || baseCurrency}
-                            // amount={
-                            //   averageBasePrice
-                            //     ? averageBasePrice
-                            //     : basePriceValue || 0
-                            // }
+                            from={currencyValue || baseCurrency}
+                            amount={basePriceValue}
                             className={s.bookItPrice}
                           />
                         </div>
                         <span className={s.bookItNight}>
                           {" "}
-                          <FormattedMessage {...messages.perNight} />
+                          {/* <FormattedMessage {...messages.perNight} /> */}
+                          {details?.serviceUnit}
                         </span>
                       </div>
                       <div>
