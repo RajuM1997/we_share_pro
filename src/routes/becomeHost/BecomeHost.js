@@ -306,12 +306,12 @@ class BecomeHost extends React.Component {
     this.setState((thisState) => ({
       ...thisState,
       formData: {
-        ...thisState.formData,
+        ...thisState?.formData,
         dynamicFields: {
-          ...(thisState.formData?.dynamicFields || {}),
+          ...(thisState?.formData?.dynamicFields || {}),
           ...(currentPageId
             ? {
-                ...(thisState.formData?.dynamicFields[currentPageId] || {}),
+                ...(thisState?.formData?.dynamicFields[currentPageId] || {}),
                 [key]: value,
               }
             : {}),
