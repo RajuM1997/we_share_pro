@@ -1,50 +1,39 @@
 import ShowUserProfileType from "../types/ShowUserProfileType";
 import { User, UserLogin, UserClaim, UserProfile } from "../../data/models";
 
-import { GraphQLInt as IntType, GraphQLBoolean as BooleanType } from "graphql";
+import { GraphQLBoolean as String } from "graphql";
 
 const getUsersProfile = {
   type: ShowUserProfileType,
   args: {
-    profileId: { type: IntType },
-    userId: { type: String },
+    id: { type: String },
+  },
+  async resolve({ request }, { id }) {
+    return await UserProfile.findById(id);
   },
 
-  async resolve({ request }, { profileId, isUser }) {
-    let where;
-    if (isUser) {
-      let userId = request.user.id;
-      where = {
-        userId,
-      };
-    } else {
-      where = {
-        profileId,
-      };
-    }
+  // Get All User Profile Data
+  //     const userData = await UserProfile.find({
+  //       attributes: [
+  //         "userId",
+  //         "profileId",
+  //         "firstName",
+  //         "lastName",
+  //         "dateOfBirth",
+  //         "gender",
+  //         "phoneNumber",
+  //         "preferredLanguage",
+  //         "preferredCurrency",
+  //         "location",
+  //         "info",
+  //         "createdAt",
+  //         "picture",
+  //       ],
+  //       where,
+  //     });
 
-    // Get All User Profile Data
-    const userData = await UserProfile.find({
-      attributes: [
-        "userId",
-        "profileId",
-        "firstName",
-        "lastName",
-        "dateOfBirth",
-        "gender",
-        "phoneNumber",
-        "preferredLanguage",
-        "preferredCurrency",
-        "location",
-        "info",
-        "createdAt",
-        "picture",
-      ],
-      where,
-    });
-
-    return userData;
-  },
+  //     return userData;
+  //   },
+  // };
 };
-
 export default getUsersProfile;
