@@ -241,13 +241,13 @@ class PageReRendererStep3 extends Component {
                                       updateCalendar={(event) => {
                                         if (event?.from) {
                                           updateField(
-                                              "bookingAvailabilityStart",
+                                              "availabilityStart",
                                               event?.from
                                           );
                                         }
                                         if (event?.to) {
                                           updateField(
-                                              "bookingAvailabilityEnd",
+                                              "availabilityEnd",
                                               event?.to
                                           );
                                         }

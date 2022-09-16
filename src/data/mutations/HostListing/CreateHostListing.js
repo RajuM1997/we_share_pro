@@ -48,6 +48,8 @@ const createHostListing = {
         monthlyDiscount,
         bookingType,
         dynamicFields,
+        availabilityStart,
+        availabilityEnd,
     }) {
 
 
@@ -83,6 +85,8 @@ const createHostListing = {
                 monthlyDiscount,
                 bookingType,
                 dynamicFields,
+                availabilityStart,
+                availabilityEnd,
             })
             if (createHostListing) {
                 return {
@@ -134,6 +138,8 @@ const createHostListing = {
         monthlyDiscount: { type: IntType },
         bookingType: { type: StringType },
         dynamicFields: { type: StringType },
+        availabilityStart: { type: StringType },
+        availabilityEnd: { type: StringType },
     },
 };
 

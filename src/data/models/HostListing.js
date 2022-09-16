@@ -30,7 +30,7 @@ const HostListing = Model.define("HostListing", {
         allowNull: false,
     },
     itemDescription: {
-        type: DataType.STRING,
+        type: DataType.TEXT('long'),
         allowNull: false,
     },
     fullAddress: {
@@ -131,6 +131,14 @@ const HostListing = Model.define("HostListing", {
     },
     dynamicFields: {
         type: DataType.TEXT('long'),
+        allowNull: false,
+    },
+    availabilityStart: {
+        type: DataType.DATE,
+        allowNull: false,
+    },
+    availabilityEnd: {
+        type: DataType.DATE,
         allowNull: false,
     },
 });

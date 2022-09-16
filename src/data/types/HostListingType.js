@@ -81,6 +81,8 @@ const HostListingType = new ObjectType({
         monthlyDiscount: { type: IntType },
         bookingType: { type: StringType },
         dynamicFields: { type: StringType },
+        availabilityStart: { type: StringType },
+        availabilityEnd: { type: StringType },
         // Listing: {
         //     type: new List(HostListing),
         //     resolve (HostListingType) {

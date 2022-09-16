@@ -41,6 +41,8 @@ const submit = async (values) => {
             $monthlyDiscount: Int,
             $bookingType: String,
             $dynamicFields: String,
+            $availabilityStart: String,
+            $availabilityEnd: String,
           ) {
             createHostListing(
                 userId: $userId,
@@ -73,6 +75,8 @@ const submit = async (values) => {
                 monthlyDiscount: $monthlyDiscount,
                 bookingType: $bookingType,
                 dynamicFields: $dynamicFields,
+                availabilityStart: $availabilityStart,
+                availabilityEnd: $availabilityEnd,
             ) {
                 status
             }
