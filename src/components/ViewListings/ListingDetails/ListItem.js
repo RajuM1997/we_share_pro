@@ -31,12 +31,19 @@ class ListItem extends React.Component {
 
   render() {
     const { open } = this.state;
-
+    const {
+      itemList,
+      label,
+      showLabel,
+      hideLabel,
+      icon,
+      itemName,
+    } = this.props;
     return (
       <div className={cx(s.horizontalLineThrough)}>
         <Row>
           <Col xs={12} sm={12} md={12} lg={12} className={cx(s.space1)}>
-            <p className={cx(s.textMutedNew)}> Shared Spaces </p>
+            <p className={cx(s.textMutedNew)}>{label}</p>
           </Col>
           <Col xs={12} sm={12} md={12} lg={12} className={cx(s.spaceTop1)}>
             <Row>
@@ -49,9 +56,9 @@ class ListItem extends React.Component {
                               <img src={IconDefault} className={cx(s.imgSection, 'imgSectionRtl')} />
                             }
                           </span>} */}
-                  <span
-                    className={cx(s.text, s.overflowText, s.listContent)}
-                  ></span>
+                  <span className={cx(s.text, s.overflowText, s.listContent)}>
+                    {itemName}
+                  </span>
                 </div>
 
                 <Collapse className={s.collapseContainer} in={open}>
@@ -65,7 +72,7 @@ class ListItem extends React.Component {
                                 }
                               </span>} */}
                       <span className={cx(s.text, s.overflowText)}>
-                        hello listitems
+                        {/* hello listitems */}
                       </span>
                     </p>
                   </div>

@@ -809,7 +809,7 @@
   {
     "id": "app.calendar",
     "description": "calendar title",
-    "defaultMessage": "Update your calendar",
+    "defaultMessage": "Update your availability on calendar",
     "message": "Actualiza tu calendario",
     "files": [
       "src/locale/messages.js"

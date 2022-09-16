@@ -98,7 +98,7 @@ class LocationMap extends React.Component {
 
   render() {
     const { center } = this.state;
-    const { data } = this.props;
+    const { data, details } = this.props;
 
     let displayName = data?.user?.profile?.displayName;
     let city = data?.city;
@@ -115,7 +115,7 @@ class LocationMap extends React.Component {
           <p>
             <span className={cx(s.text)}>
               {displayName} <FormattedMessage {...messages.propertyLocated} />{" "}
-              {city}, {country}
+              {details?.city}, {details?.country}
             </span>
           </p>
           <div style={{ height: 350 }}>

@@ -5,7 +5,6 @@ import fetch from "../../core/fetch";
 import { toastr } from "react-redux-toastr";
 
 const submit = async (values) => {
-  console.log("values", values);
   if (values == null) {
     toastr.error("Error Occurred", "Failed to add new listing");
   } else {

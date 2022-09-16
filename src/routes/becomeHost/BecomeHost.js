@@ -12,6 +12,7 @@ import getCategoryQuery from "./getCategory.graphql";
 import getSubCategoryQuery from "./getSubCategory.graphql";
 import getCountriesQuery from "./getCountries.graphql";
 import getHostListingByUserIdQuery from "./getHostListingByUserId.graphql";
+import getPageFieldsQuery from "./getPageField.graphql";
 
 // Redux
 import { connect } from "react-redux";
@@ -65,6 +66,10 @@ class BecomeHost extends React.Component {
       loading: PropTypes.bool,
       getHostListingByUserIdData: PropTypes.array,
     }),
+    getPageFieldsData: PropTypes.shape({
+      loading: PropTypes.bool,
+      getPageFieldsData: PropTypes.array,
+    }),
   };
   static defaultProps = {
     data: {
@@ -79,6 +84,9 @@ class BecomeHost extends React.Component {
     getHostListingByUserIdData: {
       loading: true,
     },
+    getPageFieldsData: {
+      loading: true,
+    },
     pageData: {},
   };
 
@@ -88,9 +96,11 @@ class BecomeHost extends React.Component {
       steps: {},
       pageData: {},
       currentPageIndex: 0,
-      currentStep: 3,
+      currentStep: 1,
       personCapacity: 0,
-      formData: {},
+      formData: {
+        dynamicFields: {},
+      },
       selectedCategory: "",
       selectedSubCategory: "",
       shawButton: true,
@@ -132,7 +142,7 @@ class BecomeHost extends React.Component {
           return {
             ...page,
             pageIndex: index,
-            step: 2,
+            step: 1,
             fields,
           };
         });
@@ -289,6 +299,10 @@ class BecomeHost extends React.Component {
   }
 
   updateFieldByPageId = (currentPageId) => (key, value) => {
+    console.log("currentPageId", currentPageId);
+    console.log("key", key);
+    console.log("value", value);
+
     this.setState((thisState) => ({
       ...thisState,
       formData: {
@@ -355,6 +369,7 @@ class BecomeHost extends React.Component {
       getSubCategoryData,
       getCountriesData,
       getHostListingByUserIdData,
+      getPageFieldsData,
       formPage,
       formBaseURI,
       mode,
@@ -364,7 +379,7 @@ class BecomeHost extends React.Component {
     const pageData = this.state?.pageData[this.state.currentStep] || [];
     const currentPageFields = pageData[this.state.currentPageIndex] || [];
     const { pageId: currentPageId } = currentPageFields[0] || {};
-    // console.log("listingData", getHostListingByUserIdData);
+    // console.log("page fields", getPageFieldsData);
 
     return (
       <div className={s.root}>
@@ -419,6 +434,7 @@ class BecomeHost extends React.Component {
                       updateField={this.updateFieldByPageId(currentPageId)}
                       handleCompleteStep={this.handleCompleteStep}
                       countryList={getCountriesData}
+                      fieldsData={getPageFieldsData.getPageFieldAdmin}
                     />
                   )}
                   {this?.state?.currentStep === 3 && (
@@ -474,6 +490,12 @@ export default compose(
   }),
   graphql(getSubCategoryQuery, {
     name: "getSubCategoryData",
+    options: {
+      ssr: true,
+    },
+  }),
+  graphql(getPageFieldsQuery, {
+    name: "getPageFieldsData",
     options: {
       ssr: true,
     },

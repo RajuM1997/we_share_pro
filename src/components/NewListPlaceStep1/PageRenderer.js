@@ -153,26 +153,33 @@ class PageRenderer extends Component {
       baseCurrency,
       availableCurrencies,
       countryList,
+      fieldsData,
     } = this.props;
-    // console.log(countryList.getCountries);
-    const { spaces } = this.state;
+    let pageTitle;
+    currentPageData.fields?.map((item) => {
+      let filterTitle = fieldsData.filter((pi) => pi.pageId === item.pageId);
+      return (pageTitle = filterTitle);
+    });
     const { formatMessage } = this.props.intl;
-    console.log("Current Page Data", currentPageData);
+    // console.log("Current Page Data", currentPageData);
     return (
       <Grid className={s.container}>
         <Row className={cx(s.landingContainer, "arrowPosition")}>
           <Col xs={12} sm={7} md={7} lg={7}>
             <div>
-              <h3 className={s.landingContentTitle}>
-                {currentPageData?.title}
-              </h3>
-              {currentPageData?.subtitle && (
-                <div className={cx(s.space4, s.spaceTop4)}>
-                  <span className={s.bookingLandingStep}>
-                    {currentPageData?.subtitle}
-                  </span>
-                </div>
-              )}
+              {pageTitle?.map((filterT) => {
+                return (
+                  <>
+                    <h3 className={s.landingContentTitle}>{filterT?.title}</h3>
+                    <div className={cx(s.space4, s.spaceTop4)}>
+                      <span className={s.bookingLandingStep}>
+                        {filterT?.subtitle}
+                      </span>
+                    </div>
+                  </>
+                );
+              })}
+
               <form onSubmit="">
                 <div className={s.landingMainContent}>
                   <FormGroup className={s.formGroup}>

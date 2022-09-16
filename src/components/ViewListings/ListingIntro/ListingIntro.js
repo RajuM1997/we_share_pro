@@ -27,15 +27,21 @@ import personalHomeIcon from "../../../../public/SiteIcons/personalhome.svg";
 class ListingIntro extends React.Component {
   render() {
     const { formatMessage } = this.props.intl;
+    const { details } = this.props;
+    console.log(details);
 
     return (
       <div>
         <Row className={s.introPadding}>
           <Col xs={12} sm={9} md={9} lg={9}>
-            <h1 className={cx(s.titleText, s.space1)}></h1>
+            <h1 className={cx(s.titleText, s.space1)}>
+              {details.itemTitle != null
+                ? details.itemTitle
+                : " " + formatMessage(messages.in) + " " + details.city}
+            </h1>
             <div className={cx(s.space3)}>
               <span className={s.textMuted}>
-                {/* {data.city}, {data.state}, {data.country} */}
+                {details?.city}, {details?.state}, {details?.country}
               </span>
               <div className={"visible-xs"}>
                 <span>

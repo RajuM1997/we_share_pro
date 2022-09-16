@@ -3,12 +3,11 @@ import { User, UserLogin, UserClaim, UserProfile } from "../../data/models";
 
 import { GraphQLInt as IntType, GraphQLBoolean as BooleanType } from "graphql";
 
-const showUserProfile = {
+const getUsersProfile = {
   type: ShowUserProfileType,
-
   args: {
     profileId: { type: IntType },
-    isUser: { type: BooleanType },
+    userId: { type: String },
   },
 
   async resolve({ request }, { profileId, isUser }) {
@@ -48,4 +47,4 @@ const showUserProfile = {
   },
 };
 
-export default showUserProfile;
+export default getUsersProfile;
