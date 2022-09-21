@@ -27,9 +27,11 @@ import personalHomeIcon from "../../../../public/SiteIcons/personalhome.svg";
 class ListingIntro extends React.Component {
   render() {
     const { formatMessage } = this.props.intl;
-    const { details } = this.props;
-    console.log(details);
-
+    const { details, getUserProfile } = this.props;
+    console.log("users", getUserProfile.userId);
+    // const userData = getUserProfile.forEach((items) => {
+    //   return items;
+    // });
     return (
       <div>
         <Row className={s.introPadding}>
@@ -59,7 +61,15 @@ class ListingIntro extends React.Component {
                 </div> */}
                 <div className={s.displayTableCell}>
                   <div className={cx(s.profileAvatarSection, s.mobileBg)}>
-                    <Avatar />
+                    <Avatar
+                      source={getUserProfile?.picture}
+                      type={"small"}
+                      title={getUserProfile?.firstName}
+                      className={s.profileAvatarNew}
+                      withLink
+                      linkClassName={s.profileAvatarLink}
+                      profileId={getUserProfile?.profileId}
+                    />
                   </div>
                   <p className={cx("text-center", s.hostNameText)}>
                     {/* <Link to={"/users/show/" + data.user.profile.profileId}>
@@ -243,14 +253,24 @@ class ListingIntro extends React.Component {
           </Col>
           <Col xs={12} sm={3} md={3} lg={3} className={"hidden-xs"}>
             <div className={cx(s.profileAvatarSection, s.mobileBg)}>
-              <Avatar />
+              <Avatar
+                source={getUserProfile.picture}
+                type={"small"}
+                height={115}
+                width={115}
+                title={getUserProfile.firstName}
+                className={s.profileAvatar}
+                withLink
+                linkClassName={s.profileAvatarLink}
+                profileId={getUserProfile.profileId}
+              />
             </div>
             <p className={cx("text-center", s.hostNameText)}>
-              {/* <Link to={"/users/show/" + data.user.profile.profileId}>
+              <Link to={"/users/show/" + getUserProfile.profileId}>
                 <span className={cx(s.textMuted)}>
-                  {data.user.profile.firstName}
+                  {getUserProfile.firstName}
                 </span>
-              </Link> */}
+              </Link>
             </p>
           </Col>
         </Row>

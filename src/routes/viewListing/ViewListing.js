@@ -134,7 +134,7 @@ class ViewListing extends React.Component {
     const smallDevice = isBrowser
       ? window.matchMedia("(max-width: 640px)").matches
       : undefined;
-
+    console.log("guests", guests);
     let basePriceValue =
       UserListing &&
       UserListing.listingData &&
@@ -169,7 +169,7 @@ class ViewListing extends React.Component {
     if (reviewsCount > 0 && reviewsStarRating > 0) {
       starRatingValue = Math.round(reviewsStarRating / reviewsCount);
     }
-    console.log("date", ListingBlockedDates.UserListing.blockedDates);
+    console.log("users listing", UserListing);
 
     return (
       <div className={s.root}>

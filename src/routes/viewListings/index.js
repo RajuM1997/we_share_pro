@@ -56,15 +56,6 @@ export default async function action({ params, store, query }) {
   }
   `;
 
-  const getUsersProfile = `
-    query getUsersProfile($profileId: Int!) {
-      getUsersProfile(profileId: $profileId) {
-        profileId
-        firstName
-    }
-  }
-  `;
-
   const listingId = Number(params.listId);
   const resp = await fetch("/graphql", {
     method: "post",
@@ -78,21 +69,6 @@ export default async function action({ params, store, query }) {
     }),
   });
   const { data } = await resp.json();
-
-  // const userId = data.getHostListingDetailsById.userId;
-  const res = await fetch("/graphql", {
-    method: "post",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: getUsersProfile,
-      variables: { profileId: 3 },
-    }),
-  });
-  const { data: usersProfile } = await res.json();
-  console.log(usersProfile);
   return {
     title: title,
     component: (

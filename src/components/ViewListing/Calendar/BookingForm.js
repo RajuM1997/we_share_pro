@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 // Redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // Redux Form
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from "redux-form";
 // Style
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Calendar.css';
-import bt from '../../../components/commonStyle.css';
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import s from "./Calendar.css";
+import bt from "../../../components/commonStyle.css";
 import {
   Row,
   Col,
@@ -15,20 +15,20 @@ import {
   FormGroup,
   FormControl,
   ControlLabel,
-} from 'react-bootstrap';
-import cx from 'classnames';
-import * as FontAwesome from 'react-icons/lib/fa';
+} from "react-bootstrap";
+import cx from "classnames";
+import * as FontAwesome from "react-icons/lib/fa";
 // Translation
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from "react-intl";
 
 // Locale
-import messages from '../../../locale/messages';
+import messages from "../../../locale/messages";
 // Redux action
-import { bookingProcess } from '../../../actions/booking/bookingProcess';
+import { bookingProcess } from "../../../actions/booking/bookingProcess";
 // Component
-import DateRange from '../DateRange';
-import BillDetails from './BillDetails';
-import BookingButton from './BookingButton';
+import DateRange from "../DateRange";
+import BillDetails from "./BillDetails";
+import BookingButton from "./BookingButton";
 
 class BookingForm extends Component {
   static propTypes = {
@@ -65,7 +65,7 @@ class BookingForm extends Component {
     formatMessage: PropTypes.any,
     account: PropTypes.shape({
       userBanStatus: PropTypes.number,
-    })
+    }),
   };
   static defaultProps = {
     blockedDates: [],
@@ -76,7 +76,7 @@ class BookingForm extends Component {
     endDate: null,
     guests: 1,
     personCapacity: 0,
-    country: ''
+    country: "",
   };
 
   constructor(props) {
@@ -90,25 +90,30 @@ class BookingForm extends Component {
     const { listingFields } = this.props;
     if (listingFields != undefined) {
       this.setState({
-        personCapacityData: listingFields.personCapacity
+        personCapacityData: listingFields.personCapacity,
       });
     }
   }
-  
 
   componentWillReceiveProps(nextProps) {
     const { listingFields } = nextProps;
     if (listingFields != undefined) {
       this.setState({
-        personCapacityData: listingFields.personCapacity
+        personCapacityData: listingFields.personCapacity,
       });
     }
   }
 
-  renderFormControlSelect({ input, label, meta: { touched, error }, children, className }) {
+  renderFormControlSelect({
+    input,
+    label,
+    meta: { touched, error },
+    children,
+    className,
+  }) {
     return (
       <div>
-        <FormControl componentClass="select" {...input} className={className} >
+        <FormControl componentClass="select" {...input} className={className}>
           {children}
         </FormControl>
       </div>
@@ -120,20 +125,62 @@ class BookingForm extends Component {
 
     const rows = [];
     for (let i = 1; i <= personCapacity; i++) {
-      rows.push(<option key={i} value={i}>{i} {i > 1 ? personCapacityData[0].otherItemName : personCapacityData[0].itemName}</option>);
+      rows.push(
+        <option key={i} value={i}>
+          {i}{" "}
+          {i > 1
+            ? personCapacityData[0]?.otherItemName
+            : personCapacityData[0]?.itemName}
+        </option>
+      );
     }
     return rows;
   }
   render() {
     const { formatMessage } = this.props.intl;
-    const { id, personCapacity, basePrice, cleaningPrice, currency, isHost, bookingType, taxRate } = this.props;
-    const { monthlyDiscount, weeklyDiscount, minNight, maxNight, maxDaysNotice } = this.props;
-    const { isLoading, availability, maximumStay, guests, startDate, endDate, account, blockedDates, minimumStay, country } = this.props;
-    const { bookingProcess, serviceFees, base, rates, bookingLoading, initialValues } = this.props;
-    const isDateChosen = startDate != null && endDate != null || false;
+    const {
+      id,
+      personCapacity,
+      basePrice,
+      cleaningPrice,
+      currency,
+      isHost,
+      bookingType,
+      taxRate,
+    } = this.props;
+    const {
+      monthlyDiscount,
+      weeklyDiscount,
+      minNight,
+      maxNight,
+      maxDaysNotice,
+    } = this.props;
+    const {
+      isLoading,
+      availability,
+      maximumStay,
+      guests,
+      startDate,
+      endDate,
+      account,
+      blockedDates,
+      minimumStay,
+      country,
+    } = this.props;
+    const {
+      bookingProcess,
+      serviceFees,
+      base,
+      rates,
+      bookingLoading,
+      initialValues,
+    } = this.props;
+    const isDateChosen = (startDate != null && endDate != null) || false;
     let userBanStatusValue;
     if (account) {
-      const { account: { userBanStatus } } = this.props;
+      const {
+        account: { userBanStatus },
+      } = this.props;
       userBanStatusValue = userBanStatus;
     }
 
@@ -143,15 +190,17 @@ class BookingForm extends Component {
           <Row>
             <Col xs={12} sm={12} md={12} lg={12}>
               <label className={s.text}>
-                <span><FormattedMessage {...messages.dates} /></span>
+                <span>
+                  <FormattedMessage {...messages.dates} />
+                </span>
               </label>
-              <span className={cx('viewListingDate')}>
+              <span className={cx("viewListingDate")}>
                 <DateRange
                   listId={id}
                   minimumNights={minNight}
                   maximumNights={maxNight}
                   blockedDates={blockedDates}
-                  formName={'BookingForm'}
+                  formName={"BookingForm"}
                   maxDaysNotice={maxDaysNotice}
                   country={country}
                 />
@@ -162,11 +211,17 @@ class BookingForm extends Component {
         <FormGroup>
           <Row>
             <Col xs={12} sm={12} md={12} lg={12}>
-              <ControlLabel className={s.text}><FormattedMessage {...messages.guest} /></ControlLabel>
+              <ControlLabel className={s.text}>
+                <FormattedMessage {...messages.guest} />
+              </ControlLabel>
               <Field
                 name="guests"
                 component={this.renderFormControlSelect}
-                className={cx(s.formControlSelect, bt.commonControlSelect, 'viewGuestCount')}
+                className={cx(
+                  s.formControlSelect,
+                  bt.commonControlSelect,
+                  "viewGuestCount"
+                )}
               >
                 {this.renderGuests(personCapacity)}
               </Field>
@@ -174,46 +229,54 @@ class BookingForm extends Component {
           </Row>
         </FormGroup>
         <FormGroup>
-          {
-            !isLoading && maximumStay && isDateChosen && !userBanStatusValue && <div className={cx(s.bookItMessage, s.spaceTop3)}>
+          {!isLoading && maximumStay && isDateChosen && !userBanStatusValue && (
+            <div className={cx(s.bookItMessage, s.spaceTop3)}>
               <p className={cx(s.noMargin, s.textCenter, s.textError)}>
-                <FormattedMessage {...messages.maximumStay} /> {maxNight} {maxNight > 1 ? formatMessage(messages.nights) : formatMessage(messages.night)}
+                <FormattedMessage {...messages.maximumStay} /> {maxNight}{" "}
+                {maxNight > 1
+                  ? formatMessage(messages.nights)
+                  : formatMessage(messages.night)}
               </p>
             </div>
-          }
-          {
-            !isLoading && minimumStay && isDateChosen && !userBanStatusValue && <div
-              className={cx(s.bookItMessage, s.spaceTop3)}
-            >
+          )}
+          {!isLoading && minimumStay && isDateChosen && !userBanStatusValue && (
+            <div className={cx(s.bookItMessage, s.spaceTop3)}>
               <p className={cx(s.noMargin, s.textCenter, s.textError)}>
-                <FormattedMessage {...messages.minimumNightStay} />  {minNight} {minNight > 1 ? formatMessage(messages.nights) : formatMessage(messages.night)}
+                <FormattedMessage {...messages.minimumNightStay} /> {minNight}{" "}
+                {minNight > 1
+                  ? formatMessage(messages.nights)
+                  : formatMessage(messages.night)}
               </p>
             </div>
-          }
+          )}
 
-          {
-            !isLoading && !availability && isDateChosen && !userBanStatusValue && <div className={cx(s.bookItMessage, s.spaceTop3)}>
+          {!isLoading && !availability && isDateChosen && !userBanStatusValue && (
+            <div className={cx(s.bookItMessage, s.spaceTop3)}>
               <p className={cx(s.noMargin, s.textCenter, s.textError)}>
                 <FormattedMessage {...messages.hostErrorMessage2} />
               </p>
             </div>
-          }
+          )}
         </FormGroup>
-        {
-          !maximumStay && !minimumStay && availability && isDateChosen && !userBanStatusValue && <BillDetails
-            basePrice={basePrice}
-            cleaningPrice={cleaningPrice}
-            currency={currency}
-            monthlyDiscount={monthlyDiscount}
-            weeklyDiscount={weeklyDiscount}
-            startDate={startDate}
-            endDate={endDate}
-            serviceFees={serviceFees}
-            base={base}
-            rates={rates}
-            taxRate={taxRate}
-          />
-        }
+        {!maximumStay &&
+          !minimumStay &&
+          availability &&
+          isDateChosen &&
+          !userBanStatusValue && (
+            <BillDetails
+              basePrice={basePrice}
+              cleaningPrice={cleaningPrice}
+              currency={currency}
+              monthlyDiscount={monthlyDiscount}
+              weeklyDiscount={weeklyDiscount}
+              startDate={startDate}
+              endDate={endDate}
+              serviceFees={serviceFees}
+              base={base}
+              rates={rates}
+              taxRate={taxRate}
+            />
+          )}
         <BookingButton
           listId={id}
           startDate={startDate}
@@ -236,20 +299,20 @@ class BookingForm extends Component {
   }
 }
 BookingForm = reduxForm({
-  form: 'BookingForm', // a unique name for this form
+  form: "BookingForm", // a unique name for this form
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
 })(BookingForm);
 // Decorate with connect to read form values
-const selector = formValueSelector('BookingForm'); // <-- same as form name
-const mapState = state => ({
+const selector = formValueSelector("BookingForm"); // <-- same as form name
+const mapState = (state) => ({
   isLoading: state.viewListing.isLoading,
   availability: state.viewListing.availability,
   maximumStay: state.viewListing.maximumStay,
   minimumStay: state.viewListing.minimumStay,
-  startDate: selector(state, 'startDate'),
-  endDate: selector(state, 'endDate'),
-  guests: Number(selector(state, 'guests')),
+  startDate: selector(state, "startDate"),
+  endDate: selector(state, "endDate"),
+  guests: Number(selector(state, "guests")),
   account: state.account.data,
   serviceFees: state.book.serviceFees,
   base: state.currency.base,
@@ -260,4 +323,6 @@ const mapState = state => ({
 const mapDispatch = {
   bookingProcess,
 };
-export default injectIntl(withStyles(s, bt)(connect(mapState, mapDispatch)(BookingForm)));
+export default injectIntl(
+  withStyles(s, bt)(connect(mapState, mapDispatch)(BookingForm))
+);

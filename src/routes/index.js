@@ -56,6 +56,11 @@ export default {
         import(/* webpackChunkName: 'manageListing' */ "./manageListing"),
     },
     {
+      path: "/my-listing",
+      load: () =>
+        import(/* webpackChunkName: 'manageListing' */ "./manageListings"),
+    },
+    {
       path: "/category",
       load: () =>
         import(/* webpackChunkName: 'manageListing' */ "./viewCategory/index"),

@@ -12,7 +12,7 @@ import userRegister from "./queries/userRegister";
 import userAccount from "./queries/userAccount";
 import userEditProfile from "./queries/userEditProfile";
 import showUserProfile from "./queries/showUserProfile";
-import getUsersProfile from "./queries/getUsersProfile";
+import getUserProfile from "./queries/getUserProfile";
 import locationItem from "./queries/locationItem";
 import createListing from "./queries/createListing";
 import showListing from "./queries/showListing";
@@ -593,7 +593,7 @@ const schema = new Schema({
       getHostListingDetailsById,
       getHostListingByUserId,
       getHostListingByCategory,
-      getUsersProfile,
+      getUserProfile,
     },
   }),
   mutation: new ObjectType({

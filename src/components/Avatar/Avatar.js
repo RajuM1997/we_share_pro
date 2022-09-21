@@ -1,14 +1,14 @@
 // General
-import React from 'react';
-import PropTypes from 'prop-types';
-import { graphql, gql, compose } from 'react-apollo';
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql, gql, compose } from "react-apollo";
 
 // Asset
-import defaultPic from '../../../public/SiteImages/defaultPic.png';
-import cx from 'classnames';
+import defaultPic from "../../../public/SiteImages/defaultPic.png";
+import cx from "classnames";
 
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Avatar.css';
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import s from "./Avatar.css";
 
 class Avatar extends React.Component {
   static propTypes = {
@@ -23,12 +23,12 @@ class Avatar extends React.Component {
     profilePictureData: PropTypes.shape({
       loading: PropTypes.bool,
       account: PropTypes.shape({
-        picture: PropTypes.string
-      })
+        picture: PropTypes.string,
+      }),
     }),
     isUser: PropTypes.bool,
     type: PropTypes.string,
-    staticImage: PropTypes.bool
+    staticImage: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -40,13 +40,13 @@ class Avatar extends React.Component {
     profilePictureData: {
       loading: true,
       userAccount: {
-        picture: null
-      }
+        picture: null,
+      },
     },
     isUser: false,
-    type: 'medium',
-    staticImage: false
-  }
+    type: "medium",
+    staticImage: false,
+  };
 
   render() {
     const {
@@ -58,21 +58,23 @@ class Avatar extends React.Component {
       withLink,
       linkClassName,
       profileId,
-      profilePictureData: {
-        loading, userAccount
-      },
+      profilePictureData: { loading, userAccount },
       isUser,
       type,
-      staticImage
+      staticImage,
     } = this.props;
-    const path = '/images/avatar/' + type + '_';
+    console.log(source);
+    const path = "/images/avatar/" + type + "_";
     let imgSource = defaultPic;
 
     if (isUser) {
       if (staticImage) {
         imgSource = source !== null ? source : defaultPic;
       } else if (!loading && userAccount != null) {
-        imgSource = userAccount.picture !== null ? path + userAccount.picture : defaultPic;
+        imgSource =
+          userAccount.picture !== null
+            ? path + userAccount.picture
+            : defaultPic;
       }
     } else {
       if (staticImage) {
@@ -81,10 +83,15 @@ class Avatar extends React.Component {
         imgSource = source !== null ? path + source : defaultPic;
       }
     }
+    console.log(imgSource);
 
     if (withLink) {
       return (
-        <a href={"/users/show/" + profileId} target="_blank" className={linkClassName}>
+        <a
+          href={"/users/show/" + profileId}
+          target="_blank"
+          className={linkClassName}
+        >
           <img
             src={imgSource}
             className={cx(s.imgBackground, className)}
@@ -105,26 +112,25 @@ class Avatar extends React.Component {
         />
       );
     }
-
   }
 }
 
 export default compose(
   withStyles(s),
-  graphql(gql`
+  graphql(
+    gql`
       query {
-          userAccount {
-              picture
-          }
+        userAccount {
+          picture
+        }
       }
     `,
     {
-      name: 'profilePictureData',
+      name: "profilePictureData",
       options: (props) => ({
         skip: !props.isUser,
-        ssr: false
-      })
-    }),
+        ssr: false,
+      }),
+    }
+  )
 )(Avatar);
-
-

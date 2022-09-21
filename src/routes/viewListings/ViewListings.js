@@ -28,6 +28,7 @@ import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConver
 import BookingModal from "../../components/ViewListings/BookingModal/BookingModal";
 import AutoAffix from "react-overlays/lib/AutoAffix";
 import Calendar from "../../components/ViewListing/Calendar/Calendar";
+import HostDetail from "../../components/ViewListing/HostDetail/HostDetail";
 
 // ES6 Imports
 import Scroll from "react-scroll"; // Imports all Mixins
@@ -35,6 +36,9 @@ import Scroll from "react-scroll"; // Imports all Mixins
 import messages from "../../locale/messages";
 
 import { openBookingModal } from "../../actions/BookingModal/modalActions";
+
+// graphql
+import getUserProfileQuery from "./getUserProfile.graphql";
 
 // Or Access Link,Element,etc as follows
 let Link = Scroll.Link;
@@ -51,9 +55,21 @@ class ViewListings extends React.Component {
       userId: PropTypes.string,
       userBanStatus: PropTypes.number,
     }),
+    getUserProfileData: PropTypes.shape({
+      loading: PropTypes.bool,
+      getUserProfileData: PropTypes.array,
+    }),
+    account: PropTypes.shape({
+      userId: PropTypes.string,
+      userBanStatus: PropTypes.number,
+    }),
   };
 
   static defaultProps = {
+    getUserProfileData: {
+      loading: true,
+      getUserProfileData: [],
+    },
     account: {
       userId: null,
       userBanStatus: 0,
@@ -95,12 +111,14 @@ class ViewListings extends React.Component {
     }
   }
   render() {
-    const { details, averageBasePrice } = this.props;
     const {
       account: { userId, userBanStatus },
+      getUserProfileData: { getUserProfile },
       isAdmin,
+      details,
+      guests,
     } = this.props;
-    console.log(userId);
+    console.log("users profile", details);
     const isBrowser = typeof window !== "undefined";
     const smallDevice = isBrowser
       ? window.matchMedia("(max-width: 640px)").matches
@@ -108,13 +126,24 @@ class ViewListings extends React.Component {
     let basePriceValue = details?.basePrice ? details?.basePrice : 0;
     let currencyValue = details?.currency ? details?.currency : "USD";
     const ListingBlockedDates = [];
-    let isHost = false;
     // if (UserListing) {
     //   if (userId && userId === UserListing.userId) {
     //     isHost = true;
     //   } else if (isAdmin) {
     //     isHost = true;
     //   }
+    // }
+    let isHost = false;
+    if (details) {
+      if (userId && userId === details?.userId) {
+        isHost = true;
+      } else if (isAdmin) {
+        isHost = true;
+      }
+    }
+    console.log("host", isHost);
+    // if (preview && !isHost) {
+    //   return <NotFound title={title} />;
     // }
     return (
       <div className={s.root}>
@@ -223,7 +252,10 @@ class ViewListings extends React.Component {
                               s.listingIntroSection
                             )}
                           >
-                            <ListingIntro details={details} />
+                            <ListingIntro
+                              details={details}
+                              getUserProfile={getUserProfile || {}}
+                            />
                           </Col>
                         </Row>
                       </Grid>
@@ -237,7 +269,7 @@ class ViewListings extends React.Component {
                         <AvailabilityCalendar
                           listId={details.listId}
                           smallDevice={smallDevice}
-                          // loading={ListingBlockedDates.loading}
+                          loading={ListingBlockedDates.loading}
                           blockedDates={
                             ListingBlockedDates.UserListing != null
                               ? ListingBlockedDates.UserListing.blockedDates
@@ -252,33 +284,33 @@ class ViewListings extends React.Component {
                           <Reviews />
                         </Grid>
                       </Element>
-                      {/* <Element name="test3" className="element">
-                          <Grid fluid>
-                            <HostDetail
-                              id={UserListing.id}
-                              userId={UserListing.userId}
-                              hostEmail={UserListing.user.email}
-                              personCapacity={UserListing.personCapacity}
-                              city={UserListing.city}
-                              listingData={UserListing.listingData || undefined}
-                              profile={UserListing.user.profile || undefined}
-                              blockedDates={
-                                ListingBlockedDates.UserListing != null
-                                  ? ListingBlockedDates.UserListing.blockedDates
-                                  : undefined
-                              }
-                              isHost={isHost}
-                              userBanStatus={userBanStatus}
-                              country={UserListing.country}
-                              urlParameters={{
-                                listTitle: UserListing.title,
-                                startDate,
-                                endDate,
-                                guests,
-                              }}
-                            />
-                          </Grid>
-                        </Element> */}
+                      <Element name="test3" className="element">
+                        <Grid fluid>
+                          <HostDetail
+                            id={details.listId}
+                            userId={getUserProfile?.userId}
+                            hostEmail={getUserProfile?.email}
+                            personCapacity={details.personCapacity}
+                            city={details.city}
+                            listingData={details || undefined}
+                            profile={getUserProfile || undefined}
+                            blockedDates={
+                              ListingBlockedDates.UserListing != null
+                                ? ListingBlockedDates.UserListing.blockedDates
+                                : undefined
+                            }
+                            isHost={isHost}
+                            userBanStatus={userBanStatus}
+                            country={details.country}
+                            urlParameters={{
+                              listTitle: details.itemTitle,
+                              // startDate,
+                              // endDate,
+                              guests,
+                            }}
+                          />
+                        </Grid>
+                      </Element>
                       <Element name="test4" className="element">
                         <Grid fluid className={cx(s.paddingTop2)}>
                           <LocationMap details={details} />
@@ -301,23 +333,23 @@ class ViewListings extends React.Component {
                         )}
                       >
                         <Calendar
-                          // id={UserListing.id}
-                          // loading={ListingBlockedDates.loading}
+                          id={details.id}
+                          loading={ListingBlockedDates.loading}
                           blockedDates={
                             ListingBlockedDates.UserListing != null
                               ? ListingBlockedDates.UserListing.blockedDates
                               : undefined
                           }
-                          // personCapacity={details.personCapacity}
+                          personCapacity={details?.personCapacity || []}
                           listingData={details || undefined}
-                          // isHost={isHost}
+                          isHost={isHost}
                           bookingType={details?.bookingType}
                           // userBanStatus={userBanStatus}
                           startDate={10}
                           endDate={10}
                           // reviewsCount={UserListing.reviewsCount}
                           // reviewsStarRating={UserListing.reviewsStarRating}
-                          // guests={guests}
+                          guests={guests}
                           country={details?.country}
                         />
                       </div>
@@ -457,20 +489,20 @@ class ViewListings extends React.Component {
                       className={cx(s.displayTableCell, s.displayBlockMobile)}
                     >
                       <BookingModal
-                      // id={UserListing.id}
-                      // loading={ListingBlockedDates.loading}
-                      // blockedDates={
-                      //   ListingBlockedDates.UserListing != null
-                      //     ? ListingBlockedDates.UserListing.blockedDates
-                      //     : undefined
-                      // }
-                      // personCapacity={UserListing.personCapacity}
-                      // listingData={UserListing.listingData || undefined}
-                      // isHost={isHost}
-                      // bookingType={UserListing.bookingType}
-                      // reviewsCount={UserListing.reviewsCount}
-                      // reviewsStarRating={UserListing.reviewsStarRating}
-                      // country={UserListing.country}
+                        id={details.id}
+                        loading={ListingBlockedDates.loading}
+                        blockedDates={
+                          ListingBlockedDates.UserListing != null
+                            ? ListingBlockedDates.UserListing.blockedDates
+                            : undefined
+                        }
+                        personCapacity={details?.personCapacity}
+                        listingData={details || undefined}
+                        isHost={isHost}
+                        bookingType={details?.bookingType}
+                        reviewsCount={details?.reviewsCount}
+                        reviewsStarRating={details?.reviewsStarRating}
+                        country={details?.country}
                       />
                       <Button
                         className={cx(s.btn, bt.btnPrimary, s.fullWidth)}
@@ -501,5 +533,17 @@ const mapDispatch = {
 };
 export default compose(
   withStyles(s, bt),
-  connect(mapState, mapDispatch)
+  connect(mapState, mapDispatch),
+  graphql(getUserProfileQuery, {
+    name: "getUserProfileData",
+    options: (props) =>
+      // console.log("grapgh", props?.account?.userId),
+      ({
+        variables: {
+          userId: props?.account?.userId,
+        },
+        fetchPolicy: "network-only",
+        ssr: false,
+      }),
+  })
 )(ViewListings);

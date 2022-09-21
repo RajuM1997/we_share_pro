@@ -99,6 +99,7 @@ class Calendar extends React.Component {
       guests,
       country,
       averageBasePrice,
+      listingData,
     } = this.props;
     const { reviewsCount, reviewsStarRating } = this.props;
 
@@ -212,6 +213,7 @@ class Calendar extends React.Component {
                   taxRate={taxRate}
                   guests={guests}
                   country={country}
+                  listingData={listingData}
                 />
                 <div>
                   <FormGroup

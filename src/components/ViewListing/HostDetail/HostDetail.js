@@ -1,27 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import React from "react";
+import PropTypes from "prop-types";
+import { FormattedMessage, injectIntl } from "react-intl";
 // Locale
-import messages from '../../../locale/messages';
+import messages from "../../../locale/messages";
 // Redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // External Component
-import moment from 'moment';
+import moment from "moment";
 // Style
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './HostDetail.css';
-import bt from '../../../components/commonStyle.css';
-import {
-  Button,
-  Row,
-} from 'react-bootstrap';
-import cx from 'classnames';
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import s from "./HostDetail.css";
+import bt from "../../../components/commonStyle.css";
+import { Button, Row } from "react-bootstrap";
+import cx from "classnames";
 // Component
-import Avatar from '../../Avatar';
-import ContactHost from '../ContactHost';
-import Link from '../../Link';
+import Avatar from "../../Avatar";
+import ContactHost from "../ContactHost";
+import Link from "../../Link";
 // Redux Action
-import { contactHostOpen } from '../../../actions/message/contactHostModal';
+import { contactHostOpen } from "../../../actions/message/contactHostModal";
 class HostDetail extends React.Component {
   static propTypes = {
     id: PropTypes.number.isRequired,
@@ -51,8 +48,8 @@ class HostDetail extends React.Component {
       startDate: PropTypes.string,
       endDate: PropTypes.string,
       guests: PropTypes.string,
-      listTitle: PropTypes.string
-    })
+      listTitle: PropTypes.string,
+    }),
   };
   static defaultProps = {
     id: 0,
@@ -66,24 +63,51 @@ class HostDetail extends React.Component {
       picture: null,
       location: null,
       createdAt: null,
-      info: null
+      info: null,
     },
     listingData: {
       minNight: 0,
-      maxNight: 0
+      maxNight: 0,
     },
     blockedDates: [],
     showContactHostModal: false,
     isHost: false,
     country: null,
-    urlParameters: null
-  }
+    urlParameters: null,
+  };
   render() {
-    const { contactHostOpen, isHost, hostEmail, userBanStatus, urlParameters } = this.props;
-    const { id, personCapacity, userId, city, blockedDates, country } = this.props;
-    const { profile: { profileId, displayName, firstName, lastName, picture, location, info, createdAt } } = this.props;
-    const { listingData: { minNight, maxNight, maxDaysNotice } } = this.props;
-    let joinedDate = createdAt != null ? moment(createdAt).format("MMMM YYYY") : '';
+    const {
+      contactHostOpen,
+      isHost,
+      hostEmail,
+      userBanStatus,
+      urlParameters,
+    } = this.props;
+    const {
+      id,
+      personCapacity,
+      userId,
+      city,
+      blockedDates,
+      country,
+    } = this.props;
+    const {
+      profile: {
+        profileId,
+        displayName,
+        firstName,
+        lastName,
+        picture,
+        location,
+        info,
+        createdAt,
+      },
+    } = this.props;
+    const {
+      listingData: { minNight, maxNight, maxDaysNotice },
+    } = this.props;
+    let joinedDate =
+      createdAt != null ? moment(createdAt).format("MMMM YYYY") : "";
     let initialValues = {
       listId: id,
       host: userId,
@@ -120,16 +144,25 @@ class HostDetail extends React.Component {
                 <div className={cx(s.displayTableCell, s.vrAlignTop)}>
                   <Link to={"/users/show/" + profileId}>
                     <h1 className={cx(s.titleText, s.space1)}>
-                      <FormattedMessage {...messages.hostedBy} /> {' '}  {firstName + ' ' + lastName}
+                      <FormattedMessage {...messages.hostedBy} />{" "}
+                      {firstName + " " + lastName}
                     </h1>
                   </Link>
-                  <p className={s.textMuted}>{location} · <FormattedMessage {...messages.joinedIn} /> {joinedDate}</p>
-                  <p><span className={cx(s.text)}>{info}</span></p>
-                  {
-                    !isHost && !userBanStatus && <Button className={cx(s.btn, bt.btnLarge, bt.btnPrimary)} onClick={() => contactHostOpen(id, urlParameters)}>
+                  <p className={s.textMuted}>
+                    {location} · <FormattedMessage {...messages.joinedIn} />{" "}
+                    {joinedDate}
+                  </p>
+                  <p>
+                    <span className={cx(s.text)}>{info}</span>
+                  </p>
+                  {!isHost && !userBanStatus && (
+                    <Button
+                      className={cx(s.btn, bt.btnLarge, bt.btnPrimary)}
+                      onClick={() => contactHostOpen(id, urlParameters)}
+                    >
                       <FormattedMessage {...messages.contactHost} />
                     </Button>
-                  }
+                  )}
                 </div>
                 <div className={s.displayTableCell}>
                   <div className={s.profileAvatarSection}>
@@ -154,9 +187,8 @@ class HostDetail extends React.Component {
     );
   }
 }
-const mapState = (state) => ({
-});
+const mapState = (state) => ({});
 const mapDispatch = {
-  contactHostOpen
+  contactHostOpen,
 };
 export default withStyles(s, bt)(connect(mapState, mapDispatch)(HostDetail));
