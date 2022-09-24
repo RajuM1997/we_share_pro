@@ -28,27 +28,24 @@ import messages from '../../../locale/messages';
 
 // Redux Actions
 import { checkAvailability } from '../../../actions/checkAvailability';
-import { getBlockedDates } from '../../../actions/Listing/getBlockedDates';
 import { getSpecialPricingData } from '../../../actions/Listing/getSpecialPricingData';
 
 import CustomizableCalendarDay from './CustomizableCalendarDay';
-import CustomDayContents from './CustomDayContents';
 import Loader from '../../../components/Loader';
 
 // Local
 import { isRTL } from '../../../helpers/formatLocale';
 import { getDateUsingTimeZone } from '../../../helpers/dateRange';
+import CustomDayContents from "./CustomDayContents";
 class AvailabilityCalendar extends React.Component {
   static propTypes = {
     listId: PropTypes.number.isRequired,
-    blockedDates: PropTypes.array,
     smallDevice: PropTypes.bool,
     verySmallDevice: PropTypes.bool,
     country: PropTypes.string
   };
 
   static defaultProps = {
-    blockedDates: [],
     listId: null,
     maxDaysNotice: 'unavailable',
     autoFocusEndDate: false,
@@ -76,38 +73,21 @@ class AvailabilityCalendar extends React.Component {
       focusedInput: props.autoFocusEndDate ? END_DATE : START_DATE,
       startDate: null,
       endDate: null,
-      blockedDatesSet: new Set(),
       smallDevice: false,
       load: true
     };
     this.onDatesChange = this.onDatesChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
-    this.isDayBlocked = this.isDayBlocked.bind(this);
-    this.onNextMonthChange = this.onNextMonthChange.bind(this);
-    this.onPrevMonthChange = this.onPrevMonthChange.bind(this);
     this.handleResize = this.handleResize.bind(this);
   }
 
   componentDidMount() {
-    const { blockedDates } = this.props;
-    const { smallDevice } = this.state;
-    const blockedDatesSet = new Set();
-
-    let windowHeight = isBrowser ? window.matchMedia('(max-width: 640px)').matches : undefined;
     let isBrowser = typeof window !== 'undefined';
     if (isBrowser) {
       this.handleResize();
       window.addEventListener('resize', this.handleResize);
 
     }
-    blockedDates.forEach(day => {
-      // we save the unique timestamp of that day
-      if (day.calendarStatus != 'available') {
-        blockedDatesSet.add(moment(day.blockedDates).format('YYYY-MM-DD'));
-      }
-    });
-
-    this.setState({ blockedDatesSet });
   }
 
   componentWillUnmount() {
@@ -118,18 +98,7 @@ class AvailabilityCalendar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { blockedDates, formStartDate, formEndDate } = nextProps;
-    const { blockedDatesSet } = this.state;
-
-    blockedDates.forEach(day => {
-      // we save the unique timestamp of that day
-      if (day.calendarStatus != 'available') {
-        blockedDatesSet.add(moment(day.blockedDates).format('YYYY-MM-DD'));
-      }
-    });
-
-    this.setState({ blockedDatesSet });
-
+    const { formStartDate, formEndDate } = nextProps;
     if (formStartDate && formEndDate) {
       this.setState({
         startDate: moment(formStartDate),
@@ -171,61 +140,6 @@ class AvailabilityCalendar extends React.Component {
     });
   }
 
-  isDayBlocked(day) {
-    const { blockedDatesSet } = this.state;
-    if (blockedDatesSet) {
-      return blockedDatesSet.has(moment(day).format('YYYY-MM-DD'));
-    } else {
-      return null;
-    }
-  }
-
-
-  async onNextMonthChange(e) {
-    const { getBlockedDates, listId, country } = this.props;
-    const { blockedDatesSet } = this.state;
-    let today = getDateUsingTimeZone(country, true);
-    let navigationDate = moment(e).format('YYYY-MM-DD');
-    let monthsDiff = moment(navigationDate).diff(moment(today), 'months');
-    //const blockedDatesSet = new Set();
-    if (monthsDiff && monthsDiff > 0) {
-      let isRangedMonth = Number(monthsDiff) % 5;
-      if (isRangedMonth === 0) {
-        const { data } = await getBlockedDates(listId, moment(navigationDate).startOf('month').format('YYYY-MM-DD'));
-        if (data && data.getBlockedDatesCalendar && data.getBlockedDatesCalendar.length > 0) {
-          data.getBlockedDatesCalendar.forEach(day => {
-            blockedDatesSet.add(moment(day.blockedDates).format('YYYY-MM-DD'));
-          });
-          this.setState({ blockedDatesSet });
-        }
-      }
-    }
-  }
-
-  async onPrevMonthChange(e) {
-    const { getBlockedDates, listId, country } = this.props;
-    const { blockedDatesSet } = this.state;
-    let today = getDateUsingTimeZone(country, true);
-    let navigationDate = moment(e).format('YYYY-MM-DD');
-    let monthsDiff = moment(navigationDate).diff(moment(today), 'months');
-    //const blockedDatesSet = new Set();
-    let filterDate = moment(e).add(-5, 'months');
-
-    if (monthsDiff && monthsDiff > 0) {
-      let isRangedMonth = Number(monthsDiff) % 4;
-      if (isRangedMonth === 0) {
-        const { data } = await getBlockedDates(listId, moment(filterDate).startOf('month').format('YYYY-MM-DD'));
-        if (data && data.getBlockedDatesCalendar && data.getBlockedDatesCalendar.length > 0) {
-          data.getBlockedDatesCalendar.forEach(day => {
-            blockedDatesSet.add(moment(day.blockedDates).format('YYYY-MM-DD'));
-          });
-          this.setState({ blockedDatesSet });
-        }
-      }
-    }
-
-  }
-
   handleResize(e) {
     let isBrowser = typeof window !== 'undefined';
     let smallDevice = isBrowser ? window.matchMedia('(max-width: 767px)').matches : false;
@@ -237,7 +151,7 @@ class AvailabilityCalendar extends React.Component {
     const { verySmallDevice, listId } = this.props;
     const { smallDevice } = this.state;
     const { listingData, locale } = this.props;
-    const { loading, blockedDates, country } = this.props;
+    const { loading, country } = this.props;
 
     const { formatMessage } = this.props.intl;
     let numberOfMonths = (smallDevice) ? 1 : 2;
@@ -306,10 +220,7 @@ class AvailabilityCalendar extends React.Component {
                   minimumNights={minNight > 0 ? minNight : 1}
                   onOutsideClick={() => { console.log('outside click') }}
                   renderCalendarDay={props => <CustomizableCalendarDay {...props} />}
-                  // renderDayContents={day => <CustomDayContents day={day} startDate={startDate} endDate={endDate} minimumNights={minNight > 0 ? minNight : 1} />}
-                  isDayBlocked={day => this.isDayBlocked(day)}
-                  onPrevMonthClick={(props) => { this.onPrevMonthChange(props) }}
-                  onNextMonthClick={(props) => { this.onNextMonthChange(props) }}
+                  renderDayContents={day => <CustomDayContents day={day} startDate={startDate} endDate={endDate} minimumNights={minNight > 0 ? minNight : 1} />}
                   transitionDuration={0}
                   anchorDirection={isRTL(locale) ? 'right' : 'left'}
                   isRTL={isRTL(locale)}
@@ -335,7 +246,6 @@ const mapState = state => ({
 const mapDispatch = {
   change,
   checkAvailability,
-  getBlockedDates,
   getSpecialPricingData
 };
 
