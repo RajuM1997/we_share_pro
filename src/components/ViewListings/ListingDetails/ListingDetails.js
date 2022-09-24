@@ -22,6 +22,7 @@ import ListItem from "./ListItem";
 import Link from "../../Link";
 
 import ListBedTypes from "./ListBedTypes";
+import {getFieldsBySubCategory, getPageFieldBySubCategory} from "../../../helpers/graphQLHelper";
 
 class ListingDetails extends React.Component {
   static defaultProps = {
@@ -33,6 +34,7 @@ class ListingDetails extends React.Component {
     super(props);
     this.state = {
       open: false,
+      listingData: [],
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -41,20 +43,62 @@ class ListingDetails extends React.Component {
     this.setState({ open: !this.state.open });
   }
 
+  fetchPageData(subCategoryId) {
+    try {
+      const dynamicFields = JSON.parse(this.props.details?.dynamicFields);
+      const data = [];
+      if (dynamicFields && typeof dynamicFields === "object") {
+        getPageFieldBySubCategory(subCategoryId).then(pageData => {
+          getFieldsBySubCategory(subCategoryId).then(fieldsData => {
+            // this.setState({ fieldsData: data })
+            for (const [key, value] of Object.entries(dynamicFields)) {
+              const fields = [];
+              const page = pageData.find(page => page.id === Number(key));
+              const pageTitle = page?.title;
+              if(value && typeof value === 'object') {
+                for (const [childKey, childValue] of Object.entries(value)) {
+                  const field = fieldsData.find(field => field.name === childKey);
+                  const fieldTitle = field?.title;
+                  if(typeof childValue === 'object' && childValue?.length){
+                    fields.push({
+                      fieldTitle: fieldTitle,
+                      values: childValue.join(','),
+                    })
+                  } else {
+                    fields.push({
+                      fieldTitle: fieldTitle,
+                      values: childValue,
+                    })
+                  }
+
+                }
+              }
+              data.push({
+                pageTitle: pageTitle,
+                fields,
+              })
+            }
+            if (data?.length > 0) {
+              this.setState({listingData: data});
+            }
+          }).catch(e => {
+          })
+        }).catch(e => {
+        })
+      }
+    } catch (e) {
+
+    }
+  }
+
+  componentDidMount() {
+    this.fetchPageData(this.props.details.subCategoryId)
+  }
+
   render() {
     const { open } = this.state;
-    const { formatMessage } = this.props.intl;
-    const data = JSON.parse(details.dynamicFields);
-    const { details, getPageFieldsData } = this.props;
-    console.log("hosting details", details);
-    console.log("getPageFieldsData", getPageFieldsData);
-    console.log("dynamicFields", data);
-    // const listItemsData = Object.assign({}, data.houseRules);
-
-    const listItemsData = data?.houseRules?.reduce((acc, cur, i) => {
-      return { ...acc, [i]: cur };
-    }, {});
-    console.log("array to obj", listItemsData);
+    const { details} = this.props;
+    const data = {};
     return (
       <Row className={cx(s.pageContent)}>
         <div className={cx(s.horizontalLineThrough)}>
@@ -68,7 +112,6 @@ class ListingDetails extends React.Component {
                 {" "}
                 {details?.itemDescription.slice(0, 150)}
               </span>
-              {/* <span className={cx(s.subText, s.lineBreak)}> firstArray</span>) */}
               <span>
                 <Collapse in={open}>
                   <div>
@@ -125,120 +168,37 @@ class ListingDetails extends React.Component {
 
           <hr />
         </div>
-        <div className={cx(s.horizontalLineThrough)}>
-          <Row>
-            <Col xs={12} sm={12} md={12} lg={12} className={cx(s.space1)}>
-              <p className={s.textMutedNew}>
-                <FormattedMessage {...messages.theSpace} />
-              </p>
-            </Col>
-            <Col xs={12} sm={12} md={12} lg={12}>
-              <Row>
-                <Col md={12} lg={12}>
-                  <p className={s.splitList}>
-                    <span className={cx(s.text)}>
-                      <FormattedMessage {...messages.accommodates} />:{" "}
-                      <strong>{data?.personCapacity}</strong>
-                    </span>
-                  </p>
-                  <p className={s.splitList}>
-                    <span className={cx(s.text)}>
-                      <FormattedMessage {...messages.bathrooms} />:{" "}
-                      <strong>{data?.bathrooms}</strong>
-                    </span>
-                  </p>
-                  <p className={s.splitList}>
-                    <span className={cx(s.text)}>
-                      <FormattedMessage {...messages.bedrooms} />:{" "}
-                      <strong>{data?.bedrooms}</strong>
-                    </span>
-                  </p>
-                  {/* <p>
-                    <span className={cx(s.text)}>
-                      <FormattedMessage {...messages.beds} />: <strong>{beds}</strong>
-                    </span>
-                  </p> */}
+        {
+          this.state.listingData?.map(ele => (
+              <div className={cx(s.horizontalLineThrough)}>
+                <Row>
+                  <Col xs={12} sm={12} md={12} lg={12} className={cx(s.space1)}>
+                    <p className={s.textMutedNew}>
+                      {ele?.pageTitle}
+                    </p>
+                  </Col>
+                  <Col xs={12} sm={12} md={12} lg={12}>
+                    <Row>
+                      <Col md={12} lg={12}>
+                    {
+                      ele?.fields?.map(field => (
+                          <p className={s.splitList}>
+                            <span className={cx(s.text)}>
+                              {field?.fieldTitle} :{" "}
+                              <strong>{field?.values}</strong>
+                            </span>
+                          </p>
+                      ))
+                    }
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
 
-                  <p className={s.splitList}>
-                    <span className={cx(s.text)}>
-                      <FormattedMessage {...messages.checkIn} />:{" "}
-                      <strong>{data?.checkInStart}</strong>
-                    </span>
-                  </p>
-                  <p className={s.splitList}>
-                    <span className={cx(s.text)}>
-                      <FormattedMessage {...messages.propertyType} />:{" "}
-                      <strong>{data?.houseType}</strong>
-                    </span>
-                  </p>
-                  <p className={s.splitList}>
-                    <span className={cx(s.text)}>
-                      <FormattedMessage {...messages.roomType} />:{" "}
-                      <strong>{data?.bathroomType}</strong>
-                    </span>
-                  </p>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-          <hr />
-        </div>
-
-        <div>
-          {" "}
-          <ListBedTypes
-            // itemList={listBedTypes}
-            // label={formatMessage(messages.beds)}
-            data={data}
-          />
-          <div xs={12} sm={12} md={12} lg={12}>
-            <hr />
-          </div>
-        </div>
-        <div>
-          {" "}
-          <ListItem
-            label={formatMessage(messages.sharedSpaces)}
-            showLabel={formatMessage(messages.showAllSharedSpaces)}
-            hideLabel={formatMessage(messages.closeAllSharedSpaces)}
-            icon={false}
-            data={data}
-            itemName={""}
-          />
-          <div>
-            <hr />
-          </div>
-        </div>
-
-        <div>
-          {" "}
-          <ListItem
-            label={formatMessage(messages.aminities)}
-            showLabel={formatMessage(messages.showAmenities)}
-            hideLabel={formatMessage(messages.closeAmenities)}
-            icon={true}
-            data={data}
-            itemName={""}
-          />
-          <div>
-            <hr />
-          </div>
-        </div>
-        <div>
-          {" "}
-          <ListItem
-            label={formatMessage(messages.houseRules)}
-            showLabel={formatMessage(messages.showAllHouseRules)}
-            hideLabel={formatMessage(messages.closeHouseRules)}
-            icon={false}
-            data={data}
-            itemName={""}
-          />
-          <div>
-            <hr />
-          </div>
-        </div>
-
+                <hr />
+              </div>
+          ))
+        }
         <div className={cx(s.horizontalLineThrough)}>
           <Row>
             <Col xs={12} sm={12} md={12} lg={12} className={cx(s.space1)}>
@@ -260,8 +220,6 @@ class ListingDetails extends React.Component {
                   <div className={cx(s.listingFontSize, s.showHideMargin)}>
                     <Link
                       to="/cancellation-policies/"
-                      // +data.listingData.cancellation.policyName
-
                       className={cx(s.sectionCaptionLink)}
                     >
                       <FormattedMessage {...messages.viewDetails} />
@@ -271,14 +229,6 @@ class ListingDetails extends React.Component {
               </Row>
             </Col>
           </Row>
-          <hr />
-        </div>
-
-        <div>
-          <ListItem />
-          <div>
-            <hr />
-          </div>
         </div>
       </Row>
     );

@@ -52,10 +52,6 @@ var durationFn = function(deltaTop) {
 };
 class ViewListings extends React.Component {
   static propTypes = {
-    account: PropTypes.shape({
-      userId: PropTypes.string,
-      userBanStatus: PropTypes.number,
-    }),
     getUserProfileData: PropTypes.shape({
       loading: PropTypes.bool,
       getUserProfileData: PropTypes.array,
@@ -80,9 +76,6 @@ class ViewListings extends React.Component {
       userBanStatus: 0,
     },
     isAdmin: false,
-    getPageFieldsData: {
-      loading: true,
-    },
   };
 
   getPhotosData() {
@@ -122,13 +115,10 @@ class ViewListings extends React.Component {
     const {
       account: { userId, userBanStatus },
       getUserProfileData: { getUserProfile },
-      getPageFieldsData,
       isAdmin,
       details,
       guests,
     } = this.props;
-    console.log("users profile", details);
-    console.log("users profile", getPageFieldsData);
     const isBrowser = typeof window !== "undefined";
     const smallDevice = isBrowser
       ? window.matchMedia("(max-width: 640px)").matches
@@ -275,9 +265,6 @@ class ViewListings extends React.Component {
                       >
                         <ListingDetails
                           details={details}
-                          getPageFieldsData={
-                            getPageFieldsData.getPageFieldAdmin
-                          }
                         />
                       </Grid>
                       <Grid fluid className={"availabilityMobile"}>
@@ -549,12 +536,6 @@ const mapDispatch = {
 export default compose(
   withStyles(s, bt),
   connect(mapState, mapDispatch),
-  graphql(getPageFieldsQuery, {
-    name: "getPageFieldsData",
-    options: {
-      ssr: true,
-    },
-  }),
   graphql(getUserProfileQuery, {
     name: "getUserProfileData",
     options: (props) =>
