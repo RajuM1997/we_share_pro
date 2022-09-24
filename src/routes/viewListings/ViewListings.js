@@ -148,7 +148,6 @@ class ViewListings extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          {/*<pre>{JSON.stringify(this.props, null, 4)}</pre>*/}
           <div className={s.pageContainer}>
             <Photos data={this.getPhotosData()} />
             <Element name="test1" className="element">

@@ -77,7 +77,8 @@ const submit = async (values) => {
                 availabilityStart: $availabilityStart,
                 availabilityEnd: $availabilityEnd,
             ) {
-                status
+                status,
+                id
             }
           }
         `;
@@ -109,10 +110,9 @@ const submit = async (values) => {
     });
     try {
       const { data } = await resp.json();
-      console.log(data);
       if (data?.createHostListing?.status === "200") {
         toastr.success("Listing", "Successfully Added!");
-        // history.push("/siteadmin/category");
+        return data?.createHostListing;
       } else {
         toastr.error("Listing", "Failed to Added");
       }
