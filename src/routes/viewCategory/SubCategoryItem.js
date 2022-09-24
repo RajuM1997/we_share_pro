@@ -97,7 +97,8 @@ class SubCategoryItem extends Component {
                         <div className={s.review}>
                           <p>
                             <span className={s.category_price}>
-                              {data?.basePrice} / {data?.serviceUnit}
+                              {data?.currency}.{""} {data?.basePrice} /{" "}
+                              {data?.serviceUnit}
                             </span>
                             <br />
                             {/* <span className={s.totalPrice}>10,088 total</span> */}

@@ -429,7 +429,10 @@
 .customBorder[type="checkbox"]:checked:before {
   color: rgb(81, 81, 236) !important;
 }
-
+.jumboSelect {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+}
 .listPhotoCover {
   display: block;
   height: 185px;

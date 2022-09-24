@@ -53,7 +53,8 @@ export function deletePageField(id) {
           type: ADMIN_DELETE_PAGE_FIELD_SUCCESS,
         });
         toastr.success("Delete Page Field", "Deleted successfully!");
-        history.push("/siteadmin/fieldSetting");
+        // history.push("/siteadmin/fieldSetting");
+        window.location.reload();
       } else {
         toastr.error("Delete Page Field", "Deletion failed!");
       }

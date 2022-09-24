@@ -47,12 +47,13 @@ export function deleteFields(id) {
         refetchQueries: [{ query }],
       });
 
-      if (data.Fields.status == "200") {
+      if (data.deleteFields.status == "200") {
         dispatch({
           type: ADMIN_DELETE_FIELDS_SUCCESS,
         });
         toastr.success("Delete Fields", "Deleted successfully!");
-        history.push("/siteadmin");
+        // history.push("/siteadmin");
+        window.location.reload();
       } else {
         toastr.error("Delete Fields", "Deletion failed!");
       }

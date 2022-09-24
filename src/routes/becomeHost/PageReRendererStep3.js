@@ -329,7 +329,7 @@ class PageReRendererStep3 extends Component {
                                 }}
                               >
                                 <option value="" selected disabled>
-                                  Please Select
+                                  Select a Booking Time
                                 </option>
                                 {bookingNoticeTime.map((value, key) => {
                                   return (
@@ -370,7 +370,7 @@ class PageReRendererStep3 extends Component {
                                 }}
                               >
                                 <option value="" selected disabled>
-                                  Please Select
+                                  Select a Notice Start
                                 </option>
                                 {sideMenuData?.map((ele) => (
                                   <option value={ele.title} key={ele.title}>
@@ -400,7 +400,7 @@ class PageReRendererStep3 extends Component {
                                 }}
                               >
                                 <option value="" selected disabled>
-                                  Please Select
+                                  Select a Notice End
                                 </option>
                                 {sideMenuData?.map((ele) => (
                                   <option value={ele.title} key={ele.title}>
@@ -436,7 +436,7 @@ class PageReRendererStep3 extends Component {
                                 }}
                               >
                                 <option value="" selected disabled>
-                                  Please Select
+                                  Select a Notice
                                 </option>
                                 <option value={"available"}>
                                   {formatMessage(messages.datesOption5)}
@@ -480,7 +480,7 @@ class PageReRendererStep3 extends Component {
                                 }}
                               >
                                 <option value="" selected disabled>
-                                  Please Select
+                                  Select a cancellation Policy
                                 </option>
                                 <option value={"1"}>
                                   {formatMessage(messages.flexible)}
@@ -532,7 +532,7 @@ class PageReRendererStep3 extends Component {
                                         }}
                                       >
                                         <option value="" selected disabled>
-                                          Please Select
+                                          Select a Service Unit
                                         </option>
                                         <option value="daily">Daily</option>
                                         <option value="weekly">Weekly</option>
@@ -557,7 +557,7 @@ class PageReRendererStep3 extends Component {
                                         }}
                                       >
                                         <option value="" selected disabled>
-                                          Please Select
+                                          Select Min Unit
                                         </option>
                                         <option value={1}>1</option>
                                       </select>
@@ -579,7 +579,7 @@ class PageReRendererStep3 extends Component {
                                         }}
                                       >
                                         <option value="" selected disabled>
-                                          Please Select
+                                          Select Max Unit
                                         </option>
                                         <option value={1}>1</option>
                                       </select>
@@ -643,7 +643,7 @@ class PageReRendererStep3 extends Component {
                                 }}
                               >
                                 <option value="" selected disabled>
-                                  Please Select
+                                  Select a Currency
                                 </option>
                                 {availableCurrencies.map((currency, key) => {
                                   if (currency.isEnable === true) {
@@ -969,7 +969,7 @@ class PageReRendererStep3 extends Component {
                 <h3 className={s.landingContentTitle}>
                   <FormattedMessage {...messages.calendar} />
                 </h3>
-                <div className={s.lableWeight}>
+                {/* <div className={s.lableWeight}>
                   <p className={cx(s.bookedWidth)}>
                     <span
                       className={cx(s.notAvailableColor, "availableRTl")}
@@ -980,20 +980,10 @@ class PageReRendererStep3 extends Component {
                     <span className={cx(s.bookedColor, "availableRTl")}></span>
                     <FormattedMessage {...messages.notAvailable} />
                   </p>
-                  <p className={s.calenderColorText}>
-                    <span
-                      className={cx(s.availableColor, "availableRTl")}
-                    ></span>
-                    <FormattedMessage {...messages.availableLabel} />
-                  </p>
-                  <p className={s.calenderColorText}>
-                    <span className={cx(s.specialColor, "availableRTl")}></span>
-                    <FormattedMessage {...messages.sessionPrice} />
-                  </p>
-                </div>
-                <h3 className={s.landingStep3}>
+                </div> */}
+                {/* <h3 className={s.landingStep3}>
                   <FormattedMessage {...messages.unBlockInfo} />
-                </h3>
+                </h3> */}
                 <form>
                   <div className={s.landingMainContent}>
                     <FormGroup className={cx(s.formGroup, s.posRelative)}>
@@ -1018,7 +1008,7 @@ class PageReRendererStep3 extends Component {
           </Row>
         )}
         {fieldType === "calendar" && (
-          <FormGroup className={s.formGroup}>
+          <FormGroup className={s.formGroup} style={{ marginBottom: "83px" }}>
             <Col xs={12} sm={12} md={12} lg={12} className={s.noPadding}>
               <Button
                 className={cx(

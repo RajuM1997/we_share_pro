@@ -141,7 +141,7 @@ class PageReRendererStep1 extends Component {
       countryList,
       handleCompleteStep,
     } = this.props;
-    console.log(countryList.getCountries);
+    // console.log(countryList.getCountries);
     const {} = this.state;
     const { formatMessage } = this.props.intl;
     const fieldType = currentPageData?.fields?.[0]?.type;
@@ -164,7 +164,7 @@ class PageReRendererStep1 extends Component {
                       </h3>
                       <p className={s.maximumCharColor}>
                         {" "}
-                        <FormattedMessage {...messages.maximumCharcterLeft} />
+                        {/* <FormattedMessage {...messages.maximumCharcterLeft} /> */}
                       </p>
                       <FormGroup className={s.formGroup}>
                         <input
@@ -263,7 +263,7 @@ class PageReRendererStep1 extends Component {
                             }}
                           >
                             <option value="" selected disabled>
-                              Please Select
+                              Please Select Country
                             </option>
                             {countryList.getCountries?.map((item) => {
                               console.log("country", item);
@@ -337,7 +337,13 @@ class PageReRendererStep1 extends Component {
                           </Col>
                         </Row>
                         <Row>
-                          <Col xs={12} sm={6} md={6} lg={6}>
+                          <Col
+                            xs={12}
+                            sm={6}
+                            md={6}
+                            lg={6}
+                            style={{ marginLeft: "7px" }}
+                          >
                             <ControlLabel className={s.landingLabel}>
                               <FormattedMessage {...messages.zipcode} />
                             </ControlLabel>

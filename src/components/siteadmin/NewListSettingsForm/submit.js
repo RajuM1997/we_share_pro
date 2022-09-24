@@ -10,6 +10,8 @@ import { getAdminListingSettings } from "../../../actions/siteadmin/getAdminList
 
 async function submit(values, dispatch, fields) {
   console.log(values);
+  const { subCategoryId } = values;
+  console.log("subCategoryId", subCategoryId);
   if (values == null) {
     toastr.error("Error Occured", "Please Add page Field");
   } else {
@@ -53,7 +55,9 @@ async function submit(values, dispatch, fields) {
 
     if (data?.addFields?.status === "success") {
       toastr.success("Page Field", "Successfully Added!");
-      // history.push("/siteadmin/category");
+      // history.push(`/siteadmin/category`);
+      // history.push(`/siteadmin/fields/${subCategoryId}`);
+      window.location.reload();
     } else {
       toastr.error("Page Field", "Failed to create");
     }
