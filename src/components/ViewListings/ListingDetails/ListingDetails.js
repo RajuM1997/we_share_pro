@@ -45,15 +45,7 @@ class ListingDetails extends React.Component {
     const { open } = this.state;
     const { formatMessage } = this.props.intl;
     const { details } = this.props;
-    console.log("hosting details", details);
     const data = JSON.parse(details.dynamicFields);
-    console.log(data);
-    // const listItemsData = Object.assign({}, data.houseRules);
-
-    const listItemsData = data?.houseRules?.reduce((acc, cur, i) => {
-      return { ...acc, [i]: cur };
-    }, {});
-    // console.log("array to obj", listItemsData.value);
     return (
       <Row className={cx(s.pageContent)}>
         <div className={cx(s.horizontalLineThrough)}>
@@ -212,7 +204,6 @@ class ListingDetails extends React.Component {
         <div>
           {" "}
           <ListItem
-            // itemList={userAmenities}
             label={formatMessage(messages.aminities)}
             showLabel={formatMessage(messages.showAmenities)}
             hideLabel={formatMessage(messages.closeAmenities)}
@@ -227,13 +218,12 @@ class ListingDetails extends React.Component {
         <div>
           {" "}
           <ListItem
-            // itemList={houseRules}
             label={formatMessage(messages.houseRules)}
             showLabel={formatMessage(messages.showAllHouseRules)}
             hideLabel={formatMessage(messages.closeHouseRules)}
             icon={false}
             data={data}
-            itemName={listItemsData[0]}
+            itemName={""}
           />
           <div>
             <hr />
