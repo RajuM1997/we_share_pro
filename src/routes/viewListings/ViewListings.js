@@ -265,6 +265,13 @@ class ViewListings extends React.Component {
                       >
                         <ListingDetails
                           details={details}
+                          isHost={isHost}
+                          urlParameters={{
+                            listTitle: details.itemTitle,
+                            // startDate,
+                            // endDate,
+                            guests,
+                          }}
                         />
                       </Grid>
                       <Grid fluid className={"availabilityMobile"}>
@@ -538,14 +545,15 @@ export default compose(
   connect(mapState, mapDispatch),
   graphql(getUserProfileQuery, {
     name: "getUserProfileData",
-    options: (props) =>
-      // console.log("grapgh", props?.account?.userId),
-      ({
+    options: (props) => (
+      console.log("grapgh", props?.details?.userId),
+      {
         variables: {
-          userId: props?.account?.userId,
+          userId: props?.details?.userId,
         },
         fetchPolicy: "network-only",
         ssr: false,
-      }),
+      }
+    ),
   })
 )(ViewListings);

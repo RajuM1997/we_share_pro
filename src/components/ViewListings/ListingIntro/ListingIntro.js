@@ -51,14 +51,18 @@ class ListingIntro extends React.Component {
                 </span>
               </div>
             </div>
-            <div className={cx(s.space2, "visible-xs")}>
+            {/* <div className={cx(s.space2, "visible-xs")}>
               <div className={s.displayTable}>
-                {/* <div className={cx(s.displayTableCell, s.vrAlignBottom)}>
-                  <a className={s.textMuted}>{data.city}, {data.state}, {data.country}</a>
-                  <div className={'visible-xs'}>
-                    <span><StarRating name={'review'} value={starRatingValue} /></span>
+                <div className={cx(s.displayTableCell, s.vrAlignBottom)}>
+                  <a className={s.textMuted}>
+                    {data.city}, {data.state}, {data.country}
+                  </a>
+                  <div className={"visible-xs"}>
+                    <span>
+                      <StarRating name={"review"} value={starRatingValue} />
+                    </span>
                   </div>
-                </div> */}
+                </div>
                 <div className={s.displayTableCell}>
                   <div className={cx(s.profileAvatarSection, s.mobileBg)}>
                     <Avatar
@@ -72,16 +76,16 @@ class ListingIntro extends React.Component {
                     />
                   </div>
                   <p className={cx("text-center", s.hostNameText)}>
-                    {/* <Link to={"/users/show/" + data.user.profile.profileId}>
+                    <Link to={"/users/show/" + data.user.profile.profileId}>
                       <span className={cx(s.textMuted)}>
                         {data.user.profile.firstName}
                       </span>
-                    </Link> */}
+                    </Link>
                   </p>
                 </div>
               </div>
-            </div>
-            <div className={cx(s.displayTable)}>
+            </div> */}
+            {/* <div className={cx(s.displayTable)}>
               <div className={s.displayTableRow}>
                 <div
                   className={cx(
@@ -111,9 +115,9 @@ class ListingIntro extends React.Component {
                           <FormattedMessage {...messages.roomType} />
                         </div>
                         <div>
-                          {/* {data.settingsData &&
+                           {data.settingsData &&
                             data.settingsData.length > 0 &&
-                            data.settingsData[0].listsettings.itemName} */}
+                            data.settingsData[0].listsettings.itemName} 
                         </div>
                       </div>
                     </div>
@@ -140,7 +144,7 @@ class ListingIntro extends React.Component {
                         className={cx(s.displayTableCell, s.introTextPadding)}
                       >
                         <div className={cx(s.textMutedNew)}>
-                          {/* Guest */}
+                          Guest
                           <FormattedMessage {...messages.guest} />
                         </div>
                         <div>{formatMessage(messages.guests)}</div>
@@ -149,8 +153,8 @@ class ListingIntro extends React.Component {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className={cx(s.displayTable)}>
+            </div> */}
+            {/* <div className={cx(s.displayTable)}>
               <div className={s.displayTableRow}>
                 <div
                   className={cx(
@@ -214,7 +218,7 @@ class ListingIntro extends React.Component {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* {data.residenceType === "1" && (
               <div className={cx(s.displayTable)}>

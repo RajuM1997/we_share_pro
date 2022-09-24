@@ -1,30 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 // Assets
-import mediumNoImage from '../../../public/SiteImages/medium_no_image.png';
-import largeNoImage from '../../../public/SiteImages/large_no_image.jpeg';
+import mediumNoImage from "../../../public/SiteImages/medium_no_image.png";
+import largeNoImage from "../../../public/SiteImages/large_no_image.jpeg";
 
 // components
-import LazyLoadImage from '../LazyLoadImage';
+import LazyLoadImage from "../LazyLoadImage";
 
 class ListCoverPhoto extends React.Component {
   static propTypes = {
     coverPhoto: PropTypes.number,
     listPhotos: PropTypes.array,
     className: PropTypes.string,
-    bgImage: PropTypes.bool
+    bgImage: PropTypes.bool,
   };
 
   static defaultProps = {
     bgImage: false,
-    lazyLoad: false
-  }
+    lazyLoad: false,
+  };
 
   constructor(props) {
     super(props);
     this.state = {
-      photo: null
+      photo: null,
     };
   }
 
@@ -38,7 +38,7 @@ class ListCoverPhoto extends React.Component {
           if (item.id === coverPhoto) {
             activePhoto = item.name;
           }
-        })
+        });
       }
       this.setState({ photo: activePhoto });
     }
@@ -54,7 +54,7 @@ class ListCoverPhoto extends React.Component {
           if (item.id === coverPhoto) {
             activePhoto = item.name;
           }
-        })
+        });
       }
       this.setState({ photo: activePhoto });
     }
@@ -63,11 +63,12 @@ class ListCoverPhoto extends React.Component {
   render() {
     const { className, photoType, bgImage, lazyLoad } = this.props;
     const { photo } = this.state;
-    let path = '', source;
+    let path = "",
+      source;
     if (photo != null) {
       source = photo;
       if (photoType != undefined) {
-        path = '/images/upload/' + photoType + '_';
+        path = "/images/upload/" + photoType + "_";
       }
     } else {
       if (photoType != undefined) {
@@ -77,32 +78,39 @@ class ListCoverPhoto extends React.Component {
           source = mediumNoImage;
         }
       } else {
-        source = mediumNoImage
+        source = mediumNoImage;
       }
     }
     console.log("props", this.props);
     return (
-        <div className={className} style={{ backgroundImage: `url(${path}${source})` }}>
-          <p>Lo</p>
-        </div>
+      <div
+        className={className}
+        style={{ backgroundImage: `url(${path}${source})` }}
+      ></div>
     );
     if (lazyLoad && bgImage) {
       return (
-          <LazyLoadImage
-              src={`${path}${source}`}
-              placeholderSrc={'/images/upload/placeholder_' + source}
-              className={className}
-          />
+        <LazyLoadImage
+          src={`${path}${source}`}
+          placeholderSrc={"/images/upload/placeholder_" + source}
+          className={className}
+        />
       );
     } else if (bgImage) {
       return (
-          <div className={className} style={{ backgroundImage: `url(${path}${source})` }}>
-            {this.props.children}
-          </div>
+        <div
+          className={className}
+          style={{ backgroundImage: `url(${path}${source})` }}
+        >
+          {this.props.children}
+        </div>
       );
     } else {
       return (
-          <div className={className} style={{ backgroundImage: `url(${path + source})` }} />
+        <div
+          className={className}
+          style={{ backgroundImage: `url(${path + source})` }}
+        />
       );
     }
   }
