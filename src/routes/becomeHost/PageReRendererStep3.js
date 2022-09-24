@@ -482,15 +482,11 @@ class PageReRendererStep3 extends Component {
                                 <option value="" selected disabled>
                                   Select a cancellation Policy
                                 </option>
-                                <option value={"1"}>
-                                  {formatMessage(messages.flexible)}
-                                </option>
-                                <option value={"2"}>
-                                  {formatMessage(messages.moderate)}
-                                </option>
-                                <option value={"3"}>
-                                  {formatMessage(messages.strict)}
-                                </option>
+                                {sideMenuData?.map((ele) => (
+                                    <option value={ele.title} key={ele.title}>
+                                      {ele.title}
+                                    </option>
+                                ))}
                               </select>
                             </FormGroup>
                           </div>
@@ -559,7 +555,11 @@ class PageReRendererStep3 extends Component {
                                         <option value="" selected disabled>
                                           Select Min Unit
                                         </option>
-                                        <option value={1}>1</option>
+                                        {
+                                          Array(100).fill(0).map((e,i)=>(
+                                              <option value={i+1}>{i+1}</option>
+                                          ))
+                                        }
                                       </select>
                                     </FormGroup>
 
@@ -581,7 +581,11 @@ class PageReRendererStep3 extends Component {
                                         <option value="" selected disabled>
                                           Select Max Unit
                                         </option>
-                                        <option value={1}>1</option>
+                                        {
+                                          Array(100).fill(0).map((e,i)=>(
+                                              <option value={i+1}>{i+1}</option>
+                                          ))
+                                        }
                                       </select>
                                     </FormGroup>
                                   </div>

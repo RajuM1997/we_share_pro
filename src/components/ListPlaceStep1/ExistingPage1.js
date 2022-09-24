@@ -50,11 +50,10 @@ class ExistingPage1 extends Component {
       currentStep,
       handleOnNextStep,
       handleCompleteHostListing,
-      shawButton,
+      listingId,
     } = this.props;
     const { formatMessage } = this.props.intl;
-    let isShowButton = false,
-      stepOneCircle = false,
+    let stepOneCircle = false,
       stepTwoCircle = false,
       stepThreeCircle = false;
 
@@ -264,7 +263,6 @@ class ExistingPage1 extends Component {
 
               {currentStep === 3 && (
                 <Col xs={12} sm={12} md={12} lg={12}>
-                  {shawButton ? (
                     <>
                       <h3 className={s.spaceTop1}>
                         <FormattedMessage {...messages.readyToPublish} />
@@ -287,22 +285,25 @@ class ExistingPage1 extends Component {
                         </div>
                       </Col>
                     </>
-                  ) : (
-                    <>
-                      <h3 className={s.spaceTop1}>
-                        <FormattedMessage
+                </Col>
+              )}
+              {
+                listingId && (
+                  <>
+                    <h3 className={s.spaceTop1}>
+                      <FormattedMessage
                           {...messages.listingSubmitVerification}
-                        />
-                      </h3>
-                      <Col
+                      />
+                    </h3>
+                    <Col
                         xs={12}
                         sm={12}
                         md={12}
                         lg={12}
                         className={cx(s.spaceTop3, s.noPadding)}
-                      >
-                        <div className={s.publishAfter}>
-                          <Loader
+                    >
+                      <div className={s.publishAfter}>
+                        <Loader
                             type={"button"}
                             className={cx(s.button, bt.btnPrimary, s.btnCrisom)}
                             label={formatMessage(messages.adminApproval)}
@@ -310,19 +311,19 @@ class ExistingPage1 extends Component {
                               marginButtom: "10px",
                               background: "crimson",
                             }}
-                          />
-                          <Loader
-                            type={"button"}
-                            className={s.previewBtn}
-                            // handleClick={handleCompleteHostListing}
-                            label={formatMessage(messages.hostPreviewListing)}
-                          />
-                        </div>
-                      </Col>
-                    </>
-                  )}
-                </Col>
-              )}
+                        />
+                        <a
+                            target="_blank"
+                            href={`/host/listing/${listingId}`}
+                            className={cx(s.previewLink, "prviewLinkAR")}
+                        >
+                          <FormattedMessage {...messages.previewListing} />
+                        </a>
+                      </div>
+                    </Col>
+                  </>
+                  )
+              }
             </Col>
 
             <Col xs={12} sm={5} md={5} lg={5} className={"hidden-xs"}>

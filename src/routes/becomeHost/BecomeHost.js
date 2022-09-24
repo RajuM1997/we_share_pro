@@ -28,6 +28,7 @@ import ExistingPage1 from "../../components/ListPlaceStep1/ExistingPage1";
 import PageReRendererStep3 from "./PageReRendererStep3";
 import PageReRendererStep1 from "./PageReRendererStep1";
 import submit from "./submit";
+import moment from "moment-timezone";
 
 const groupBy = function(xs, key) {
   return xs.reduce(function(rv, x) {
@@ -97,13 +98,38 @@ class BecomeHost extends React.Component {
       pageData: {},
       currentPageIndex: 0,
       currentStep: 1,
-      personCapacity: 0,
+      personCapacity: 1,
       formData: {
         dynamicFields: {},
+        itemTitle: '',
+        itemDescription: '',
+        fullAddress: '',
+        buildingName: '',
+        country: 'US',
+        street: '',
+        city: '',
+        state: '',
+        zipcode: '',
+        serviceUnit: 'daily',
+        bookingNoticeTime: 58,
+        bookingNoticeCheckInStart: 'Flexible',
+        bookingNoticeCheckInEnd: 'Flexible',
+        maxDaysNotice: 'available',
+        cancellationPolicy: 'Flexible',
+        bookingType: 'instant',
+        weeklyDiscount: 0,
+        monthlyDiscount: 0,
+        minUnit: 1,
+        maxUnit: 1,
+        basePrice: 0,
+        currency: 'USD',
+        coverPhoto: [],
+        availabilityStart: moment().toDate(),
+        availabilityEnd: moment().add(3, 'months').toDate(),
       },
       selectedCategory: "",
       selectedSubCategory: "",
-      shawButton: true,
+      listingId: null,
     };
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
@@ -340,9 +366,13 @@ class BecomeHost extends React.Component {
       personCapacity: this.state.personCapacity,
       ...this.state.formData,
     });
-    this.setState({
-      shawButton: !this.state.shawButton,
-    });
+    console.log("data", data);
+    if (data?.status && data?.id) {
+      this.setState({ listingId: data?.id });
+    }
+    // this.setState({
+    //   shawButton: !this.state.shawButton,
+    // });
     console.log("handleCompleteHostListing", data);
   }
 
@@ -389,7 +419,7 @@ class BecomeHost extends React.Component {
           {this.state.steps &&
           this.state.steps[this?.state?.currentStep] === "visible" ? (
             <ExistingPage1
-              shawButton={this.state.shawButton}
+              listingId={this.state.listingId}
               currentStep={this.state.currentStep}
               handleOnNextStep={this.handleOnNextStep}
               handleCompleteHostListing={this.handleCompleteHostListing}
