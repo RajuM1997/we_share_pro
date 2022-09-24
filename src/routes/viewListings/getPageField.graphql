@@ -1,0 +1,12 @@
+query getPageField {
+  getPageField {
+    id
+    title
+    step
+    pageId
+    subCategoryId
+    isEnable
+    createdAt
+    updatedAt
+  }
+}

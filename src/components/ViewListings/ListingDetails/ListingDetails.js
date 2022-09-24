@@ -44,16 +44,17 @@ class ListingDetails extends React.Component {
   render() {
     const { open } = this.state;
     const { formatMessage } = this.props.intl;
-    const { details } = this.props;
+    const { details, getPageFieldsData } = this.props;
     console.log("hosting details", details);
+    console.log("getPageFieldsData", getPageFieldsData);
     const data = JSON.parse(details.dynamicFields);
-    console.log(data);
+    console.log("dynamicFields", data);
     // const listItemsData = Object.assign({}, data.houseRules);
 
     const listItemsData = data?.houseRules?.reduce((acc, cur, i) => {
       return { ...acc, [i]: cur };
     }, {});
-    // console.log("array to obj", listItemsData.value);
+    console.log("array to obj", listItemsData);
     return (
       <Row className={cx(s.pageContent)}>
         <div className={cx(s.horizontalLineThrough)}>
@@ -233,7 +234,7 @@ class ListingDetails extends React.Component {
             hideLabel={formatMessage(messages.closeHouseRules)}
             icon={false}
             data={data}
-            itemName={listItemsData[0]}
+            // itemName={listItemsData}
           />
           <div>
             <hr />
