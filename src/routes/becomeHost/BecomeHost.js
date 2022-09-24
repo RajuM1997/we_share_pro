@@ -311,8 +311,10 @@ class BecomeHost extends React.Component {
           ...(thisState?.formData?.dynamicFields || {}),
           ...(currentPageId
             ? {
-                ...(thisState?.formData?.dynamicFields[currentPageId] || {}),
-                [key]: value,
+                [currentPageId]: {
+                  ...(thisState?.formData?.dynamicFields[currentPageId] || {}),
+                  [key]: value,
+                }
               }
             : {}),
         },
@@ -430,7 +432,7 @@ class BecomeHost extends React.Component {
                       formBaseURI={formBaseURI}
                       mode={mode}
                       baseCurrency={baseCurrency}
-                      formData={this.state.formData[currentPageId] || {}}
+                      formData={this.state.formData?.dynamicFields[currentPageId] || {}}
                       updateField={this.updateFieldByPageId(currentPageId)}
                       handleCompleteStep={this.handleCompleteStep}
                       countryList={getCountriesData}

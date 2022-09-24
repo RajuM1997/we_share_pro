@@ -51,7 +51,7 @@ async function submit(values, dispatch, fields) {
     const { data } = await resp.json();
     console.log(data);
 
-    if (data.addFields.status === "success") {
+    if (data?.addFields?.status === "success") {
       toastr.success("Page Field", "Successfully Added!");
       // history.push("/siteadmin/category");
     } else {
