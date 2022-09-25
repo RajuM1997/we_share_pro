@@ -2,7 +2,7 @@ import React from "react";
 import AdminLayout from "../../../components/Layout/AdminLayout";
 import HomePageBanner from "./HomePageBanner";
 
-const title = "Categorys";
+const title = "banner";
 
 export default async function action({ store }) {
   // From Redux Store

@@ -50,7 +50,7 @@ async function submit(values, dispatch) {
 
     if (data.addBanner.status === "success") {
       toastr.success("Added Banner", "Successfully Added!");
-      // history.push("/siteadmin/category");
+      history.push("/siteadmin/banner");
     } else {
       toastr.error("Added Banner", "Failed to create");
     }

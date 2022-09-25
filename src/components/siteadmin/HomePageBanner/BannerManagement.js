@@ -13,9 +13,9 @@ import withStyles from "isomorphic-style-loader/lib/withStyles";
 import s from "./BannerManagement.css";
 import bt from "../../../components/commonStyle.css";
 import {
-  deleteCategory,
-  updateCategoryStatus,
-} from "../../../actions/siteadmin/deleteCategory";
+  deleteHomeBanner,
+  updateBannerStatus,
+} from "../../../actions/siteadmin/deleteHomeBanner";
 import history from "../../../core/history";
 
 // Translation
@@ -35,8 +35,8 @@ class CategoryManagement extends React.Component {
         image: PropTypes.string,
       })
     ),
-    deleteCategory: PropTypes.any,
-    updateCategoryStatus: PropTypes.any,
+    deleteHomeBanner: PropTypes.any,
+    updateBannerStatus: PropTypes.any,
   };
 
   static defaultProps = {
@@ -53,9 +53,8 @@ class CategoryManagement extends React.Component {
   }
 
   render() {
-    const { data, deleteCategory, updateCategoryStatus } = this.props;
+    const { data, deleteHomeBanner, updateBannerStatus } = this.props;
     console.log(data);
-    console.log(deleteCategory);
     const { formatMessage } = this.props.intl;
     return (
       <div className={cx(s.pagecontentWrapper, "pagecontentAR")}>
@@ -128,7 +127,7 @@ class CategoryManagement extends React.Component {
                         <a
                           href="javascript:void(0)"
                           onClick={() =>
-                            updateCategoryStatus(value.id, value.isEnable)
+                            updateBannerStatus(value.id, value.isEnable)
                           }
                         >
                           {value.isEnable == "true"
@@ -140,9 +139,7 @@ class CategoryManagement extends React.Component {
                         data-label={formatMessage(messages.editLabel)}
                         column={formatMessage(messages.editLabel)}
                       >
-                        <Link
-                          to={"/siteadmin/edit/popularlocation/" + value.id}
-                        >
+                        <Link to={"/siteadmin/edit/banner/" + value.id}>
                           <FormattedMessage {...messages.editLabel} />
                         </Link>
                       </Td>
@@ -152,7 +149,7 @@ class CategoryManagement extends React.Component {
                       >
                         <div>
                           <Confirm
-                            onConfirm={() => deleteCategory(value.id)}
+                            onConfirm={() => deleteHomeBanner(value.id)}
                             body={formatMessage(
                               messages.areYouSureDeleteWishList
                             )}
@@ -182,8 +179,8 @@ class CategoryManagement extends React.Component {
 const mapState = (state) => ({});
 
 const mapDispatch = {
-  deleteCategory,
-  updateCategoryStatus,
+  deleteHomeBanner,
+  updateBannerStatus,
 };
 
 export default injectIntl(

@@ -150,6 +150,10 @@ import removeLocation from "./mutations/SiteAdmin/PopularLocation/removeLocation
 import uploadCategory from "./mutations/SiteAdmin/Category/uploadCategory";
 import removeCategory from "./mutations/SiteAdmin/Category/removeCategory";
 
+// banner
+import removeBannerImage from "./mutations/SiteAdmin/HomeBanner/removeHomeBanner";
+import uploadHomeBanner from "./mutations/SiteAdmin/HomeBanner/uploadHomeBanner";
+
 import adminUserLogin from "./queries/siteadmin/adminUserLogin";
 import changeAdminUser from "./mutations/SiteAdmin/changeAdminUser";
 
@@ -217,6 +221,11 @@ import editPageField from "./queries/siteadmin/editPageField";
 import updatePageField from "./mutations/SiteAdmin/updatePageField";
 import updatePageFieldStatus from "./mutations/SiteAdmin/updatePageFieldStatus";
 import deletePageField from "./mutations/SiteAdmin/deletePageField";
+
+//banner
+import updateHomeBanner from "./mutations/SiteAdmin/updateHomeBanner";
+import updateHomeBannerStatus from "./mutations/SiteAdmin/updateHomeBannerStatus";
+import editHomeBanner from "./queries/siteadmin/editHomeBanner";
 
 // edit fields
 import editFields from "./queries/siteadmin/editFields";
@@ -594,6 +603,7 @@ const schema = new Schema({
       getHostListingByUserId,
       getHostListingByCategory,
       getUserProfile,
+      editHomeBanner,
     },
   }),
   mutation: new ObjectType({
@@ -721,6 +731,10 @@ const schema = new Schema({
       updateFieldsStatus,
       deleteFields,
       createHostListing,
+      updateHomeBanner,
+      updateHomeBannerStatus,
+      removeBannerImage,
+      uploadHomeBanner,
     },
   }),
 });

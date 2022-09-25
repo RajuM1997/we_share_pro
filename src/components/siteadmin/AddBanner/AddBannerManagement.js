@@ -52,7 +52,7 @@ class AddBannerManagement extends React.Component {
       <FormGroup className={s.space2}>
         <Row>
           <Col xs={12} sm={12} md={12} lg={3}>
-            <label className={s.labelTextNew}></label>
+            <label className={s.labelTextNew}>{label}</label>
           </Col>
           <Col xs={12} sm={12} md={12} lg={9}>
             <FormControl
@@ -159,7 +159,7 @@ class AddBannerManagement extends React.Component {
               className={cx(s.space4, bt.textAlignRight, "textAlignLeftRtl")}
             >
               <Link
-                to={"/siteadmin/popularlocation"}
+                to={"/siteadmin/banner"}
                 className={cx(
                   bt.btnPrimaryBorder,
                   bt.btnLarge,
@@ -182,69 +182,67 @@ class AddBannerManagement extends React.Component {
                     </Col>
                     <Col xs={12} sm={12} md={12} lg={9}>
                       <Uploader />
-                      <label className={s.labelTextNew}>Small Photo</label>
-                      <Uploaders />
                     </Col>
                   </Row>
                 </FormGroup>
-                <label className={s.labelTextNew}>Title</label>
                 <Field
                   name="title"
                   type="text"
                   component={this.renderFormControl}
-                  label={formatMessage(messages.titleAdminLabel)}
+                  label={formatMessage(messages.categoryAdminTitle)}
                 />
-                <label className={s.labelTextNew}>Description</label>
                 <Field
                   name="description"
                   type="text"
                   component={this.renderFormControl}
-                  label={formatMessage(messages.descriptionAdminLabel)}
+                  label={formatMessage(messages.categoryAdminDescription)}
                 />
-                <label className={s.labelTextNew}>Color Text</label>
                 <Field
                   name="colorText"
                   type="text"
                   component={this.renderFormControl}
-                  label={formatMessage(messages.buttonLabel)}
+                  label={formatMessage(messages.categoryAdminDescription)}
                 />
-                <label className={s.labelTextNew}>Bottom Text</label>
                 <Field
                   name="bottomText"
-                  defaultValue={null}
                   type="text"
                   component={this.renderFormControl}
-                  label={formatMessage(messages.bottomText)}
+                  label={formatMessage(messages.categoryAdminDescription)}
                 />
-                <label
-                  className={s.labelTextNew}
-                  style={{ marginRight: "20px", marginBottom: "10px" }}
+                <Col
+                  xs={12}
+                  sm={12}
+                  md={12}
+                  lg={3}
+                  style={{ paddingLeft: "0px" }}
                 >
-                  Category
-                </label>
-
-                <Field
-                  name="category"
-                  component="select"
-                  type="select"
-                  className={bt.commonControlInput}
-                  label={formatMessage(messages.bottomText)}
-                  style={{ marginBottom: "10px" }}
-                >
-                  <option />
-                  <option value="Vacation Home">Vacation Home</option>
-                  <option value="Events Space">Events Space</option>
-                  <option value="Workspace">Workspace</option>
-                  <option value="RVs">RVs</option>
-                  <option value="Boats">Boats</option>
-                  <option value="Electronics">Electronics</option>
-                  <option value="Power Tools">Power Tools</option>
-                  <option value="Film Equipment">Film Equipment</option>
-                  <option value="Event Equipment">Event Equipment</option>
-                  <option value="Bikes">Bikes</option>
-                  <option value="Parking">Parking</option>
-                  <option value="Vehicles">Vehicles</option>
-                </Field>
+                  <label className={s.labelTextNew}>Category</label>
+                </Col>
+                <Col xs={12} sm={12} md={12} lg={9} className={s.categoryCol}>
+                  <Field
+                    name="category"
+                    component="select"
+                    type="select"
+                    className={bt.commonControlInput}
+                    style={{ marginBottom: "10px", width: "100%" }}
+                  >
+                    <option value="" selected disabled>
+                      Please Select
+                    </option>
+                    <option value="Vacation Home">Vacation Home</option>
+                    <option value="Events Space">Events Space</option>
+                    <option value="Workspace">Workspace</option>
+                    <option value="Vehicles">Vehicles</option>
+                    <option value="RVs">RVs</option>
+                    <option value="Boats">Boats</option>
+                    <option value="Bikes">Bikes</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Power Tools">Power Tools</option>
+                    <option value="Film Equipment">Film Equipment</option>
+                    <option value="Event Equipment">Event Equipment</option>
+                    <option value="Parking">Parking</option>
+                  </Field>
+                </Col>
                 <FormGroup className={s.formGroup}>
                   <Row>
                     <Col

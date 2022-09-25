@@ -383,6 +383,27 @@ class SideBar extends Component {
                 </li>
               )}
 
+              {validatePrivilege(3, privileges) && (
+                <li
+                  className={cx({
+                    [s.active]: location === "/siteadmin/hostListings",
+                  })}
+                >
+                  <Link
+                    to={"/siteadmin/hostListings"}
+                    className={cx(s.sideNavitem, s.disPlayTable)}
+                    onClick={() => this.openClose()}
+                  >
+                    <span className={s.disPlayTabelCell}>
+                      <FontAwesome.FaList className={s.navigationIcon} />
+                    </span>
+                    <span className={s.disPlayTabelCell}>
+                      <FormattedMessage {...messages.manageHostListing} />
+                    </span>
+                  </Link>
+                </li>
+              )}
+
               {validatePrivilege(3, privileges) && listingApproval === "1" && (
                 <li
                   className={cx({
@@ -759,7 +780,7 @@ class SideBar extends Component {
                   </div>
                   <Collapse in={this.state.home} className={s.subMenu}>
                     <div>
-                      {validatePrivilege(12, privileges) && (
+                      {/* {validatePrivilege(12, privileges) && (
                         <li
                           className={cx({
                             [s.active]: location === "/siteadmin/home/caption",
@@ -782,7 +803,7 @@ class SideBar extends Component {
                             </span>
                           </Link>
                         </li>
-                      )}
+                      )} */}
 
                       {validatePrivilege(12, privileges) && (
                         <li
@@ -914,7 +935,7 @@ class SideBar extends Component {
                           </Link>
                         </li>
                       )}
-                      {validatePrivilege(12, privileges) && (
+                      {/* {validatePrivilege(12, privileges) && (
                         <li
                           className={cx({
                             [s.active]:
@@ -936,7 +957,7 @@ class SideBar extends Component {
                             </span>
                           </Link>
                         </li>
-                      )}
+                      )} */}
                       {validatePrivilege(12, privileges) && (
                         <li
                           className={cx({
@@ -1071,7 +1092,7 @@ class SideBar extends Component {
                     <div>
                       {/* {validatePrivilege(19, privileges) && ( */}
                       {data &&
-                        data.map((value, key)=> {
+                        data.map((value, key) => {
                           return (
                             <li
                               className={cx({

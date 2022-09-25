@@ -7,8 +7,9 @@ import withStyles from "isomorphic-style-loader/lib/withStyles";
 
 import { graphql, gql, compose } from "react-apollo";
 import BannerManagement from "../../../components/siteadmin/HomePageBanner/BannerManagement";
+import getHomeBanner from "./getHomeBanner.graphql";
 
-class Categorys extends Component {
+class HomePageBanner extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     data: PropTypes.shape({
@@ -28,9 +29,19 @@ class Categorys extends Component {
       data: { loading },
     } = this.props;
 
-    const {} = this.props;
-    return <BannerManagement />;
+    const {
+      data: { getHomeBanner },
+    } = this.props;
+    return <BannerManagement data={getHomeBanner} />;
   }
 }
 
-export default compose(withStyles(s))(Categorys);
+export default compose(
+  withStyles(s),
+  graphql(getHomeBanner, {
+    options: {
+      fetchPolicy: "network-only",
+      ssr: false,
+    },
+  })
+)(HomePageBanner);

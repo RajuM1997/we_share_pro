@@ -7,7 +7,7 @@ import history from "../../../core/history";
 async function submit(values, dispatch) {
   console.log(values);
   if (values.image == null) {
-    toastr.error("Error Occured", "Please Add Location Image");
+    toastr.error("Error Occured", "Please Add category Image");
   } else {
     const mutation = `
   mutation addCategory(

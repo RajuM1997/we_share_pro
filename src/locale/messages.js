@@ -45,6 +45,11 @@ const messages = defineMessages({
     defaultMessage: "Hosts",
     description: "Menu item",
   },
+  manageHostListing: {
+    id: "app.manageHostListing",
+    defaultMessage: "Manage host Listings",
+    description: "Menu item",
+  },
   manageListing: {
     id: "app.manageListing",
     defaultMessage: "Manage Listings",
@@ -597,6 +602,12 @@ const messages = defineMessages({
     id: "app.categoryType",
     defaultMessage: "Category Type",
     description: "Category Type",
+  },
+
+  editBanner: {
+    id: "app.editBanner",
+    defaultMessage: "Edit Banner",
+    description: "Title",
   },
 
   // category
@@ -5809,6 +5820,17 @@ const messages = defineMessages({
     defaultMessage: "Edit",
     description: "Edit",
   },
+
+  reject: {
+    id: "app.reject",
+    defaultMessage: " Reject",
+    description: "Edit",
+  },
+  approve: {
+    id: "app.approve",
+    defaultMessage: " Approve",
+    description: "Edit",
+  },
   adminRoleLabel: {
     id: "app.adminRoleLabel",
     defaultMessage: "Admin Role",
@@ -7305,6 +7327,11 @@ const messages = defineMessages({
   listingsManagement: {
     id: "app.listingsManagement",
     defaultMessage: "Listings Management",
+    description: "listingsManagement",
+  },
+  hostListingsManagement: {
+    id: "app.hostListingsManagement",
+    defaultMessage: "Host Listings Management",
     description: "listingsManagement",
   },
   readyTopay: {

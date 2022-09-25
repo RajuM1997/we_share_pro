@@ -39,6 +39,7 @@ class Banner extends Component {
 
   render() {
     const { loading, data, shareAndFindData } = this.props;
+    console.log("bannerData", data);
     let bannerData;
 
     // {

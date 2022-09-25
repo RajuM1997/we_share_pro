@@ -12,8 +12,8 @@ import {
 } from "../../constants";
 
 const query = gql`
-  query editBanner($id: Int!) {
-    editBanner(id: $id) {
+  query editHomeBanner($id: Int!) {
+    editHomeBanner(id: $id) {
       id
       title
       description
@@ -93,7 +93,6 @@ export function doUploadHomeBanner(image, filePath, oldPicture, id) {
     return true;
   };
 }
-
 export function doRemoveHomeBanner(image, id) {
   return async (dispatch, getState, { client }) => {
     dispatch({ type: REMOVE_BANNER_START });
@@ -101,8 +100,8 @@ export function doRemoveHomeBanner(image, id) {
 
     try {
       let mutation = gql`
-        mutation removeHomeBanner($id: Int!, $image: String) {
-          removeHomeBanner(id: $id, image: $image) {
+        mutation removeBannerImage($id: Int!, $image: String) {
+          removeBannerImage(id: $id, image: $image) {
             status
           }
         }
@@ -157,7 +156,7 @@ async function removeHomeBannerFile(image) {
     const { status } = await resp.json();
 
     if (status) {
-      console.log("status from remove category file", status);
+      console.log("status from remove banner file", status);
     }
   } catch (error) {
     console.log("error from remove file", error);

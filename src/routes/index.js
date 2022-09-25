@@ -322,6 +322,13 @@ export default {
         ),
     },
     {
+      path: "/siteadmin/hostListings",
+      load: () =>
+        import(
+          /* webpackChunkName: 'siteadmin-listings' */ "./siteadmin/hostListing"
+        ),
+    },
+    {
       path: "/siteadmin/listingApproval",
       load: () =>
         import(
@@ -634,6 +641,13 @@ export default {
       load: () =>
         import(
           /* webpackChunkName: 'siteadmin-addPopularLocation' */ "./siteadmin/addBanner"
+        ),
+    },
+    {
+      path: "/siteadmin/edit/banner/:id",
+      load: () =>
+        import(
+          /* webpackChunkName: 'siteadmin-addPopularLocation' */ "./siteadmin/editHomeBanner"
         ),
     },
     {

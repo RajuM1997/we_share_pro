@@ -1,0 +1,12 @@
+query editHomeBanner($id: Int!) {
+  editHomeBanner(id: $id) {
+    id
+    title
+    description
+    image
+    colorText
+    bottomText
+    category
+    isEnable
+  }
+}
