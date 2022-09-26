@@ -192,7 +192,7 @@ class HostListingManagement extends React.Component {
                 <Th scope="col">{formatMessage(messages.hostCity)}</Th>
                 <Th scope="col">{formatMessage(messages.hostState)}</Th>
                 <Th scope="col">{formatMessage(messages.hostCountry)}</Th>
-                <Th scope="col">{formatMessage(messages.hostCreatedDate)}</Th>
+                {/* <Th scope="col">{formatMessage(messages.hostCreatedDate)}</Th> */}
                 <Th scope="col">{formatMessage(messages.approve)}</Th>
                 <Th scope="col">{formatMessage(messages.reject)}</Th>
                 <Th scope="col">{formatMessage(messages.categoryStatus)}</Th>
