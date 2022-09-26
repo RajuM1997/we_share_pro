@@ -13,6 +13,7 @@ import {
   addListToRecommended,
   removeListFromRecommended,
 } from "../../../actions/siteadmin/ListingManagement/manageRecommend";
+import Link from "../../Link/Link";
 
 // import messages from './messages';
 import { graphql, gql, compose } from "react-apollo";
@@ -27,14 +28,32 @@ import cx from "classnames";
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 import s from "./HostListingManagement.css";
 import CustomPagination from "../../CustomPagination/CustomPagination";
-import listingsQuery from "./listingsQuery.graphql";
 import { FormControl } from "react-bootstrap";
+
+// graphql
+import getUserProfileQuery from "./getUserProfile.graphql";
 
 class HostListingManagement extends React.Component {
   static propTypes = {
     getAllListings: PropTypes.array,
     addListToRecommended: PropTypes.func.isRequired,
     removeListFromRecommended: PropTypes.func.isRequired,
+    account: PropTypes.shape({
+      userId: PropTypes.string,
+      userBanStatus: PropTypes.number,
+    }),
+  };
+
+  static defaultProps = {
+    getUserProfileData: {
+      loading: true,
+      getUserProfileData: [],
+    },
+    account: {
+      userId: null,
+      userBanStatus: 0,
+    },
+    isAdmin: false,
   };
   constructor(props) {
     super(props);
@@ -60,6 +79,7 @@ class HostListingManagement extends React.Component {
     const {
       getAllListings: { refetch },
     } = this.props;
+
     const { currentPage } = this.state;
     let variables = {
       currentPage: 1,
@@ -100,11 +120,14 @@ class HostListingManagement extends React.Component {
       removeListing,
       addListToRecommended,
       removeListFromRecommended,
+      getUserProfileData: { getUserProfile },
+      itialValues,
       data,
     } = this.props;
+    console.log("datas", itialValues);
+    console.log("getUserProfile", getUserProfile);
     const { currentPage, searchList } = this.state;
     const { formatMessage } = this.props.intl;
-
     return (
       <div className={cx(s.pagecontentWrapper, "pagecontentAR")}>
         <div>
@@ -141,8 +164,7 @@ class HostListingManagement extends React.Component {
           <div
             className={cx(
               "table-responsive",
-              "popularlocationlist",
-              "tableBorderRadiusAdmin",
+              "listing-table",
               "NewAdminResponsiveTable",
               "NewResponsiveTableAdmin"
             )}
@@ -152,32 +174,94 @@ class HostListingManagement extends React.Component {
               noDataText={formatMessage(messages.noRecordFound)}
             >
               <Thead>
+                <Th scope="col">{formatMessage(messages.categoryId)}</Th>
+                <Th
+                  scope="col"
+                  style={{ width: "350px", display: "inline-block" }}
+                >
+                  {formatMessage(messages.hostTitle)}
+                </Th>
+                <Th scope="col">{formatMessage(messages.hostHostName)}</Th>
+                {/* <Th scope="col">{formatMessage(messages.hostHostEmail)}</Th> */}
+                <Th
+                  scope="col"
+                  style={{ width: "350px", display: "inline-block" }}
+                >
+                  {formatMessage(messages.hostAddress)}
+                </Th>
+                <Th scope="col">{formatMessage(messages.hostCity)}</Th>
+                <Th scope="col">{formatMessage(messages.hostState)}</Th>
+                <Th scope="col">{formatMessage(messages.hostCountry)}</Th>
+                <Th scope="col">{formatMessage(messages.hostCreatedDate)}</Th>
                 <Th scope="col">{formatMessage(messages.approve)}</Th>
                 <Th scope="col">{formatMessage(messages.reject)}</Th>
-                {/* <Th scope="col">{formatMessage(messages.editLabel)}</Th>
-                <Th scope="col">{formatMessage(messages.delete)}</Th> */}
+                <Th scope="col">{formatMessage(messages.categoryStatus)}</Th>
+                {/* <Th scope="col">{formatMessage(messages.editLabel)}</Th> */}
+                {/* <Th scope="col">{formatMessage(messages.delete)}</Th> */}
               </Thead>
               {data &&
                 data.map(function(value, key) {
                   console.log(value);
+
                   let isStatus;
                   return (
                     <Tr key={key}>
                       <Td
                         data-label={formatMessage(messages.idLabel)}
                         column={formatMessage(messages.idLabel)}
-                        data={value.id}
+                        data={value?.id}
                       />
                       <Td
-                        data-label={formatMessage(messages.categoryName)}
-                        column={formatMessage(messages.categoryName)}
-                        data={value.title}
-                      />
-                      <Td
-                        data-label={formatMessage(messages.locationAddress)}
-                        column={formatMessage(messages.locationAddress)}
+                        data-label={formatMessage(messages.hostHostName)}
+                        column={formatMessage(messages.hostHostName)}
                         className={s.imageurl}
-                        data={value.subTitle}
+                        data={
+                          getUserProfile?.firstName +
+                          " " +
+                          getUserProfile?.lastName
+                        }
+                      />
+                      <Td
+                        data-label={formatMessage(messages.hostHostEmail)}
+                        column={formatMessage(messages.hostHostEmail)}
+                        className={s.imageurl}
+                        data={value?.email}
+                      />
+                      <Td
+                        data-label={formatMessage(messages.hostTitle)}
+                        column={formatMessage(messages.hostTitle)}
+                        data={value?.itemTitle}
+                      />
+                      <Td
+                        data-label={formatMessage(messages.hostAddress)}
+                        column={formatMessage(messages.hostAddress)}
+                        className={s.imageurl}
+                        data={value?.fullAddress}
+                      />
+                      <Td
+                        data-label={formatMessage(messages.hostCity)}
+                        column={formatMessage(messages.hostCity)}
+                        className={s.imageurl}
+                        data={value?.city}
+                      />
+
+                      <Td
+                        data-label={formatMessage(messages.hostState)}
+                        column={formatMessage(messages.hostState)}
+                        className={s.imageurl}
+                        data={value?.state}
+                      />
+                      <Td
+                        data-label={formatMessage(messages.hostCountry)}
+                        column={formatMessage(messages.hostCountry)}
+                        className={s.imageurl}
+                        data={value?.country}
+                      />
+                      <Td
+                        data-label={formatMessage(messages.hostCreatedDate)}
+                        column={formatMessage(messages.hostCreatedDate)}
+                        className={s.imageurl}
+                        data={value?.createdAt}
                       />
                       <Td
                         data-label={formatMessage(messages.status)}
@@ -193,9 +277,9 @@ class HostListingManagement extends React.Component {
                       >
                         <a
                           href="javascript:void(0)"
-                          onClick={() =>
-                            updateBannerStatus(value.id, value.isEnable)
-                          }
+                          // onClick={() =>
+                          //   updateCategoryStatus(value.id, value.isEnable)
+                          // }
                         >
                           {value.isEnable == "true"
                             ? formatMessage(messages.disableLabel)
@@ -203,20 +287,35 @@ class HostListingManagement extends React.Component {
                         </a>
                       </Td>
                       <Td
-                        data-label={formatMessage(messages.editLabel)}
-                        column={formatMessage(messages.editLabel)}
+                        data-label={formatMessage(messages.approve)}
+                        column={formatMessage(messages.hostListingStatus)}
                       >
-                        <Link to={"/siteadmin/edit/banner/" + value.id}>
-                          <FormattedMessage {...messages.editLabel} />
-                        </Link>
+                        {value?.approve == "true"
+                          ? formatMessage(messages.approve)
+                          : formatMessage(messages.hostListingStatus)}
                       </Td>
                       <Td
-                        data-label={formatMessage(messages.delete)}
-                        column={formatMessage(messages.delete)}
+                        data-label={formatMessage(messages.approve)}
+                        column={formatMessage(messages.approve)}
+                      >
+                        <a
+                          href="javascript:void(0)"
+                          // onClick={() =>
+                          //   updateBannerStatus(value.id, value.isEnable)
+                          // }
+                        >
+                          {value?.approve == "true"
+                            ? formatMessage(messages.approve)
+                            : formatMessage(messages.hostListingStatus)}
+                        </a>
+                      </Td>
+                      <Td
+                        data-label={formatMessage(messages.reject)}
+                        column={formatMessage(messages.reject)}
                       >
                         <div>
                           <Confirm
-                            onConfirm={() => deleteHomeBanner(value.id)}
+                            // onConfirm={() => deleteHomeBanner(value.id)}
                             body={formatMessage(
                               messages.areYouSureDeleteWishList
                             )}
@@ -227,7 +326,7 @@ class HostListingManagement extends React.Component {
                             )}
                           >
                             <a href="javascript:void(0)">
-                              <FormattedMessage {...messages.delete} />
+                              <FormattedMessage {...messages.reject} />
                             </a>
                           </Confirm>
                         </div>
@@ -265,5 +364,18 @@ const mapDispatch = {
 export default compose(
   injectIntl,
   withStyles(s),
-  connect(mapState, mapDispatch)
+  connect(mapState, mapDispatch),
+  graphql(getUserProfileQuery, {
+    name: "getUserProfileData",
+    options: (props) => (
+      console.log("grapgh", props?.itialValues[0]?.userId),
+      {
+        variables: {
+          userId: props?.itialValues[0]?.userId,
+        },
+        fetchPolicy: "network-only",
+        ssr: false,
+      }
+    ),
+  })
 )(HostListingManagement);

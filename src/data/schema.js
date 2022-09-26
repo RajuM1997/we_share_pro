@@ -434,6 +434,7 @@ import getHostListingBySubCategory from "./queries/HostListing/getHostListingByS
 import getHostListingByCategory from "./queries/HostListing/getHostListingByCategory";
 import getHostListingByUserId from "./queries/HostListing/getHostListingByUserId";
 import getHostListingDetailsById from "./queries/HostListing/getHostListingDetailsById";
+import getHostListing from "./queries/HostListing/getHostListing";
 
 const schema = new Schema({
   query: new ObjectType({
@@ -602,6 +603,7 @@ const schema = new Schema({
       getHostListingDetailsById,
       getHostListingByUserId,
       getHostListingByCategory,
+      getHostListing,
       getUserProfile,
       editHomeBanner,
     },

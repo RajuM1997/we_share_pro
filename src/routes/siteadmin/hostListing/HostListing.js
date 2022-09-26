@@ -1,13 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { graphql, compose } from "react-apollo";
-
+import { graphql, gql, compose } from "react-apollo";
 // Style
 import withStyles from "isomorphic-style-loader/lib/withStyles";
-import s from "./Listings.css";
+import s from "./HostListing.css";
 
 // Query
-import listingsQuery from "./listingsQuery.graphql";
+import getHostListing from "./getHostListing.graphql";
 
 // Component
 import Loader from "../../../components/Loader/Loader";
@@ -16,34 +15,72 @@ import HostListingManagement from "../../../components/siteadmin/HostListingMana
 class HostListing extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    getAllListings: PropTypes.shape({
+    getHostListing: PropTypes.shape({
       loading: PropTypes.bool,
-      getAllListings: PropTypes.array,
+      getHostListing: PropTypes.array,
     }),
   };
 
   static defaultProps = {
-    getAllListings: {
+    getHostListing: {
       loading: true,
     },
   };
 
   render() {
-    return <HostListingManagement />;
+    const {
+      data: { loading, getHostListing },
+    } = this.props;
+    const userData = getHostListing?.reduce((acc, cur, i) => {
+      acc[i] = cur;
+      return acc;
+    }, {});
+    if (loading) {
+      return <Loader type={"text"} />;
+    } else {
+      return (
+        <HostListingManagement data={getHostListing} itialValues={userData} />
+      );
+    }
   }
 }
 
 export default compose(
   withStyles(s),
-  // graphql(listingsQuery),
-  graphql(listingsQuery, {
-    name: "getAllListings",
-    options: {
-      variables: {
-        currentPage: 1,
-        searchList: "",
-      },
-      fetchPolicy: "network-only",
-    },
-  })
+  graphql(gql`
+    {
+      getHostListing {
+        id
+        userId
+        categoryId
+        subCategoryId
+        personCapacity
+        itemTitle
+        itemDescription
+        fullAddress
+        buildingName
+        country
+        street
+        zipcode
+        lat
+        lng
+        state
+        city
+        serviceUnit
+        bookingNoticeTime
+        bookingNoticeCheckInStart
+        bookingNoticeCheckInEnd
+        maxDaysNotice
+        cancellationPolicy
+        minUnit
+        basePrice
+        currency
+        coverPhoto
+        weeklyDiscount
+        monthlyDiscount
+        bookingType
+        dynamicFields
+      }
+    }
+  `)
 )(HostListing);

@@ -1507,6 +1507,7 @@ const messages = defineMessages({
     defaultMessage: "Approve",
     description: "Approve",
   },
+
   decline: {
     id: "app.decline",
     defaultMessage: "Decline",
@@ -5826,10 +5827,52 @@ const messages = defineMessages({
     defaultMessage: " Reject",
     description: "Edit",
   },
-  approve: {
-    id: "app.approve",
+  approves: {
+    id: "app.approves",
     defaultMessage: " Approve",
     description: "Edit",
+  },
+  hostTitle: {
+    id: "app.hostTitle",
+    defaultMessage: " Title",
+    description: "Title",
+  },
+  hostHostName: {
+    id: "app.hostHostName",
+    defaultMessage: " Host Name",
+    description: "HostName",
+  },
+  hostHostEmail: {
+    id: "app.hostHostEmail",
+    defaultMessage: " Host Email",
+    description: "HostEmail",
+  },
+
+  hostAddress: {
+    id: "app.hostAddress",
+    defaultMessage: " Address",
+    description: "Address",
+  },
+
+  hostCity: {
+    id: "app.hostCity",
+    defaultMessage: " City",
+    description: "City",
+  },
+  hostState: {
+    id: "app.hostState",
+    defaultMessage: " State",
+    description: "State",
+  },
+  hostCountry: {
+    id: "app.hostCountry",
+    defaultMessage: " Country",
+    description: "Country",
+  },
+  hostCreatedDate: {
+    id: "app.hostCreatedDate",
+    defaultMessage: "Created Date",
+    description: "	Created Date",
   },
   adminRoleLabel: {
     id: "app.adminRoleLabel",
@@ -5856,6 +5899,12 @@ const messages = defineMessages({
     defaultMessage: "Disabled",
     description: "Disabled",
   },
+  hostListingStatus: {
+    id: "app.hostListingStatus",
+    defaultMessage: "Pending",
+    description: "Pending",
+  },
+
   enableLabel: {
     id: "app.enableLabel",
     defaultMessage: "Enable",

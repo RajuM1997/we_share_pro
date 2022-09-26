@@ -1,0 +1,34 @@
+query getHostListing {
+  getHostListing {
+    id
+    userId
+    categoryId
+    subCategoryId
+    personCapacity
+    itemTitle
+    itemDescription
+    fullAddress
+    buildingName
+    country
+    street
+    zipcode
+    lat
+    lng
+    state
+    city
+    serviceUnit
+    bookingNoticeTime
+    bookingNoticeCheckInStart
+    bookingNoticeCheckInEnd
+    maxDaysNotice
+    cancellationPolicy
+    minUnit
+    basePrice
+    currency
+    coverPhoto
+    weeklyDiscount
+    monthlyDiscount
+    bookingType
+    dynamicFields
+  }
+}
