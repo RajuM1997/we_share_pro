@@ -34,13 +34,16 @@ class SubCategoryItem extends Component {
   };
   render() {
     const { data, listing } = this.props;
-    console.log(listing);
+    console.log("listing", listing);
     // console.log("hello", listing);
+
     return (
       <>
         {listing &&
           listing.map((data, key) => {
             let photo = JSON.parse(data?.coverPhoto);
+            let dynamicFields = JSON.parse(data?.dynamicFields);
+            console.log("dynamicFields", dynamicFields);
             return (
               <Row key={data.id}>
                 <a
@@ -72,14 +75,16 @@ class SubCategoryItem extends Component {
                       <div className={s.title}>
                         <h3 className={s.margin_none}>{data?.itemTitle}</h3>
                       </div>
-                      <div className={s.subtitle}>
+                      {/* <div className={s.subtitle}>
                         <h6 className="pb-0">
-                          {/* {data?.guests} guests {data?.bedrooms} bedrooms{" "}
-                          {data?.beds} beds {data?.baths} baths */}
+                          {dynamicFields[2]?.personCapacity} guests{" "}
+                          {dynamicFields[3]?.bathrooms} bedrooms{" "}
+                          {dynamicFields[2]?.beds} beds{" "}
+                          {dynamicFields[2]?.bedrooms}
                         </h6>
-                      </div>
+                      </div> */}
                       <div className={s.subtitle}>
-                        <h6>{data?.description}</h6>
+                        <h6>{data?.itemDescription.slice(0, 45)}</h6>
                       </div>
                       <div className={s.mony_review}>
                         <div className={s.review}>
