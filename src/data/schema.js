@@ -39,7 +39,7 @@ import GetMostViewedListing from "./queries/GetMostViewedListing";
 import EmailVerification from "./queries/EmailVerification";
 import ResendConfirmEmail from "./queries/ResendConfirmEmail";
 // import getStaticInfoBlock from './queries/getStaticInfoBlock';
-// import getHomeBanner from "./queries/getHomeBanner";
+import getHomeBanner from "./queries/getHomeBanner";
 // Forgot Password
 import sendForgotPassword from "./mutations/ForgotPassword/SendForgotPassword";
 import forgotPasswordVerification from "./queries/ForgotPassword/ForgotPasswordVerification";
@@ -239,7 +239,6 @@ import updateCategoryStatus from "./mutations/SiteAdmin/updateCategoryStatus";
 
 // banner
 import addBanner from "./mutations/SiteAdmin/addBanner";
-import getHomeBanner from "./queries/siteadmin/getHomeBanner";
 // sub categroy
 import addSubCategory from "./mutations/SiteAdmin/addSubCategory";
 import getSubCategory from "./queries/siteadmin/getSubCategory";
@@ -569,7 +568,6 @@ const schema = new Schema({
       getStepTwo,
       getHomeLogo,
       getStaticInfo,
-      getHomeBanner,
       getEmailLogo,
       getAllAdminRoles,
       getAllAdminUsers,
@@ -606,6 +604,7 @@ const schema = new Schema({
       getHostListing,
       getUserProfile,
       editHomeBanner,
+      getHomeBanner,
     },
   }),
   mutation: new ObjectType({

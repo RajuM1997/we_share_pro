@@ -137,9 +137,9 @@ class NavigationBeforeLogin extends React.Component {
             <FormattedMessage {...messages.becomeAHost} />
           </NavLink>
           <span className={s.rightBorder}></span>
-          <NavLink to="/whyhosts">
+          {/* <NavLink to="/whyhosts">
             <FormattedMessage {...messages.becomeAHost2} />
-          </NavLink>
+          </NavLink> */}
           <span className={s.rightBorder}></span>
           <NavLink to="/">
             <FormattedMessage {...messages.howItWork} />

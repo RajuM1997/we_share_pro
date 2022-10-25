@@ -24,7 +24,7 @@ import messages from "../../../locale/messages";
 
 import { openListSettingsModal } from "../../../actions/siteadmin/modalActions";
 import NewListSettingModel from "../ListSettingsModel2/NewListSettingModel";
-import {getFieldsBySubCategory} from "../../../helpers/graphQLHelper";
+import { getFieldsBySubCategory } from "../../../helpers/graphQLHelper";
 
 class FieldManagement extends React.Component {
   static propTypes = {
@@ -53,24 +53,25 @@ class FieldManagement extends React.Component {
     this.state = {
       fieldsData: [],
       pageData: [],
-    }
+    };
   }
 
   fetchPageData(subCategoryId) {
-    getFieldsBySubCategory(subCategoryId).then(data => {
-      this.setState({ pageData: data })
-    }).catch(e => {
-    })
+    getFieldsBySubCategory(subCategoryId)
+      .then((data) => {
+        this.setState({ pageData: data });
+      })
+      .catch((e) => {});
   }
 
   componentDidMount() {
     console.log("this.props.subCategoryId", this.props.subCategoryId);
-    this.fetchPageData(this.props.subCategoryId)
+    this.fetchPageData(this.props.subCategoryId);
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
     if (nextProps?.subCategoryId) {
-      this.fetchPageData(nextProps?.subCategoryId)
+      this.fetchPageData(nextProps?.subCategoryId);
     }
   }
 
@@ -126,81 +127,81 @@ class FieldManagement extends React.Component {
                 <Th scope="col">{formatMessage(messages.delete)}</Th>
               </Thead>
               {this.state?.pageData?.map((value, key) => {
-                  return (
-                    <Tr key={key}>
-                      <Td
-                        data-label={formatMessage(messages.fieldName)}
-                        column={formatMessage(messages.fieldName)}
-                        data={value.name}
-                      />
-                      <Td
-                        data-label={formatMessage(messages.fieldPageId)}
-                        column={formatMessage(messages.fieldPageId)}
-                        className={s.imageurl}
-                        data={value.pageId}
-                      />
-                      <Td
-                        data-label={formatMessage(messages.fieldType)}
-                        column={formatMessage(messages.fieldType)}
-                        className={s.imageurl}
-                        data={value.type}
-                      />
-                      <Td
-                        data-label={formatMessage(messages.status)}
-                        column={formatMessage(messages.status)}
+                return (
+                  <Tr key={key}>
+                    <Td
+                      data-label={formatMessage(messages.fieldName)}
+                      column={formatMessage(messages.fieldName)}
+                      data={value.name}
+                    />
+                    <Td
+                      data-label={formatMessage(messages.fieldPageId)}
+                      column={formatMessage(messages.fieldPageId)}
+                      className={s.imageurl}
+                      data={value.pageId}
+                    />
+                    <Td
+                      data-label={formatMessage(messages.fieldType)}
+                      column={formatMessage(messages.fieldType)}
+                      className={s.imageurl}
+                      data={value.type}
+                    />
+                    <Td
+                      data-label={formatMessage(messages.status)}
+                      column={formatMessage(messages.status)}
+                    >
+                      {value.isEnable == "true"
+                        ? formatMessage(messages.enabledLabel)
+                        : formatMessage(messages.disabledLabel)}
+                    </Td>
+                    <Td
+                      data-label={formatMessage(messages.setEnableDisable)}
+                      column={formatMessage(messages.setEnableDisable)}
+                    >
+                      <a
+                        href="javascript:void(0)"
+                        onClick={() =>
+                          updateFieldsStatus(value.id, value.isEnable)
+                        }
                       >
-                        {value.isEnable == "true"
-                          ? formatMessage(messages.enabledLabel)
-                          : formatMessage(messages.disabledLabel)}
-                      </Td>
-                      <Td
-                        data-label={formatMessage(messages.setEnableDisable)}
-                        column={formatMessage(messages.setEnableDisable)}
-                      >
-                        <a
-                          href="javascript:void(0)"
-                          onClick={() =>
-                            updateFieldsStatus(value.id, value.isEnable)
-                          }
+                        {!value.isEnable == true
+                          ? formatMessage(messages.disableLabel)
+                          : formatMessage(messages.enableLabel)}
+                      </a>
+                    </Td>
+                    <Td
+                      data-label={formatMessage(messages.editLabel)}
+                      column={formatMessage(messages.editLabel)}
+                    >
+                      <Link to={"/siteadmin/edit/fields/" + value.id}>
+                        <FormattedMessage {...messages.editLabel} />
+                      </Link>
+                    </Td>
+                    <Td
+                      data-label={formatMessage(messages.delete)}
+                      column={formatMessage(messages.delete)}
+                    >
+                      <div>
+                        <Confirm
+                          onConfirm={() => deleteFields(value.id)}
+                          body={formatMessage(
+                            messages.areYouSureDeleteWishList
+                          )}
+                          confirmText={formatMessage(messages.confirmDelete)}
+                          cancelText={formatMessage(messages.cancel)}
+                          title={formatMessage(
+                            messages.deletePopularLocationLabel
+                          )}
                         >
-                          {value.isEnable == "true"
-                            ? formatMessage(messages.disableLabel)
-                            : formatMessage(messages.enableLabel)}
-                        </a>
-                      </Td>
-                      <Td
-                        data-label={formatMessage(messages.editLabel)}
-                        column={formatMessage(messages.editLabel)}
-                      >
-                        <Link to={"/siteadmin/edit/fields/" + value.id}>
-                          <FormattedMessage {...messages.editLabel} />
-                        </Link>
-                      </Td>
-                      <Td
-                        data-label={formatMessage(messages.delete)}
-                        column={formatMessage(messages.delete)}
-                      >
-                        <div>
-                          <Confirm
-                            onConfirm={() => deleteFields(value.id)}
-                            body={formatMessage(
-                              messages.areYouSureDeleteWishList
-                            )}
-                            confirmText={formatMessage(messages.confirmDelete)}
-                            cancelText={formatMessage(messages.cancel)}
-                            title={formatMessage(
-                              messages.deletePopularLocationLabel
-                            )}
-                          >
-                            <a href="javascript:void(0)">
-                              <FormattedMessage {...messages.delete} />
-                            </a>
-                          </Confirm>
-                        </div>
-                      </Td>
-                    </Tr>
-                  );
-                })}
+                          <a href="javascript:void(0)">
+                            <FormattedMessage {...messages.delete} />
+                          </a>
+                        </Confirm>
+                      </div>
+                    </Td>
+                  </Tr>
+                );
+              })}
             </Table>
           </div>
         </div>

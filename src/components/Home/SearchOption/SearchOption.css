@@ -24,7 +24,7 @@
   overflow: hidden;
 }
 .selector {
-  padding: 11px 20px;
+  padding: 0px;
 }
 .selector select {
   background: transparent;
@@ -34,7 +34,27 @@
   font-size: 17px;
   transition: all 0.4s;
   cursor: pointer;
+  width: 70px;
+  padding: 0px 8px;
 }
+.selector input {
+  background: transparent;
+  border: none;
+  color: #797a7a;
+  font-weight: 600;
+  font-size: 17px;
+  transition: all 0.4s;
+  cursor: pointer;
+  width: 70px;
+  padding: 0px 8px;
+}
+.whenText {
+  color: #797a7a;
+  font-size: 18px;
+  margin-right: -30px;
+  font-weight: 700;
+}
+
 .selector select:focus {
   background: transparent;
   border: none;
@@ -52,7 +72,7 @@
 .search_icon {
   background: #eead41;
   padding: 15px 22px;
-  margin-right: -18px;
+  margin-right: -22px;
   cursor: pointer;
 }
 .active_search_icon {
@@ -78,7 +98,7 @@
   border: none;
   outline: none;
 }
-.search_icon .fas {
+.search_icon svg {
   color: #fff;
 }
 .active_icon_text {
@@ -142,6 +162,18 @@ select {
   outline: none;
 }
 
+::-webkit-datetime-edit {
+  color: transparent;
+}
+:focus::-webkit-datetime-edit {
+  color: transparent;
+}
+input[type="date"] {
+  color: transparent !important;
+}
+input:focus::-webkit-datetime-edit {
+  color: transparent !important;
+}
 @media only screen and (max-width: 1220px) {
   .active_search_icon {
     background: #eead41;
@@ -232,5 +264,8 @@ select {
   }
   .active_selector select {
     font-size: 11px;
+  }
+  .selector {
+    padding: 0px;
   }
 }

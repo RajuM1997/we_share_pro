@@ -197,8 +197,14 @@ class AddCategoryManagement extends React.Component {
                   component={this.renderFormControl}
                   label={formatMessage(messages.categoryAdminDescription)}
                 />
+                <Field
+                  name="category"
+                  type="text"
+                  component={this.renderFormControl}
+                  label={formatMessage(messages.categoryAdminCategory)}
+                />
 
-                <Col
+                {/* <Col
                   xs={12}
                   sm={12}
                   md={12}
@@ -230,14 +236,7 @@ class AddCategoryManagement extends React.Component {
                     <option value="Event Equipment">Event Equipment</option>
                     <option value="Parking">Parking</option>
                   </Field>
-                </Col>
-
-                {/* <Field
-                  name="subTitle"
-                  type="text"
-                  component={this.renderPlacesSuggest}
-                  label={formatMessage(messages.locationAddress)}
-                /> */}
+                </Col> */}
                 <FormGroup className={s.formGroup}>
                   <Row>
                     <Col

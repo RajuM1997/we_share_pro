@@ -141,6 +141,7 @@ class CategoryAndSubCtegorySelector extends Component {
       selectedCategory,
     } = this.props;
     const { isDisabled, personCapacity } = this.state;
+    console.log("personCapacity", personCapacity);
 
     return (
       <div>
@@ -226,7 +227,7 @@ class CategoryAndSubCtegorySelector extends Component {
                               });
                             }}
                           >
-                            <option value="" selected disabled>
+                            <option value="" selected>
                               Please Select
                             </option>
                             {personCapacity.map((value, key) => {
@@ -237,12 +238,15 @@ class CategoryAndSubCtegorySelector extends Component {
                                 i++
                               ) {
                                 rows.push(
-                                  <option value={i} key={key}>
-                                    for {i}{" "}
-                                    {i > 1
-                                      ? value.otherItemName
-                                      : value.itemName}
-                                  </option>
+                                  <>
+                                    <option>hello</option>
+                                    <option value={i} key={key}>
+                                      for {i}{" "}
+                                      {i > 1
+                                        ? value.otherItemName
+                                        : value.itemName}
+                                    </option>
+                                  </>
                                 );
                               }
                               return rows;

@@ -198,6 +198,7 @@ class HostListingManagement extends React.Component {
                 <Th scope="col">{formatMessage(messages.categoryStatus)}</Th>
                 {/* <Th scope="col">{formatMessage(messages.editLabel)}</Th> */}
                 {/* <Th scope="col">{formatMessage(messages.delete)}</Th> */}
+                {/* Airport9, Kathmandu, Nepal */}
               </Thead>
               {data &&
                 data.map(function(value, key) {

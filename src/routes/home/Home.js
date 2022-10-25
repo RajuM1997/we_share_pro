@@ -26,7 +26,6 @@ import getImageBannerQuery from "./getImageBanner.graphql";
 import getMostViewedListingQuery from "./getMostViewedListing.graphql";
 import getPopularLocationQuery from "./getPopularLocation.graphql";
 import getStaticBlockInfoQuery from "./getStaticBlockInfo.graphql";
-import getHomeBanner from "./getHomeBanner.graphql";
 import getCategoryQuery from "./getCategory.graphql";
 import getBannerQuery from "./getBannerHome.graphql";
 
@@ -69,10 +68,6 @@ class Homepage extends React.Component {
       loading: PropTypes.bool,
       GetMostViewedListing: PropTypes.array,
     }),
-    getHomeBannerData: PropTypes.shape({
-      loading: PropTypes.bool,
-      getHomeBanner: PropTypes.any,
-    }),
     formatMessage: PropTypes.func,
   };
 
@@ -95,9 +90,6 @@ class Homepage extends React.Component {
     homeBannerImages: {
       loading: true,
     },
-    getHomeBanner: {
-      loading: true,
-    },
   };
 
   render() {
@@ -116,9 +108,6 @@ class Homepage extends React.Component {
       getCategoryData,
       getBannerHomeData,
     } = this.props;
-    const { getHomeBannerData } = this.props;
-    let getHomeBanner = getHomeBannerData && getHomeBannerData.getHomeBanner;
-    console.log(getHomeBannerData);
 
     return (
       <div className={s.root}>
@@ -292,30 +281,6 @@ class Homepage extends React.Component {
 export default compose(
   injectIntl,
   withStyles(s),
-  graphql(
-    gql`
-      query getBanner {
-        getBanner {
-          id
-          title
-          content
-        }
-      }
-    `,
-    {
-      name: "getBannerData",
-      options: {
-        ssr: true,
-      },
-    }
-  ),
-  graphql(getHomeBanner, {
-    name: "getHomeBannerData",
-    options: {
-      ssr: true,
-      //fetchPolicy: 'network-only'
-    },
-  }),
   graphql(getRecommendQuery, {
     name: "getRecommendData",
     options: {

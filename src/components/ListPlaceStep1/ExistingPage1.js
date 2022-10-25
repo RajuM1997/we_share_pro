@@ -263,67 +263,63 @@ class ExistingPage1 extends Component {
 
               {currentStep === 3 && (
                 <Col xs={12} sm={12} md={12} lg={12}>
-                    <>
-                      <h3 className={s.spaceTop1}>
-                        <FormattedMessage {...messages.readyToPublish} />
-                      </h3>
-                      <Col
-                        xs={12}
-                        sm={12}
-                        md={12}
-                        lg={12}
-                        className={cx(s.spaceTop3, s.noPadding)}
-                      >
-                        <div className={s.displayInline}>
-                          <Loader
-                            type={"button"}
-                            className={cx(s.button, bt.btnPrimary)}
-                            handleClick={handleCompleteHostListing}
-                            show={false}
-                            label={formatMessage(messages.publishNow)}
-                          />
-                        </div>
-                      </Col>
-                    </>
-                </Col>
-              )}
-              {
-                listingId && (
                   <>
                     <h3 className={s.spaceTop1}>
-                      <FormattedMessage
-                          {...messages.listingSubmitVerification}
-                      />
+                      <FormattedMessage {...messages.readyToPublish} />
                     </h3>
                     <Col
-                        xs={12}
-                        sm={12}
-                        md={12}
-                        lg={12}
-                        className={cx(s.spaceTop3, s.noPadding)}
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={12}
+                      className={cx(s.spaceTop3, s.noPadding)}
                     >
-                      <div className={s.publishAfter}>
+                      <div className={s.displayInline}>
                         <Loader
-                            type={"button"}
-                            className={cx(s.button, bt.btnPrimary, s.btnCrisom)}
-                            label={formatMessage(messages.adminApproval)}
-                            style={{
-                              marginButtom: "10px",
-                              background: "crimson",
-                            }}
+                          type={"button"}
+                          className={cx(s.button, bt.btnPrimary)}
+                          handleClick={handleCompleteHostListing}
+                          show={false}
+                          label={formatMessage(messages.publishNow)}
                         />
-                        <a
-                            target="_blank"
-                            href={`/host/listing/${listingId}`}
-                            className={cx(s.previewLink, "prviewLinkAR")}
-                        >
-                          <FormattedMessage {...messages.previewListing} />
-                        </a>
                       </div>
                     </Col>
                   </>
-                  )
-              }
+                </Col>
+              )}
+              {listingId && (
+                <>
+                  <h3 className={s.spaceTop1}>
+                    <FormattedMessage {...messages.listingSubmitVerification} />
+                  </h3>
+                  <Col
+                    xs={12}
+                    sm={12}
+                    md={12}
+                    lg={12}
+                    className={cx(s.spaceTop3, s.noPadding)}
+                  >
+                    <div className={s.publishAfter}>
+                      <Loader
+                        type={"button"}
+                        className={cx(s.button, bt.btnPrimary, s.btnCrisom)}
+                        label={formatMessage(messages.adminApproval)}
+                        style={{
+                          marginButtom: "10px",
+                          background: "crimson",
+                        }}
+                      />
+                      <a
+                        target="_blank"
+                        href={`/host/listing/${listingId}`}
+                        className={cx(s.previewLink, "prviewLinkAR")}
+                      >
+                        <FormattedMessage {...messages.previewListing} />
+                      </a>
+                    </div>
+                  </Col>
+                </>
+              )}
             </Col>
 
             <Col xs={12} sm={5} md={5} lg={5} className={"hidden-xs"}>

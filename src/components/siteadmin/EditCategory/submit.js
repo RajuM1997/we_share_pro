@@ -39,6 +39,7 @@ async function submit(values, dispatch) {
   });
 
   const { data } = await resp.json();
+  console.log("category", resp);
 
   if (data.updateCategory.status === "success") {
     toastr.success("Update Category", "Changes are updated!");

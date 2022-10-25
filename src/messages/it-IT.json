@@ -4787,7 +4787,7 @@
   {
     "id": "app.step1HeadingContent",
     "description": "STEP 1 Heading Content",
-    "defaultMessage": "Beds, bathrooms, amenities, and more",
+    "defaultMessage": "Category, SubCategory,  and more",
     "message": "Letti, bagni, servizi e altro ancora",
     "files": [
       "src/locale/messages.js"

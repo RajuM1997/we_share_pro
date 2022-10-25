@@ -2918,7 +2918,7 @@ const messages = defineMessages({
   },
   step1HeadingContent: {
     id: "app.step1HeadingContent",
-    defaultMessage: "Beds, bathrooms, amenities, and more",
+    defaultMessage: "Category, SubCategory,  and more",
     description: "STEP 1 Heading Content",
   },
   step2HeadingContent: {

@@ -101,31 +101,33 @@ class BecomeHost extends React.Component {
       personCapacity: 1,
       formData: {
         dynamicFields: {},
-        itemTitle: '',
-        itemDescription: '',
-        fullAddress: '',
-        buildingName: '',
-        country: 'US',
-        street: '',
-        city: '',
-        state: '',
-        zipcode: '',
-        serviceUnit: 'daily',
+        itemTitle: "",
+        itemDescription: "",
+        fullAddress: "",
+        buildingName: "",
+        country: "US",
+        street: "",
+        city: "",
+        state: "",
+        zipcode: "",
+        serviceUnit: "daily",
         bookingNoticeTime: 58,
-        bookingNoticeCheckInStart: 'Flexible',
-        bookingNoticeCheckInEnd: 'Flexible',
-        maxDaysNotice: 'available',
-        cancellationPolicy: 'Flexible',
-        bookingType: 'instant',
+        bookingNoticeCheckInStart: "Flexible",
+        bookingNoticeCheckInEnd: "Flexible",
+        maxDaysNotice: "available",
+        cancellationPolicy: "Flexible",
+        bookingType: "instant",
         weeklyDiscount: 0,
         monthlyDiscount: 0,
         minUnit: 1,
         maxUnit: 1,
         basePrice: 0,
-        currency: 'USD',
+        currency: "USD",
         coverPhoto: [],
         availabilityStart: moment().toDate(),
-        availabilityEnd: moment().add(3, 'months').toDate(),
+        availabilityEnd: moment()
+          .add(3, "months")
+          .toDate(),
       },
       selectedCategory: "",
       selectedSubCategory: "",
@@ -210,13 +212,13 @@ class BecomeHost extends React.Component {
                   step: 1,
                 },
               ],
-              [
-                {
-                  type: "location",
-                  pageId: 3,
-                  step: 1,
-                },
-              ],
+              // [
+              //   {
+              //     type: "location",
+              //     pageId: 3,
+              //     step: 1,
+              //   },
+              // ],
               [
                 {
                   type: "address",
@@ -358,10 +360,11 @@ class BecomeHost extends React.Component {
     const category = this.props?.getCategoryData?.getCategoryAdmin?.find(
       (ele) => ele.category === this.state.selectedCategory
     );
-    console.log("categoryId", category);
+    console.log("categoryId", this.state.selectedCategory);
     const data = await submit({
       userId: currentUser,
       categoryId: category?.id,
+      category: this.state.selectedCategory,
       subCategoryId: this.state.selectedSubCategory,
       personCapacity: this.state.personCapacity,
       ...this.state.formData,
@@ -411,7 +414,7 @@ class BecomeHost extends React.Component {
     const pageData = this.state?.pageData[this.state.currentStep] || [];
     const currentPageFields = pageData[this.state.currentPageIndex] || [];
     const { pageId: currentPageId } = currentPageFields[0] || {};
-    // console.log("page fields", getPageFieldsData);
+    // console.log("page fields", this.state.selectedCategory);
 
     return (
       <div className={s.root}>

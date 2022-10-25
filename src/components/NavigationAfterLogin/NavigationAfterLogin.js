@@ -197,7 +197,7 @@ class NavigationAfterLogin extends React.Component {
               <FormattedMessage {...messages.transactionHistory} />
             </MenuItemLink>
           </NavDropdown>
-          <span className={s.rightBorder}></span>
+          {/* <span className={s.rightBorder}></span>
           <NavDropdown
             className={cx("hidden-xs", s.nonBreakPointScreen)}
             eventKey={3}
@@ -217,7 +217,7 @@ class NavigationAfterLogin extends React.Component {
             <MenuItemLink to="/user/transaction">
               <FormattedMessage {...messages.transactionHistory} />
             </MenuItemLink>
-          </NavDropdown>
+          </NavDropdown> */}
           <span className={s.rightBorder}></span>
           <NavLink
             // to={"/users/show/" + isVerified}

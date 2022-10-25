@@ -80,6 +80,7 @@ class EditFieldsManagement extends React.Component {
       id,
     } = this.props;
     const { formatMessage } = this.props.intl;
+    // console.log(JSON.parse(initialValues.fields));
     return (
       <div
         className={cx(

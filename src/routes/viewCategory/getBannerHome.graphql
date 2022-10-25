@@ -1,5 +1,5 @@
-query getHomeBanner {
-  getHomeBanner {
+query getHomeAdmin {
+  getHomeAdmin {
     title
     description
     image

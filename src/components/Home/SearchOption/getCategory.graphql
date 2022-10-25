@@ -1,0 +1,6 @@
+query getCategoryAdmin {
+  getCategoryAdmin {
+    category
+    id
+  }
+}

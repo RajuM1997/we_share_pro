@@ -209,7 +209,7 @@ class PageReRendererStep1 extends Component {
                       </div>
                     </>
                   )}
-                  {fieldType === "location" && (
+                  {/* {fieldType === "location" && (
                     <>
                       <div className={s.landingMainContent}>
                         <h3 className={s.landingContentTitle}>
@@ -228,7 +228,7 @@ class PageReRendererStep1 extends Component {
                         </FormGroup>
                       </div>
                     </>
-                  )}
+                  )} */}
                   {fieldType === "photosUpload" && (
                     <>
                       <PhotosUpload

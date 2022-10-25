@@ -11,10 +11,13 @@ import s from "./ViewCategorys.css";
 import Filter from "./Filter";
 import { graphql, gql, compose } from "react-apollo";
 import { connect } from "react-redux";
-import getHomeBannerQuery from "./getHomeBanner.graphql";
+import getHomeBannerQuery from "./getBannerHome.graphql";
 class ViewCategory extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      storagesData: null,
+    };
   }
   static propTypes = {
     title: PropTypes.string.isRequired,
@@ -29,16 +32,25 @@ class ViewCategory extends Component {
       loading: true,
     },
   };
+  componentWillMount() {
+    const listingItem = JSON.parse(sessionStorage.getItem("filterData"));
+    this.setState({ storagesData: listingItem });
+  }
   render() {
+    // const listingItem = JSON.parse(sessionStorage.getItem("filterData"));
+    console.log(this.state.storagesData);
+    const { storagesData } = this.state;
     const { listing = [], getHomeBannerData, singleCategoryData } = this.props;
-    // console.log(listing);
 
+    if (window.location.reload && storagesData) {
+      sessionStorage.removeItem("filterData");
+    }
     return (
       <>
         <div>
           <CategoryBanner
             singleCategoryData={singleCategoryData}
-            data={getHomeBannerData?.getHomeBanner}
+            data={getHomeBannerData?.getHomeAdmin}
           />
 
           <CategoryProfile />
@@ -48,7 +60,7 @@ class ViewCategory extends Component {
             <Row>
               <Col md={6} sm={12}>
                 <h6 className={s.maptitle}>79 stays in map area</h6>
-                <SubCategory listing={listing} />
+                <SubCategory listing={storagesData ? storagesData : listing} />
               </Col>
               <Col md={6} sm={12}>
                 <div className={s.map}>
