@@ -618,6 +618,15 @@
     ]
   },
   {
+    "id": "app.addBanner",
+    "description": "Add Banner",
+    "defaultMessage": "Add Banner",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.addCategory",
     "description": "Add Category",
     "defaultMessage": "Add Category",
@@ -663,6 +672,15 @@
     ]
   },
   {
+    "id": "app.addName",
+    "description": "Name",
+    "defaultMessage": "Name",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.addNew",
     "description": "add new Home page Slider title",
     "defaultMessage": "Add New",
@@ -693,6 +711,15 @@
     "id": "app.addOffer",
     "description": "Add Offer",
     "defaultMessage": "Add Offer",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.addOptions",
+    "description": "add Options",
+    "defaultMessage": "Add Options",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -798,6 +825,15 @@
     ]
   },
   {
+    "id": "app.adminApproval",
+    "description": "admin approval",
+    "defaultMessage": "Waiting for admin approval",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.adminCategory",
     "description": "Category",
     "defaultMessage": "Category",
@@ -828,6 +864,15 @@
     "id": "app.adminLoggedIn",
     "description": "adminLoggedIn",
     "defaultMessage": "You are logged in as admin, you can't perform this action!",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.adminPageFieldPageId",
+    "description": "Page Id",
+    "defaultMessage": "Page Id",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -1149,6 +1194,15 @@
     ]
   },
   {
+    "id": "app.approves",
+    "description": "Edit",
+    "defaultMessage": "Approve",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.appsAvailableOn",
     "description": "Apps available on",
     "defaultMessage": "Apps available on",
@@ -1224,6 +1278,15 @@
     "id": "app.banLabel",
     "description": "Ban",
     "defaultMessage": "Ban",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.banner",
+    "description": "Category Home page Slider title",
+    "defaultMessage": "banner Type",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -1341,6 +1404,15 @@
     "id": "app.becomeAHost",
     "description": "Menu item",
     "defaultMessage": "Become a host",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.becomeAHost2",
+    "description": "Menu item",
+    "defaultMessage": "Become a hosts",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -1718,7 +1790,7 @@
   {
     "id": "app.calendar",
     "description": "calendar title",
-    "defaultMessage": "Update your calendar",
+    "defaultMessage": "Update your availability on calendar",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -1950,6 +2022,33 @@
     ]
   },
   {
+    "id": "app.categoryAdminCategory",
+    "description": "Category",
+    "defaultMessage": "Category",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.categoryAdminDescription",
+    "description": "Description",
+    "defaultMessage": "Description",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.categoryAdminTitle",
+    "description": "Title",
+    "defaultMessage": "Title",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.categoryE",
     "description": "Cocation",
     "defaultMessage": "Category",
@@ -2133,6 +2232,15 @@
     "id": "app.chooseCancellationPolicy",
     "description": "Cancellation Policy",
     "defaultMessage": "Cancellation Policy",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.chooseCategory",
+    "description": "Choose Category to list",
+    "defaultMessage": "Choose Category to list",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -3741,6 +3849,33 @@
     ]
   },
   {
+    "id": "app.editBanner",
+    "description": "Title",
+    "defaultMessage": "Edit Banner",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.editCategory",
+    "description": "Title",
+    "defaultMessage": "Edit Category",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.editField",
+    "description": "Edit",
+    "defaultMessage": "Edit Fields",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.editLabel",
     "description": "Edit",
     "defaultMessage": "Edit",
@@ -3768,6 +3903,15 @@
     ]
   },
   {
+    "id": "app.editPageField",
+    "description": "Edit Page Field",
+    "defaultMessage": "Edit Page Field",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.editPopularLocation",
     "description": "Edit Popular Location",
     "defaultMessage": "Edit Popular Location",
@@ -3780,6 +3924,15 @@
     "id": "app.editProfile",
     "description": "Menu item",
     "defaultMessage": "Edit Profile",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.editSubCategory",
+    "description": "Edit Sub Category",
+    "defaultMessage": "Edit Sub Category",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -4344,9 +4497,108 @@
     ]
   },
   {
+    "id": "app.field",
+    "description": "Field",
+    "defaultMessage": "Field",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldCar",
+    "description": "Car",
+    "defaultMessage": "Car",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.fieldCategory",
     "description": "Category",
     "defaultMessage": "Field",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldEnabled",
+    "description": "Enabled",
+    "defaultMessage": "Enabled",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldName",
+    "description": "Name",
+    "defaultMessage": "Name",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldPage",
+    "description": "Page",
+    "defaultMessage": "Page",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldPageId",
+    "description": "Page ID",
+    "defaultMessage": "Page ID",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldTitle",
+    "description": "Title",
+    "defaultMessage": "Title",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldType",
+    "description": "Type",
+    "defaultMessage": "Type",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldsOption",
+    "description": "Options",
+    "defaultMessage": "Options",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldsPageId",
+    "description": "Page ID",
+    "defaultMessage": "Page ID",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.fieldsType",
+    "description": "Name",
+    "defaultMessage": "Type",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -5451,6 +5703,15 @@
     ]
   },
   {
+    "id": "app.hostAddress",
+    "description": "Address",
+    "defaultMessage": "Address",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.hostBannerLabel",
     "description": "Host Banner",
     "defaultMessage": "Host Banner",
@@ -5463,6 +5724,33 @@
     "id": "app.hostBannerTitle",
     "description": "Host Banner Title",
     "defaultMessage": "Host Banner Title",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.hostCity",
+    "description": "City",
+    "defaultMessage": "City",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.hostCountry",
+    "description": "Country",
+    "defaultMessage": "Country",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.hostCreatedDate",
+    "description": "Created Date",
+    "defaultMessage": "Created Date",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -5541,6 +5829,42 @@
     ]
   },
   {
+    "id": "app.hostHostEmail",
+    "description": "HostEmail",
+    "defaultMessage": "Host Email",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.hostHostName",
+    "description": "HostName",
+    "defaultMessage": "Host Name",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.hostListingStatus",
+    "description": "Pending",
+    "defaultMessage": "Pending",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.hostListingsManagement",
+    "description": "listingsManagement",
+    "defaultMessage": "Host Listings Management",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.hostName",
     "description": "Host Name",
     "defaultMessage": "Host Name",
@@ -5568,6 +5892,15 @@
     ]
   },
   {
+    "id": "app.hostPreviewListing",
+    "description": "Preview Listing",
+    "defaultMessage": "Preview Listing",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.hostResponseTime1",
     "description": "Host Action Block.",
     "defaultMessage": "Respond within",
@@ -5589,6 +5922,24 @@
     "id": "app.hostServiceFeeType",
     "description": "Host Service Fee",
     "defaultMessage": "Host Service Fee",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.hostState",
+    "description": "State",
+    "defaultMessage": "State",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.hostTitle",
+    "description": "Title",
+    "defaultMessage": "Title",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -5706,6 +6057,24 @@
     "id": "app.hostingOn",
     "description": "Not Found",
     "defaultMessage": "Hosting on",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.hostingStep",
+    "description": "Step",
+    "defaultMessage": "How many Step",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.hosts",
+    "description": "Menu item",
+    "defaultMessage": "Hosts",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -6171,6 +6540,15 @@
     ]
   },
   {
+    "id": "app.labelOption",
+    "description": "Label",
+    "defaultMessage": "Label",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.language",
     "description": "Language",
     "defaultMessage": "Language",
@@ -6399,6 +6777,15 @@
     "id": "app.listingRejected",
     "description": "listingRejected",
     "defaultMessage": "Listing Rejected",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.listingSubmitVerification",
+    "description": "for verification",
+    "defaultMessage": "Your listing is submitted for verification",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -6723,6 +7110,15 @@
     "id": "app.manageCurrency",
     "description": "Manage Currency",
     "defaultMessage": "Manage Currency",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.manageHostListing",
+    "description": "Menu item",
+    "defaultMessage": "Manage host Listings",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -8043,6 +8439,33 @@
     ]
   },
   {
+    "id": "app.pageFieldPageId",
+    "description": "Page Id",
+    "defaultMessage": "Page Id",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.pageFieldStep",
+    "description": "Step",
+    "defaultMessage": "Step",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.pageFieldTitle",
+    "description": "Title",
+    "defaultMessage": "Title",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.pageLabel",
     "description": "/page/",
     "defaultMessage": "/page/",
@@ -8055,6 +8478,33 @@
     "id": "app.pageName",
     "description": "Page Name",
     "defaultMessage": "Page Name",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.pageSetting",
+    "description": "Page Setting",
+    "defaultMessage": "Fields Setting",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.pageSubTitle",
+    "description": "Page Sub Title",
+    "defaultMessage": "Page Sub Title (Optional)",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.pageTitle",
+    "description": "Page Title",
+    "defaultMessage": "Page Title",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -9807,6 +10257,15 @@
     ]
   },
   {
+    "id": "app.reject",
+    "description": "Edit",
+    "defaultMessage": "Reject",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.remove",
     "description": "Payout Method",
     "defaultMessage": "Remove",
@@ -11222,7 +11681,7 @@
   {
     "id": "app.step1HeadingContent",
     "description": "STEP 1 Heading Content",
-    "defaultMessage": "Beds, bathrooms, amenities, and more",
+    "defaultMessage": "Category, SubCategory,  and more",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -11463,6 +11922,69 @@
     ]
   },
   {
+    "id": "app.subAdminAddress",
+    "description": "Address",
+    "defaultMessage": "Address",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subAdminBaths",
+    "description": "Baths",
+    "defaultMessage": "Baths",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subAdminBedrooms",
+    "description": "Bedrooms",
+    "defaultMessage": "Bedrooms",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subAdminBeds",
+    "description": "Beds",
+    "defaultMessage": "Beds",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subAdminDescription",
+    "description": "Description",
+    "defaultMessage": "Description",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subAdminGuests",
+    "description": "Guests",
+    "defaultMessage": "Guests",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subAdminSubCategory",
+    "description": "Sub Category",
+    "defaultMessage": "Sub Category",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
     "id": "app.subCategory",
     "description": "Sub Category Home page Slider title",
     "defaultMessage": "Sub Category",
@@ -11502,6 +12024,33 @@
     "id": "app.subCategoryStatus",
     "description": "Status",
     "defaultMessage": "Status",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subCategorys",
+    "description": "Sub Category Home page Slider title",
+    "defaultMessage": "Sub Category Type",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subTitle",
+    "description": "Sub Title",
+    "defaultMessage": "Sub Title",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.subTitleAdmin",
+    "description": "Title",
+    "defaultMessage": "Title",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -12312,6 +12861,15 @@
     "id": "app.usersReviews",
     "description": "usersReviews",
     "defaultMessage": "Users Reviews",
+    "message": "",
+    "files": [
+      "src/locale/messages.js"
+    ]
+  },
+  {
+    "id": "app.valueOption",
+    "description": "Value",
+    "defaultMessage": "Value",
     "message": "",
     "files": [
       "src/locale/messages.js"
@@ -13131,222 +13689,6 @@
     "id": "app.zipcodeRequired",
     "description": "zipcodeRequired",
     "defaultMessage": "Zip Code is Required",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.subCategorys",
-    "description": "Sub Category Home page Slider title",
-    "defaultMessage": "Sub Category Type",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.subTitle",
-    "description": "Sub Title",
-    "defaultMessage": "Sub Title",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.addBanner",
-    "description": "Add Banner",
-    "defaultMessage": "Add Banner",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.banner",
-    "description": "Category Home page Slider title",
-    "defaultMessage": "banner Type",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.fieldCar",
-    "description": "Car",
-    "defaultMessage": "Car",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.fieldEnabled",
-    "description": "Enabled",
-    "defaultMessage": "Enabled",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.fieldName",
-    "description": "Name",
-    "defaultMessage": "Name",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.fieldPageId",
-    "description": "Page ID",
-    "defaultMessage": "Page ID",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.fieldType",
-    "description": "Type",
-    "defaultMessage": "Type",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.subAdminAddress",
-    "description": "Address",
-    "defaultMessage": "Address",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.subAdminBaths",
-    "description": "Baths",
-    "defaultMessage": "Baths",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.subAdminBedrooms",
-    "description": "Bedrooms",
-    "defaultMessage": "Bedrooms",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.subAdminDescription",
-    "description": "Description",
-    "defaultMessage": "Description",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.subAdminGuests",
-    "description": "Guests",
-    "defaultMessage": "Guests",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.subAdminSubCategory",
-    "description": "Sub Category",
-    "defaultMessage": "Sub Category",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.subTitleAdmin",
-    "description": "Title",
-    "defaultMessage": "Title",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.becomeAHost2",
-    "description": "Menu item",
-    "defaultMessage": "Become a hosts",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.hosts",
-    "description": "Menu item",
-    "defaultMessage": "Hosts",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.categoryAdminCategory",
-    "description": "Category",
-    "defaultMessage": "Category",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.categoryAdminDescription",
-    "description": "Description",
-    "defaultMessage": "Description",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.categoryAdminTitle",
-    "description": "Title",
-    "defaultMessage": "Title",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.editCategory",
-    "description": "Title",
-    "defaultMessage": "Edit Category",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.editSubCategory",
-    "description": "Edit Sub Category",
-    "defaultMessage": "Edit Sub Category",
-    "message": "",
-    "files": [
-      "src/locale/messages.js"
-    ]
-  },
-  {
-    "id": "app.subAdminBeds",
-    "description": "Beds",
-    "defaultMessage": "Beds",
     "message": "",
     "files": [
       "src/locale/messages.js"
