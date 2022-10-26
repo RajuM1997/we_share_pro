@@ -1,6 +1,0 @@
-{
-    "name": "BlogManagement",
-    "version": "0.0.0",
-    "private": true,
-    "main": "./BlogManagement.js"
-}

@@ -1,8 +1,0 @@
-query getSubCategoryAdmin {
-  getSubCategoryAdmin {
-    id
-    title
-    subCategory
-    primaryCategory
-  }
-}

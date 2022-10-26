@@ -1,9 +1,0 @@
-{
-  getStaticInfo {
-        title
-        content
-        name
-        image
-        isEnable
-      }
-}

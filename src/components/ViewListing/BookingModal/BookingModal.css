@@ -1,8 +1,0 @@
-@import '../../../components/variables.css';
-/** RentAll - Begin **/
-.logInModalContainer {
-  max-width: 450px;
-}
-.logInModalBody {
-  padding: 0px;
-}

@@ -1,6 +1,0 @@
-{
-  "name": "HostingBlock",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./HostingBlock.js"
-}

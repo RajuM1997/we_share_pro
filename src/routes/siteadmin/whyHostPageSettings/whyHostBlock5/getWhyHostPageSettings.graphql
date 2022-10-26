@@ -1,8 +1,0 @@
-{
-    getWhyHostPage {
-        id
-        title
-        name
-        value
-    }
-}

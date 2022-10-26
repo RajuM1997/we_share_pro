@@ -1,5 +1,0 @@
-query  getHostListingBySubCategory($subCategoryId: String!) {
-   getHostListingBySubCategory($subCategoryId:String!) {
-    id
-  }
-}

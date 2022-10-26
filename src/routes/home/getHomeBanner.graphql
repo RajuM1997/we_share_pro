@@ -1,6 +1,0 @@
- {
-    getHomeBanner {
-        id
-        name
-    }
-}

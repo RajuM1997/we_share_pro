@@ -1,5 +1,0 @@
-query getCategory {
-  getCategory {
-    category
-  }
-}

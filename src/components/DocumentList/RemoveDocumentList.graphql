@@ -1,6 +1,0 @@
-mutation ($id:Int) {
-  RemoveDocumentList (id: $id) {
-    status
-    photosCount
-  }
-}

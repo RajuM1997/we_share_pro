@@ -1,6 +1,0 @@
-{
-  "name": "NewsBox",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./NewsBox.js"
-}

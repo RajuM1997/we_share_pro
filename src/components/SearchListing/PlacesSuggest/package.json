@@ -1,6 +1,0 @@
-{
-  "name": "PlacesSuggest",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./PlacesSuggest.js"
-}

@@ -1,6 +1,0 @@
-{
-    "name": "AddBlogDetails",
-    "version": "0.0.0",
-    "private": true,
-    "main": "./AddBlogDetails.js"
-}

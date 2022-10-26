@@ -1,7 +1,0 @@
-query getUnreadCount{
-  getUnreadCount {
-    hostCount
-    guestCount
-    total
-  }
-}

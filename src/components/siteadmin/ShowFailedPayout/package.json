@@ -1,6 +1,0 @@
-{
-    "name": "ShowFailedPayout",
-    "version": "0.0.0",
-    "private": true,
-    "main": "./ShowFailedPayout.js"
-}
